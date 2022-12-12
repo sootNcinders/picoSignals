@@ -1,0 +1,31 @@
+{
+  "address": 2,
+
+  "head0": {
+    "destination": [1],
+    "dim" : 10,
+
+    "green": {
+      "pin": 0,
+      "current": 70,
+      "brightness" : 127
+    },
+    "amber": {
+      "pin": 1,
+      "current": 60,
+      "brightness" : 127
+    },
+    "red": {
+      "pin": 2,
+      "current": 50,
+      "brightness" : 127
+    }
+  },
+  
+  "capture0": {
+    "pin": 0
+  },
+  "release0": {
+    "pin": 1
+  }
+}

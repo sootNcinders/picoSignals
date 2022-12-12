@@ -1,0 +1,101 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"ArduinoJson/src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 77,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 85,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "share/ArduinoJson/cmake",
+			"exportName" : "ArduinoJson_Targets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "ArduinoJson::@8bb2f6e91c1f0cc3ca19",
+					"index" : 0
+				}
+			],
+			"paths" : 
+			[
+				"ArduinoJson/src/CMakeFiles/Export/3703fe6b0a18a2fd0e364b51f524361c/ArduinoJsonTargets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "share/ArduinoJson/cmake",
+			"paths" : 
+			[
+				"build/ArduinoJson/ArduinoJsonConfig.cmake",
+				"build/ArduinoJson/ArduinoJsonConfigVersion.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"ArduinoJson/src/ArduinoJson.h",
+				"ArduinoJson/src/ArduinoJson.hpp"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"ArduinoJson/src/ArduinoJson"
+			],
+			"type" : "directory"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "ArduinoJson/src",
+		"source" : "ArduinoJson/src"
+	}
+}

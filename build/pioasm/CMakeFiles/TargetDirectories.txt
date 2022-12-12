@@ -1,0 +1,3 @@
+/Users/tleavitt/pico/projects/picoSignals/build/pioasm/CMakeFiles/pioasm.dir
+/Users/tleavitt/pico/projects/picoSignals/build/pioasm/CMakeFiles/edit_cache.dir
+/Users/tleavitt/pico/projects/picoSignals/build/pioasm/CMakeFiles/rebuild_cache.dir
