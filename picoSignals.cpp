@@ -116,38 +116,42 @@ pca9674 input1(i2c0, 0x20);
 PCA9955 output1(i2c0, 0x01, 57.375);
 RFM95 radio(spi0, PICO_DEFAULT_SPI_CSN_PIN, RADIOINT, 0);
 
+//array of info for each head
 headInfo heads[MAXHEADS];
 
-bool headOn = true;
-bool headDim = false;
+bool headOn = true; //is any head on
+bool headDim = false; //are all heads dim
 
-uint8_t retries = 0;
-uint8_t maxRetries = 10; 
-uint8_t retryTime = 100;//in milliseconds
-uint8_t dimTime = 10; //in minutes
-uint8_t sleepTime = 15;//in minutes
-uint8_t clearDelayTime = 10;//in seconds
+//Variables loaded from the config file
+uint8_t retries = 0; //number of retries for current packet
+uint8_t maxRetries = 10; //maximum number of tries to send a packet
+uint8_t retryTime = 100;//time between attempts in milliseconds
+uint8_t dimTime = 10; //time before dimming the head in minutes
+uint8_t sleepTime = 15;//time before putting the signal heads in minutes
+uint8_t clearDelayTime = 10;//time before letting amber go to green in seconds, used to help traffic flow alternate
 
-int64_t tDiff = 0;
+int64_t tDiff = 0;//time difference for absolute time measurements 
 
-absolute_time_t retryTimeout;
-absolute_time_t dimTimeout;
+absolute_time_t retryTimeout; //abolute time of last packet send attempt
+absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
 
-volatile bool alarmSet = false;
+volatile bool alarmSet = false; //flag so only one stat light timer can be set at a time, prevents overloading the hardware timers
 
+//alarm call back function to turn the STAT light back on
 int64_t turnOnStat(alarm_id_t id, void *user_data)
 {
     gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
-    alarmSet = false;
+    alarmSet = false; //clear flag
 
     return 0;
 }
 
+//alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
 {
     if(user_data)
     {
-        if(((headInfo*)user_data)->head->getColor() != red)
+        if(((headInfo*)user_data)->head->getColor() != red) //stop the head from clearing if the block was captured before the timer finished
         {
             ((headInfo*)user_data)->head->setHead(green);
             ((headInfo*)user_data)->delayClearStarted = false;
@@ -157,6 +161,7 @@ int64_t delayedClear(alarm_id_t id, void *user_data)
     return 0;
 }
 
+//Interrupt Service Routine for all GPIO pins, handles interrupt signals from the radio transciever
 void gpio_isr(uint gpio, uint32_t event_mask)
 {
     //printf("ISR GPIO: %d MASK: %d\n", gpio, event_mask);
@@ -216,6 +221,8 @@ void gpio_isr(uint gpio, uint32_t event_mask)
     gpio_acknowledge_irq(gpio, event_mask);
 }
 
+bool sendError = false;
+//transmit a certain packet out
 void transmit(uint8_t dest, char asp, bool ack, bool code)
 {
     //printf("TRANSMIT\n");
@@ -227,24 +234,35 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
 
     if(!radio.send(255, (uint8_t*) &transmission, sizeof(transmission)))
     {
+        //if the send failed set the error light
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
+        sendError = true;
+    }
+    else if(sendError)
+    {
+        //if the transciever driver recovers, clear the error
+        gpio_put(GOODLED, LOW);
+        gpio_put(ERRORLED, HIGH);
+        sendError = false;
     }
 }
 
+//config JSON file parser
 void parseConfig()
 {
-    FIL file; 
-    FRESULT fr;
-    FATFS fs;
-    sd_card_t *pSD;
-    GARHEAD *gar;
-    RGBHEAD *rgb;
+    FIL file; //config file 
+    FRESULT fr; //file system return results
+    FATFS fs; //FAT file system interface
+    sd_card_t *pSD; //SD card driver pointer
+    GARHEAD *gar; //Temporary GAR head object
+    RGBHEAD *rgb; //Temporary RGB head object
     
-    pSD = sd_get_by_num(0);
-
+    //Get the SD card and start its driver
+    pSD = sd_get_by_num(0); 
     sd_init_driver();
 
+    //Mount the SD card file system, if it fails set the error light and stop execution
     fr = f_mount(&fs, "0:", 1);
     if (fr != FR_OK)
     {
@@ -253,6 +271,7 @@ void parseConfig()
         panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
+    //Open the config file, if it fails set the error light and stop execution
     const char* const filename = "config.json";
     fr = f_open(&file, filename, FA_READ);
     if (fr != FR_OK && fr != FR_EXIST)
@@ -262,10 +281,9 @@ void parseConfig()
         panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
 
-    char cfgRaw[512];
-
+    //Read the config file into RAM, if it fails set error light and stop execution
+    char cfgRaw[512]; //May need to expand for more complex config files
     fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), 0);
-
     if(fr != FR_OK)
     {
         gpio_put(GOODLED, HIGH);
@@ -273,6 +291,7 @@ void parseConfig()
         panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
 
+    //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
     StaticJsonDocument<512> cfg;
     DeserializationError error = deserializeJson(cfg, cfgRaw);
     if(error)
@@ -293,6 +312,7 @@ void parseConfig()
 
     sleepTime = cfg["sleepTime"] | 30;
 
+    //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
     {
         gpio_put(GOODLED, HIGH);
@@ -302,85 +322,83 @@ void parseConfig()
 
     uint8_t pin1, pin2, pin3, cur1, cur2, cur3 = 0;
 
-    JsonObject Jhead = cfg["head0"].as<JsonObject>();
+    JsonObject Jhead[] = {cfg["head0"].as<JsonObject>(), cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>()};
 
-    if(!Jhead.isNull())
+    for(int i = 0; i < MAXHEADS; i++)
     {
-        if(!Jhead["blue"].as<JsonObject>().isNull())
+        if(!Jhead[i].isNull())
         {
-            uint8_t bri1, bri2, bri3 = 0;
+            if(!Jhead[i]["blue"].as<JsonObject>().isNull())
+            {
+                uint8_t bri1, bri2, bri3 = 0;
 
-            pin1 = Jhead["red"]["pin"];
-            cur1 = Jhead["red"]["current"];
+                pin1 = Jhead[i]["red"]["pin"];
+                cur1 = Jhead[i]["red"]["current"];
 
-            pin2 = Jhead["green"]["pin"];
-            cur2 = Jhead["green"]["current"];
+                pin2 = Jhead[i]["green"]["pin"];
+                cur2 = Jhead[i]["green"]["current"];
 
-            pin3 = Jhead["blue"]["pin"];
-            cur3 = Jhead["blue"]["current"];
+                pin3 = Jhead[i]["blue"]["pin"];
+                cur3 = Jhead[i]["blue"]["current"];
 
-            rgb = new RGBHEAD(&output1, pin1, pin2, pin3);
-            rgb->init(cur1, cur2, cur3);
+                rgb = new RGBHEAD(&output1, pin1, pin2, pin3);
+                rgb->init(cur1, cur2, cur3);
 
-            //TO DO color levels
+                //TO DO color levels
 
-            heads[0].head = rgb;
+                heads[i].head = rgb;
+            }
+            else
+            {
+                uint8_t briG, briA, briR = 0;
+
+                pin1 = Jhead[i]["green"]["pin"];
+                cur1 = Jhead[i]["green"]["current"];
+                briG = Jhead[i]["green"]["brightness"] | 255;
+
+                pin2 = Jhead[i]["amber"]["pin"];
+                cur2 = Jhead[i]["amber"]["current"];
+                briA = Jhead[i]["amber"]["brightness"] | 255;
+
+                pin3 = Jhead[i]["red"]["pin"];
+                cur3 = Jhead[i]["red"]["current"];
+                briR = Jhead[i]["red"]["brightness"] | 255;
+
+                gar = new GARHEAD(&output1, pin1, pin2, pin3);
+                gar->init(cur1, cur2, cur3);
+                gar->setColorBrightness(green, briG);
+                gar->setColorBrightness(amber, briA);
+                gar->setColorBrightness(red, briR);
+
+                heads[i].head = gar;
+            }
+
+            heads[i].destAddr = Jhead[i]["destination"][0];
+
+            if(heads[i].destAddr == 0)
+            {
+                gpio_put(GOODLED, HIGH);
+                gpio_put(ERRORLED, LOW);
+                panic("No Destination configured\n");
+            }
+
+            if(heads[i].destAddr == addr)
+            {
+                gpio_put(GOODLED, HIGH);
+                gpio_put(ERRORLED, LOW);
+                panic("Destination is this node");
+            }
+
+            heads[i].head->setHead(green);
+
+            heads[i].dimBright = Jhead[i]["dim"] | 255;
+
+            heads[i].releaseTime = Jhead[i]["release"] | 6;
+
+            heads[i].delayClearStarted = false;
         }
-        else
-        {
-            uint8_t briG, briA, briR = 0;
-
-            pin1 = Jhead["green"]["pin"];
-            cur1 = Jhead["green"]["current"];
-            briG = Jhead["green"]["brightness"] | 255;
-
-            pin2 = Jhead["amber"]["pin"];
-            cur2 = Jhead["amber"]["current"];
-            briA = Jhead["amber"]["brightness"] | 255;
-
-            pin3 = Jhead["red"]["pin"];
-            cur3 = Jhead["red"]["current"];
-            briR = Jhead["red"]["brightness"] | 255;
-
-            gar = new GARHEAD(&output1, pin1, pin2, pin3);
-            gar->init(cur1, cur2, cur3);
-            gar->setColorBrightness(green, briG);
-            gar->setColorBrightness(amber, briA);
-            gar->setColorBrightness(red, briR);
-
-            heads[0].head = gar;
-        }
-
-        heads[0].destAddr = Jhead["destination"][0];
-
-        if(heads[0].destAddr == 0)
-        {
-            gpio_put(GOODLED, HIGH);
-            gpio_put(ERRORLED, LOW);
-            panic("No Destination configured\n");
-        }
-
-        if(heads[0].destAddr == addr)
-        {
-            gpio_put(GOODLED, HIGH);
-            gpio_put(ERRORLED, LOW);
-            panic("Destination is this node");
-        }
-
-        heads[0].head->setHead(green);
-
-        heads[0].dimBright = Jhead["dim"] | 255;
-
-        heads[0].releaseTime = Jhead["release"] | 6;
-
-        heads[0].delayClearStarted = false;
     }
-    else
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("No Head configured\n");
-    }
+
 
     JsonObject cap = cfg["capture0"].as<JsonObject>();
 
@@ -422,7 +440,7 @@ void parseConfig()
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("No Capture Configured");
+        panic("No Release Configured");
     }
 }
 
@@ -467,7 +485,7 @@ int main()
     //Delay to allow serial monitor to connect
     sleep_ms(5000);
 
-    printf("PICO SIGNAL TEST\n");
+    printf("PICO SIGNAL V1\n");
 
     printf("ADC: %d\n", adc_read());
     printf("Battery: %2.2FV\n", adc_read() * CONVERSION_FACTOR);
