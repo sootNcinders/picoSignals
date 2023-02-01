@@ -456,14 +456,12 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     uint8_t buf[5];
     
     absolute_time_t t = get_absolute_time();
-    int64_t tDiff = 0;
 
     setTX();
 
     while(_mode != RFMModeIdle && _mode != RFMModeRx)//_buf[0] != RFM95_MODE_STDBY && _buf[0] != RFM95_MODE_RXCONTINUOUS)
     {
-        tDiff = absolute_time_diff_us(t, get_absolute_time());
-        if(tDiff > (1000 * 1000))
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
         {
             printf("Mode Fault\n");
 
@@ -482,8 +480,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     t = get_absolute_time();
     while(channelActive())
     {  
-        tDiff = absolute_time_diff_us(t, get_absolute_time());
-        if(tDiff > (10000 * 1000))
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 10000)
         {
             printOpMode();
             nop_sleep_ms(1);

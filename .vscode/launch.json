@@ -10,15 +10,15 @@
             "servertype": "bmp",
             "interface": "swd",
             "device": "RP2040",
+            "numberOfProcessors": 2,
+            "targetProcessor": 1,
             "BMPGDBSerialPort": "/dev/cu.usbmodem98B6A6B31",
-            "showDevDebugOutput": "raw",
-            "runToMain": true,
-            "preLaunchCommands": [
-                "set async-remote false",
-                "set remote-timeout 20"
+            "powerOverBMP": "true",
+            "postAttachCommands": [
+                "break main",
+                "starti",
             ],
-            "preRestartCommands": [
-                "enable breakpoint",
+            "postRestartCommands": [
                 "break main"
             ]
         },

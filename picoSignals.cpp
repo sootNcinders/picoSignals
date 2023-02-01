@@ -18,6 +18,8 @@
 #include "hw_config.h"
 #include "ArduinoJson.h"
 
+#define VERSION 0
+#define REVISION 1
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -130,21 +132,22 @@ uint8_t dimTime = 10; //time before dimming the head in minutes
 uint8_t sleepTime = 15;//time before putting the signal heads in minutes
 uint8_t clearDelayTime = 10;//time before letting amber go to green in seconds, used to help traffic flow alternate
 
-int64_t tDiff = 0;//time difference for absolute time measurements 
-
 absolute_time_t retryTimeout; //abolute time of last packet send attempt
 absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
 
 volatile bool alarmSet = false; //flag so only one stat light timer can be set at a time, prevents overloading the hardware timers
 
+bool statState = false;
+absolute_time_t statBlink;
+
 //alarm call back function to turn the STAT light back on
-int64_t turnOnStat(alarm_id_t id, void *user_data)
+/*int64_t turnOnStat(alarm_id_t id, void *user_data)
 {
     gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
     alarmSet = false; //clear flag
 
     return 0;
-}
+}*/
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -344,7 +347,10 @@ void parseConfig()
                 rgb = new RGBHEAD(&output1, pin1, pin2, pin3);
                 rgb->init(cur1, cur2, cur3);
 
-                //TO DO color levels
+                rgb->setColorLevels(red, Jhead[i]["red"]["rgb"][0], Jhead[i]["red"]["rgb"][1], Jhead[i]["red"]["rgb"][2]);
+                rgb->setColorLevels(amber, Jhead[i]["amber"]["rgb"][0], Jhead[i]["amber"]["rgb"][1], Jhead[i]["amber"]["rgb"][2]);
+                rgb->setColorLevels(green, Jhead[i]["green"]["rgb"][0], Jhead[i]["green"]["rgb"][1], Jhead[i]["green"]["rgb"][2]);
+                rgb->setColorLevels(lunar, Jhead[i]["lunar"]["rgb"][0], Jhead[i]["lunar"]["rgb"][1], Jhead[i]["lunar"]["rgb"][2]);
 
                 heads[i].head = rgb;
             }
@@ -472,6 +478,8 @@ int main()
     gpio_init(PICO_DEFAULT_LED_PIN);
     gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
     gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
+    statBlink = get_absolute_time();
+    statState = true;
 
     //Initialize the ADC for battery monitoring
     adc_init();
@@ -485,10 +493,12 @@ int main()
     //Delay to allow serial monitor to connect
     sleep_ms(5000);
 
-    printf("PICO SIGNAL V1\n");
+    printf("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
 
-    printf("ADC: %d\n", adc_read());
-    printf("Battery: %2.2FV\n", adc_read() * CONVERSION_FACTOR);
+    uint16_t rawADC = adc_read();
+    float bat = (float)rawADC * CONVERSION_FACTOR;
+    printf("ADC: %d\n", rawADC);
+    printf("Battery: %2.2FV\n", bat);
 
     //Start the SPI and i2c buses 
     initi2c0();
@@ -686,8 +696,14 @@ int main()
                     }
                 }
             }
-            tDiff = (absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000);//Get time difference and convert to ms
-        } while ((retries > 0) && (tDiff < retryTime));
+        } while ((retries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
+
+        if((absolute_time_diff_us(statBlink, get_absolute_time()) / 1000) >= 1000)
+        {
+            statState = !statState;
+            gpio_put(PICO_DEFAULT_LED_PIN, statState);
+            statBlink = get_absolute_time();
+        }
         
         if(retries > 10)
         {
@@ -726,8 +742,8 @@ int main()
 
                     if(!alarmSet)
                     {
-                        gpio_put(PICO_DEFAULT_LED_PIN, LOW);
-                        add_alarm_in_ms(50, turnOnStat, NULL, true);
+                        //gpio_put(PICO_DEFAULT_LED_PIN, LOW);
+                        //add_alarm_in_ms(50, turnOnStat, NULL, true);
                         alarmSet = true;
                     }
                 }
@@ -743,8 +759,8 @@ int main()
 
                     if(!alarmSet)
                     {
-                        gpio_put(PICO_DEFAULT_LED_PIN, LOW);
-                        add_alarm_in_ms(50, turnOnStat, NULL, true);
+                        //gpio_put(PICO_DEFAULT_LED_PIN, LOW);
+                        //add_alarm_in_ms(50, turnOnStat, NULL, true);
                         alarmSet = true;
                     }
                 }
@@ -810,9 +826,7 @@ int main()
             {
                 if(heads[i].head->getColor() == red && heads[i].releaseTime > 0)
                 {
-                    tDiff = ((absolute_time_diff_us(heads[i].releaseTimer, get_absolute_time()))/60000000);
-
-                    if(tDiff >= heads[i].releaseTime)
+                    if(((absolute_time_diff_us(heads[i].releaseTimer, get_absolute_time()))/60000000) >= heads[i].releaseTime)
                     {
                         printf("Release Timeout Head %d\n", i);
 
@@ -830,9 +844,7 @@ int main()
 
         if(dimTime > 0)
         {
-            tDiff = ((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000);//convert time difference from microseconds to minutes
-
-            if(tDiff >= dimTime && headOn && !headDim)
+            if(((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000) >= dimTime && headOn && !headDim)
             {
                 for(int i = 0; i < MAXHEADS; i++)
                 {
@@ -849,9 +861,7 @@ int main()
 
         if(sleepTime > 0)
         {
-            tDiff = ((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000);//convert time difference from microseconds to minutes
-
-            if(tDiff >= sleepTime && headOn)
+            if((((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000) >= sleepTime) && headOn)
             {
                 for(int i = 0; i < MAXHEADS; i++)
                 {
