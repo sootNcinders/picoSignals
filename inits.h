@@ -8,7 +8,7 @@
 
 void initi2c0()
 {
-    i2c_init(i2c0, 400 * 1000);
+    i2c_init(i2c0, 1000 * 1000);
     gpio_set_function(PICO_DEFAULT_I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);
@@ -19,7 +19,7 @@ void initi2c0()
 
 void initspi0()
 {
-    spi_init(spi0, 500 * 1000);
+    spi_init(spi0, 1000 * 1000);
     gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_TX_PIN, GPIO_FUNC_SPI);

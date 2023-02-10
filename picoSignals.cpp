@@ -19,7 +19,7 @@
 #include "ArduinoJson.h"
 
 #define VERSION 0
-#define REVISION 1
+#define REVISION 2
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -58,9 +58,11 @@ typedef struct
     uint8_t headNum; //Head number, 0 to MAXHEADS
     uint8_t headNum2; //Second head for turnout controlled captures
     uint8_t turnoutPinNum; //Pin to check state for turnout controlled captures
-    bool    active; //Current pin state
-    bool    lastActive; //Previous pin state
-    bool    serviced = false; 
+    bool    active = false; //Current pin state
+    bool    lastActive = false; //Previous pin state
+    bool    raw = false;
+    bool    lastRaw = false;
+    absolute_time_t lastChange;
 }switchInfo;
 
 //signal head info
@@ -258,8 +260,6 @@ void parseConfig()
     FRESULT fr; //file system return results
     FATFS fs; //FAT file system interface
     sd_card_t *pSD; //SD card driver pointer
-    GARHEAD *gar; //Temporary GAR head object
-    RGBHEAD *rgb; //Temporary RGB head object
     
     //Get the SD card and start its driver
     pSD = sd_get_by_num(0); 
@@ -284,18 +284,21 @@ void parseConfig()
         panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
 
+#define FILESIZE 10240
     //Read the config file into RAM, if it fails set error light and stop execution
-    char cfgRaw[512]; //May need to expand for more complex config files
-    fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), 0);
+    char cfgRaw[FILESIZE]; //May need to expand for more complex config files
+    UINT readSize = 0;
+    fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
     if(fr != FR_OK)
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
         panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
+    printf("Read %d characters of config file\n", readSize);
 
     //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
-    StaticJsonDocument<512> cfg;
+    StaticJsonDocument<FILESIZE> cfg;
     DeserializationError error = deserializeJson(cfg, cfgRaw);
     if(error)
     {
@@ -305,7 +308,6 @@ void parseConfig()
     }
 
     addr = cfg["address"];
-    heads[0].destAddr = cfg["destination"];
 
     maxRetries = cfg["retries"] | 10;
 
@@ -329,6 +331,8 @@ void parseConfig()
 
     for(int i = 0; i < MAXHEADS; i++)
     {
+        GARHEAD *gar; //Temporary GAR head object
+        RGBHEAD *rgb; //Temporary RGB head object
         if(!Jhead[i].isNull())
         {
             if(!Jhead[i]["blue"].as<JsonObject>().isNull())
@@ -344,15 +348,14 @@ void parseConfig()
                 pin3 = Jhead[i]["blue"]["pin"];
                 cur3 = Jhead[i]["blue"]["current"];
 
-                rgb = new RGBHEAD(&output1, pin1, pin2, pin3);
+                heads[i].head = new RGBHEAD(&output1, pin1, pin2, pin3);
+                rgb = (RGBHEAD*)heads[i].head;
                 rgb->init(cur1, cur2, cur3);
 
                 rgb->setColorLevels(red, Jhead[i]["red"]["rgb"][0], Jhead[i]["red"]["rgb"][1], Jhead[i]["red"]["rgb"][2]);
                 rgb->setColorLevels(amber, Jhead[i]["amber"]["rgb"][0], Jhead[i]["amber"]["rgb"][1], Jhead[i]["amber"]["rgb"][2]);
                 rgb->setColorLevels(green, Jhead[i]["green"]["rgb"][0], Jhead[i]["green"]["rgb"][1], Jhead[i]["green"]["rgb"][2]);
                 rgb->setColorLevels(lunar, Jhead[i]["lunar"]["rgb"][0], Jhead[i]["lunar"]["rgb"][1], Jhead[i]["lunar"]["rgb"][2]);
-
-                heads[i].head = rgb;
             }
             else
             {
@@ -370,13 +373,13 @@ void parseConfig()
                 cur3 = Jhead[i]["red"]["current"];
                 briR = Jhead[i]["red"]["brightness"] | 255;
 
-                gar = new GARHEAD(&output1, pin1, pin2, pin3);
+                heads[i].head = new GARHEAD(&output1, pin1, pin2, pin3);
+                gar = (GARHEAD*)heads[i].head;
+
                 gar->init(cur1, cur2, cur3);
                 gar->setColorBrightness(green, briG);
                 gar->setColorBrightness(amber, briA);
                 gar->setColorBrightness(red, briR);
-
-                heads[i].head = gar;
             }
 
             heads[i].destAddr = Jhead[i]["destination"][0];
@@ -405,48 +408,37 @@ void parseConfig()
         }
     }
 
+    JsonObject pins[] = {cfg["pin0"].as<JsonObject>(), cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(),
+                            cfg["pin4"].as<JsonObject>(), cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>()};
 
-    JsonObject cap = cfg["capture0"].as<JsonObject>();
-
-    if(!cap.isNull())
+    for(int i = 0; i < MAXINPUTS; i++)
     {
-        uint8_t pin = cap["pin"];
-
-        inputs[pin].mode = capture;
-        inputs[pin].lastActive = false;
-        inputs[pin].active = false;
-        inputs[pin].headNum = cap["head1"];
-
-        if(!cap["turnoutPin"].isNull())
+        if(!pins[i].isNull())
         {
-            inputs[pin].mode = turnoutCapture;
-            inputs[pin].turnoutPinNum = cap["turnoutPin"];
-            inputs[pin].headNum2 = cap["head2"];
+            if(pins[i]["mode"] == "capture")
+            {
+                inputs[i].mode = capture;
+                inputs[i].headNum = pins[i]["head1"];
+
+                if(!pins[i]["head2"].isNull())
+                {
+                    inputs[i].mode = turnoutCapture;
+                    inputs[i].headNum2 = pins[i]["head2"];
+                    inputs[i].turnoutPinNum = pins[i]["turnout"];
+                }
+            }
+            else if(pins[i]["mode"] == "release")
+            {
+                inputs[i].mode = release;
+                inputs[i].headNum = pins[i]["head"];
+            }
+            else if (pins[i]["mode"] == "turnout")
+            {
+                inputs[i].mode = turnout;
+            }
+
+            inputs[i].active = inputs[i].lastActive = false;
         }
-    }
-    else
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("No Capture Configured");
-    }
-
-    JsonObject rel = cfg["release0"].as<JsonObject>();
-
-    if(!rel.isNull())
-    {
-        uint8_t pin = rel["pin"];
-
-        inputs[pin].mode = release;
-        inputs[pin].lastActive = false;
-        inputs[pin].active = true;
-        inputs[pin].headNum = 0;
-    }
-    else
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("No Release Configured");
     }
 }
 
@@ -498,7 +490,7 @@ int main()
     uint16_t rawADC = adc_read();
     float bat = (float)rawADC * CONVERSION_FACTOR;
     printf("ADC: %d\n", rawADC);
-    printf("Battery: %2.2FV\n", bat);
+    printf("Battery: %2.2FV\n\n", bat);
 
     //Start the SPI and i2c buses 
     initi2c0();
@@ -517,9 +509,10 @@ int main()
     //Read config file from the micro SD card 
     parseConfig();
 
-    printf("NODE: %d\nDEST: %d\n", addr, heads[0].destAddr);
+    printf("\nNODE: %d\nDEST: %d\n", addr, heads[0].destAddr);
 
     //Set up the RFM95 radio
+    //12500bps datarate
     radio.init();
     radio.setLEDS(RXLED, TXLED);
     radio.setAddress(addr);
@@ -542,6 +535,14 @@ int main()
 
     //radio.printRegisters();
 
+    for(int i = 0; i < MAXHEADS; i++)
+    {
+        if(heads[i].head)
+        {
+            transmit(heads[i].destAddr, 'G', false, false);
+        }
+    }
+
     printf("Retries: %d\nRetry Time: %dms\nDim Time: %dmin\nSleep Time: %dmin\n", maxRetries, retryTime, dimTime, sleepTime);
 
     while(1)
@@ -554,6 +555,7 @@ int main()
                 to = 0;
                 from = 0;
                 len = sizeof(transmission);
+                bool localRelease = false;
 
                 radio.recv((uint8_t *)& transmission, &len, &from, &to);
 
@@ -575,34 +577,6 @@ int main()
 
                     if(transmission.destination == addr && !transmission.isCode && headFound)
                     {
-                        if(!headOn)
-                        {
-                            output1.wake();
-
-                            for(int i = 0; i < MAXHEADS; i++)
-                            {
-                                if(heads[i].head)
-                                {
-                                    heads[i].head->setHeadBrightness(255);
-                                }
-                            }
-
-                            headOn = true;
-                            headDim = false;
-                        }
-                        if(headDim)
-                        {
-                            for(int i = 0; i < MAXHEADS; i++)
-                            {
-                                if(heads[i].head)
-                                {
-                                    heads[i].head->setHeadBrightness(255);
-                                }
-                            }
-
-                            headDim = false;
-                        }
-
                         switch(transmission.aspect)
                         {
                             case 'G':
@@ -611,8 +585,18 @@ int main()
                                 {
                                     transmit(from, 'G', true, false);
                                 }
+                                
+                                for(int i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                    {
+                                        localRelease = inputs[i].active;
+                                        inputs[i].lastActive = true;
+                                        break;
+                                    }
+                                }
 
-                                if(heads[headNum].head->getColor() == amber && !heads[headNum].delayClearStarted)
+                                if(heads[headNum].head->getColor() == amber && !heads[headNum].delayClearStarted && !localRelease)
                                 {
                                     add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[headNum], true);
                                     heads[headNum].delayClearStarted = true;
@@ -620,16 +604,6 @@ int main()
                                 else
                                 {
                                     heads[headNum].head->setHead(green);
-                                }
-
-                                for(int i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].headNum == 0 && inputs[i].mode == release)
-                                    {
-                                        inputs[i].active = false;
-                                        inputs[i].lastActive = false;
-                                        break;
-                                    }
                                 }
 
                                 retries = 0;
@@ -649,10 +623,9 @@ int main()
 
                                     for(int i = 0; i < MAXINPUTS; i++)
                                     {
-                                        if(inputs[i].headNum == 0 && inputs[i].mode == capture)
+                                        if(inputs[i].headNum == headNum && inputs[i].mode == capture)
                                         {
-                                            inputs[i].active = false;
-                                            inputs[i].lastActive = false;
+                                            inputs[i].lastActive = true;
                                             break;
                                         }
                                     }
@@ -674,16 +647,14 @@ int main()
 
                                 for(int i = 0; i < MAXINPUTS; i++)
                                 {
-                                    if(inputs[i].headNum == 0 && inputs[i].mode == release)
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
                                     {
-                                        inputs[i].active = false;
-                                        inputs[i].lastActive = false;
+                                        inputs[i].lastActive = true;
                                     }
 
-                                    if(inputs[i].headNum == 0 && inputs[i].mode == capture)
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == capture)
                                     {
-                                        inputs[i].active = false;
-                                        inputs[i].lastActive = false;
+                                        inputs[i].lastActive = true;
                                     }
                                 }
 
@@ -692,6 +663,42 @@ int main()
 
                                 heads[0].releaseTimer = get_absolute_time();
                                 break;
+                        }
+                    }
+
+                    if(transmission.aspect == 'A' || transmission.aspect == 'a' || transmission.aspect == 'R' || transmission.aspect == 'r')
+                    {
+                        if(!headOn)
+                        {
+                            output1.wake();
+
+                            for(int i = 0; i < MAXHEADS; i++)
+                            {
+                                if(heads[i].head)
+                                {
+                                    heads[i].head->setHeadBrightness(255);
+
+                                    if(heads[i].head->getColor() == off)
+                                    {
+                                        heads[i].head->setHead(green);
+                                    }
+                                }
+                            }
+
+                            headOn = true;
+                            headDim = false;
+                        }
+                        else if(headDim)
+                        {
+                            for(int i = 0; i < MAXHEADS; i++)
+                            {
+                                if(heads[i].head)
+                                {
+                                    heads[i].head->setHeadBrightness(255);
+                                }
+                            }
+
+                            headDim = false;
                         }
                     }
                 }
@@ -709,71 +716,46 @@ int main()
         {
             for(int i = 0; i < MAXINPUTS; i++)
             {
-                inputs[i].active = false;
-                inputs[i].lastActive = false;
+                inputs[i].lastActive = inputs[i].active;
             }
 
             retries = 0;
-        }
-        else
-        {
-            for(int i = 0; i < MAXINPUTS; i++)
-            {
-                if(inputs[i].lastActive)
-                {
-                    inputs[i].lastActive = false;
-                }
-            }
         }
         
         input1.updateInputs();
 
         for(int i = 0; i < MAXINPUTS; i++)
         {
-            //Latch capture or release signals
-            if(inputs[i].mode == capture)
-            {                
-                if(input1.getInput(i, false) == LOW && !inputs[i].serviced && (heads[inputs[i].headNum].head->getColor() == green || heads[inputs[i].headNum].head->getColor() == off))
+            inputs[i].raw = input1.getInput(i, false);
+
+            if(inputs[i].raw != inputs[i].lastRaw)
+            {
+                inputs[i].lastChange = get_absolute_time();
+            }
+
+            inputs[i].lastRaw = inputs[i].raw;
+
+            if(inputs[i].raw != inputs[i].active)
+            {
+                //Latch capture or release signals
+                if(inputs[i].mode == capture || inputs[i].mode == release || inputs[i].mode == turnoutCapture)
                 {
-                    inputs[i].active = true;
-                    //inputs[i].lastActive = false;
-
-                    inputs[i].serviced = true;
-
-                    if(!alarmSet)
+                    //raw input must stay inactive for 50ms before the clear is latched
+                    if(inputs[i].active && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
                     {
-                        //gpio_put(PICO_DEFAULT_LED_PIN, LOW);
-                        //add_alarm_in_ms(50, turnOnStat, NULL, true);
-                        alarmSet = true;
+                        inputs[i].active = inputs[i].lastActive = false;
+                    }
+                    //raw input must stay active for 5ms before set is latched
+                    else if(!inputs[i].active && inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (5*1000)))
+                    {
+                        inputs[i].active = true;
                     }
                 }
-            }
-            else if(inputs[i].mode == release)
-            {
-                if(input1.getInput(i, false) == LOW && !inputs[i].serviced && (heads[inputs[i].headNum].head->getColor() == amber || heads[inputs[i].headNum].head->getColor() == red))
+                //get direct input for turnout monitoring, input must be stable for 50ms to latch
+                else if(inputs[i].mode == turnout && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
                 {
-                    inputs[i].active = true;
-                    //inputs[i].lastActive = false;
-
-                    inputs[i].serviced = true;
-
-                    if(!alarmSet)
-                    {
-                        //gpio_put(PICO_DEFAULT_LED_PIN, LOW);
-                        //add_alarm_in_ms(50, turnOnStat, NULL, true);
-                        alarmSet = true;
-                    }
+                    inputs[i].active = inputs[i].raw;
                 }
-            }
-            //get direct input for turnout monitoring
-            else if(inputs[i].mode == turnout)
-            {
-                inputs[i].active = input1.getInput(i, false);
-            }
-
-            if(inputs[i].serviced && input1.getInput(i, false) == HIGH)
-            {
-                inputs[i].serviced = false;
             }
         }
 
@@ -792,30 +774,56 @@ int main()
 
                     if(inputs[i].mode == turnoutCapture && inputs[inputs[i].turnoutPinNum].active)
                     {
-                        transmit(heads[inputs[i].headNum2].destAddr, 'R', false, false);
+                        if(heads[inputs[i].headNum2].head->getColor() == green)
+                        {
+                            transmit(heads[inputs[i].headNum2].destAddr, 'R', false, false);
+                            retries++;
+                            printf("Sending Capture %d\n", inputs[i].headNum2);
+
+                            for(int x = 0; x < MAXINPUTS; x++)
+                            {
+                                if(inputs[x].mode == release && inputs[i].headNum2 == inputs[x].headNum)
+                                {
+                                    inputs[x].active = inputs[x].lastActive = false;
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        transmit(heads[inputs[i].headNum].destAddr, 'R', false, false);
+                        if(heads[inputs[i].headNum].head->getColor() == green)
+                        {
+                            transmit(heads[inputs[i].headNum].destAddr, 'R', false, false);
+                            retries++;
+                            printf("Sending Capture %d\n", inputs[i].headNum);
+
+                            for(int x = 0; x < MAXINPUTS; x++)
+                            {
+                                if(inputs[x].mode == release && inputs[i].headNum == inputs[x].headNum)
+                                {
+                                    inputs[x].active = inputs[x].lastActive = false;
+                                }
+                            }
+                        }
                     }
 
-                    retries++;
-
-                    inputs[i].lastActive = true;
-
-                    printf("Sending Capture %d\n", inputs[i].headNum);
                 }
             }
             else if(inputs[i].mode == release)
             {
-                if(inputs[i].active && !inputs[i].lastActive)
+                if(inputs[i].active && !inputs[i].lastActive && (heads[inputs[i].headNum].head->getColor() == amber || heads[inputs[i].headNum].head->getColor() == red))
                 {
                     transmit(heads[inputs[i].headNum].destAddr, 'G', false, false);
                     retries++;
-
-                    inputs[i].lastActive = true;
-
                     printf("Sending Release %d\n", inputs[i].headNum);
+
+                    for(int x = 0; x < MAXINPUTS; x++)
+                    {
+                        if((inputs[x].mode == capture || inputs[x].mode == turnoutCapture) && inputs[i].headNum == inputs[x].headNum)
+                        {
+                            inputs[x].active = inputs[x].lastActive = false;
+                        }
+                    }
                 }
             }
         }
@@ -832,7 +840,7 @@ int main()
 
                         for(int x = 0; x < MAXINPUTS; x++)
                         {
-                            if(inputs[x].mode == release)
+                            if(inputs[x].mode == release && inputs[x].headNum == i)
                             {
                                 inputs[x].active = true;
                             }

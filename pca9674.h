@@ -33,6 +33,8 @@ class pca9674
         uint8_t buffer;
         i2c_inst_t* bus; 
 
+        uint8_t lastBuffer;
+
         bool pinState[8];
 };
 

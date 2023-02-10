@@ -25,6 +25,7 @@ void PCA9955::setLEDcurrent(uint8_t num, float mAmps)
 
     buffer[0] = 0x18 + num;
     buffer[1] = (uint8_t)((mAmps/57.375)*255);
+    
     i2c_write_blocking(_bus, _address, buffer, 2, false);
 
     #ifdef PCA9955_DEBUG

@@ -65,7 +65,7 @@ bool RGBHEAD::setHead(uint8_t color)
 
             brightness = (uint8_t)(_levels[color][r] * _headBrightness);
 
-            if(brightness < 8)
+            if(brightness < 8 && brightness > 0)
             {
                 brightness = 8;
             }
@@ -78,7 +78,7 @@ bool RGBHEAD::setHead(uint8_t color)
 
             brightness = (uint8_t)(_levels[color][g] * _headBrightness);
 
-            if(brightness < 8)
+            if(brightness < 8 && brightness > 0)
             {
                 brightness = 8;
             }
@@ -91,7 +91,7 @@ bool RGBHEAD::setHead(uint8_t color)
 
             brightness = (uint8_t)(_levels[color][b] * _headBrightness);
             
-            if(brightness < 8)
+            if(brightness < 8 && brightness > 0)
             {
                 brightness = 8;
             }

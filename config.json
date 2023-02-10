@@ -1,8 +1,33 @@
 {
-  "address": 2,
+  "address": 3,
 
   "head0": {
-    "destination": [1],
+    "destination": [4],
+    "dim" : 10,
+
+    "red": {
+      "pin": 4,
+      "current": 20,
+
+      "rgb": [255, 0, 0]
+    },
+    "green": {
+      "pin": 5,
+      "current": 20,
+
+      "rgb": [0, 255, 0]
+    },
+    "blue": {
+      "pin": 3,
+      "current": 20
+    },
+    "amber": {
+      "rgb": [255, 40, 0]
+    }
+  },
+
+  "head1": {
+    "destination": [5],
     "dim" : 10,
 
     "green": {
@@ -22,10 +47,20 @@
     }
   },
   
-  "capture0": {
-    "pin": 0
+  "pin0": {
+    "mode": "capture",
+    "head1": 0
   },
-  "release0": {
-    "pin": 1
+  "pin1":{
+    "mode": "release",
+    "head": 0
+  },
+  "pin2": {
+    "mode": "capture",
+    "head1": 1
+  },
+  "pin3": {
+    "mode": "release",
+    "head": 1
   }
 }

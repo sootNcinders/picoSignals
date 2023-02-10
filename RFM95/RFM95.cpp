@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/spi.h"
@@ -459,7 +460,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
 
     setTX();
 
-    while(_mode != RFMModeIdle && _mode != RFMModeRx)//_buf[0] != RFM95_MODE_STDBY && _buf[0] != RFM95_MODE_RXCONTINUOUS)
+    while(_mode != RFMModeIdle && _mode != RFMModeRx)
     {
         if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
         {
@@ -480,7 +481,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     t = get_absolute_time();
     while(channelActive())
     {  
-        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 10000)
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
         {
             printOpMode();
             nop_sleep_ms(1);
@@ -495,6 +496,8 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
 
             return false;
         }
+
+        nop_sleep_us((rand() % 100) + 1);
     }
 
     //Point FIFO to 0x00
