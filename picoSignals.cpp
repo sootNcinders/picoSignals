@@ -142,14 +142,8 @@ volatile bool alarmSet = false; //flag so only one stat light timer can be set a
 bool statState = false;
 absolute_time_t statBlink;
 
-//alarm call back function to turn the STAT light back on
-/*int64_t turnOnStat(alarm_id_t id, void *user_data)
-{
-    gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
-    alarmSet = false; //clear flag
-
-    return 0;
-}*/
+bool ctcPresent = false;
+bool changed = false;
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -159,8 +153,9 @@ int64_t delayedClear(alarm_id_t id, void *user_data)
         if(((headInfo*)user_data)->head->getColor() != red) //stop the head from clearing if the block was captured before the timer finished
         {
             ((headInfo*)user_data)->head->setHead(green);
-            ((headInfo*)user_data)->delayClearStarted = false;
+            changed = true;
         }
+        ((headInfo*)user_data)->delayClearStarted = false;
     }
 
     return 0;
@@ -228,6 +223,8 @@ void gpio_isr(uint gpio, uint32_t event_mask)
 
 bool sendError = false;
 //transmit a certain packet out
+//Transmit time: 2ms
+//Response time: 47mS
 void transmit(uint8_t dest, char asp, bool ack, bool code)
 {
     //printf("TRANSMIT\n");
@@ -259,6 +256,8 @@ void parseConfig()
     FIL file; //config file 
     FRESULT fr; //file system return results
     FATFS fs; //FAT file system interface
+    DIR dir;
+    FILINFO fInfo;
     sd_card_t *pSD; //SD card driver pointer
     
     //Get the SD card and start its driver
@@ -274,8 +273,17 @@ void parseConfig()
         panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
+    fr = f_findfirst(&dir, &fInfo, "", "config*.json");
+    if(fr != FR_OK)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
     //Open the config file, if it fails set the error light and stop execution
-    const char* const filename = "config.json";
+    //const char* const filename = "config.json";
+    const char* const filename = fInfo.fname;
     fr = f_open(&file, filename, FA_READ);
     if (fr != FR_OK && fr != FR_EXIST)
     {
@@ -596,14 +604,18 @@ int main()
                                     }
                                 }
 
-                                if(heads[headNum].head->getColor() == amber && !heads[headNum].delayClearStarted && !localRelease)
+                                if(heads[headNum].head->getColor() == amber && !localRelease)
                                 {
-                                    add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[headNum], true);
-                                    heads[headNum].delayClearStarted = true;
+                                    if(!heads[headNum].delayClearStarted)
+                                    {
+                                        add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[headNum], true);
+                                        heads[headNum].delayClearStarted = true;
+                                    }
                                 }
                                 else
                                 {
                                     heads[headNum].head->setHead(green);
+                                    changed = true;
                                 }
 
                                 retries = 0;
@@ -620,6 +632,8 @@ int main()
                                 if(heads[headNum].head->getColor() == green || heads[headNum].head->getColor() == amber || heads[headNum].head->getColor() == off)
                                 {                                   
                                     heads[headNum].head->setHead(amber);
+
+                                    changed = true;
 
                                     for(int i = 0; i < MAXINPUTS; i++)
                                     {
@@ -644,6 +658,8 @@ int main()
                                 }
                                 
                                 heads[headNum].head->setHead(red);
+
+                                changed = true;
 
                                 for(int i = 0; i < MAXINPUTS; i++)
                                 {
@@ -735,27 +751,25 @@ int main()
 
             inputs[i].lastRaw = inputs[i].raw;
 
-            if(inputs[i].raw != inputs[i].active)
+            //Latch capture or release signals
+            if(inputs[i].mode == capture || inputs[i].mode == release || inputs[i].mode == turnoutCapture)
             {
-                //Latch capture or release signals
-                if(inputs[i].mode == capture || inputs[i].mode == release || inputs[i].mode == turnoutCapture)
+                //raw input must stay inactive for 50ms before the clear is latched
+                if((/*inputs[i].active ||*/ inputs[i].lastActive) && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
                 {
-                    //raw input must stay inactive for 50ms before the clear is latched
-                    if(inputs[i].active && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
-                    {
-                        inputs[i].active = inputs[i].lastActive = false;
-                    }
-                    //raw input must stay active for 5ms before set is latched
-                    else if(!inputs[i].active && inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (5*1000)))
-                    {
-                        inputs[i].active = true;
-                    }
+                    inputs[i].active = inputs[i].lastActive = false;
                 }
-                //get direct input for turnout monitoring, input must be stable for 50ms to latch
-                else if(inputs[i].mode == turnout && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
+                //raw input must stay active for 5ms before set is latched
+                else if(!inputs[i].active && inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (5*1000)))
                 {
-                    inputs[i].active = inputs[i].raw;
+                    inputs[i].active = true;
                 }
+            }
+            //get direct input for turnout monitoring, input must be stable for 50ms to latch
+            else if(inputs[i].mode == turnout && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
+            {
+                inputs[i].active = inputs[i].raw;
+                changed = true;
             }
         }
 
@@ -884,6 +898,13 @@ int main()
 
                 headOn = false;
             }
+        }
+
+        if(ctcPresent && changed)
+        {
+            //TO DO: Overhaul CTC protocol
+
+            changed = false;
         }
     }//end loop
 }

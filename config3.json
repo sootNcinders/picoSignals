@@ -1,0 +1,82 @@
+{
+    "address": 3,
+    "head0": {
+        "amber": {
+            "rgb": [
+                255,
+                40,
+                0
+            ]
+        },
+        "blue": {
+            "current": 20,
+            "pin": 3
+        },
+        "destination": [
+            4
+        ],
+        "dim": 10,
+        "green": {
+            "current": 20,
+            "pin": 5,
+            "rgb": [
+                0,
+                255,
+                0
+            ]
+        },
+        "lunar": {
+            "rgb": [
+                255,
+                255,
+                255
+            ]
+        },
+        "red": {
+            "current": 20,
+            "pin": 4,
+            "rgb": [
+                255,
+                0,
+                0
+            ]
+        }
+    },
+    "head1": {
+        "amber": {
+            "brightness": 127,
+            "current": 58,
+            "pin": 1
+        },
+        "destination": [
+            5
+        ],
+        "dim": 10,
+        "green": {
+            "brightness": 127,
+            "current": 58,
+            "pin": 0
+        },
+        "red": {
+            "brightness": 127,
+            "current": 50,
+            "pin": 2
+        }
+    },
+    "pin0": {
+        "head1": 0,
+        "mode": "capture"
+    },
+    "pin1": {
+        "head": 0,
+        "mode": "release"
+    },
+    "pin2": {
+        "head1": 1,
+        "mode": "capture"
+    },
+    "pin3": {
+        "head": 1,
+        "mode": "release"
+    }
+}
