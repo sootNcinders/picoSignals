@@ -464,13 +464,15 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     {
         if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
         {
-            printf("Mode Fault\n");
+            printf("Mode Fault   Mode = %d\n", _mode);
 
             if(!txAlarmSet)
             {
                 add_alarm_in_ms(20, TXalarm, this, true);
                 txAlarmSet = true;
             }
+
+            setModeIdle();
 
             return false;
         }
@@ -481,7 +483,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     t = get_absolute_time();
     while(channelActive())
     {  
-        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 500)
         {
             printOpMode();
             nop_sleep_ms(1);
@@ -493,6 +495,8 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
                 add_alarm_in_ms(20, TXalarm, this, true);
                 txAlarmSet = true;
             }
+
+            setModeIdle();
 
             return false;
         }

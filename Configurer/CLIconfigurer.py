@@ -26,12 +26,22 @@ for i in range(0, num):
         val = input()
     rgb = (val == 'y')
 
-    for x in range(0, 1):
+    numDests = 0
+    while numDests < 1 or numDests > 6:
+            print("Number of Destinations " + " 1-6: ")
+            numDests = int(input())
+
+    dests = [0,0,0,0,0,0]
+    for x in range(0, numDests):
         val = 0
         while val < 1 or val > 255:
-            print("Destination " + str(i) + " 1-255: ")
+            if(x == 0):
+                print("Head " + str(i) + " Primary Destination" + " 1-255: ")
+            else:
+                print("Head " + str(i) + " Secondary Destination " + str(x) + " 1-255: ")
             val = int(input())
-        head[i].update({"destination" : [val]})
+        dests[x] = val
+    head[i].update({"destination" : dests})
 
     val = -1
     while val < 0 or val > 255:

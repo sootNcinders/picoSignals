@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
+#include "pico/multicore.h"
+#include "pico/sync.h"
 #include "hardware/i2c.h"
 #include "hardware/spi.h"
 #include "hardware/adc.h"
@@ -23,6 +25,7 @@
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
+#define MAXDESTINATIONS 6
 
 //Pin State defines
 #define HIGH 1
@@ -40,6 +43,8 @@
 
 //Battery voltage conversion factor
 #define CONVERSION_FACTOR (12.7/1374) //((3.3f / 0xFFF) * 10)
+
+#define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
 
 //input type
 typedef enum
@@ -69,8 +74,11 @@ typedef struct
 typedef struct
 {
     Head    *head; //The head driver
-    uint8_t destAddr; //this heads partner
+    uint8_t numDest;
+    uint8_t destAddr[MAXDESTINATIONS]; //this heads partner
+    bool destResponded[MAXDESTINATIONS];
     uint8_t dimBright; //Dimmed brightness level
+    uint8_t retries;
     uint8_t releaseTime; //Time to wait to release
     absolute_time_t releaseTimer; //Absolute time of capture
     bool delayClearStarted;
@@ -127,7 +135,6 @@ bool headOn = true; //is any head on
 bool headDim = false; //are all heads dim
 
 //Variables loaded from the config file
-uint8_t retries = 0; //number of retries for current packet
 uint8_t maxRetries = 10; //maximum number of tries to send a packet
 uint8_t retryTime = 100;//time between attempts in milliseconds
 uint8_t dimTime = 10; //time before dimming the head in minutes
@@ -144,6 +151,8 @@ absolute_time_t statBlink;
 
 bool ctcPresent = false;
 bool changed = false;
+
+critical_section_t i2cCS;
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -250,309 +259,40 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
     }
 }
 
-//config JSON file parser
-void parseConfig()
+void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
 {
-    FIL file; //config file 
-    FRESULT fr; //file system return results
-    FATFS fs; //FAT file system interface
-    DIR dir;
-    FILINFO fInfo;
-    sd_card_t *pSD; //SD card driver pointer
-    
-    //Get the SD card and start its driver
-    pSD = sd_get_by_num(0); 
-    sd_init_driver();
-
-    //Mount the SD card file system, if it fails set the error light and stop execution
-    fr = f_mount(&fs, "0:", 1);
-    if (fr != FR_OK)
+    for(int i = 0; i < heads[hN].numDest; i++)
     {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
-    }
-
-    fr = f_findfirst(&dir, &fInfo, "", "config*.json");
-    if(fr != FR_OK)
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
-    }
-
-    //Open the config file, if it fails set the error light and stop execution
-    //const char* const filename = "config.json";
-    const char* const filename = fInfo.fname;
-    fr = f_open(&file, filename, FA_READ);
-    if (fr != FR_OK && fr != FR_EXIST)
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
-    }
-
-#define FILESIZE 10240
-    //Read the config file into RAM, if it fails set error light and stop execution
-    char cfgRaw[FILESIZE]; //May need to expand for more complex config files
-    UINT readSize = 0;
-    fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
-    if(fr != FR_OK)
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
-    }
-    printf("Read %d characters of config file\n", readSize);
-
-    //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
-    StaticJsonDocument<FILESIZE> cfg;
-    DeserializationError error = deserializeJson(cfg, cfgRaw);
-    if(error)
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("Config JSON error: %s\n", error.c_str());
-    }
-
-    addr = cfg["address"];
-
-    maxRetries = cfg["retries"] | 10;
-
-    retryTime = cfg["retryTime"] | 100;
-
-    dimTime = cfg["dimTime"] | 15;
-
-    sleepTime = cfg["sleepTime"] | 30;
-
-    //address 0 is not used and node can not join the network without an ID
-    if(addr == 0)
-    {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("Invalid Address\n");
-    }
-
-    uint8_t pin1, pin2, pin3, cur1, cur2, cur3 = 0;
-
-    JsonObject Jhead[] = {cfg["head0"].as<JsonObject>(), cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>()};
-
-    for(int i = 0; i < MAXHEADS; i++)
-    {
-        GARHEAD *gar; //Temporary GAR head object
-        RGBHEAD *rgb; //Temporary RGB head object
-        if(!Jhead[i].isNull())
+        if(heads[hN].destAddr[i] == f)
         {
-            if(!Jhead[i]["blue"].as<JsonObject>().isNull())
-            {
-                uint8_t bri1, bri2, bri3 = 0;
-
-                pin1 = Jhead[i]["red"]["pin"];
-                cur1 = Jhead[i]["red"]["current"];
-
-                pin2 = Jhead[i]["green"]["pin"];
-                cur2 = Jhead[i]["green"]["current"];
-
-                pin3 = Jhead[i]["blue"]["pin"];
-                cur3 = Jhead[i]["blue"]["current"];
-
-                heads[i].head = new RGBHEAD(&output1, pin1, pin2, pin3);
-                rgb = (RGBHEAD*)heads[i].head;
-                rgb->init(cur1, cur2, cur3);
-
-                rgb->setColorLevels(red, Jhead[i]["red"]["rgb"][0], Jhead[i]["red"]["rgb"][1], Jhead[i]["red"]["rgb"][2]);
-                rgb->setColorLevels(amber, Jhead[i]["amber"]["rgb"][0], Jhead[i]["amber"]["rgb"][1], Jhead[i]["amber"]["rgb"][2]);
-                rgb->setColorLevels(green, Jhead[i]["green"]["rgb"][0], Jhead[i]["green"]["rgb"][1], Jhead[i]["green"]["rgb"][2]);
-                rgb->setColorLevels(lunar, Jhead[i]["lunar"]["rgb"][0], Jhead[i]["lunar"]["rgb"][1], Jhead[i]["lunar"]["rgb"][2]);
-            }
-            else
-            {
-                uint8_t briG, briA, briR = 0;
-
-                pin1 = Jhead[i]["green"]["pin"];
-                cur1 = Jhead[i]["green"]["current"];
-                briG = Jhead[i]["green"]["brightness"] | 255;
-
-                pin2 = Jhead[i]["amber"]["pin"];
-                cur2 = Jhead[i]["amber"]["current"];
-                briA = Jhead[i]["amber"]["brightness"] | 255;
-
-                pin3 = Jhead[i]["red"]["pin"];
-                cur3 = Jhead[i]["red"]["current"];
-                briR = Jhead[i]["red"]["brightness"] | 255;
-
-                heads[i].head = new GARHEAD(&output1, pin1, pin2, pin3);
-                gar = (GARHEAD*)heads[i].head;
-
-                gar->init(cur1, cur2, cur3);
-                gar->setColorBrightness(green, briG);
-                gar->setColorBrightness(amber, briA);
-                gar->setColorBrightness(red, briR);
-            }
-
-            heads[i].destAddr = Jhead[i]["destination"][0];
-
-            if(heads[i].destAddr == 0)
-            {
-                gpio_put(GOODLED, HIGH);
-                gpio_put(ERRORLED, LOW);
-                panic("No Destination configured\n");
-            }
-
-            if(heads[i].destAddr == addr)
-            {
-                gpio_put(GOODLED, HIGH);
-                gpio_put(ERRORLED, LOW);
-                panic("Destination is this node");
-            }
-
-            heads[i].head->setHead(green);
-
-            heads[i].dimBright = Jhead[i]["dim"] | 255;
-
-            heads[i].releaseTime = Jhead[i]["release"] | 6;
-
-            heads[i].delayClearStarted = false;
+            heads[hN].destResponded[i] = true;
         }
     }
 
-    JsonObject pins[] = {cfg["pin0"].as<JsonObject>(), cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(),
-                            cfg["pin4"].as<JsonObject>(), cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>()};
-
-    for(int i = 0; i < MAXINPUTS; i++)
+    bool missingResponse = false;
+    for(int i = 0; i < heads[hN].numDest; i++)
     {
-        if(!pins[i].isNull())
+        if(heads[hN].destResponded[i] == false)
         {
-            if(pins[i]["mode"] == "capture")
+            missingResponse = true;
+        }
+    }
+    if(!missingResponse)
+    {
+        for(int i = 0; i < MAXINPUTS; i++)
+        {
+            if(inputs[i].headNum == hN && inputs[i].mode == m)
             {
-                inputs[i].mode = capture;
-                inputs[i].headNum = pins[i]["head1"];
-
-                if(!pins[i]["head2"].isNull())
-                {
-                    inputs[i].mode = turnoutCapture;
-                    inputs[i].headNum2 = pins[i]["head2"];
-                    inputs[i].turnoutPinNum = pins[i]["turnout"];
-                }
+                inputs[i].lastActive = true;
+                break;
             }
-            else if(pins[i]["mode"] == "release")
-            {
-                inputs[i].mode = release;
-                inputs[i].headNum = pins[i]["head"];
-            }
-            else if (pins[i]["mode"] == "turnout")
-            {
-                inputs[i].mode = turnout;
-            }
-
-            inputs[i].active = inputs[i].lastActive = false;
         }
     }
 }
 
-int main()
+#ifdef MULTICORE
+void core1loop()
 {
-    //Initialize for printf
-    stdio_init_all();
-
-    //Initialize the input interrupt 
-    gpio_init(SWITCHINT);
-    gpio_set_dir(SWITCHINT, GPIO_IN);
-    gpio_pull_up(SWITCHINT);
-
-    //Initialize the RFM95 interrupt
-    gpio_init(RADIOINT);
-    gpio_set_dir(RADIOINT, GPIO_IN);
-
-    //Initialize the Good stat LED
-    gpio_init(GOODLED);
-    gpio_set_dir(GOODLED, GPIO_OUT);
-    gpio_put(GOODLED, LOW);
-
-    //Initialize the Error stat LED
-    gpio_init(ERRORLED);
-    gpio_set_dir(ERRORLED, GPIO_OUT);
-    gpio_put(ERRORLED, HIGH);
-
-    //Initialize the on board LED 
-    gpio_init(PICO_DEFAULT_LED_PIN);
-    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
-    gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
-    statBlink = get_absolute_time();
-    statState = true;
-
-    //Initialize the ADC for battery monitoring
-    adc_init();
-    adc_gpio_init(ADCIN);
-    adc_select_input(0);
-
-    //Setup GPIO interrupts and callback 
-    gpio_set_irq_enabled_with_callback(RADIOINT, RFM95_INT_MODE, true, gpio_isr);
-    //gpio_set_irq_enabled(SWITCHINT, PCA9674_INT_MODE, true);
-
-    //Delay to allow serial monitor to connect
-    sleep_ms(5000);
-
-    printf("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
-
-    uint16_t rawADC = adc_read();
-    float bat = (float)rawADC * CONVERSION_FACTOR;
-    printf("ADC: %d\n", rawADC);
-    printf("Battery: %2.2FV\n\n", bat);
-
-    //Start the SPI and i2c buses 
-    initi2c0();
-    initspi0();
-
-    //Set all PCA9674 pins as inputs
-    input1.inputMask(0xFF);
-    
-    //Initialize all LED pins 
-    for(int i = 0; i < 16; i++)
-    {
-        output1.setLEDcurrent(i, 0);
-        output1.setLEDbrightness(i, 0);
-    }
-
-    //Read config file from the micro SD card 
-    parseConfig();
-
-    printf("\nNODE: %d\nDEST: %d\n", addr, heads[0].destAddr);
-
-    //Set up the RFM95 radio
-    //12500bps datarate
-    radio.init();
-    radio.setLEDS(RXLED, TXLED);
-    radio.setAddress(addr);
-    //Preamble length: 8
-    radio.setPreambleLength(8);
-    //Center Frequency
-    radio.setFrequency(915.0);
-    //Set TX power to Max
-    radio.setTxPower(20);
-    //Set Bandwidth 500kHz
-    radio.setSignalBandwidth(500000);
-    //Set Coding Rate 4/5
-    radio.setCodingRate(5);
-    //Set Spreading Factor 8
-    radio.setSpreadingFactor(8);
-    //Accept all packets
-    radio.setPromiscuous(true);
-
-    radio.setModeRX();
-
-    //radio.printRegisters();
-
-    for(int i = 0; i < MAXHEADS; i++)
-    {
-        if(heads[i].head)
-        {
-            transmit(heads[i].destAddr, 'G', false, false);
-        }
-    }
-
-    printf("Retries: %d\nRetry Time: %dms\nDim Time: %dmin\nSleep Time: %dmin\n", maxRetries, retryTime, dimTime, sleepTime);
-
     while(1)
     {
         retryTimeout = get_absolute_time();
@@ -566,9 +306,6 @@ int main()
                 bool localRelease = false;
 
                 radio.recv((uint8_t *)& transmission, &len, &from, &to);
-
-                printf("\nREC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
-                printf("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
 
                 if(len == sizeof(transmission))
                 {
@@ -718,8 +455,522 @@ int main()
                         }
                     }
                 }
+
+                DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
+                DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
             }
         } while ((retries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
+    }
+}
+#endif
+
+//config JSON file parser
+void parseConfig()
+{
+    FIL file; //config file 
+    FRESULT fr; //file system return results
+    FATFS fs; //FAT file system interface
+    DIR dir;
+    FILINFO fInfo;
+    sd_card_t *pSD; //SD card driver pointer
+    
+    //Get the SD card and start its driver
+    pSD = sd_get_by_num(0); 
+    sd_init_driver();
+
+    //Mount the SD card file system, if it fails set the error light and stop execution
+    fr = f_mount(&fs, "0:", 1);
+    if (fr != FR_OK)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
+    fr = f_findfirst(&dir, &fInfo, "", "config*.json");
+    if(fr != FR_OK)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
+    //Open the config file, if it fails set the error light and stop execution
+    //const char* const filename = "config.json";
+    const char* const filename = fInfo.fname;
+    fr = f_open(&file, filename, FA_READ);
+    if (fr != FR_OK && fr != FR_EXIST)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+    }
+
+#define FILESIZE 10240
+    //Read the config file into RAM, if it fails set error light and stop execution
+    char cfgRaw[FILESIZE]; //May need to expand for more complex config files
+    UINT readSize = 0;
+    fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
+    if(fr != FR_OK)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+    }
+    DPRINTF("Read %d characters of config file\n", readSize);
+
+    //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
+    StaticJsonDocument<FILESIZE> cfg;
+    DeserializationError error = deserializeJson(cfg, cfgRaw);
+    if(error)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("Config JSON error: %s\n", error.c_str());
+    }
+
+    addr = cfg["address"];
+
+    maxRetries = cfg["retries"] | 10;
+
+    retryTime = cfg["retryTime"] | 100;
+
+    dimTime = cfg["dimTime"] | 15;
+
+    sleepTime = cfg["sleepTime"] | 30;
+
+    //address 0 is not used and node can not join the network without an ID
+    if(addr == 0)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("Invalid Address\n");
+    }
+
+    uint8_t pin1, pin2, pin3, cur1, cur2, cur3 = 0;
+
+    JsonObject Jhead[] = {cfg["head0"].as<JsonObject>(), cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>()};
+
+    for(int i = 0; i < MAXHEADS; i++)
+    {
+        GARHEAD *gar; //Temporary GAR head object
+        RGBHEAD *rgb; //Temporary RGB head object
+        if(!Jhead[i].isNull())
+        {
+            if(!Jhead[i]["blue"].as<JsonObject>().isNull())
+            {
+                uint8_t bri1, bri2, bri3 = 0;
+
+                pin1 = Jhead[i]["red"]["pin"];
+                cur1 = Jhead[i]["red"]["current"];
+
+                pin2 = Jhead[i]["green"]["pin"];
+                cur2 = Jhead[i]["green"]["current"];
+
+                pin3 = Jhead[i]["blue"]["pin"];
+                cur3 = Jhead[i]["blue"]["current"];
+
+                heads[i].head = new RGBHEAD(&output1, pin1, pin2, pin3);
+                rgb = (RGBHEAD*)heads[i].head;
+                rgb->init(cur1, cur2, cur3);
+
+                rgb->setColorLevels(red, Jhead[i]["red"]["rgb"][0], Jhead[i]["red"]["rgb"][1], Jhead[i]["red"]["rgb"][2]);
+                rgb->setColorLevels(amber, Jhead[i]["amber"]["rgb"][0], Jhead[i]["amber"]["rgb"][1], Jhead[i]["amber"]["rgb"][2]);
+                rgb->setColorLevels(green, Jhead[i]["green"]["rgb"][0], Jhead[i]["green"]["rgb"][1], Jhead[i]["green"]["rgb"][2]);
+                rgb->setColorLevels(lunar, Jhead[i]["lunar"]["rgb"][0], Jhead[i]["lunar"]["rgb"][1], Jhead[i]["lunar"]["rgb"][2]);
+            }
+            else
+            {
+                uint8_t briG, briA, briR = 0;
+
+                pin1 = Jhead[i]["green"]["pin"];
+                cur1 = Jhead[i]["green"]["current"];
+                briG = Jhead[i]["green"]["brightness"] | 255;
+
+                pin2 = Jhead[i]["amber"]["pin"];
+                cur2 = Jhead[i]["amber"]["current"];
+                briA = Jhead[i]["amber"]["brightness"] | 255;
+
+                pin3 = Jhead[i]["red"]["pin"];
+                cur3 = Jhead[i]["red"]["current"];
+                briR = Jhead[i]["red"]["brightness"] | 255;
+
+                heads[i].head = new GARHEAD(&output1, pin1, pin2, pin3);
+                gar = (GARHEAD*)heads[i].head;
+
+                gar->init(cur1, cur2, cur3);
+                gar->setColorBrightness(green, briG);
+                gar->setColorBrightness(amber, briA);
+                gar->setColorBrightness(red, briR);
+            }
+
+            heads[i].numDest = 0;
+            for(int x = 0; x < MAXDESTINATIONS; x++)
+            {
+                uint8_t d = Jhead[i]["destination"][x];
+                if(d != 0)
+                {
+                    heads[i].destAddr[heads[i].numDest] = d;
+                    heads[i].numDest++;
+                }
+            }
+
+            if(heads[i].numDest == 0)
+            {
+                gpio_put(GOODLED, HIGH);
+                gpio_put(ERRORLED, LOW);
+                panic("No Destination configured\n");
+            }
+
+            heads[i].dimBright = Jhead[i]["dim"] | 255;
+
+            heads[i].releaseTime = Jhead[i]["release"] | 6;
+
+            heads[i].delayClearStarted = false;
+        }
+    }
+
+    JsonObject pins[] = {cfg["pin0"].as<JsonObject>(), cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(),
+                            cfg["pin4"].as<JsonObject>(), cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>()};
+
+    for(int i = 0; i < MAXINPUTS; i++)
+    {
+        if(!pins[i].isNull())
+        {
+            if(pins[i]["mode"] == "capture")
+            {
+                inputs[i].mode = capture;
+                inputs[i].headNum = pins[i]["head1"];
+
+                if(!pins[i]["head2"].isNull())
+                {
+                    inputs[i].mode = turnoutCapture;
+                    inputs[i].headNum2 = pins[i]["head2"];
+                    inputs[i].turnoutPinNum = pins[i]["turnout"];
+                }
+            }
+            else if(pins[i]["mode"] == "release")
+            {
+                inputs[i].mode = release;
+                inputs[i].headNum = pins[i]["head"];
+            }
+            else if (pins[i]["mode"] == "turnout")
+            {
+                inputs[i].mode = turnout;
+            }
+
+            inputs[i].active = inputs[i].lastActive = false;
+        }
+    }
+}
+
+int main()
+{
+    //Initialize for printf
+    stdio_init_all();
+
+    //Initialize the input interrupt 
+    gpio_init(SWITCHINT);
+    gpio_set_dir(SWITCHINT, GPIO_IN);
+    gpio_pull_up(SWITCHINT);
+
+    //Initialize the RFM95 interrupt
+    gpio_init(RADIOINT);
+    gpio_set_dir(RADIOINT, GPIO_IN);
+
+    //Initialize the Good stat LED
+    gpio_init(GOODLED);
+    gpio_set_dir(GOODLED, GPIO_OUT);
+    gpio_put(GOODLED, LOW);
+
+    //Initialize the Error stat LED
+    gpio_init(ERRORLED);
+    gpio_set_dir(ERRORLED, GPIO_OUT);
+    gpio_put(ERRORLED, HIGH);
+
+    //Initialize the on board LED 
+    gpio_init(PICO_DEFAULT_LED_PIN);
+    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+    gpio_put(PICO_DEFAULT_LED_PIN, HIGH);
+    statBlink = get_absolute_time();
+    statState = true;
+
+    //Initialize the ADC for battery monitoring
+    adc_init();
+    adc_gpio_init(ADCIN);
+    adc_select_input(0);
+
+    //Setup GPIO interrupts and callback 
+    gpio_set_irq_enabled_with_callback(RADIOINT, RFM95_INT_MODE, true, gpio_isr);
+    //gpio_set_irq_enabled(SWITCHINT, PCA9674_INT_MODE, true);
+
+    //Delay to allow serial monitor to connect
+    sleep_ms(5000);
+
+    DPRINTF("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
+
+    uint16_t rawADC = adc_read();
+    float bat = (float)rawADC * CONVERSION_FACTOR;
+    DPRINTF("ADC: %d\n", rawADC);
+    DPRINTF("Battery: %2.2FV\n\n", bat);
+
+    #ifdef MULTICORE
+    critical_section_init(&i2cCS);
+    input1.setCriticalSection(&i2cCS);
+    output1.setCriticalSection(&i2cCS);
+    #endif
+
+    //Start the SPI and i2c buses 
+    initi2c0();
+    initspi0();
+
+    //Set all PCA9674 pins as inputs
+    input1.inputMask(0xFF);
+    
+    //Initialize all LED pins 
+    for(int i = 0; i < 16; i++)
+    {
+        output1.setLEDcurrent(i, 0);
+        output1.setLEDbrightness(i, 0);
+    }
+
+    //Read config file from the micro SD card 
+    parseConfig();
+
+    DPRINTF("\nNODE: %d\nDEST: %d\n", addr, heads[0].destAddr);
+
+    //Set up the RFM95 radio
+    //12500bps datarate
+    radio.init();
+    radio.setLEDS(RXLED, TXLED);
+    radio.setAddress(addr);
+    //Preamble length: 8
+    radio.setPreambleLength(8);
+    //Center Frequency
+    radio.setFrequency(915.0);
+    //Set TX power to Max
+    radio.setTxPower(20);
+    //Set Bandwidth 500kHz
+    radio.setSignalBandwidth(500000);
+    //Set Coding Rate 4/5
+    radio.setCodingRate(5);
+    //Set Spreading Factor 8
+    //Spreading Factor of 7 gives 21875bps - ~24ms round trip vs ~45ms round trip
+    radio.setSpreadingFactor(7);
+    //Accept all packets
+    radio.setPromiscuous(true);
+
+    radio.setModeRX();
+
+    //radio.printRegisters();
+
+    #ifdef MULTICORE
+    multicore_launch_core1(core1loop);
+    #endif
+
+    /*for(int i = 0; i < MAXHEADS; i++)
+    {
+        if(heads[i].head)
+        {
+            transmit(heads[i].destAddr, 'G', false, false);
+        }
+    }*/
+
+    for(int i = 0; i < MAXHEADS; i++)
+    {
+        if(heads[i].head)
+        {
+            heads[i].head->setHead(red);
+        }
+    }
+    for(int i = 0; i < MAXINPUTS; i++)
+    {
+        if(inputs[i].mode == release)
+        {
+            inputs[i].active = true;
+        }
+    }
+
+    DPRINTF("Retries: %d\nRetry Time: %dms\nDim Time: %dmin\nSleep Time: %dmin\n", maxRetries, retryTime, dimTime, sleepTime);
+
+    while(1)
+    {
+        #ifdef MULTICORE
+        //Hold checking IO during message transmision and response
+        absolute_time_t retryTimeoutd = get_absolute_time();
+        while ((retries > 0) && ((absolute_time_diff_us(retryTimeoutd, get_absolute_time()) / 1000) <= retryTime));
+        #else
+        uint8_t anyRetries = 0;
+        for(int i = 0; i < MAXHEADS; i++)
+        {
+            if(heads[i].retries != 0)
+            {
+                anyRetries = heads[i].retries;
+            }
+        }
+        retryTimeout = get_absolute_time();
+        do
+        {
+            if(radio.available())
+            {
+                to = 0;
+                from = 0;
+                len = sizeof(transmission);
+                bool localRelease = false;
+
+                radio.recv((uint8_t *)& transmission, &len, &from, &to);
+
+                if(len == sizeof(transmission))
+                {
+                    bool headFound = false;
+                    uint8_t headNum = 0;
+                    for(int i = 0; i < MAXHEADS && !headFound; i++)
+                    {
+                        for(int x = 0; x < heads[i].numDest && !headFound; x++)
+                        {
+                            if(from == heads[i].destAddr[x])
+                            {
+                                headNum = i;
+                                headFound = true;
+                            }
+                        }
+                    }
+
+                    if(transmission.destination == addr && !transmission.isCode && headFound)
+                    {
+                        switch(transmission.aspect)
+                        {
+                            case 'G':
+                            case 'g':
+                                if(!transmission.isACK)
+                                {
+                                    transmit(from, 'G', true, false);
+                                }
+                                
+                                for(int i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                    {
+                                        localRelease = inputs[i].active;
+                                        break;
+                                    }
+                                }
+
+                                setLastActive(headNum, from, release);
+
+                                if(heads[headNum].head->getColor() == amber && !localRelease)
+                                {
+                                    if(!heads[headNum].delayClearStarted)
+                                    {
+                                        add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[headNum], true);
+                                        heads[headNum].delayClearStarted = true;
+                                    }
+                                }
+                                else
+                                {
+                                    heads[headNum].head->setHead(green);
+                                    changed = true;
+                                }
+
+                                heads[headNum].retries = 0;
+                                dimTimeout = get_absolute_time();
+                                break;
+
+                            case 'A':
+                            case 'a':
+                                if(!transmission.isACK)
+                                {
+                                    transmit(from, 'R', true, false);
+                                }
+
+                                if(heads[headNum].head->getColor() == green || heads[headNum].head->getColor() == amber || heads[headNum].head->getColor() == off)
+                                {                                   
+                                    heads[headNum].head->setHead(amber);
+
+                                    changed = true;
+
+                                    setLastActive(headNum, from, capture);
+
+                                    heads[headNum].retries = 0;
+                                    dimTimeout = get_absolute_time();
+                                    heads[0].releaseTimer = get_absolute_time();
+                                }
+                                break;
+                            
+                            case 'R':
+                            case 'r':
+                                if(!transmission.isACK)
+                                {
+                                    transmit(from, 'A', true, false);
+                                }
+                                
+                                heads[headNum].head->setHead(red);
+
+                                changed = true;
+
+                                for(int i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                    {
+                                        inputs[i].lastActive = true;
+                                    }
+
+                                    if(inputs[i].headNum == headNum && inputs[i].mode == capture)
+                                    {
+                                        inputs[i].lastActive = true;
+                                    }
+                                }
+
+                                heads[headNum].retries = 0;
+                                dimTimeout = get_absolute_time();
+
+                                heads[0].releaseTimer = get_absolute_time();
+                                break;
+                        }
+                    }
+
+                    if(transmission.aspect == 'A' || transmission.aspect == 'a' || transmission.aspect == 'R' || transmission.aspect == 'r')
+                    {
+                        if(!headOn)
+                        {
+                            output1.wake();
+
+                            for(int i = 0; i < MAXHEADS; i++)
+                            {
+                                if(heads[i].head)
+                                {
+                                    heads[i].head->setHeadBrightness(255);
+
+                                    if(heads[i].head->getColor() == off)
+                                    {
+                                        heads[i].head->setHead(green);
+                                    }
+                                }
+                            }
+
+                            headOn = true;
+                            headDim = false;
+                        }
+                        else if(headDim)
+                        {
+                            for(int i = 0; i < MAXHEADS; i++)
+                            {
+                                if(heads[i].head)
+                                {
+                                    heads[i].head->setHeadBrightness(255);
+                                }
+                            }
+
+                            headDim = false;
+                        }
+                    }
+                }
+
+                DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
+                DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
+            }
+        } while ((anyRetries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
+        #endif
 
         if((absolute_time_diff_us(statBlink, get_absolute_time()) / 1000) >= 1000)
         {
@@ -728,14 +979,41 @@ int main()
             statBlink = get_absolute_time();
         }
         
-        if(retries > 10)
+        for(int i = 0; i < MAXHEADS; i++)
         {
-            for(int i = 0; i < MAXINPUTS; i++)
+            if(heads[i].retries > 10)
             {
-                inputs[i].lastActive = inputs[i].active;
-            }
+                for(int x = 0; x < heads[i].numDest; x++)
+                {
+                    if(!heads[i].destResponded[x])
+                    {
+                        heads[i].destResponded[x] = true;
+                        break;
+                    }
+                }
 
-            retries = 0;
+                bool missingResponse = false;
+                for(int x = 0; x < heads[i].numDest; x++)
+                {
+                    if(heads[i].destResponded[x] == false)
+                    {
+                        missingResponse = true;
+                    }
+                }
+                if(!missingResponse)
+                {
+                    for(int x = 0; x < MAXINPUTS; x++)
+                    {
+                        if(inputs[x].headNum == i)
+                        {
+                            inputs[x].lastActive = inputs[x].active;
+                            break;
+                        }
+                    }
+                }
+
+                heads[i].retries = 0;
+            }
         }
         
         input1.updateInputs();
@@ -763,6 +1041,10 @@ int main()
                 else if(!inputs[i].active && inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (5*1000)))
                 {
                     inputs[i].active = true;
+                    for(int x = 0; x < MAXDESTINATIONS; x++)
+                    {
+                        heads[inputs[i].headNum].destResponded[x] = false;
+                    }
                 }
             }
             //get direct input for turnout monitoring, input must be stable for 50ms to latch
@@ -781,18 +1063,51 @@ int main()
             {
                 if(inputs[i].active && !inputs[i].lastActive)
                 {
-                    if(heads[inputs[i].headNum].head->getColor() == off)
+                    if(!headOn)
                     {
-                        heads[inputs[i].headNum].head->setHead(green);
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHead(green);
+                            }
+                        }
+                        headOn = true;
+                    }
+                    if(headDim)
+                    {
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHeadBrightness(255);
+                            }
+                        }
+                        headDim = false;
                     }
 
                     if(inputs[i].mode == turnoutCapture && inputs[inputs[i].turnoutPinNum].active)
                     {
-                        if(heads[inputs[i].headNum2].head->getColor() == green)
+                        bool incompleteSend = false;
+                        for(int x = 0; x < heads[inputs[i].headNum2].numDest; x++)
                         {
-                            transmit(heads[inputs[i].headNum2].destAddr, 'R', false, false);
-                            retries++;
-                            printf("Sending Capture %d\n", inputs[i].headNum2);
+                            if(!heads[inputs[i].headNum2].destResponded[x])
+                            {
+                                incompleteSend = true;
+                            }
+                        }
+                        if(heads[inputs[i].headNum2].head->getColor() == green || incompleteSend)
+                        {
+                            for(int x = 0; x < heads[inputs[i].headNum2].numDest; x++)
+                            {
+                                if(!heads[inputs[i].headNum2].destResponded[x])
+                                {
+                                    transmit(heads[inputs[i].headNum2].destAddr[x], 'R', false, false);
+                                    break;
+                                }
+                            }
+                            heads[inputs[i].headNum2].retries++;
+                            DPRINTF("Sending Capture %d\n", inputs[i].headNum2);
 
                             for(int x = 0; x < MAXINPUTS; x++)
                             {
@@ -805,11 +1120,26 @@ int main()
                     }
                     else
                     {
-                        if(heads[inputs[i].headNum].head->getColor() == green)
+                        bool incompleteSend = false;
+                        for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                         {
-                            transmit(heads[inputs[i].headNum].destAddr, 'R', false, false);
-                            retries++;
-                            printf("Sending Capture %d\n", inputs[i].headNum);
+                            if(!heads[inputs[i].headNum].destResponded[x])
+                            {
+                                incompleteSend = true;
+                            }
+                        }
+                        if(heads[inputs[i].headNum].head->getColor() == green || incompleteSend)
+                        {
+                            for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
+                            {
+                                if(!heads[inputs[i].headNum].destResponded[x])
+                                {
+                                    transmit(heads[inputs[i].headNum].destAddr[x], 'R', false, false);
+                                    break;
+                                }
+                            }
+                            heads[inputs[i].headNum].retries++;
+                            DPRINTF("Sending Capture %d\n", inputs[i].headNum);
 
                             for(int x = 0; x < MAXINPUTS; x++)
                             {
@@ -825,11 +1155,26 @@ int main()
             }
             else if(inputs[i].mode == release)
             {
-                if(inputs[i].active && !inputs[i].lastActive && (heads[inputs[i].headNum].head->getColor() == amber || heads[inputs[i].headNum].head->getColor() == red))
+                bool incompleteSend = false;
+                for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                 {
-                    transmit(heads[inputs[i].headNum].destAddr, 'G', false, false);
-                    retries++;
-                    printf("Sending Release %d\n", inputs[i].headNum);
+                    if(!heads[inputs[i].headNum].destResponded[x])
+                    {
+                        incompleteSend = true;
+                    }
+                }
+                if(inputs[i].active && !inputs[i].lastActive && ((heads[inputs[i].headNum].head->getColor() == amber || heads[inputs[i].headNum].head->getColor() == red || incompleteSend)))
+                {
+                    for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
+                    {
+                        if(!heads[inputs[i].headNum].destResponded[x])
+                        {
+                            transmit(heads[inputs[i].headNum].destAddr[x], 'G', false, false);
+                            break;
+                        }
+                    }
+                    heads[inputs[i].headNum].retries++;
+                    DPRINTF("Sending Release %d\n", inputs[i].headNum);
 
                     for(int x = 0; x < MAXINPUTS; x++)
                     {
@@ -846,19 +1191,14 @@ int main()
         {
             if(heads[i].head)
             {
-                if(heads[i].head->getColor() == red && heads[i].releaseTime > 0)
+                if((heads[i].head->getColor() != green && heads[i].head->getColor() != off) && heads[i].releaseTime > 0)
                 {
                     if(((absolute_time_diff_us(heads[i].releaseTimer, get_absolute_time()))/60000000) >= heads[i].releaseTime)
                     {
-                        printf("Release Timeout Head %d\n", i);
+                        DPRINTF("Release Timeout Head %d\n", i);
 
-                        for(int x = 0; x < MAXINPUTS; x++)
-                        {
-                            if(inputs[x].mode == release && inputs[x].headNum == i)
-                            {
-                                inputs[x].active = true;
-                            }
-                        }
+                        heads[i].head->setHead(green);
+                        heads[i].releaseTimer = get_absolute_time();
                     }
                 }
             }
@@ -872,7 +1212,7 @@ int main()
                 {
                     if(heads[i].head)
                     {
-                        printf("Dimming Head %d\n", i);
+                        DPRINTF("Dimming Head %d\n", i);
                         heads[i].head->setHeadBrightness(heads[i].dimBright);
                     }
                 }
@@ -889,7 +1229,7 @@ int main()
                 {
                     if(heads[i].head)
                     {
-                        printf("Turning off Head %d\n", i);
+                        DPRINTF("Turning off Head %d\n", i);
                         heads[i].head->setHead(off);
                     }
                 }

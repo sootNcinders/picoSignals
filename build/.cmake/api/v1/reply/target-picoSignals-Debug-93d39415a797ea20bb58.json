@@ -62,7 +62,7 @@
 			{
 				"command" : 6,
 				"file" : 0,
-				"line" : 37,
+				"line" : 39,
 				"parent" : 0
 			},
 			{
@@ -210,6 +210,10 @@
 				{
 					"backtrace" : 2,
 					"define" : "LIB_PICO_MEM_OPS_PICO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "LIB_PICO_MULTICORE=1"
 				},
 				{
 					"backtrace" : 2,
@@ -501,6 +505,10 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/common/pico_usb_reset_interface/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -653,6 +661,10 @@
 				},
 				{
 					"backtrace" : 2,
+					"define" : "LIB_PICO_MULTICORE=1"
+				},
+				{
+					"backtrace" : 2,
 					"define" : "LIB_PICO_PLATFORM=1"
 				},
 				{
@@ -941,6 +953,10 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/common/pico_usb_reset_interface/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -1066,7 +1082,8 @@
 				91,
 				92,
 				93,
-				94
+				94,
+				95
 			]
 		},
 		{
@@ -1157,6 +1174,10 @@
 				{
 					"backtrace" : 2,
 					"define" : "LIB_PICO_MEM_OPS_PICO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "LIB_PICO_MULTICORE=1"
 				},
 				{
 					"backtrace" : 2,
@@ -1448,6 +1469,10 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/common/pico_usb_reset_interface/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -2446,7 +2471,8 @@
 				91,
 				92,
 				93,
-				94
+				94,
+				95
 			]
 		},
 		{
@@ -2929,6 +2955,12 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 1,
 			"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 1,
+			"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c",
 			"sourceGroupIndex" : 0
 		},
 		{

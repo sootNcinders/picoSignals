@@ -1,5 +1,6 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
+#include "pico/sync.h"
 #include "hardware/i2c.h"
 
 #ifndef PCA9955_H
@@ -49,12 +50,16 @@ class PCA9955
         /// @brief Takes the PCA9955 out of low power mode - LED states will need to be need to be reset
         void wake();
 
+        /// @brief Set the critical section used to protect the i2c bus
+        /// @param cs Critical section pointer
+        void setCriticalSection(critical_section_t* cs);
+
     private:
         i2c_inst_t* _bus;
         uint8_t _address;
+        critical_section_t* critSec;
         float _maxCurrent;
         uint8_t ledState[4];
-
         uint8_t _errors[8];
 
         //

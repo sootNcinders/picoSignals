@@ -84,4 +84,10 @@ CMakeFiles/picoSignals.dir/pca9674.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/i2c.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/i2c.h \
  /Users/tleavitt/pico/projects/picoSignals/pca9674.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
  /Users/tleavitt/pico/projects/picoSignals/utils.c

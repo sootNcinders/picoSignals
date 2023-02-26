@@ -22,6 +22,8 @@ add_executable(picoSignals
 # pull in common dependencies and additional i2c hardware support
 target_link_libraries(picoSignals 
                         pico_stdlib 
+                        pico_multicore
+                        pico_sync
                         hardware_i2c 
                         hardware_spi
                         hardware_adc

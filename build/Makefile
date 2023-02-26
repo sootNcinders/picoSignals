@@ -1953,6 +1953,30 @@ Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.obj
+
+# target to build an object file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.i: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.i
+
+# target to preprocess a source file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.s: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.s
+
+# target to generate assembly for a file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
+
 Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj
 
@@ -2600,6 +2624,9 @@ help:
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.i"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.s"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.obj"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.obj"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.i"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.s"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.i"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.s"

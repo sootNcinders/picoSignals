@@ -1,5 +1,6 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
+#include "pico/sync.h"
 #include "hardware/i2c.h"
 
 #ifndef PCA9674_H
@@ -28,10 +29,15 @@ class pca9674
         /// @brief loads current state of all pins to memory
         void updateInputs();
 
+        /// @brief Set the critical section used to protect the i2c bus
+        /// @param cs Critical section pointer
+        void setCriticalSection(critical_section_t* cs);
+
     private:
         uint8_t address;
         uint8_t buffer;
         i2c_inst_t* bus; 
+        critical_section_t* critSec;
 
         uint8_t lastBuffer;
 

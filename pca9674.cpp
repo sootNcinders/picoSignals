@@ -17,10 +17,13 @@ void pca9674::inputMask(uint8_t mask)
 
     for(int i = 0; i < 5; i++)
     {
+        if(critSec) critical_section_enter_blocking(critSec);
         if(i2c_write_timeout_us(bus, address, &mask, 1, false, 500) == 1)
         {
+            if(critSec) critical_section_exit(critSec);
             break;
         }
+        if(critSec) critical_section_exit(critSec);
         nop_sleep_us(5);//Back to back access delay
     }
 
@@ -44,7 +47,9 @@ void pca9674::updateInputs()
 
     for(int i = 0; i < 5; i++)
     {
+        if(critSec) critical_section_enter_blocking(critSec);
         rtn = i2c_read_timeout_us(bus, address, &buffer, 1, false, 500);
+        if(critSec) critical_section_exit(critSec);
 
         if(rtn == 1)
         {
@@ -69,4 +74,9 @@ void pca9674::updateInputs()
     }
 
     nop_sleep_us(5);//Back to back access delay
+}
+
+void pca9674::setCriticalSection(critical_section_t* cs)
+{
+    critSec = cs;
 }

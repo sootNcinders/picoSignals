@@ -19,7 +19,7 @@ void initi2c0()
 
 void initspi0()
 {
-    spi_init(spi0, 1000 * 1000);
+    spi_init(spi0, 5000 * 1000);
     gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_TX_PIN, GPIO_FUNC_SPI);

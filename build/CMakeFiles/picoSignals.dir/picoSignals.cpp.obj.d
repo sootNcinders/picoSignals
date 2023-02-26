@@ -86,6 +86,13 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/include/hardware/i2c.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/i2c.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/i2c.h \
@@ -110,14 +117,10 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffconf.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/hw_config.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.h \
  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson.h \
