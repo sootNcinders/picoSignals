@@ -236,13 +236,13 @@ bool sendError = false;
 //Response time: 47mS
 void transmit(uint8_t dest, char asp, bool ack, bool code)
 {
-    //printf("TRANSMIT\n");
-
+    //Pack the data packet
     transmission.destination = dest;
     transmission.aspect = asp;
     transmission.isACK = ack;
     transmission.isCode = code;
 
+    //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &transmission, sizeof(transmission)))
     {
         //if the send failed set the error light
@@ -250,6 +250,7 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
         gpio_put(ERRORLED, LOW);
         sendError = true;
     }
+    //If the radio recovers, clear the error light
     else if(sendError)
     {
         //if the transciever driver recovers, clear the error
@@ -259,8 +260,10 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
     }
 }
 
+//Function to handle when the transmission sequence is complete for multiple destinations
 void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
 {
+    //Set that the destination f has responded
     for(int i = 0; i < heads[hN].numDest; i++)
     {
         if(heads[hN].destAddr[i] == f)
@@ -269,6 +272,7 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
         }
     }
 
+    //Check if any of the destinations have not responded
     bool missingResponse = false;
     for(int i = 0; i < heads[hN].numDest; i++)
     {
@@ -277,6 +281,7 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
             missingResponse = true;
         }
     }
+    //If all of the destinations have responded, set lastActive to prevent further transmissions
     if(!missingResponse)
     {
         for(int i = 0; i < MAXINPUTS; i++)
@@ -529,15 +534,15 @@ void parseConfig()
         panic("Config JSON error: %s\n", error.c_str());
     }
 
-    addr = cfg["address"];
+    addr = cfg["address"]; //Address of this node
 
-    maxRetries = cfg["retries"] | 10;
+    maxRetries = cfg["retries"] | 10; //Number of retries, default to 10 if not specified 
 
-    retryTime = cfg["retryTime"] | 100;
+    retryTime = cfg["retryTime"] | 100; //Time to wait for a response, default to 100ms if not specified 
 
-    dimTime = cfg["dimTime"] | 15;
+    dimTime = cfg["dimTime"] | 15; //Time to dim the head(s), default to 15min if not specified
 
-    sleepTime = cfg["sleepTime"] | 30;
+    sleepTime = cfg["sleepTime"] | 30; //Time to put the heads to sleep, 30min if not specified
 
     //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
@@ -557,6 +562,7 @@ void parseConfig()
         RGBHEAD *rgb; //Temporary RGB head object
         if(!Jhead[i].isNull())
         {
+            //If a blue is specified, assume the head is RGB
             if(!Jhead[i]["blue"].as<JsonObject>().isNull())
             {
                 uint8_t bri1, bri2, bri3 = 0;
@@ -604,6 +610,7 @@ void parseConfig()
                 gar->setColorBrightness(red, briR);
             }
 
+            //Load up to 6 destinations 
             heads[i].numDest = 0;
             for(int x = 0; x < MAXDESTINATIONS; x++)
             {
@@ -615,6 +622,7 @@ void parseConfig()
                 }
             }
 
+            //if no valid destinations were supplied, fault out
             if(heads[i].numDest == 0)
             {
                 gpio_put(GOODLED, HIGH);
@@ -622,9 +630,9 @@ void parseConfig()
                 panic("No Destination configured\n");
             }
 
-            heads[i].dimBright = Jhead[i]["dim"] | 255;
+            heads[i].dimBright = Jhead[i]["dim"] | 255; //Set the dim brightness value, default to 255 (full brightness) if not specified 
 
-            heads[i].releaseTime = Jhead[i]["release"] | 6;
+            heads[i].releaseTime = Jhead[i]["release"] | 6; //Set the time to auto clear the head, default to 6min if not specified
 
             heads[i].delayClearStarted = false;
         }
@@ -633,6 +641,7 @@ void parseConfig()
     JsonObject pins[] = {cfg["pin0"].as<JsonObject>(), cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(),
                             cfg["pin4"].as<JsonObject>(), cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>()};
 
+    //Load the mode for up to 8 inputs
     for(int i = 0; i < MAXINPUTS; i++)
     {
         if(!pins[i].isNull())
@@ -707,8 +716,10 @@ int main()
     //Delay to allow serial monitor to connect
     sleep_ms(5000);
 
+    //print the current version and revision
     DPRINTF("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
 
+    //Read battery ADC - Test code
     uint16_t rawADC = adc_read();
     float bat = (float)rawADC * CONVERSION_FACTOR;
     DPRINTF("ADC: %d\n", rawADC);
@@ -754,9 +765,9 @@ int main()
     radio.setSignalBandwidth(500000);
     //Set Coding Rate 4/5
     radio.setCodingRate(5);
-    //Set Spreading Factor 8
-    //Spreading Factor of 7 gives 21875bps - ~24ms round trip vs ~45ms round trip
-    radio.setSpreadingFactor(7);
+    //Spreading Factor of 8 gives 12500bps - ~45ms round trip
+    //Spreading Factor of 7 gives 21875bps - ~24ms round trip ****Insufficient Range****
+    radio.setSpreadingFactor(8);
     //Accept all packets
     radio.setPromiscuous(true);
 
@@ -776,6 +787,7 @@ int main()
         }
     }*/
 
+    //Set all heads to red to send releases so the block starts on clear.
     for(int i = 0; i < MAXHEADS; i++)
     {
         if(heads[i].head)
@@ -800,6 +812,8 @@ int main()
         absolute_time_t retryTimeoutd = get_absolute_time();
         while ((retries > 0) && ((absolute_time_diff_us(retryTimeoutd, get_absolute_time()) / 1000) <= retryTime));
         #else
+
+        //Check to see if any head is currently transmitting
         uint8_t anyRetries = 0;
         for(int i = 0; i < MAXHEADS; i++)
         {
@@ -811,6 +825,7 @@ int main()
         retryTimeout = get_absolute_time();
         do
         {
+            //Check if any packets have come in
             if(radio.available())
             {
                 to = 0;
@@ -818,10 +833,13 @@ int main()
                 len = sizeof(transmission);
                 bool localRelease = false;
 
+                //Load the packet into the correct data structure
                 radio.recv((uint8_t *)& transmission, &len, &from, &to);
 
+                //Do not process if the correct size packet was read from the radio
                 if(len == sizeof(transmission))
                 {
+                    //Find the head the corresponding to the transmitting node
                     bool headFound = false;
                     uint8_t headNum = 0;
                     for(int i = 0; i < MAXHEADS && !headFound; i++)
@@ -836,23 +854,28 @@ int main()
                         }
                     }
 
+                    //Process if this node was the destination and the transmitting node is a destination for one of the heads
                     if(transmission.destination == addr && !transmission.isCode && headFound)
                     {
                         switch(transmission.aspect)
                         {
                             case 'G':
                             case 'g':
+                                //Respond if necessary 
                                 if(!transmission.isACK)
                                 {
                                     transmit(from, 'G', true, false);
                                 }
-                                
-                                for(int i = 0; i < MAXINPUTS; i++)
+                                else
                                 {
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                    //Check if the release was from this node
+                                    for(int i = 0; i < MAXINPUTS; i++)
                                     {
-                                        localRelease = inputs[i].active;
-                                        break;
+                                        if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                        {
+                                            localRelease = inputs[i].active;
+                                            break;
+                                        }
                                     }
                                 }
 
@@ -1091,7 +1114,7 @@ int main()
                         bool incompleteSend = false;
                         for(int x = 0; x < heads[inputs[i].headNum2].numDest; x++)
                         {
-                            if(!heads[inputs[i].headNum2].destResponded[x])
+                            if(!heads[inputs[i].headNum2].destResponded[x] && heads[inputs[i].headNum2].destResponded[0])
                             {
                                 incompleteSend = true;
                             }
@@ -1123,7 +1146,7 @@ int main()
                         bool incompleteSend = false;
                         for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                         {
-                            if(!heads[inputs[i].headNum].destResponded[x])
+                            if(!heads[inputs[i].headNum].destResponded[x] && heads[inputs[i].headNum].destResponded[0])
                             {
                                 incompleteSend = true;
                             }
@@ -1158,7 +1181,7 @@ int main()
                 bool incompleteSend = false;
                 for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                 {
-                    if(!heads[inputs[i].headNum].destResponded[x])
+                    if(!heads[inputs[i].headNum].destResponded[x] && heads[inputs[i].headNum].destResponded[0])
                     {
                         incompleteSend = true;
                     }
@@ -1187,6 +1210,7 @@ int main()
             }
         }
 
+        //Check if any of the heads need to be cleared
         for(int i = 0; i < MAXHEADS; i++)
         {
             if(heads[i].head)
