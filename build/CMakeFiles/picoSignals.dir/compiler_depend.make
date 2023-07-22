@@ -4479,18 +4479,17 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/pi
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson.h \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Configuration.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayRef.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayFunctions.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionData.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArray.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantRefBase.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/Converter.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Namespace.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/preprocessor.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/version.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/assert.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayIterator.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/SlotFunctions.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantData.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/JsonVariantConst.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Memory/MemoryPool.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Memory/Alignment.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/assert.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/mpl/max.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StringAdapters.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits.hpp \
@@ -4499,6 +4498,7 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/pi
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/integral_constant.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_array.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_base_of.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/remove_reference.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_class.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/declval.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_const.hpp \
@@ -4515,12 +4515,11 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/pi
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/type_identity.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/make_void.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/remove_const.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/remove_reference.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/JsonString.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/RamString.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/IsString.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/String.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Misc/SafeBoolIdiom.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StoragePolicy.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StringAdapter.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/JsonString.hpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ostream \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ios \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/iosfwd \
@@ -4611,49 +4610,48 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/pi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/locale_facets.tcc \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_ios.tcc \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/ostream.tcc \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StdString.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StringView.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StringObject.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StringTraits.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantSlot.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/integer.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/limits.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantContent.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/Float.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/Integer.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionData.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/JsonFloat.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/JsonInteger.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/IsString.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantAttorney.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/attributes.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantTo.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantFunctions.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantData.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Misc/SerializedValue.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/convertNumber.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/FloatTraits.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/alias_cast.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/math.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/static_array.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantRef.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/Converter.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantAttorney.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/attributes.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantTo.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantFunctions.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StoragePolicy.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/pgmspace_generic.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/Visitor.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantOperators.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/arithmeticCompare.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantTag.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantShortcuts.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayShortcuts.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectShortcuts.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectRef.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectFunctions.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectIterator.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/Pair.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayConst.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayIterator.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/JsonVariant.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/SlotFunctions.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObject.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectConst.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectIterator.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonPair.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/MemberProxy.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/DynamicJsonDocument.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/BasicJsonDocument.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/JsonDocument.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantProxy.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/MemberProxy.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/StaticJsonDocument.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayImpl.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayImpl.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/Utilities.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionImpl.hpp \
-  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectImpl.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectImpl.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/ConverterImpl.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Json/JsonSerializer.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Json/TextFormatter.hpp \
@@ -4674,9 +4672,11 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/pi
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Json/JsonDeserializer.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/deserialize.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/DeserializationError.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/DeserializationOptions.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Filter.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/NestingLimit.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Reader.hpp \
+  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/utility.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Readers/IteratorReader.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Readers/RamReader.hpp \
   /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Readers/VariantReader.hpp \
@@ -4771,8 +4771,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Readers/RamReader.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Reader.hpp:
-
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Filter.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/DeserializationError.hpp:
@@ -4799,13 +4797,7 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/ConverterImpl.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectImpl.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayImpl.hpp:
-
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/StaticJsonDocument.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantProxy.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/JsonDocument.hpp:
 
@@ -4813,17 +4805,17 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Document/DynamicJsonDocument.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/Pair.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonPair.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectIterator.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObject.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectFunctions.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/SlotFunctions.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectRef.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/JsonVariant.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/ObjectShortcuts.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/Reader.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayShortcuts.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayConst.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionImpl.hpp:
 
@@ -4832,6 +4824,18 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantOperators.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/Visitor.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/pgmspace_generic.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayIterator.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/alias_cast.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/convertNumber.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Misc/SerializedValue.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantData.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/MsgPack/ieee754.hpp:
 
@@ -4843,15 +4847,7 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantAttorney.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantRef.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/alias_cast.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/convertNumber.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Misc/SerializedValue.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/Integer.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/JsonInteger.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantImpl.hpp:
 
@@ -4863,7 +4859,7 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantSlot.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StdString.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StringTraits.hpp:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/locale_facets.tcc:
 
@@ -4872,12 +4868,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_ios.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/stdexcept:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/NestingLimit.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StoragePolicy.hpp:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/error_constants.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/system_error:
 
@@ -4891,19 +4881,19 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/alloc_traits.h:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_cmp.h:
-
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/concepts:
+
+/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/iterator_concepts.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/initializer_list:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_access.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectIterator.hpp:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/allocator.h:
 
@@ -4985,17 +4975,19 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ostream:
 
-/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/JsonString.hpp:
 
-/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/remove_reference.hpp:
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StringAdapter.hpp:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/include/hardware/xosc.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/make_void.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_unsigned.hpp:
+
+/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_pointer.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_integral.hpp:
 
@@ -5009,15 +5001,19 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_class.hpp:
 
+/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h:
+
+/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/remove_reference.hpp:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_base_of.hpp:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/strings.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/JsonVariantConst.hpp:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_array.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_floating_point.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/IsString.hpp:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h:
 
@@ -5025,19 +5021,17 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits.hpp:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/NestingLimit.hpp:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/error_constants.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/StoragePolicy.hpp:
+
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/ostream.tcc:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ssi.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/mpl/max.hpp:
-
-/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_pointer.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantData.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayIterator.hpp:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/c++allocator.h:
 
@@ -5052,14 +5046,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ioqspi.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/preprocessor.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/iterator_concepts.h:
-
-/Users/tleavitt/pico/projects/picoSignals/hw_config.c:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionData.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantCompare.hpp:
 
@@ -5078,8 +5064,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson.h:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/String.hpp:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h:
 
@@ -5135,6 +5119,8 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/psm.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/JsonFloat.hpp:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/psm.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_pthreadtypes.h:
@@ -5181,8 +5167,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Misc/SafeBoolIdiom.hpp:
-
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/xosc.h:
@@ -5197,9 +5181,15 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/include/hardware/pll.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/IsString.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_floating_point.hpp:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_cmp.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h:
 
@@ -5243,11 +5233,9 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/sem.c:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Numbers/Float.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayRef.hpp:
-
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_same.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArray.hpp:
 
 generated/pico_base/pico/config_autogen.h:
 
@@ -5264,6 +5252,8 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectConst.hpp:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c:
 
@@ -5341,6 +5331,8 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/DeserializationOptions.hpp:
+
 /Users/tleavitt/pico/projects/picoSignals/RFM95/RFM95.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/select.h:
@@ -5389,10 +5381,6 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ArrayFunctions.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantShortcuts.hpp:
-
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/include/hardware/rtc.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/rtc.h:
@@ -5428,8 +5416,6 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/time.h:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/SlotFunctions.hpp:
 
 /Users/tleavitt/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h:
 
@@ -5519,11 +5505,11 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/hw_config.h:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/static_array.hpp:
-
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/postypes.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Variant/VariantRefBase.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.h:
 
@@ -5547,7 +5533,13 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Collection/CollectionData.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/hw_config.c:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/rtc.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/utility.hpp:
 
 /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h:
 
@@ -5597,6 +5589,8 @@ generated/pico_base/pico/version.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Memory/Alignment.hpp:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/JsonArrayImpl.hpp:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c:
@@ -5616,6 +5610,8 @@ generated/pico_base/pico/version.h:
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/debug/assertions.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectImpl.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/my_debug.h:
 
@@ -5685,6 +5681,8 @@ generated/pico_base/pico/version.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h:
 
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StringObject.hpp:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_math.c:
@@ -5717,6 +5715,10 @@ generated/pico_base/pico/version.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_signed.hpp:
 
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/ctype.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/util.h:
@@ -5734,8 +5736,6 @@ generated/pico_base/pico/version.h:
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_qspi.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Json/Latch.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/StringView.hpp:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/cwctype:
 

@@ -1,0 +1,44 @@
+{
+    "address": 18,
+    "dimTime" : 60,
+    "sleepTime": 120,
+    "lowBattery": 1,
+    "batteryReset": 1,
+    "head0": {
+        "destination": [
+            17,
+            21,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 50,
+        "green": {
+            "pin": 0,
+            "current": 30,
+            "brightness": 255
+        },
+        "amber": {
+            "pin": 1,
+            "current": 30,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 2,
+            "current": 30,
+            "brightness": 255
+        }
+    },
+    "pin0": {
+        "mode": "release",
+        "head1": 0
+    },
+    "pin1": {
+        "mode": "capture",
+        "head": 0
+    },
+    "pin2": {
+        "mode": "turnout"
+    }
+}

@@ -20,8 +20,8 @@
 #include "hw_config.h"
 #include "ArduinoJson.h"
 
-#define VERSION 0
-#define REVISION 2
+#define VERSION 1
+#define REVISION 0
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -41,8 +41,10 @@
 #define TXLED    9
 #define ADCIN    26
 
+#define BLINK_INTERVAL 500 //ms
+
 //Battery voltage conversion factor
-#define CONVERSION_FACTOR (12.7/1374) //((3.3f / 0xFFF) * 10)
+#define CONVERSION_FACTOR (12.0/1284) //((3.3f / 0xFFF) * 10)
 
 #define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
 
@@ -140,19 +142,28 @@ uint8_t retryTime = 100;//time between attempts in milliseconds
 uint8_t dimTime = 10; //time before dimming the head in minutes
 uint8_t sleepTime = 15;//time before putting the signal heads in minutes
 uint8_t clearDelayTime = 10;//time before letting amber go to green in seconds, used to help traffic flow alternate
+float   lowBatThreshold = 11.0; //Voltage to trigger low battery warning
+float   lowBatReset = 12.0; //Voltage to reset low battery warning
 
 absolute_time_t retryTimeout; //abolute time of last packet send attempt
 absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
+absolute_time_t blinkTimer; //absolute time for the head blinking and battery checking
+
+uint8_t blinkCounter = 0; //Counter for blinking the heads
+bool batteryLow = false; //low battery flag
+bool blinkOff = false; //current head state for blinking, used to prevent reset leaving the head off
+float bat = 0.0; //measured battery voltage
 
 volatile bool alarmSet = false; //flag so only one stat light timer can be set at a time, prevents overloading the hardware timers
 
-bool statState = false;
-absolute_time_t statBlink;
+bool statState = false; //Current state of the stat light
+absolute_time_t statBlink; //Absolute time of last change of stat light
 
+//CTC board updating variables, not currently used
 bool ctcPresent = false;
 bool changed = false;
 
-critical_section_t i2cCS;
+critical_section_t i2cCS; //Mutex for i2c bus, only used for multicore 
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -161,6 +172,7 @@ int64_t delayedClear(alarm_id_t id, void *user_data)
     {
         if(((headInfo*)user_data)->head->getColor() != red) //stop the head from clearing if the block was captured before the timer finished
         {
+            DPRINTF("Delayed clear\n");
             ((headInfo*)user_data)->head->setHead(green);
             changed = true;
         }
@@ -177,6 +189,7 @@ void gpio_isr(uint gpio, uint32_t event_mask)
 
     switch(gpio)
     {
+        //Interrupt from the radio
         case RADIOINT:
             //if(event_mask == RFM95_INT_MODE)
             {
@@ -184,6 +197,7 @@ void gpio_isr(uint gpio, uint32_t event_mask)
             }
             break;
 
+        //Interrupt from the input chip, not currently used
         case SWITCHINT:
             //if(event_mask == PCA9674_INT_MODE)
             /*{
@@ -279,6 +293,7 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
         if(heads[hN].destResponded[i] == false)
         {
             missingResponse = true;
+            heads[i].retries = 0;
         }
     }
     //If all of the destinations have responded, set lastActive to prevent further transmissions
@@ -286,11 +301,16 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
     {
         for(int i = 0; i < MAXINPUTS; i++)
         {
-            if(inputs[i].headNum == hN && inputs[i].mode == m)
+            if((inputs[i].headNum == hN && inputs[i].mode == m) || (m == turnoutCapture && inputs[i].headNum2 == hN  && inputs[inputs[i].turnoutPinNum].active))
             {
                 inputs[i].lastActive = true;
+                heads[i].retries = 0;
                 break;
             }
+        }
+        for(int x = 0; x < heads[hN].numDest; x++)
+        {
+            heads[hN].destResponded[x] = false;
         }
     }
 }
@@ -475,8 +495,8 @@ void parseConfig()
     FIL file; //config file 
     FRESULT fr; //file system return results
     FATFS fs; //FAT file system interface
-    DIR dir;
-    FILINFO fInfo;
+    DIR dir; //Directory of the file
+    FILINFO fInfo; //Information on the file
     sd_card_t *pSD; //SD card driver pointer
     
     //Get the SD card and start its driver
@@ -492,6 +512,7 @@ void parseConfig()
         panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
+    //Locate the config file in the file system, fault out if it cant be found
     fr = f_findfirst(&dir, &fInfo, "", "config*.json");
     if(fr != FR_OK)
     {
@@ -538,11 +559,14 @@ void parseConfig()
 
     maxRetries = cfg["retries"] | 10; //Number of retries, default to 10 if not specified 
 
-    retryTime = cfg["retryTime"] | 100; //Time to wait for a response, default to 100ms if not specified 
+    retryTime = cfg["retryTime"] | 150; //Time to wait for a response, default to 150ms if not specified 
 
     dimTime = cfg["dimTime"] | 15; //Time to dim the head(s), default to 15min if not specified
 
     sleepTime = cfg["sleepTime"] | 30; //Time to put the heads to sleep, 30min if not specified
+
+    lowBatThreshold = cfg["lowBattery"] | 11.0; //Voltage to activate low battery warning, 11v if not specified
+    lowBatReset     = cfg["batteryReset"] | 12.0; //Voltage to reset low battery warning, 12v if not specified
 
     //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
@@ -673,8 +697,21 @@ void parseConfig()
     }
 }
 
+float checkBattery()
+{
+    uint16_t rawADC;
+    float bat;
+
+    rawADC = adc_read();
+    bat = (float)rawADC * CONVERSION_FACTOR;
+
+    return bat;
+}
+
 int main()
 {
+    set_sys_clock_48mhz();
+
     //Initialize for printf
     stdio_init_all();
 
@@ -721,7 +758,7 @@ int main()
 
     //Read battery ADC - Test code
     uint16_t rawADC = adc_read();
-    float bat = (float)rawADC * CONVERSION_FACTOR;
+    bat = checkBattery();
     DPRINTF("ADC: %d\n", rawADC);
     DPRINTF("Battery: %2.2FV\n\n", bat);
 
@@ -748,7 +785,18 @@ int main()
     //Read config file from the micro SD card 
     parseConfig();
 
-    DPRINTF("\nNODE: %d\nDEST: %d\n", addr, heads[0].destAddr);
+    DPRINTF("\nNODE: %d\n", addr);
+
+    for(int i = 0; i < MAXHEADS; i++)
+    {
+        if(heads[i].head)
+        {
+            for(int x = 0; x < heads[i].numDest; x++)
+            {
+                DPRINTF("Head %d Dest %d: %d\n", i, x, heads[i].destAddr[x]);
+            }
+        }
+    }
 
     //Set up the RFM95 radio
     //12500bps datarate
@@ -765,9 +813,11 @@ int main()
     radio.setSignalBandwidth(500000);
     //Set Coding Rate 4/5
     radio.setCodingRate(5);
+    //Spreading Factor of 10 gives 3906bps - ~130ms round trip - Too slow?
+    //Spreading Factor of 9 gives  7031bps - ~70ms round trip
     //Spreading Factor of 8 gives 12500bps - ~45ms round trip
     //Spreading Factor of 7 gives 21875bps - ~24ms round trip ****Insufficient Range****
-    radio.setSpreadingFactor(8);
+    radio.setSpreadingFactor(9);
     //Accept all packets
     radio.setPromiscuous(true);
 
@@ -855,7 +905,7 @@ int main()
                     }
 
                     //Process if this node was the destination and the transmitting node is a destination for one of the heads
-                    if(transmission.destination == addr && !transmission.isCode && headFound)
+                    if(transmission.destination == addr && !transmission.isCode && headFound && from != addr)
                     {
                         switch(transmission.aspect)
                         {
@@ -916,38 +966,45 @@ int main()
 
                                     heads[headNum].retries = 0;
                                     dimTimeout = get_absolute_time();
-                                    heads[0].releaseTimer = get_absolute_time();
+                                    heads[headNum].releaseTimer = get_absolute_time();
                                 }
                                 break;
                             
                             case 'R':
                             case 'r':
-                                if(!transmission.isACK)
+                                if(heads[headNum].head->getColor() != amber || heads[headNum].delayClearStarted)
                                 {
-                                    transmit(from, 'A', true, false);
-                                }
-                                
-                                heads[headNum].head->setHead(red);
-
-                                changed = true;
-
-                                for(int i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                    if(!transmission.isACK)
                                     {
-                                        inputs[i].lastActive = true;
+                                        transmit(from, 'A', true, false);
+                                    }
+                                    
+                                    heads[headNum].head->setHead(red);
+
+                                    changed = true;
+
+                                    for(int i = 0; i < MAXINPUTS; i++)
+                                    {
+                                        if(inputs[i].headNum == headNum && inputs[i].mode == release)
+                                        {
+                                            inputs[i].lastActive = true;
+                                        }
+
+                                        if(inputs[i].headNum == headNum && inputs[i].mode == capture)
+                                        {
+                                            inputs[i].lastActive = true;
+                                        }
                                     }
 
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == capture)
-                                    {
-                                        inputs[i].lastActive = true;
-                                    }
+                                    heads[headNum].retries = 0;
+                                    dimTimeout = get_absolute_time();
+
+                                    heads[headNum].releaseTimer = get_absolute_time();
                                 }
-
-                                heads[headNum].retries = 0;
-                                dimTimeout = get_absolute_time();
-
-                                heads[0].releaseTimer = get_absolute_time();
+                                else
+                                {
+                                    transmit(from, 'R', true, false);
+                                }
                                 break;
                         }
                     }
@@ -986,8 +1043,12 @@ int main()
 
                             headDim = false;
                         }
+
+                        dimTimeout = get_absolute_time();
                     }
                 }
+
+                //Possibly adjust delay time each time a packet is received
 
                 DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
                 DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
@@ -1006,36 +1067,59 @@ int main()
         {
             if(heads[i].retries > 10)
             {
-                for(int x = 0; x < heads[i].numDest; x++)
+                if(heads[i].destResponded[0])
                 {
-                    if(!heads[i].destResponded[x])
+                    for(int x = 0; x < heads[i].numDest; x++)
                     {
-                        heads[i].destResponded[x] = true;
-                        break;
-                    }
-                }
-
-                bool missingResponse = false;
-                for(int x = 0; x < heads[i].numDest; x++)
-                {
-                    if(heads[i].destResponded[x] == false)
-                    {
-                        missingResponse = true;
-                    }
-                }
-                if(!missingResponse)
-                {
-                    for(int x = 0; x < MAXINPUTS; x++)
-                    {
-                        if(inputs[x].headNum == i)
+                        if(heads[i].destResponded[x] == false)
                         {
-                            inputs[x].lastActive = inputs[x].active;
+                            heads[i].destResponded[x] = true;
                             break;
                         }
                     }
-                }
 
-                heads[i].retries = 0;
+                    bool missingResponse = false;
+                    for(int x = 0; x < heads[i].numDest; x++)
+                    {
+                        if(heads[i].destResponded[x] == false)
+                        {
+                            missingResponse = true;
+                            heads[i].retries = 0;
+                        }
+                    }
+                    if(!missingResponse)
+                    {
+                        for(int x = 0; x < MAXINPUTS; x++)
+                        {
+                            if((inputs[x].headNum == i || (inputs[x].mode == turnoutCapture && inputs[x].headNum2 == i)) && inputs[x].active)
+                            {
+                                inputs[x].lastActive = true;
+                                heads[i].retries = 0;
+                                break;
+                            }
+                        }
+                        for(int x = 0; x < heads[i].numDest; x++)
+                        {
+                            heads[i].destResponded[x] = false;
+                        }
+                    }
+                }
+                else
+                {
+                    for(int x = 0; x < MAXINPUTS; x++)
+                    {
+                        if((inputs[x].headNum == i || (inputs[x].mode == turnoutCapture && inputs[x].headNum2 == i)) && inputs[x].active)
+                        {
+                            inputs[x].lastActive = true;
+                            heads[i].retries = 0;
+                            break;
+                        }
+                    }
+                    for(int x = 0; x < heads[i].numDest; x++)
+                    {
+                        heads[i].destResponded[x] = false;
+                    }
+                }
             }
         }
         
@@ -1064,15 +1148,29 @@ int main()
                 else if(!inputs[i].active && inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (5*1000)))
                 {
                     inputs[i].active = true;
-                    for(int x = 0; x < MAXDESTINATIONS; x++)
+
+                    if(inputs[i].mode == turnoutCapture && inputs[inputs[i].turnoutPinNum].active)
                     {
-                        heads[inputs[i].headNum].destResponded[x] = false;
+                        for(int x = 0; x < MAXDESTINATIONS; x++)
+                        {
+                            heads[inputs[i].headNum2].destResponded[x] = false;
+                        }
+                        heads[inputs[i].headNum2].retries = 0;
+                    }
+                    else
+                    {
+                        for(int x = 0; x < MAXDESTINATIONS; x++)
+                        {
+                            heads[inputs[i].headNum].destResponded[x] = false;
+                        }
+                        heads[inputs[i].headNum].retries = 0;
                     }
                 }
             }
             //get direct input for turnout monitoring, input must be stable for 50ms to latch
-            else if(inputs[i].mode == turnout && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
+            else if(inputs[i].mode == turnout && inputs[i].active != inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
             {
+                printf("Turnout %d = %d\n", i, inputs[i].raw);
                 inputs[i].active = inputs[i].raw;
                 changed = true;
             }
@@ -1088,14 +1186,19 @@ int main()
                 {
                     if(!headOn)
                     {
+                        output1.wake();
+
                         for(int i = 0; i < MAXHEADS; i++)
                         {
-                            if(heads[i].head)
+                            if(heads[i].head && heads[i].head->getColor() == off)
                             {
+                                heads[i].head->setHeadBrightness(255);
                                 heads[i].head->setHead(green);
                             }
                         }
+
                         headOn = true;
+                        dimTimeout = get_absolute_time();
                     }
                     if(headDim)
                     {
@@ -1107,11 +1210,13 @@ int main()
                             }
                         }
                         headDim = false;
+                        dimTimeout = get_absolute_time();
                     }
 
                     if(inputs[i].mode == turnoutCapture && inputs[inputs[i].turnoutPinNum].active)
                     {
                         bool incompleteSend = false;
+                        bool transmitted = false;
                         for(int x = 0; x < heads[inputs[i].headNum2].numDest; x++)
                         {
                             if(!heads[inputs[i].headNum2].destResponded[x] && heads[inputs[i].headNum2].destResponded[0])
@@ -1126,11 +1231,12 @@ int main()
                                 if(!heads[inputs[i].headNum2].destResponded[x])
                                 {
                                     transmit(heads[inputs[i].headNum2].destAddr[x], 'R', false, false);
+                                    heads[inputs[i].headNum2].retries++;
+                                    DPRINTF("Sending Capture %d to %d\n", inputs[i].headNum2, heads[inputs[i].headNum2].destAddr[x]);
+                                    transmitted = true;
                                     break;
                                 }
                             }
-                            heads[inputs[i].headNum2].retries++;
-                            DPRINTF("Sending Capture %d\n", inputs[i].headNum2);
 
                             for(int x = 0; x < MAXINPUTS; x++)
                             {
@@ -1140,10 +1246,19 @@ int main()
                                 }
                             }
                         }
+                        if(!transmitted)
+                        {
+                            inputs[i].lastActive = true;
+                        }
+                        else
+                        {
+                            break;    
+                        }
                     }
                     else
                     {
                         bool incompleteSend = false;
+                        bool transmitted = false;
                         for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                         {
                             if(!heads[inputs[i].headNum].destResponded[x] && heads[inputs[i].headNum].destResponded[0])
@@ -1158,11 +1273,12 @@ int main()
                                 if(!heads[inputs[i].headNum].destResponded[x])
                                 {
                                     transmit(heads[inputs[i].headNum].destAddr[x], 'R', false, false);
+                                    heads[inputs[i].headNum].retries++;
+                                    DPRINTF("Sending Capture %d to %d\n", inputs[i].headNum, heads[inputs[i].headNum].destAddr[x]);
+                                    transmitted = true;
                                     break;
                                 }
                             }
-                            heads[inputs[i].headNum].retries++;
-                            DPRINTF("Sending Capture %d\n", inputs[i].headNum);
 
                             for(int x = 0; x < MAXINPUTS; x++)
                             {
@@ -1172,6 +1288,14 @@ int main()
                                 }
                             }
                         }
+                        if(!transmitted)
+                        {
+                            inputs[i].lastActive = true;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
 
                 }
@@ -1179,6 +1303,7 @@ int main()
             else if(inputs[i].mode == release)
             {
                 bool incompleteSend = false;
+                bool transmitted = false;
                 for(int x = 0; x < heads[inputs[i].headNum].numDest; x++)
                 {
                     if(!heads[inputs[i].headNum].destResponded[x] && heads[inputs[i].headNum].destResponded[0])
@@ -1193,11 +1318,12 @@ int main()
                         if(!heads[inputs[i].headNum].destResponded[x])
                         {
                             transmit(heads[inputs[i].headNum].destAddr[x], 'G', false, false);
+                            heads[inputs[i].headNum].retries++;
+                            DPRINTF("Sending Release %d to %d\n", inputs[i].headNum, heads[inputs[i].headNum].destAddr[x]);
+                            transmitted = true;
                             break;
                         }
                     }
-                    heads[inputs[i].headNum].retries++;
-                    DPRINTF("Sending Release %d\n", inputs[i].headNum);
 
                     for(int x = 0; x < MAXINPUTS; x++)
                     {
@@ -1206,6 +1332,14 @@ int main()
                             inputs[x].active = inputs[x].lastActive = false;
                         }
                     }
+                }
+                if(!transmitted)
+                {
+                    //inputs[i].lastActive = true;
+                }
+                else
+                {
+                    break;
                 }
             }
         }
@@ -1228,6 +1362,99 @@ int main()
             }
         }
 
+        if(absolute_time_diff_us(blinkTimer, get_absolute_time()) / 1000 >= BLINK_INTERVAL)
+        {
+            bat = checkBattery();
+            if(bat < lowBatThreshold)
+            {
+                batteryLow = true;
+                DPRINTF("Battery: %2.2FV\n\n", bat);
+            }
+            else if(checkBattery() > lowBatReset)
+            {
+                batteryLow = false;
+            }
+
+            if(batteryLow && headOn)
+            {
+                if(blinkCounter == 0)
+                {
+                    for(int i = 0; i < MAXHEADS; i++)
+                    {
+                        if(heads[i].head)
+                        {
+                            heads[i].head->setHeadBrightness(0);
+                        }
+                    }
+
+                    blinkOff = true;
+                }
+                else
+                {
+                    if(headDim)
+                    {
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHeadBrightness(heads[i].dimBright);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHeadBrightness(255);
+                            }
+                        }
+                    }
+
+                    blinkOff = false;   
+                }
+
+                blinkCounter++;
+
+                if(blinkCounter >= 4)
+                {
+                    blinkCounter = 0;
+                }
+            }
+            else
+            {
+                blinkCounter = 0;
+
+                if(blinkOff)
+                {
+                    if(headDim)
+                    {
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHeadBrightness(heads[i].dimBright);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(int i = 0; i < MAXHEADS; i++)
+                        {
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHeadBrightness(255);
+                            }
+                        }
+                    }
+                }
+            }
+
+            blinkTimer = get_absolute_time();
+        }
+
+        //If the dim time has an acceptable value and the timer has expired, dim the head to the specified value to save power
         if(dimTime > 0)
         {
             if(((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000) >= dimTime && headOn && !headDim)
@@ -1245,6 +1472,7 @@ int main()
             }
         }
 
+        //If the sleep time has an acceptable value and the timer has expired, turn the heads off and put the LED driver in sleep mode to save power
         if(sleepTime > 0)
         {
             if((((absolute_time_diff_us(dimTimeout, get_absolute_time()))/60000000) >= sleepTime) && headOn)

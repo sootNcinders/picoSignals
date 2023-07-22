@@ -179,12 +179,6 @@ for i in range(0, num):
         config.update({"pin" + str(i): {"mode" : "release", "head" : headNum}})
     
     elif val == 't':
-        val = -1
-        while val < 0 or val > 3:
-            print("Head Nuber 0-3:")
-            val = int(input())
-        headNum = val
-
         config.update({"pin" + str(i): {"mode" : "turnout"}})
 
 with open("config" + str(addr) + ".json", 'w') as config_file:
