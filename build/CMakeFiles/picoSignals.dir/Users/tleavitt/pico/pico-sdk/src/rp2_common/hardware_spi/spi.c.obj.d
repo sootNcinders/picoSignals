@@ -37,10 +37,6 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h

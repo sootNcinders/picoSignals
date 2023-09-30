@@ -1,6 +1,7 @@
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -33,6 +34,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdlib.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
@@ -64,7 +66,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
- /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
@@ -74,4 +76,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h

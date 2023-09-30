@@ -209,24 +209,10 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
-
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i: cmake_force
@@ -236,6 +222,20 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_plat
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c
@@ -306,94 +306,10 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/loc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/lock_core.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/lock_core.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
 
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s
-
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.i: cmake_force
@@ -407,7 +323,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mut
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.i: cmake_force
@@ -417,6 +333,90 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/cri
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj -c /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.s
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c
@@ -432,37 +432,10 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
 
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building ASM object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj   -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing ASM source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling ASM source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
-
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i: cmake_force
@@ -476,7 +449,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i: cmake_force
@@ -490,7 +463,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i: cmake_force
@@ -504,7 +477,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i: cmake_force
@@ -518,7 +491,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i: cmake_force
@@ -528,6 +501,33 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building ASM object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj   -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing ASM source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling ASM source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c
@@ -842,276 +842,10 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
 
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
-
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i: cmake_force
@@ -1125,7 +859,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_uniq
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i: cmake_force
@@ -1135,6 +869,272 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -c /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c
@@ -1414,29 +1414,29 @@ picoSignals_OBJECTS = \
 "CMakeFiles/picoSignals.dir/utils.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/sem.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj" \
@@ -1460,6 +1460,8 @@ picoSignals_OBJECTS = \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj" \
@@ -1479,8 +1481,6 @@ picoSignals_OBJECTS = \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj" \
-"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj" \
@@ -1514,29 +1514,29 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/hw_config.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/utils.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/sem.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/time.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/datetime.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/pheap.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_util/queue.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
@@ -1560,6 +1560,8 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
@@ -1579,8 +1581,6 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tin
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
@@ -1607,8 +1607,8 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/link.txt
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/picoSignals.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/arm-none-eabi-objcopy -Oihex /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf picoSignals.hex
 	/opt/homebrew/bin/arm-none-eabi-objcopy -Obinary /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf picoSignals.bin
-	/opt/homebrew/bin/arm-none-eabi-objdump -h /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf >picoSignals.dis
-	/opt/homebrew/bin/arm-none-eabi-objdump -d /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf >>picoSignals.dis
+	/opt/homebrew/bin/arm-none-eabi-objdump -h /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf > picoSignals.dis
+	/opt/homebrew/bin/arm-none-eabi-objdump -d /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf >> picoSignals.dis
 	elf2uf2/elf2uf2 /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf picoSignals.uf2
 
 # Rule to build all files generated by this target.

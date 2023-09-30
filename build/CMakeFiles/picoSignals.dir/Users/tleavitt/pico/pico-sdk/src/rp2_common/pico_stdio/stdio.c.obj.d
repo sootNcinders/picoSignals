@@ -33,6 +33,9 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
+ /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stat.h \
+ /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/time.h \
+ /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/time.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -52,17 +55,17 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \

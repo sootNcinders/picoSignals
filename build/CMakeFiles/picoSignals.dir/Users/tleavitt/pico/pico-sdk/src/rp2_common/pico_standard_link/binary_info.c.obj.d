@@ -33,5 +33,4 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stan
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h

@@ -897,41 +897,7 @@ CMakeFiles/picoSignals.dir/RGBhead.cpp.obj: /Users/tleavitt/pico/projects/picoSi
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/newlib.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_newlib_version.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/config.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/ieeefp.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_default_types.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
-  generated/pico_base/pico/version.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
-  generated/pico_base/pico/config_autogen.h \
-  /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
-
-CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -964,6 +930,44 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cd
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/newlib.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_newlib_version.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/config.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/ieeefp.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_default_types.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+  generated/pico_base/pico/version.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  generated/pico_base/pico/config_autogen.h \
+  /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
@@ -992,7 +996,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cd
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
@@ -1013,6 +1017,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cd
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1044,10 +1049,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/df
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1079,10 +1086,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/df
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1114,10 +1123,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1149,10 +1160,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/mi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1184,10 +1197,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/ms
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1219,10 +1234,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/ne
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1254,10 +1271,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/ne
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1289,10 +1308,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/us
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1324,10 +1345,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/ve
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1359,7 +1382,8 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
@@ -1402,6 +1426,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/t
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1420,10 +1445,11 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/t
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
@@ -1441,6 +1467,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/t
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1473,7 +1500,8 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
@@ -1501,10 +1529,9 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
@@ -1517,18 +1544,21 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd_attr.h
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1561,7 +1591,8 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
@@ -1589,10 +1620,9 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
@@ -1605,17 +1635,19 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/u
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd_attr.h
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1648,6 +1680,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
@@ -1676,7 +1709,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
@@ -1687,23 +1720,23 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd_attr.h
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1736,6 +1769,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdlib.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
@@ -1767,7 +1801,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
@@ -1777,10 +1811,14 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -1813,6 +1851,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
@@ -1842,7 +1881,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
@@ -1860,11 +1899,12 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/ctype.h
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/critical_section.c \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
@@ -2773,10 +2813,6 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/spi.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/spi.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h
@@ -3119,6 +3155,8 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_doub
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/lock.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_double/include/pico/double.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
@@ -3127,12 +3165,18 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_doub
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_double/include/pico/double.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h \
+  generated/pico_base/pico/version.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  generated/pico_base/pico/config_autogen.h \
+  /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -3226,36 +3270,44 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_floa
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_math.c \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/math.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/newlib.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_newlib_version.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/config.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/ieeefp.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_default_types.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/math.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_types.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_default_types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/lock.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/float.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
+  generated/pico_base/pico/version.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  generated/pico_base/pico/config_autogen.h \
+  /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdlib.h \
@@ -3275,21 +3327,6 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mall
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/stdlib.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/alloca.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdio.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/types.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/endian.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_endian.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/select.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_sigset.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_timeval.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/timespec.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_timespec.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_pthreadtypes.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -3298,6 +3335,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_mall
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
   generated/pico_base/pico/version.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
   generated/pico_base/pico/config_autogen.h \
@@ -3438,22 +3476,22 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_prin
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   generated/pico_base/pico/version.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
   generated/pico_base/pico/config_autogen.h \
   /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/float.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c \
@@ -3486,6 +3524,14 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_runt
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/time.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/time.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/time.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_locale.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_time.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/times.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/unistd.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/unistd.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -3562,8 +3608,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stan
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/cstdlib \
@@ -3588,7 +3633,28 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stan
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/stdlib.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/alloca.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/std_abs.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/cassert \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint.h \
+  generated/pico_base/pico/version.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  generated/pico_base/pico/config_autogen.h \
+  /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
@@ -3624,6 +3690,9 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stat.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/time.h \
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/time.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -3643,17 +3712,17 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \
@@ -3755,6 +3824,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -3773,10 +3843,11 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
@@ -3794,6 +3865,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
@@ -3846,6 +3918,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -3864,10 +3937,11 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
@@ -3885,6 +3959,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
@@ -3896,7 +3971,8 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h \
-  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h
+  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
@@ -3939,6 +4015,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -3957,10 +4034,11 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
-  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
@@ -3978,6 +4056,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdi
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
   /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
@@ -4880,15 +4959,17 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/alloc_traits.h:
 
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_cmp.h:
+
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/concepts:
-
-/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/iterator_concepts.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/initializer_list:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_access.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/backward/binders.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/stl_function.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/new_allocator.h:
 
@@ -4896,15 +4977,13 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/allocator.h:
 
-/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/rtc.c:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/string:
-
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/gthr-default.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/atomicity.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/ios_base.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/ctype.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/locale.h:
 
@@ -4948,10 +5027,6 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/new:
 
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/stl_construct.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/typeinfo:
-
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/exception_defines.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h:
@@ -4982,17 +5057,11 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/make_void.hpp:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_unsigned.hpp:
-
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_pointer.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_integral.hpp:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/streambuf_iterator.h:
 
@@ -5062,6 +5131,8 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/projects/picoSignals/pca9955.cpp:
 
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/times.h:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c:
@@ -5078,7 +5149,27 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h:
 
+/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h:
+
+/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/include/hardware/clocks.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stat.h:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_convertible.hpp:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/stl_construct.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/typeinfo:
+
+/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/rtc.c:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/string:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_time.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/time.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_printf/printf.c:
 
@@ -5192,15 +5283,7 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h:
 
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/range_cmp.h:
-
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h:
-
-/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/reent.h:
-
-/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_clocks/include/hardware/clocks.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/float.h:
 
@@ -5244,10 +5327,6 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h:
 
-/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c:
-
-/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/dcd_attr.h:
-
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/crc.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/iosfwd:
@@ -5259,6 +5338,8 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Object/JsonObjectConst.hpp:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/unistd.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c:
 
@@ -5292,17 +5373,23 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c:
 
-/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c:
-
-/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/scb.h:
-
-/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h:
-
-/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h:
-
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/declval.hpp:
+
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c:
+
+/Users/tleavitt/pico/projects/picoSignals/RGBhead.h:
+
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_unsigned.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/make_unsigned.hpp:
+
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/cxxabi_init_exception.h:
 
@@ -5316,8 +5403,6 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/declval.hpp:
-
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/mpu.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Strings/Adapters/JsonString.hpp:
@@ -5327,8 +5412,6 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c:
-
-/Users/tleavitt/pico/projects/picoSignals/RGBhead.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h:
 
@@ -5378,6 +5461,10 @@ generated/pico_base/pico/config_autogen.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h:
 
+/Users/tleavitt/pico/pico-sdk/src/common/pico_time/timeout_helper.c:
+
+/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/scb.h:
+
 /Users/tleavitt/pico/pico-sdk/src/common/pico_util/include/pico/util/datetime.h:
 
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h:
@@ -5387,6 +5474,8 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/rtc.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/unistd.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c:
 
@@ -5418,6 +5507,8 @@ generated/pico_base/pico/config_autogen.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/time.h:
 
+/Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h:
+
 /Users/tleavitt/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_sigset.h:
@@ -5448,6 +5539,8 @@ generated/pico_base/pico/config_autogen.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/stdlib.h:
 
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/spi.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/math.hpp:
@@ -5467,8 +5560,6 @@ generated/pico_base/pico/config_autogen.h:
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/stl_function.h:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_spi.c:
 
@@ -5524,6 +5615,10 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c:
 
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/iterator_concepts.h:
+
+/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h:
@@ -5554,10 +5649,6 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h:
 
-/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c:
-
-/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c:
-
 /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h:
@@ -5577,8 +5668,6 @@ generated/pico_base/pico/config_autogen.h:
 generated/pico_base/pico/version.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/backward/binders.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/enable_if.hpp:
 
@@ -5720,6 +5809,10 @@ generated/pico_base/pico/version.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_signed.hpp:
 
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/ctype.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/util.h:
@@ -5744,13 +5837,13 @@ generated/pico_base/pico/version.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h:
 
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h:
+
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/include/hardware/i2c.h:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp:
 
 /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h:
-
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/ctype.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/ext/numeric_traits.h:
 
@@ -5758,9 +5851,11 @@ generated/pico_base/pico/version.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/localefwd.h:
 
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h:
+/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c:
 
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/make_unsigned.hpp:
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Serialization/Writers/DummyWriter.hpp:
 

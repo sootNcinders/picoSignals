@@ -498,6 +498,11 @@ void parseConfig()
     DIR dir; //Directory of the file
     FILINFO fInfo; //Information on the file
     sd_card_t *pSD; //SD card driver pointer
+
+    if(!sd_card_detect(0))
+    {
+        DPRINTF("No SD Card Detected\n");
+    }
     
     //Get the SD card and start its driver
     pSD = sd_get_by_num(0); 

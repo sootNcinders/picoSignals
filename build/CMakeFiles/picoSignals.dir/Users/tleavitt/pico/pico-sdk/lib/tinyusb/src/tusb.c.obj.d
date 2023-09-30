@@ -1,6 +1,7 @@
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
@@ -33,6 +34,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/cdefs.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
@@ -62,7 +64,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
- /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_error.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
@@ -80,8 +82,9 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
  /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
- /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h \
- /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/ctype.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_pvt.h

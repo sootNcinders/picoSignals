@@ -33,6 +33,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
  generated/pico_base/pico/config_autogen.h \
  generated/pico_base/pico/version.h
@@ -184,6 +185,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stan
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S \
  generated/pico_base/pico/config_autogen.h \
