@@ -27,6 +27,7 @@ target_link_libraries(picoSignals
                         hardware_i2c 
                         hardware_spi
                         hardware_adc
+                        hardware_timer
                         FatFs_SPI
                         ArduinoJson
                         )

@@ -815,7 +815,6 @@ CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_locale.h
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/strings.h
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/string.h
- /Users/tleavitt/pico/projects/picoSignals/utils.c
 
 CMakeFiles/picoSignals.dir/RGBhead.cpp.obj
  /Users/tleavitt/pico/projects/picoSignals/RGBhead.cpp
@@ -4339,7 +4338,6 @@ CMakeFiles/picoSignals.dir/pca9674.cpp.obj
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h
- /Users/tleavitt/pico/projects/picoSignals/utils.c
 
 CMakeFiles/picoSignals.dir/pca9955.cpp.obj
  /Users/tleavitt/pico/projects/picoSignals/pca9955.cpp
@@ -4433,7 +4431,6 @@ CMakeFiles/picoSignals.dir/pca9955.cpp.obj
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h
- /Users/tleavitt/pico/projects/picoSignals/utils.c
 
 CMakeFiles/picoSignals.dir/picoSignals.cpp.obj
  /Users/tleavitt/pico/projects/picoSignals/picoSignals.cpp

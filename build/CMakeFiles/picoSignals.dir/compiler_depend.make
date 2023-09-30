@@ -799,8 +799,7 @@ CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj: /Users/tleavitt/pico/projects/pi
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_locale.h \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/strings.h \
-  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/string.h \
-  /Users/tleavitt/pico/projects/picoSignals/utils.c
+  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/string.h
 
 CMakeFiles/picoSignals.dir/RGBhead.cpp.obj: /Users/tleavitt/pico/projects/picoSignals/RGBhead.cpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdio.h \
@@ -4256,8 +4255,7 @@ CMakeFiles/picoSignals.dir/pca9674.cpp.obj: /Users/tleavitt/pico/projects/picoSi
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
-  /Users/tleavitt/pico/projects/picoSignals/utils.c
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h
 
 CMakeFiles/picoSignals.dir/pca9955.cpp.obj: /Users/tleavitt/pico/projects/picoSignals/pca9955.cpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdio.h \
@@ -4349,8 +4347,7 @@ CMakeFiles/picoSignals.dir/pca9955.cpp.obj: /Users/tleavitt/pico/projects/picoSi
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
   /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
-  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
-  /Users/tleavitt/pico/projects/picoSignals/utils.c
+  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h
 
 CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: /Users/tleavitt/pico/projects/picoSignals/picoSignals.cpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdio.h \
@@ -4751,6 +4748,8 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
   /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
 
 
+/Users/tleavitt/pico/projects/picoSignals/utils.c:
+
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/MsgPack/MsgPackSerializer.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/MsgPack/MsgPackDeserializer.hpp:
@@ -4990,6 +4989,10 @@ CMakeFiles/picoSignals.dir/utils.c.obj: /Users/tleavitt/pico/projects/picoSignal
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_pointer.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_integral.hpp:
+
+/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/streambuf_iterator.h:
 
@@ -5327,8 +5330,6 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/projects/picoSignals/RGBhead.h:
 
-/Users/tleavitt/pico/projects/picoSignals/utils.c:
-
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Deserialization/DeserializationOptions.hpp:
@@ -5553,6 +5554,10 @@ generated/pico_base/pico/config_autogen.h:
 
 /Users/tleavitt/pico/pico-sdk/src/boards/include/boards/pico.h:
 
+/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c:
+
+/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c:
+
 /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/config.h:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h:
@@ -5715,10 +5720,6 @@ generated/pico_base/pico/version.h:
 
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/type_traits/is_signed.hpp:
 
-/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/basic_string.h:
-
-/Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Array/ElementProxy.hpp:
-
 /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/Polyfills/ctype.hpp:
 
 /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/util.h:
@@ -5756,10 +5757,6 @@ generated/pico_base/pico/version.h:
 /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/localefwd.h:
-
-/Users/tleavitt/pico/pico-sdk/src/common/pico_sync/mutex.c:
-
-/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c:
 
 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h:
 

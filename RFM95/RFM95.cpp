@@ -5,7 +5,7 @@
 #include "hardware/spi.h"
 #include "RFM95.h"
 #include <string.h>
-#include "../utils.c"
+#include "hardware/structs/timer.h"
 
 //#define RFM95_DEBUG
 
@@ -486,7 +486,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
         if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 500)
         {
             printOpMode();
-            nop_sleep_ms(1);
+            busy_wait_ms(1);
             printf("CAD Fault\n");
             setModeSleep();
 
@@ -501,7 +501,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
             return false;
         }
 
-        nop_sleep_us((rand() % 100) + 1);
+        busy_wait_us((rand() % 100) + 1);
     }
 
     //Point FIFO to 0x00
@@ -574,7 +574,7 @@ bool RFM95::channelActive()
     int64_t tDiff = 0;
     while(_mode == RFMModeCad && (tDiff < (1000*1000)))
     {
-        nop_sleep_ms(1);
+        busy_wait_ms(1);
         tDiff = absolute_time_diff_us(t, get_absolute_time());
     }
     
@@ -950,7 +950,7 @@ void RFM95::setModeSleep()
     spi_write_blocking(_bus, buf, 2);
     chipDeselect();
 
-    nop_sleep_ms(10);
+    busy_wait_ms(10);
     //readRegister(RFM95_REG_01_OP_MODE, _buf);
     buf[0] = RFM95_REG_01_OP_MODE & ~RFM95_WRITE_BIT;
 
@@ -1054,16 +1054,16 @@ void RFM95::readRegister(uint8_t reg, uint8_t *buf)
 
 void RFM95::chipSelect()
 {
-    nop_sleep_us(1);
+    busy_wait_us(1);
     gpio_put(_cs, 0);  // Active low
-    nop_sleep_us(1);
+    busy_wait_us(1);
 }
 
 void RFM95::chipDeselect()
 {
-    nop_sleep_us(1);
+    busy_wait_us(1);
     gpio_put(_cs, 1);  // Active low
-    nop_sleep_us(1);
+    busy_wait_us(1);
 }
 
 void RFM95::setLowDatarate()

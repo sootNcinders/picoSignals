@@ -89,5 +89,4 @@ CMakeFiles/picoSignals.dir/pca9955.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /Users/tleavitt/pico/projects/picoSignals/utils.c
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h

@@ -21,7 +21,7 @@
 #include "ArduinoJson.h"
 
 #define VERSION 1
-#define REVISION 0
+#define REVISION 3
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -305,7 +305,7 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
             {
                 inputs[i].lastActive = true;
                 heads[i].retries = 0;
-                break;
+                //break;
             }
         }
         for(int x = 0; x < heads[hN].numDest; x++)
@@ -576,7 +576,7 @@ void parseConfig()
         panic("Invalid Address\n");
     }
 
-    uint8_t pin1, pin2, pin3, cur1, cur2, cur3 = 0;
+    uint8_t pin1, pin2, pin3, pin4, cur1, cur2, cur3, cur4 = 255;
 
     JsonObject Jhead[] = {cfg["head0"].as<JsonObject>(), cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>()};
 
@@ -611,27 +611,60 @@ void parseConfig()
             }
             else
             {
-                uint8_t briG, briA, briR = 0;
+                uint8_t briG, briA, briR, briL = 255;
 
-                pin1 = Jhead[i]["green"]["pin"];
-                cur1 = Jhead[i]["green"]["current"];
-                briG = Jhead[i]["green"]["brightness"] | 255;
+                if(!Jhead[i]["green"].as<JsonObject>().isNull())
+                {
+                    pin1 = Jhead[i]["green"]["pin"];
+                    cur1 = Jhead[i]["green"]["current"];
+                    briG = Jhead[i]["green"]["brightness"] | 255;
+                }
+                else
+                {
+                    pin1 = 255;
+                }
 
-                pin2 = Jhead[i]["amber"]["pin"];
-                cur2 = Jhead[i]["amber"]["current"];
-                briA = Jhead[i]["amber"]["brightness"] | 255;
+                if(!Jhead[i]["amber"].as<JsonObject>().isNull())
+                {
+                    pin2 = Jhead[i]["amber"]["pin"];
+                    cur2 = Jhead[i]["amber"]["current"];
+                    briA = Jhead[i]["amber"]["brightness"] | 255;
+                }
+                else
+                {
+                    pin2 = 255;
+                }
 
-                pin3 = Jhead[i]["red"]["pin"];
-                cur3 = Jhead[i]["red"]["current"];
-                briR = Jhead[i]["red"]["brightness"] | 255;
+                if(!Jhead[i]["red"].as<JsonObject>().isNull())
+                {
+                    pin3 = Jhead[i]["red"]["pin"];
+                    cur3 = Jhead[i]["red"]["current"];
+                    briR = Jhead[i]["red"]["brightness"] | 255;
+                }
+                else
+                {
+                    pin3 = 255;
+                }
 
-                heads[i].head = new GARHEAD(&output1, pin1, pin2, pin3);
+                if(!Jhead[i]["lunar"].as<JsonObject>().isNull())
+                {
+                    pin4 = Jhead[i]["lunar"]["pin"];
+                    cur4 = Jhead[i]["lunar"]["current"];
+                    briL = Jhead[i]["lunar"]["brightness"] | 255;
+                }
+                else
+                {
+                    pin4 = 255;
+                }
+
+                heads[i].head = new GARHEAD(&output1, pin1, pin2, pin3, pin4);
                 gar = (GARHEAD*)heads[i].head;
 
-                gar->init(cur1, cur2, cur3);
+                gar->init(cur1, cur2, cur3, cur4);
                 gar->setColorBrightness(green, briG);
                 gar->setColorBrightness(amber, briA);
                 gar->setColorBrightness(red, briR);
+                gar->setColorBrightness(lunar, briL);
             }
 
             //Load up to 6 destinations 
@@ -762,6 +795,13 @@ int main()
     DPRINTF("ADC: %d\n", rawADC);
     DPRINTF("Battery: %2.2FV\n\n", bat);
 
+    if(bat < 8 && bat > 4)
+    {
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        panic("Low Battery! %2.2f\n", bat);
+    }
+
     #ifdef MULTICORE
     critical_section_init(&i2cCS);
     input1.setCriticalSection(&i2cCS);
@@ -796,6 +836,18 @@ int main()
                 DPRINTF("Head %d Dest %d: %d\n", i, x, heads[i].destAddr[x]);
             }
         }
+    }
+
+    for(int i = 0; i < off; i++)
+    {
+        for(int x = 0; x < MAXHEADS; x++)
+        {
+            if(heads[x].head)
+            {
+                heads[x].head->setHead(i);
+            }
+        }
+        sleep_ms(1000);
     }
 
     //Set up the RFM95 radio
@@ -1095,7 +1147,7 @@ int main()
                             {
                                 inputs[x].lastActive = true;
                                 heads[i].retries = 0;
-                                break;
+                                //break;
                             }
                         }
                         for(int x = 0; x < heads[i].numDest; x++)
@@ -1112,7 +1164,7 @@ int main()
                         {
                             inputs[x].lastActive = true;
                             heads[i].retries = 0;
-                            break;
+                            //break;
                         }
                     }
                     for(int x = 0; x < heads[i].numDest; x++)
@@ -1139,8 +1191,8 @@ int main()
             //Latch capture or release signals
             if(inputs[i].mode == capture || inputs[i].mode == release || inputs[i].mode == turnoutCapture)
             {
-                //raw input must stay inactive for 50ms before the clear is latched
-                if((/*inputs[i].active ||*/ inputs[i].lastActive) && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (50*1000)))
+                //raw input must stay inactive for 2500ms before the clear is latched
+                if((/*inputs[i].active ||*/ inputs[i].lastActive) && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (/*50*/2500*1000)))
                 {
                     inputs[i].active = inputs[i].lastActive = false;
                 }
@@ -1242,7 +1294,7 @@ int main()
                             {
                                 if(inputs[x].mode == release && inputs[i].headNum2 == inputs[x].headNum)
                                 {
-                                    inputs[x].active = inputs[x].lastActive = false;
+                                    inputs[x].lastActive = true;
                                 }
                             }
                         }
@@ -1284,7 +1336,7 @@ int main()
                             {
                                 if(inputs[x].mode == release && inputs[i].headNum == inputs[x].headNum)
                                 {
-                                    inputs[x].active = inputs[x].lastActive = false;
+                                    inputs[x].lastActive = true;
                                 }
                             }
                         }
@@ -1329,7 +1381,7 @@ int main()
                     {
                         if((inputs[x].mode == capture || inputs[x].mode == turnoutCapture) && inputs[i].headNum == inputs[x].headNum)
                         {
-                            inputs[x].active = inputs[x].lastActive = false;
+                            inputs[x].lastActive = true;
                         }
                     }
                 }
@@ -1389,7 +1441,7 @@ int main()
 
                     blinkOff = true;
                 }
-                else
+                else if(blinkCounter == 4)
                 {
                     if(headDim)
                     {
@@ -1412,14 +1464,14 @@ int main()
                         }
                     }
 
-                    blinkOff = false;   
+                    blinkOff = false; 
                 }
 
                 blinkCounter++;
 
-                if(blinkCounter >= 4)
+                if(blinkCounter >= 8)
                 {
-                    blinkCounter = 0;
+                    blinkCounter = 0; 
                 }
             }
             else
@@ -1448,6 +1500,7 @@ int main()
                             }
                         }
                     }
+                    blinkOff = false;
                 }
             }
 

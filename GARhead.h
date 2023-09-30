@@ -14,13 +14,13 @@ class GARHEAD: public Head
         /// @param gPin Green pin on PCA9955
         /// @param aPin Amber pin on PCA9955
         /// @param rPin Red pin on PCA9955
-        GARHEAD(PCA9955 *driver, uint8_t gPin, uint8_t aPin, uint8_t rPin);
+        GARHEAD(PCA9955 *driver, uint8_t gPin, uint8_t aPin, uint8_t rPin, uint8_t lPin);
 
         /// @brief Initializes the head and sets the current for each LED
         /// @param gCurrent Green LED current
         /// @param aCurrent Amber LED current
         /// @param rCurrent Red LED current
-        void init(float gCurrent, float aCurrent, float rCurrent);
+        void init(float gCurrent, float aCurrent, float rCurrent, float lCurrent);
 
         /// @brief Sets the head to the specified color
         /// @param color Color from headState ENUM
@@ -45,6 +45,11 @@ class GARHEAD: public Head
         void setHeadBrightness(float brightness);
 
     private:
+        /// @brief Fades from one color to the next
+        /// @param oldColor current color
+        /// @param newColor next color
+        void fade(uint8_t oldColor, uint8_t newColor);
+
         PCA9955 *_driver;
 
         uint8_t _color;
@@ -52,6 +57,7 @@ class GARHEAD: public Head
         uint8_t _gPin;
         uint8_t _aPin;
         uint8_t _rPin;
+        uint8_t _lPin;
 
         uint8_t _brightness[off];
 
