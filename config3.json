@@ -9,76 +9,71 @@
             0,
             0
         ],
-        "dim": 10,
-        "green": {
-            "pin": 0,
-            "current": 58,
-            "brightness": 127
-        },
-        "amber": {
-            "pin": 1,
-            "current": 58,
-            "brightness": 127
-        },
-        "red": {
-            "pin": 2,
-            "current": 50,
-            "brightness": 127
-        }
-    },
-    "head1": {
-        "destination": [
-            5,
-            6,
-            0,
-            0,
-            0,
-            0
-        ],
-        "dim": 10,
+        "dim": 20,
         "blue": {
-            "pin": 3,
-            "current" : 30,
-            "brightness": 255
+            "pin": 5,
+            "current" : 50
         },
         "red": {
-            "pin": 4,
-            "current": 30,
-            "brightness" : 255
+            "pin": 3,
+            "current": 50,
+
+            "rgb": [
+                255,
+                0,
+                0
+            ]
         },
         "green": {
-            "pin": 5,
-            "current": 30,
-            "brightness": 255
+            "pin": 4,
+            "current": 50,
+
+            "rgb": [
+                40,
+                150,
+                0
+            ]
         },
 
-        "red": {
-            "rgb": [
-                255,
-                0,
-                0
-            ]
-        },
         "amber": {
             "rgb": [
-                255,
-                255,
-                0
-            ]
-        },
-        "green": {
-            "rgb": [
-                0,
-                255,
+                150,
+                100,
                 0
             ]
         },
         "lunar": {
             "rgb": [
-                50,
-                50,
-                255
+                25,
+                125,
+                125
             ]
+        }
+    },
+    "head1": {
+        "destination": [
+            5,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 20,
+        "green": {
+            "pin": 0,
+            "current": 35,
+            "brightness": 255
+        },
+        "amber": {
+            "pin": 1,
+            "current": 35,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 2,
+            "current": 35,
+            "brightness": 255
         }
     },
     "pin0": {
@@ -87,15 +82,14 @@
     },
     "pin1": {
         "mode": "capture",
-        "head1": 0,
-        "head2": 1,
-        "turnout": 3
+        "head1": 0
     },
     "pin2": {
-        "mode": "release",
-        "head": 1
+        "mode" : "capture",
+        "head1": 1
     },
     "pin3": {
-        "mode": "turnout"
+        "mode": "release",
+        "head": 1
     }
 }

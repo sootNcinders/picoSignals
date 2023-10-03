@@ -192,7 +192,7 @@ void RFM95::handleInterrupt(void)
     {
         _payloadLen[_head] = 0;
     }
-    else if(_mode == RFMModeRx && (irq_flags & RFM95_RX_DONE))
+    else if((_mode == RFMModeRx || _mode == RFMModeRxSingle) && (irq_flags & RFM95_RX_DONE))
     {
         setRX();
 
@@ -302,6 +302,11 @@ void RFM95::handleInterrupt(void)
         chipSelect();
         spi_write_blocking(_bus, buf, 2);
         chipDeselect();
+
+        if(_mode == RFMModeRxSingle)
+        {
+            _mode = RFMModeIdle;
+        }
     }
     else if(_mode == RFMModeTx && (irq_flags & RFM95_TX_DONE))
     {
@@ -315,7 +320,15 @@ void RFM95::handleInterrupt(void)
     else if(_mode == RFMModeCad && (irq_flags & RFM95_CAD_DONE))
     {
         _cad = irq_flags & RFM95_CAD_DETECTED;
-        setModeIdle();
+
+        if(_cad)
+        {
+            setModeRXSingle();
+        }
+        else
+        {
+            setModeIdle();
+        }
     }
 
     buf[0] = RFM95_REG_12_IRQ_FLAGS | RFM95_WRITE_BIT;
@@ -586,6 +599,14 @@ bool RFM95::channelActive()
     }
     else
     {
+        t = get_absolute_time();
+        tDiff = 0;
+        while(_mode != RFMModeIdle && (tDiff < (100*1000)))
+        {
+            busy_wait_ms(1);
+            tDiff = absolute_time_diff_us(t, get_absolute_time());
+        }
+
         return _cad;
     }
 }
@@ -916,6 +937,27 @@ void RFM95::setModeRX()
     chipDeselect();
 
     _mode = RFMModeRx;
+}
+
+void RFM95::setModeRXSingle()
+{
+    uint8_t buf[2];
+
+    buf[0] = RFM95_REG_01_OP_MODE | RFM95_WRITE_BIT;
+    buf[1] = RFM95_MODE_RXSINGLE;
+
+    chipSelect();
+    spi_write_blocking(_bus, buf, 2);
+    chipDeselect();
+
+    buf[0] = RFM95_REG_40_DIO_MAPPING1 | RFM95_WRITE_BIT;
+    buf[1] = 0x00;
+
+    chipSelect();
+    spi_write_blocking(_bus, buf, 2);
+    chipDeselect();
+
+    _mode = RFMModeRxSingle;
 }
 
 void RFM95::setModeTX()

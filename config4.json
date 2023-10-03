@@ -12,18 +12,18 @@
         "dim": 20,
         "green": {
             "pin": 0,
-            "current": 58,
-            "brightness": 40
+            "current": 35,
+            "brightness": 255
         },
         "amber": {
             "pin": 1,
-            "current": 58,
-            "brightness": 40
+            "current": 35,
+            "brightness": 255
         },
         "red": {
             "pin": 2,
-            "current": 50,
-            "brightness": 40
+            "current": 35,
+            "brightness": 255
         }
     },
     "pin0": {

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/multicore.h"
@@ -20,8 +21,8 @@
 #include "hw_config.h"
 #include "ArduinoJson.h"
 
-#define VERSION 1
-#define REVISION 3
+#define VERSION 2
+#define REVISION 0
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -91,28 +92,30 @@ typedef struct
 typedef struct
 {
   uint8_t destination; //Unsigned 8 bit integer destination address, 0-255
-  //uint8_t voltage; //Unsinged 8 bit integer battery voltage, 0-255 representing 00.0 - 25.5V
   bool isACK;  //Is this packet an acknowledgement
-  bool isCode; //Is this packet a code control packet
-  char aspect; /*New aspect color for signal head. R - red, A - amber, G - green
-                *New aspect for right head on signal bridge: Q - red, B - amber, H - green
-                *If isCode is true
-                *A - Amber LED out
-                *C - Remote capture
-                *D - Remote release
-                *G - Green LED out
-                *R - Red LED out
-                *W - Wake signal
-                *Z - Trigger a reset - not working?
-                *S - Switch Main
-                *s - Switch Diverging
-                *T - Switch 2 Main
-                *t - Switch 2 Diverging 
-                *V - Battery good reset - **needs implementing**
-                *v - Battery low alarm - **needs implementing**
-                */
+  bool isCode; //Is this packet a code control packet - Currently Unused. Left in for compatibility. May use for interblock comms 
+  char aspect; //New aspect color for signal head. R - red, A - amber, G - green
 } RCL;
 RCL transmission; // The packet
+
+typedef struct
+{
+    uint8_t  destination;
+    uint16_t heads;
+    uint8_t  inputs;
+    uint16_t status;
+} TOCTC;
+TOCTC toCTC;
+
+typedef struct
+{
+    uint8_t destination;
+    uint8_t head;
+    char    cmd;
+} FROMCTC;
+FROMCTC fromCTC;
+
+uint8_t tempbuf[6];
 
 //Message data
 uint8_t to;
@@ -121,6 +124,13 @@ uint8_t len;
 
 //This nodes address 
 uint8_t addr = 0;
+
+//CTC board updating variables, not currently used
+bool    ctcPresent = false;
+bool    changed = false;
+uint8_t ctcAddr = 254;
+uint8_t ctcRetries = 0;
+bool    ctcSending = false;
 
 //Input pin states
 switchInfo inputs[MAXINPUTS];
@@ -158,10 +168,6 @@ volatile bool alarmSet = false; //flag so only one stat light timer can be set a
 
 bool statState = false; //Current state of the stat light
 absolute_time_t statBlink; //Absolute time of last change of stat light
-
-//CTC board updating variables, not currently used
-bool ctcPresent = false;
-bool changed = false;
 
 critical_section_t i2cCS; //Mutex for i2c bus, only used for multicore 
 
@@ -301,11 +307,10 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
     {
         for(int i = 0; i < MAXINPUTS; i++)
         {
-            if((inputs[i].headNum == hN && inputs[i].mode == m) || (m == turnoutCapture && inputs[i].headNum2 == hN  && inputs[inputs[i].turnoutPinNum].active))
+            if((inputs[i].headNum == hN && inputs[i].mode == m) || (inputs[i].mode == turnoutCapture && inputs[i].headNum2 == hN  && inputs[inputs[i].turnoutPinNum].active))
             {
                 inputs[i].lastActive = true;
                 heads[i].retries = 0;
-                //break;
             }
         }
         for(int x = 0; x < heads[hN].numDest; x++)
@@ -743,6 +748,8 @@ float checkBattery()
     rawADC = adc_read();
     bat = (float)rawADC * CONVERSION_FACTOR;
 
+    bat = round(bat * 10) / 10;
+
     return bat;
 }
 
@@ -798,13 +805,13 @@ int main()
     uint16_t rawADC = adc_read();
     bat = checkBattery();
     DPRINTF("ADC: %d\n", rawADC);
-    DPRINTF("Battery: %2.2FV\n\n", bat);
+    DPRINTF("Battery: %2.1FV\n\n", bat);
 
     if(bat < 8 && bat > 4)
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("Low Battery! %2.2f\n", bat);
+        panic("Low Battery! %2.1f\n", bat);
     }
 
     #ifdef MULTICORE
@@ -929,6 +936,10 @@ int main()
                 anyRetries = heads[i].retries;
             }
         }
+        if(ctcRetries != 0)
+        {
+            anyRetries = ctcRetries;
+        }
         retryTimeout = get_absolute_time();
         do
         {
@@ -937,15 +948,16 @@ int main()
             {
                 to = 0;
                 from = 0;
-                len = sizeof(transmission);
+                len = sizeof(tempbuf);
                 bool localRelease = false;
 
                 //Load the packet into the correct data structure
-                radio.recv((uint8_t *)& transmission, &len, &from, &to);
+                radio.recv((uint8_t *)& tempbuf, &len, &from, &to);
 
                 //Do not process if the correct size packet was read from the radio
                 if(len == sizeof(transmission))
                 {
+                    memcpy((void *) &transmission, tempbuf, sizeof(transmission));
                     //Find the head the corresponding to the transmitting node
                     bool headFound = false;
                     uint8_t headNum = 0;
@@ -1002,6 +1014,39 @@ int main()
                                     changed = true;
                                 }
 
+                                if(!headOn)
+                                {
+                                    output1.wake();
+
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+
+                                            if(heads[i].head->getColor() == off)
+                                            {
+                                                heads[i].head->setHead(green);
+                                            }
+                                        }
+                                    }
+
+                                    headOn = true;
+                                    headDim = false;
+                                }
+                                else if(headDim)
+                                {
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+                                        }
+                                    }
+
+                                    headDim = false;
+                                }
+
                                 heads[headNum].retries = 0;
                                 dimTimeout = get_absolute_time();
                                 break;
@@ -1029,7 +1074,23 @@ int main()
                             
                             case 'R':
                             case 'r':
-                                if(heads[headNum].head->getColor() != amber || heads[headNum].delayClearStarted)
+                                bool lostRace = false;
+                                if(from > addr)
+                                {
+                                    for(int i = 0; i < MAXINPUTS; i++)
+                                    {
+                                        if((inputs[i].headNum == headNum || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active)) 
+                                            && (inputs[i].mode == capture || inputs[i].mode == turnoutCapture))
+                                        {
+                                            if(inputs[i].active && !inputs[i].lastActive)
+                                            {
+                                                lostRace = true;
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                if((heads[headNum].head->getColor() != amber || heads[headNum].delayClearStarted) && !lostRace)
                                 {
                                     if(!transmission.isACK)
                                     {
@@ -1047,7 +1108,8 @@ int main()
                                             inputs[i].lastActive = true;
                                         }
 
-                                        if(inputs[i].headNum == headNum && inputs[i].mode == capture)
+                                        if((inputs[i].headNum == headNum || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active)) 
+                                            && (inputs[i].mode == capture || inputs[i].mode == turnoutCapture))
                                         {
                                             inputs[i].lastActive = true;
                                         }
@@ -1087,6 +1149,7 @@ int main()
 
                             headOn = true;
                             headDim = false;
+                            changed = true;
                         }
                         else if(headDim)
                         {
@@ -1099,10 +1162,93 @@ int main()
                             }
 
                             headDim = false;
+                            changed = true;
                         }
 
                         dimTimeout = get_absolute_time();
                     }
+                }
+                else if(len == sizeof(fromCTC) && from == ctcAddr)
+                {
+                    memcpy((void *)& fromCTC, tempbuf, sizeof(fromCTC));
+                    if(fromCTC.destination == addr)
+                    {
+                        switch(fromCTC.cmd)
+                        {
+                            case 'W':
+                                if(!headOn)
+                                {
+                                    output1.wake();
+
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+
+                                            if(heads[i].head->getColor() == off)
+                                            {
+                                                heads[i].head->setHead(green);
+                                            }
+                                        }
+                                    }
+
+                                    headOn = true;
+                                    headDim = false;
+                                }
+                                else if(headDim)
+                                {
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+                                        }
+                                    }
+
+                                    headDim = false;
+                                }
+
+                                dimTimeout = get_absolute_time();
+                                changed = true;
+                                break;
+
+                            case 'U':
+                                changed = true;
+                                break;
+
+                            case 'C':
+                                for(int i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && 
+                                        (inputs[i].headNum == fromCTC.head || inputs[i].headNum2 == fromCTC.head))
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                        heads[fromCTC.head].retries = 0;
+                                    }
+                                }
+                                break;
+
+                            case 'R':
+                                for(int i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].mode == release && inputs[i].headNum == fromCTC.head)
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                        heads[fromCTC.head].retries = 0;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+                else if(len == 1 && from == ctcAddr)
+                {
+                    ctcRetries = 0;
+                    ctcSending = false;
+                    changed = false;
                 }
 
                 //Possibly adjust delay time each time a packet is received
@@ -1425,7 +1571,8 @@ int main()
             if(bat < lowBatThreshold)
             {
                 batteryLow = true;
-                DPRINTF("Battery: %2.2FV\n\n", bat);
+                headDim = true;
+                DPRINTF("Battery: %2.1FV\n\n", bat);
             }
             else if(checkBattery() > lowBatReset)
             {
@@ -1552,9 +1699,74 @@ int main()
 
         if(ctcPresent && changed)
         {
-            //TO DO: Overhaul CTC protocol
+            uint16_t tmp = 0;
 
-            changed = false;
+            toCTC.destination = ctcAddr;
+            
+            toCTC.heads = 0;
+            for(int i = MAXHEADS - 1; i >= 0; i--)
+            {
+                if(headDim && headOn)
+                {
+                    tmp = tmp + 0x1;
+                }
+                else if(!headOn)
+                {
+                    tmp = tmp + 0x2;
+                }
+                else if(batteryLow)
+                {
+                    tmp = tmp + 0x3;
+                }
+                else
+                {
+                    tmp = tmp + 0x0;
+                }
+                tmp = tmp << 2;
+
+                if(heads[i].head->getColor() == green)
+                {
+                    tmp = tmp + 0x0;
+                }
+                else if(heads[i].head->getColor() == amber)
+                {
+                    tmp = tmp + 0x1;
+                }
+                else if(heads[i].head->getColor() == red)
+                {
+                    tmp = tmp + 0x2;
+                }
+                else if( heads[i].head->getColor() == lunar)
+                {
+                    tmp = tmp + 0x3;
+                }
+
+                if(i != 0)
+                {
+                    tmp = tmp << 4;
+                }
+            }
+            toCTC.heads = tmp;
+
+            tmp = 0;
+            toCTC.inputs = 0;
+            for(int i = 0; i < MAXINPUTS; i++)
+            {
+                if(inputs[i].active)
+                {
+                    tmp = 1 << i;
+                }
+                toCTC.inputs = toCTC.inputs + tmp;
+                tmp = 0;
+            }
+
+            toCTC.status = 0;
+            toCTC.status = (uint16_t)(checkBattery() * 10);
+
+            radio.send(ctcAddr, (uint8_t *)& toCTC, sizeof(toCTC));
+
+            ctcSending = true;
+            ctcRetries++;
         }
     }//end loop
 }

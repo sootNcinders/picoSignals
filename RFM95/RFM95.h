@@ -247,6 +247,7 @@ typedef enum
 	RFMModeIdle,             ///< Transport is idle.
 	RFMModeTx,               ///< Transport is in the process of transmitting a message.
 	RFMModeRx,               ///< Transport is in the process of receiving a message.
+    RFMModeRxSingle,         ///< Transport will receive one message and then go idle
 	RFMModeCad               ///< Transport is in the process of detecting channel activity (if supported)
     } RHMode;
 
@@ -339,6 +340,9 @@ class RFM95
 
         /// @brief Puts RFM95 in RX Continuous Mode
         void setModeRX();
+
+        /// @brief Puts the RFM95 in RX Single Shot Mode
+        void setModeRXSingle();
 
         /// @brief Puts RFM95 in Transmit mode
         void setModeTX();
