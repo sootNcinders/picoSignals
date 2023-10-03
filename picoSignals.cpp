@@ -21,7 +21,7 @@
 #include "ArduinoJson.h"
 
 #define VERSION 1
-#define REVISION 3
+#define REVISION 4
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -1002,6 +1002,39 @@ int main()
                                     changed = true;
                                 }
 
+                                if(!headOn)
+                                {
+                                    output1.wake();
+
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+
+                                            if(heads[i].head->getColor() == off)
+                                            {
+                                                heads[i].head->setHead(green);
+                                            }
+                                        }
+                                    }
+
+                                    headOn = true;
+                                    headDim = false;
+                                }
+                                else if(headDim)
+                                {
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+                                        }
+                                    }
+
+                                    headDim = false;
+                                }
+
                                 heads[headNum].retries = 0;
                                 dimTimeout = get_absolute_time();
                                 break;
@@ -1029,7 +1062,23 @@ int main()
                             
                             case 'R':
                             case 'r':
-                                if(heads[headNum].head->getColor() != amber || heads[headNum].delayClearStarted)
+                                bool lostRace = false;
+                                if(from > addr)
+                                {
+                                    for(int i = 0; i < MAXINPUTS; i++)
+                                    {
+                                        if((inputs[i].headNum == headNum || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active)) 
+                                            && (inputs[i].mode == capture || inputs[i].mode == turnoutCapture))
+                                        {
+                                            if(inputs[i].active && !inputs[i].lastActive)
+                                            {
+                                                lostRace = true;
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                if((heads[headNum].head->getColor() != amber || heads[headNum].delayClearStarted) && !lostRace)
                                 {
                                     if(!transmission.isACK)
                                     {
@@ -1047,7 +1096,8 @@ int main()
                                             inputs[i].lastActive = true;
                                         }
 
-                                        if(inputs[i].headNum == headNum && inputs[i].mode == capture)
+                                        if((inputs[i].headNum == headNum || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active)) 
+                                            && (inputs[i].mode == capture || inputs[i].mode == turnoutCapture))
                                         {
                                             inputs[i].lastActive = true;
                                         }
