@@ -1477,9 +1477,19 @@ int main()
                 batteryLow = true;
                 DPRINTF("Battery: %2.2FV\n\n", bat);
             }
-            else if(checkBattery() > lowBatReset)
+            else if(bat > lowBatReset)
             {
                 batteryLow = false;
+            }
+
+            //Dim LEDs to save power if battery is getting low.
+            if(bat < lowBatReset)
+            {
+                for(int i; i < MAXHEADS; i++)
+                {
+                    heads[i].head->setHeadBrightness(heads[i].dimBright);
+                }
+                headDim = true;
             }
 
             if(batteryLow && headOn)
