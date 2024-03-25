@@ -1,0 +1,159 @@
+{
+    "address": 99,
+    "head0": {
+        "destination": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 10,
+        "green": {
+            "pin": 0,
+            "current": 30,
+            "brightness": 255
+        },
+        "amber": {
+            "pin": 1,
+            "current": 30,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 2,
+            "current": 30,
+            "brightness": 255
+        },
+        "lunar": {
+            "pin": 3,
+            "current": 30,
+            "brightness": 255
+        }
+    },
+    "head1": {
+        "destination": [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 10,
+        "green": {
+            "pin": 4,
+            "current": 30,
+            "brightness": 191
+        },
+        "amber": {
+            "pin": 5,
+            "current": 30,
+            "brightness": 191
+        },
+        "red": {
+            "pin": 6,
+            "current": 30,
+            "brightness": 191
+        },
+        "lunar": {
+            "pin": 7,
+            "current": 30,
+            "brightness": 191
+        }
+    },
+    "head2": {
+        "destination": [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 10,
+        "green": {
+            "pin": 8,
+            "current": 30,
+            "brightness": 127
+        },
+        "amber": {
+            "pin": 9,
+            "current": 30,
+            "brightness": 127
+        },
+        "red": {
+            "pin": 10,
+            "current": 30,
+            "brightness": 127
+        },
+        "lunar": {
+            "pin": 11,
+            "current": 30,
+            "brightness": 127
+        }
+    },
+    "head3": {
+        "destination": [
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 10,
+        "green": {
+            "pin": 12,
+            "current": 30,
+            "brightness": 64
+        },
+        "amber": {
+            "pin": 13,
+            "current": 30,
+            "brightness": 64
+        },
+        "red": {
+            "pin": 14,
+            "current": 30,
+            "brightness": 64
+        },
+        "lunar": {
+            "pin": 15,
+            "current": 30,
+            "brightness": 64
+        }
+    },
+    "pin0": {
+        "mode": "capture",
+        "head1": 0
+    },
+    "pin1": {
+        "mode": "release",
+        "head": 0
+    },
+    "pin2": {
+        "mode": "capture",
+        "head1": 1
+    },
+    "pin3": {
+        "mode": "release",
+        "head": 1
+    },
+    "pin4": {
+        "mode": "capture",
+        "head1": 2
+    },
+    "pin5": {
+        "mode": "release",
+        "head": 2
+    },
+    "pin6": {
+        "mode": "capture",
+        "head1": 3
+    },
+    "pin7": {
+        "mode": "release",
+        "head": 3
+    }
+}

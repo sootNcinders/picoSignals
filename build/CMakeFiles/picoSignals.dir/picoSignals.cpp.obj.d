@@ -102,6 +102,9 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/include/hardware/adc.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/adc.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/adc.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h \
  /Users/tleavitt/pico/projects/picoSignals/inits.h \
  /Users/tleavitt/pico/projects/picoSignals/pca9674.h \
  /Users/tleavitt/pico/projects/picoSignals/pca9955.h \

@@ -7,6 +7,7 @@
 #include "hardware/i2c.h"
 #include "hardware/spi.h"
 #include "hardware/adc.h"
+#include "hardware/watchdog.h"
 #include "inits.h"
 #include "pca9674.h"
 #include "pca9955.h"
@@ -21,7 +22,7 @@
 #include "ArduinoJson.h"
 
 #define VERSION 1
-#define REVISION 4
+#define REVISION 6
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -47,6 +48,11 @@
 #define CONVERSION_FACTOR (12.0/1284) //((3.3f / 0xFFF) * 10)
 
 #define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
+
+#define FILESIZE 10240
+
+extern uint32_t FLASHJSON[];
+#define FLASHJSONADDR (FLASHJSON)
 
 //input type
 typedef enum
@@ -142,8 +148,8 @@ uint8_t retryTime = 100;//time between attempts in milliseconds
 uint8_t dimTime = 10; //time before dimming the head in minutes
 uint8_t sleepTime = 15;//time before putting the signal heads in minutes
 uint8_t clearDelayTime = 10;//time before letting amber go to green in seconds, used to help traffic flow alternate
-float   lowBatThreshold = 11.0; //Voltage to trigger low battery warning
-float   lowBatReset = 12.0; //Voltage to reset low battery warning
+float   lowBatThreshold = 11.75; //Voltage to trigger low battery warning
+float   lowBatReset = 12.1; //Voltage to reset low battery warning
 
 absolute_time_t retryTimeout; //abolute time of last packet send attempt
 absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
@@ -537,7 +543,6 @@ void parseConfig()
         panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
 
-#define FILESIZE 10240
     //Read the config file into RAM, if it fails set error light and stop execution
     char cfgRaw[FILESIZE]; //May need to expand for more complex config files
     UINT readSize = 0;
@@ -765,7 +770,7 @@ int main()
     //Initialize the Good stat LED
     gpio_init(GOODLED);
     gpio_set_dir(GOODLED, GPIO_OUT);
-    gpio_put(GOODLED, LOW);
+    gpio_put(GOODLED, HIGH);
 
     //Initialize the Error stat LED
     gpio_init(ERRORLED);
@@ -800,11 +805,19 @@ int main()
     DPRINTF("ADC: %d\n", rawADC);
     DPRINTF("Battery: %2.2FV\n\n", bat);
 
-    if(bat < 8 && bat > 4)
+    if(bat < 8.0)
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("Low Battery! %2.2f\n", bat);
+        DPRINTF("Low Battery! %2.2f\n", bat);
+
+        radio.setModeSleep();
+
+        while(bat < lowBatReset)
+        {
+            sleep_ms(60000);
+            bat = checkBattery();
+        }
     }
 
     #ifdef MULTICORE
@@ -816,6 +829,8 @@ int main()
     //Start the SPI and i2c buses 
     initi2c0();
     initspi0();
+
+    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
     //Set all PCA9674 pins as inputs
     input1.inputMask(0xFF);
@@ -902,18 +917,28 @@ int main()
             heads[i].head->setHead(red);
         }
     }
-    for(int i = 0; i < MAXINPUTS; i++)
+
+    //Auto release if the watchdog did not reboot the controller. Otherwise assume most restrictive condition for safety 
+    if(!watchdog_caused_reboot())
     {
-        if(inputs[i].mode == release)
+        for(int i = 0; i < MAXINPUTS; i++)
         {
-            inputs[i].active = true;
+            if(inputs[i].mode == release)
+            {
+                inputs[i].active = true;
+            }
         }
     }
 
     DPRINTF("Retries: %d\nRetry Time: %dms\nDim Time: %dmin\nSleep Time: %dmin\n", maxRetries, retryTime, dimTime, sleepTime);
 
+    gpio_put(GOODLED,  LOW);
+    gpio_put(ERRORLED, HIGH);
+
     while(1)
     {
+        watchdog_update(); //kick the dog
+
         #ifdef MULTICORE
         //Hold checking IO during message transmision and response
         absolute_time_t retryTimeoutd = get_absolute_time();
@@ -1116,7 +1141,8 @@ int main()
                         }
                     }
 
-                    if(transmission.aspect == 'A' || transmission.aspect == 'a' || transmission.aspect == 'R' || transmission.aspect == 'r')
+                    if(transmission.aspect == 'G' || transmission.aspect == 'g' || transmission.aspect == 'A' || 
+                        transmission.aspect == 'a' || transmission.aspect == 'R' || transmission.aspect == 'r')
                     {
                         if(!headOn)
                         {
@@ -1476,20 +1502,27 @@ int main()
             {
                 batteryLow = true;
                 DPRINTF("Battery: %2.2FV\n\n", bat);
+
+                while(bat < (lowBatThreshold - 1))
+                {
+                    for(int i = 0; i < MAXHEADS; i++)
+                    {
+                        if(heads[i].head)
+                        {
+                            heads[i].head->setHead(off);
+                        }
+                    }
+
+                    radio.setModeSleep();
+
+                    sleep_ms(60000);
+                    bat = checkBattery();
+                }
+                radio.setModeRX();
             }
             else if(bat > lowBatReset)
             {
                 batteryLow = false;
-            }
-
-            //Dim LEDs to save power if battery is getting low.
-            if(bat < lowBatReset)
-            {
-                for(int i; i < MAXHEADS; i++)
-                {
-                    heads[i].head->setHeadBrightness(heads[i].dimBright);
-                }
-                headDim = true;
             }
 
             if(batteryLow && headOn)
@@ -1508,28 +1541,17 @@ int main()
                 }
                 else if(blinkCounter == 4)
                 {
-                    if(headDim)
+                    for(int i = 0; i < MAXHEADS; i++)
                     {
-                        for(int i = 0; i < MAXHEADS; i++)
+                        if(heads[i].head)
                         {
-                            if(heads[i].head)
-                            {
-                                heads[i].head->setHeadBrightness(heads[i].dimBright);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for(int i = 0; i < MAXHEADS; i++)
-                        {
-                            if(heads[i].head)
-                            {
-                                heads[i].head->setHeadBrightness(255);
-                            }
+                            //Dim the head to save power while in low power mode
+                            heads[i].head->setHeadBrightness(heads[i].dimBright);
                         }
                     }
 
                     blinkOff = false; 
+                    headDim = true;
                 }
 
                 blinkCounter++;

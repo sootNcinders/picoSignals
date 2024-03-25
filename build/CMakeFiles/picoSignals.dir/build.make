@@ -1602,6 +1602,7 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/build.make
 picoSignals.elf: pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
+picoSignals.elf: /Users/tleavitt/pico/projects/picoSignals/picoSignals.ld
 picoSignals.elf: CMakeFiles/picoSignals.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Linking CXX executable picoSignals.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/picoSignals.dir/link.txt --verbose=$(VERBOSE)
