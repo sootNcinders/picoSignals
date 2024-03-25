@@ -1192,47 +1192,47 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.s
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffsystem.c
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffsystem.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffsystem.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.i
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.i
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffsystem.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.s
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.s
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffunicode.c
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffunicode.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffunicode.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.i
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.i
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffunicode.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.s
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.s
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj: CMakeFiles/picoSignals.dir/flags.make
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.i"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.i
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c > CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.i
 
-CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.s"
-	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.s
+CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.s
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_spi.c
@@ -1485,9 +1485,9 @@ picoSignals_OBJECTS = \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj" \
-"CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj" \
-"CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj" \
-"CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj" \
+"CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj" \
+"CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj" \
+"CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj" \
@@ -1585,9 +1585,9 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj
-picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj

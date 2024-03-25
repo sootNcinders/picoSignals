@@ -54,7 +54,7 @@ static spi_t spis[] = {  // One for each SPI.
         //.baud_rate = 25 * 1000 * 1000, // Actual frequency: 20833333. Has
         // worked for me with SanDisk.
 
-        .dma_isr = spi1_dma_isr
+        //.dma_isr = spi1_dma_isr
     }
 };
 
@@ -72,7 +72,7 @@ static sd_card_t sd_cards[] = {  // One for each SD card
     }
 };
 
-void spi1_dma_isr() { spi_irq_handler(&spis[0]); }
+//void spi1_dma_isr() { spi_irq_handler(&spis[0]); }
 
 /* ********************************************************************** */
 size_t sd_get_num() { return count_of(sd_cards); }

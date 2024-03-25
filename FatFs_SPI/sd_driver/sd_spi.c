@@ -1,14 +1,14 @@
 /* sd_spi.c
 Copyright 2021 Carl John Kugler III
 
-Licensed under the Apache License, Version 2.0 (the License); you may not use 
-this file except in compliance with the License. You may obtain a copy of the 
+Licensed under the Apache License, Version 2.0 (the License); you may not use
+this file except in compliance with the License. You may obtain a copy of the
 License at
 
-   http://www.apache.org/licenses/LICENSE-2.0 
-Unless required by applicable law or agreed to in writing, software distributed 
-under the License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR 
-CONDITIONS OF ANY KIND, either express or implied. See the License for the 
+   http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 */
 
@@ -24,8 +24,11 @@ specific language governing permissions and limitations under the License.
 #include "sd_spi.h"
 #include "spi.h"
 
-//#define TRACE_PRINTF(fmt, args...)
-#define TRACE_PRINTF printf  // task_printf
+#define TRACE_PRINTF(fmt, args...)
+/* #define TRACE_PRINTF printf  // task_printf */
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
 
 void sd_spi_go_high_frequency(sd_card_t *pSD) {
     uint actual = spi_set_baudrate(pSD->spi->hw_inst, pSD->spi->baud_rate);
@@ -35,6 +38,8 @@ void sd_spi_go_low_frequency(sd_card_t *pSD) {
     uint actual = spi_set_baudrate(pSD->spi->hw_inst, 400 * 1000); // Actual frequency: 398089
     TRACE_PRINTF("%s: Actual frequency: %lu\n", __FUNCTION__, (long)actual);
 }
+
+#pragma GCC diagnostic pop
 
 static void sd_spi_lock(sd_card_t *pSD) {
     spi_lock(pSD->spi);
@@ -88,9 +93,9 @@ bool sd_spi_transfer(sd_card_t *pSD, const uint8_t *tx, uint8_t *rx,
 
 uint8_t sd_spi_write(sd_card_t *pSD, const uint8_t value) {
     // TRACE_PRINTF("%s\n", __FUNCTION__);
-    u_int8_t received = SPI_FILL_CHAR;
+    uint8_t received = SPI_FILL_CHAR;
 #if 0
-    int num = spi_write_read_blocking(pSD->spi->hw_inst, &value, &received, 1);    
+    int num = spi_write_read_blocking(pSD->spi->hw_inst, &value, &received, 1);
     myASSERT(1 == num);
 #else
     bool success = spi_transfer(pSD->spi, &value, &received, 1);

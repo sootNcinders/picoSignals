@@ -72,8 +72,8 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffconf.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffconf.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \

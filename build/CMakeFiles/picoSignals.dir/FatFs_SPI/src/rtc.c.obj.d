@@ -78,8 +78,8 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_util/include/pico/util/datetime.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffconf.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffconf.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/util.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/scb.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include/rtc.h

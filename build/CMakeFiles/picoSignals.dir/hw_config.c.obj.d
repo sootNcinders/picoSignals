@@ -35,8 +35,8 @@ CMakeFiles/picoSignals.dir/hw_config.c.obj: \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/hw_config.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffconf.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffconf.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
@@ -84,4 +84,4 @@ CMakeFiles/picoSignals.dir/hw_config.c.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/diskio.h
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/diskio.h

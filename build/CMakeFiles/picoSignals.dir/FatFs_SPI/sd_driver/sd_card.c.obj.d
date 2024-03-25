@@ -48,8 +48,8 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/hw_config.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffconf.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffconf.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
@@ -86,5 +86,5 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj: \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_spi.h \
- /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/diskio.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/diskio.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/crc.h

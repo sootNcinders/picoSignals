@@ -252,77 +252,77 @@ cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
 .PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
 
-FatFs_SPI/ff14a/source/ff.obj: FatFs_SPI/ff14a/source/ff.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ff.obj
+FatFs_SPI/ff15/source/ff.obj: FatFs_SPI/ff15/source/ff.c.obj
+.PHONY : FatFs_SPI/ff15/source/ff.obj
 
 # target to build an object file
-FatFs_SPI/ff14a/source/ff.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ff.c.obj
+FatFs_SPI/ff15/source/ff.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
+.PHONY : FatFs_SPI/ff15/source/ff.c.obj
 
-FatFs_SPI/ff14a/source/ff.i: FatFs_SPI/ff14a/source/ff.c.i
-.PHONY : FatFs_SPI/ff14a/source/ff.i
+FatFs_SPI/ff15/source/ff.i: FatFs_SPI/ff15/source/ff.c.i
+.PHONY : FatFs_SPI/ff15/source/ff.i
 
 # target to preprocess a source file
-FatFs_SPI/ff14a/source/ff.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.i
-.PHONY : FatFs_SPI/ff14a/source/ff.c.i
+FatFs_SPI/ff15/source/ff.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.i
+.PHONY : FatFs_SPI/ff15/source/ff.c.i
 
-FatFs_SPI/ff14a/source/ff.s: FatFs_SPI/ff14a/source/ff.c.s
-.PHONY : FatFs_SPI/ff14a/source/ff.s
+FatFs_SPI/ff15/source/ff.s: FatFs_SPI/ff15/source/ff.c.s
+.PHONY : FatFs_SPI/ff15/source/ff.s
 
 # target to generate assembly for a file
-FatFs_SPI/ff14a/source/ff.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.s
-.PHONY : FatFs_SPI/ff14a/source/ff.c.s
+FatFs_SPI/ff15/source/ff.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.s
+.PHONY : FatFs_SPI/ff15/source/ff.c.s
 
-FatFs_SPI/ff14a/source/ffsystem.obj: FatFs_SPI/ff14a/source/ffsystem.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.obj
+FatFs_SPI/ff15/source/ffsystem.obj: FatFs_SPI/ff15/source/ffsystem.c.obj
+.PHONY : FatFs_SPI/ff15/source/ffsystem.obj
 
 # target to build an object file
-FatFs_SPI/ff14a/source/ffsystem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.c.obj
+FatFs_SPI/ff15/source/ffsystem.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
+.PHONY : FatFs_SPI/ff15/source/ffsystem.c.obj
 
-FatFs_SPI/ff14a/source/ffsystem.i: FatFs_SPI/ff14a/source/ffsystem.c.i
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.i
+FatFs_SPI/ff15/source/ffsystem.i: FatFs_SPI/ff15/source/ffsystem.c.i
+.PHONY : FatFs_SPI/ff15/source/ffsystem.i
 
 # target to preprocess a source file
-FatFs_SPI/ff14a/source/ffsystem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.i
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.c.i
+FatFs_SPI/ff15/source/ffsystem.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.i
+.PHONY : FatFs_SPI/ff15/source/ffsystem.c.i
 
-FatFs_SPI/ff14a/source/ffsystem.s: FatFs_SPI/ff14a/source/ffsystem.c.s
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.s
+FatFs_SPI/ff15/source/ffsystem.s: FatFs_SPI/ff15/source/ffsystem.c.s
+.PHONY : FatFs_SPI/ff15/source/ffsystem.s
 
 # target to generate assembly for a file
-FatFs_SPI/ff14a/source/ffsystem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.s
-.PHONY : FatFs_SPI/ff14a/source/ffsystem.c.s
+FatFs_SPI/ff15/source/ffsystem.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.s
+.PHONY : FatFs_SPI/ff15/source/ffsystem.c.s
 
-FatFs_SPI/ff14a/source/ffunicode.obj: FatFs_SPI/ff14a/source/ffunicode.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.obj
+FatFs_SPI/ff15/source/ffunicode.obj: FatFs_SPI/ff15/source/ffunicode.c.obj
+.PHONY : FatFs_SPI/ff15/source/ffunicode.obj
 
 # target to build an object file
-FatFs_SPI/ff14a/source/ffunicode.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.c.obj
+FatFs_SPI/ff15/source/ffunicode.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
+.PHONY : FatFs_SPI/ff15/source/ffunicode.c.obj
 
-FatFs_SPI/ff14a/source/ffunicode.i: FatFs_SPI/ff14a/source/ffunicode.c.i
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.i
+FatFs_SPI/ff15/source/ffunicode.i: FatFs_SPI/ff15/source/ffunicode.c.i
+.PHONY : FatFs_SPI/ff15/source/ffunicode.i
 
 # target to preprocess a source file
-FatFs_SPI/ff14a/source/ffunicode.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.i
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.c.i
+FatFs_SPI/ff15/source/ffunicode.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.i
+.PHONY : FatFs_SPI/ff15/source/ffunicode.c.i
 
-FatFs_SPI/ff14a/source/ffunicode.s: FatFs_SPI/ff14a/source/ffunicode.c.s
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.s
+FatFs_SPI/ff15/source/ffunicode.s: FatFs_SPI/ff15/source/ffunicode.c.s
+.PHONY : FatFs_SPI/ff15/source/ffunicode.s
 
 # target to generate assembly for a file
-FatFs_SPI/ff14a/source/ffunicode.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.s
-.PHONY : FatFs_SPI/ff14a/source/ffunicode.c.s
+FatFs_SPI/ff15/source/ffunicode.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.s
+.PHONY : FatFs_SPI/ff15/source/ffunicode.c.s
 
 FatFs_SPI/sd_driver/crc.obj: FatFs_SPI/sd_driver/crc.c.obj
 .PHONY : FatFs_SPI/sd_driver/crc.obj
@@ -2399,15 +2399,15 @@ help:
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
 	@echo "... bs2_default"
 	@echo "... picoSignals"
-	@echo "... FatFs_SPI/ff14a/source/ff.obj"
-	@echo "... FatFs_SPI/ff14a/source/ff.i"
-	@echo "... FatFs_SPI/ff14a/source/ff.s"
-	@echo "... FatFs_SPI/ff14a/source/ffsystem.obj"
-	@echo "... FatFs_SPI/ff14a/source/ffsystem.i"
-	@echo "... FatFs_SPI/ff14a/source/ffsystem.s"
-	@echo "... FatFs_SPI/ff14a/source/ffunicode.obj"
-	@echo "... FatFs_SPI/ff14a/source/ffunicode.i"
-	@echo "... FatFs_SPI/ff14a/source/ffunicode.s"
+	@echo "... FatFs_SPI/ff15/source/ff.obj"
+	@echo "... FatFs_SPI/ff15/source/ff.i"
+	@echo "... FatFs_SPI/ff15/source/ff.s"
+	@echo "... FatFs_SPI/ff15/source/ffsystem.obj"
+	@echo "... FatFs_SPI/ff15/source/ffsystem.i"
+	@echo "... FatFs_SPI/ff15/source/ffsystem.s"
+	@echo "... FatFs_SPI/ff15/source/ffunicode.obj"
+	@echo "... FatFs_SPI/ff15/source/ffunicode.i"
+	@echo "... FatFs_SPI/ff15/source/ffunicode.s"
 	@echo "... FatFs_SPI/sd_driver/crc.obj"
 	@echo "... FatFs_SPI/sd_driver/crc.i"
 	@echo "... FatFs_SPI/sd_driver/crc.s"

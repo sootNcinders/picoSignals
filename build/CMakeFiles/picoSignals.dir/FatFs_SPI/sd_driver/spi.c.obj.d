@@ -1,10 +1,5 @@
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.c \
- /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/assert.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/newlib.h \
@@ -12,6 +7,11 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/config.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/ieeefp.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/features.h \
+ /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+ /Users/tleavitt/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_default_types.h \
@@ -76,6 +76,10 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/sched.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/types.h \
  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/stdio.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/hw_config.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffconf.h \
+ /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.h \
  /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \

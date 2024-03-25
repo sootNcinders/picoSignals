@@ -123,7 +123,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/include"
   "/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/include"
   "/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/include"
-  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source"
+  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source"
   "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver"
   "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/include"
   "/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/include"
@@ -133,9 +133,9 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ff.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ff.c.obj.d"
-  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffsystem.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffsystem.c.obj.d"
-  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source/ffunicode.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff14a/source/ffunicode.c.obj.d"
+  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj.d"
+  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj.d"
+  "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj.d"
   "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/crc.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj.d"
   "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj.d"
   "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.c" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj" "gcc" "CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj.d"

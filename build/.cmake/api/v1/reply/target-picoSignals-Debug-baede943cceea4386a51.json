@@ -524,7 +524,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source"
+					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source"
 				},
 				{
 					"backtrace" : 2,
@@ -972,7 +972,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source"
+					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source"
 				},
 				{
 					"backtrace" : 2,
@@ -1488,7 +1488,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff14a/source"
+					"path" : "/Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source"
 				},
 				{
 					"backtrace" : 2,
@@ -2984,19 +2984,19 @@
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 1,
-			"path" : "FatFs_SPI/ff14a/source/ffsystem.c",
+			"path" : "FatFs_SPI/ff15/source/ffsystem.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 1,
-			"path" : "FatFs_SPI/ff14a/source/ffunicode.c",
+			"path" : "FatFs_SPI/ff15/source/ffunicode.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 1,
-			"path" : "FatFs_SPI/ff14a/source/ff.c",
+			"path" : "FatFs_SPI/ff15/source/ff.c",
 			"sourceGroupIndex" : 0
 		},
 		{
