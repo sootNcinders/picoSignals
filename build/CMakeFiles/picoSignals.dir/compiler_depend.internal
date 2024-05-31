@@ -4637,6 +4637,7 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h
  /Users/tleavitt/pico/projects/picoSignals/inits.h
  /Users/tleavitt/pico/projects/picoSignals/pca9674.h
  /Users/tleavitt/pico/projects/picoSignals/pca9955.h
@@ -4877,6 +4878,28 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj
  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/MsgPack/ieee754.hpp
  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/MsgPack/MsgPackSerializer.hpp
  /Users/tleavitt/pico/projects/picoSignals/ArduinoJson/src/ArduinoJson/compatibility.hpp
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb_option.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/osal/osal.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/device/usbd.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h
+ /Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h
 
 CMakeFiles/picoSignals.dir/utils.c.obj
  /Users/tleavitt/pico/projects/picoSignals/utils.c

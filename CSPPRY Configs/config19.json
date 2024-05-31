@@ -4,7 +4,8 @@
     "sleepTime": 120,
     "lowBattery": 1,
     "batteryReset": 1,
-    "head0": {
+    "ctcPresent": true,
+    "head1": {
         "destination": [
             17,
             0,
@@ -15,33 +16,33 @@
         ],
         "dim": 50,
         "green": {
-            "pin": 0,
-            "current": 30,
-            "brightness": 255
-        },
-        "amber": {
             "pin": 1,
             "current": 30,
             "brightness": 255
         },
-        "red": {
+        "amber": {
             "pin": 2,
+            "current": 30,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 3,
             "current": 30,
             "brightness": 255
         }
     },
-    "pin0": {
-        "mode": "release",
-        "head1": 0
-    },
     "pin1": {
-        "mode": "capture",
-        "head": 0
+        "mode": "release",
+        "head1": 1
     },
     "pin2": {
-        "mode": "turnout"
+        "mode": "capture",
+        "head": 1
     },
     "pin3": {
+        "mode": "turnout"
+    },
+    "pin4": {
         "mode": "turnout"
     }
 }

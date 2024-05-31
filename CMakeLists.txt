@@ -31,6 +31,7 @@ target_link_libraries(picoSignals
                         hardware_adc
                         hardware_timer
                         hardware_watchdog
+                        hardware_flash
                         FatFs_SPI
                         ArduinoJson
                         )

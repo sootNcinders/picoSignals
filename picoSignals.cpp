@@ -8,6 +8,7 @@
 #include "hardware/spi.h"
 #include "hardware/adc.h"
 #include "hardware/watchdog.h"
+#include "hardware/flash.h"
 #include "inits.h"
 #include "pca9674.h"
 #include "pca9955.h"
@@ -20,9 +21,10 @@
 #include "sd_card.h"
 #include "hw_config.h"
 #include "ArduinoJson.h"
+#include <tusb.h>
 
-#define VERSION 1
-#define REVISION 6
+#define VERSION 2
+#define REVISION 0
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -44,15 +46,17 @@
 
 #define BLINK_INTERVAL 500 //ms
 
+#define ALPHA (2/11)
+
 //Battery voltage conversion factor
 #define CONVERSION_FACTOR (12.0/1284) //((3.3f / 0xFFF) * 10)
 
 #define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
 
-#define FILESIZE 10240
+#define FILESIZE (FLASH_SECTOR_SIZE*3)
 
-extern uint32_t FLASHJSON[];
-#define FLASHJSONADDR (FLASHJSON)
+#define FLASHJSONADDR ((XIP_BASE + PICO_FLASH_SIZE_BYTES) - FILESIZE)
+uint8_t* flashJson = (uint8_t*) FLASHJSONADDR;
 
 //input type
 typedef enum
@@ -94,31 +98,58 @@ typedef struct
 
 
 //Packet Structure
-typedef struct
+struct RCL
 {
   uint8_t destination; //Unsigned 8 bit integer destination address, 0-255
   //uint8_t voltage; //Unsinged 8 bit integer battery voltage, 0-255 representing 00.0 - 25.5V
   bool isACK;  //Is this packet an acknowledgement
   bool isCode; //Is this packet a code control packet
-  char aspect; /*New aspect color for signal head. R - red, A - amber, G - green
-                *New aspect for right head on signal bridge: Q - red, B - amber, H - green
-                *If isCode is true
-                *A - Amber LED out
-                *C - Remote capture
-                *D - Remote release
-                *G - Green LED out
-                *R - Red LED out
-                *W - Wake signal
-                *Z - Trigger a reset - not working?
-                *S - Switch Main
-                *s - Switch Diverging
-                *T - Switch 2 Main
-                *t - Switch 2 Diverging 
-                *V - Battery good reset - **needs implementing**
-                *v - Battery low alarm - **needs implementing**
+  char aspect; /*New aspect color for signal head. 
+                * R - red 
+                * A - amber 
+                * G - green
                 */
-} RCL;
+};
 RCL transmission; // The packet
+
+
+/* Serial input for map:
+: - Start Chararcter
+00 - Node Address, 00-FF
+O - Head 1 - O, G, A, R, L
+O - Head 2
+O - Head 3
+O - Head 4
+0 - Captures, 0-F
+0 - Releases, 0-F
+0 - Turnouts, 0-F
+00 - absolute value of average RSSI to primary partner, 0-FF
+00 - Voltage x10, 0-FF */
+struct TOCTC
+{
+    uint8_t sender;
+    char head1;
+    char head2;
+    char head3;
+    char head4;
+    uint8_t captures;
+    uint8_t releases;
+    uint8_t turnouts;
+    int8_t avgRSSI;
+    uint8_t voltage;
+};
+TOCTC toCTC;
+
+struct FROMCTC
+{
+    uint8_t dest;
+    uint8_t cmd;
+};
+FROMCTC fromCTC;
+
+uint8_t buf[sizeof(toCTC)];
+
+float avgRSSI = 0;
 
 //Message data
 uint8_t to;
@@ -154,6 +185,7 @@ float   lowBatReset = 12.1; //Voltage to reset low battery warning
 absolute_time_t retryTimeout; //abolute time of last packet send attempt
 absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
 absolute_time_t blinkTimer; //absolute time for the head blinking and battery checking
+absolute_time_t ctcTimer;
 
 uint8_t blinkCounter = 0; //Counter for blinking the heads
 bool batteryLow = false; //low battery flag
@@ -166,10 +198,18 @@ bool statState = false; //Current state of the stat light
 absolute_time_t statBlink; //Absolute time of last change of stat light
 
 //CTC board updating variables, not currently used
-bool ctcPresent = false;
 bool changed = false;
+bool ctcPresent = false;
 
 critical_section_t i2cCS; //Mutex for i2c bus, only used for multicore 
+
+char cin = 0;
+char inBuf[255];
+uint8_t bufIdx = 0;
+
+uint8_t ctcTries = 0;
+
+uint8_t awakeIndicator = 255;
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -264,6 +304,48 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
 
     //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &transmission, sizeof(transmission)))
+    {
+        //if the send failed set the error light
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        sendError = true;
+    }
+    //If the radio recovers, clear the error light
+    else if(sendError)
+    {
+        //if the transciever driver recovers, clear the error
+        gpio_put(GOODLED, LOW);
+        gpio_put(ERRORLED, HIGH);
+        sendError = false;
+    }
+}
+
+void sendToCTC(TOCTC data)
+{
+    DPRINTF("Sending To CTC\n");
+    //If the transmission fails for any reason, set the error light
+    if(!radio.send(255, (uint8_t*) &data, sizeof(data)))
+    {
+        //if the send failed set the error light
+        gpio_put(GOODLED, HIGH);
+        gpio_put(ERRORLED, LOW);
+        sendError = true;
+    }
+    //If the radio recovers, clear the error light
+    else if(sendError)
+    {
+        //if the transciever driver recovers, clear the error
+        gpio_put(GOODLED, LOW);
+        gpio_put(ERRORLED, HIGH);
+        sendError = false;
+    }
+}
+
+void sendFromCTC(FROMCTC data)
+{
+    DPRINTF("Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
+    //If the transmission fails for any reason, set the error light
+    if(!radio.send(255, (uint8_t*) &data, sizeof(data)))
     {
         //if the send failed set the error light
         gpio_put(GOODLED, HIGH);
@@ -495,6 +577,22 @@ void core1loop()
 }
 #endif
 
+void writeFlashJSON(uint8_t* in)
+{
+    flashJson = (uint8_t*) FLASHJSONADDR;
+    if(memcmp(flashJson, in, FILESIZE) != 0)
+    {
+        flash_range_erase((FLASHJSONADDR - XIP_BASE), FILESIZE);
+        flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
+
+        DPRINTF("JSON written to flash\n");
+    }
+    else
+    {
+        DPRINTF("JSON matched, not written\n");
+    }
+}
+
 //config JSON file parser
 void parseConfig()
 {
@@ -520,7 +618,7 @@ void parseConfig()
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+        //panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
     //Locate the config file in the file system, fault out if it cant be found
@@ -529,7 +627,7 @@ void parseConfig()
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+        //panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
     //Open the config file, if it fails set the error light and stop execution
@@ -540,7 +638,7 @@ void parseConfig()
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+        //panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
 
     //Read the config file into RAM, if it fails set error light and stop execution
@@ -551,12 +649,17 @@ void parseConfig()
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
-        panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+        //panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+        memcpy(cfgRaw, flashJson, sizeof(cfgRaw));
     }
-    DPRINTF("Read %d characters of config file\n", readSize);
+    else
+    {
+        DPRINTF("Read %d characters of config file\n", readSize);
+        writeFlashJSON((uint8_t*)cfgRaw);
+    }
 
     //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
-    StaticJsonDocument<FILESIZE> cfg;
+    JsonDocument cfg;
     DeserializationError error = deserializeJson(cfg, cfgRaw);
     if(error)
     {
@@ -578,6 +681,8 @@ void parseConfig()
     lowBatThreshold = cfg["lowBattery"] | 11.0; //Voltage to activate low battery warning, 11v if not specified
     lowBatReset     = cfg["batteryReset"] | 12.0; //Voltage to reset low battery warning, 12v if not specified
 
+    ctcPresent = cfg["ctcPresent"];
+
     //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
     {
@@ -588,7 +693,7 @@ void parseConfig()
 
     uint8_t pin1, pin2, pin3, pin4, cur1, cur2, cur3, cur4 = 255;
 
-    JsonObject Jhead[] = {cfg["head0"].as<JsonObject>(), cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>()};
+    JsonObject Jhead[] = {cfg["head1"].as<JsonObject>(), cfg["head2"].as<JsonObject>(), cfg["head3"].as<JsonObject>(), cfg["head4"].as<JsonObject>()};
 
     for(int i = 0; i < MAXHEADS; i++)
     {
@@ -602,12 +707,15 @@ void parseConfig()
                 uint8_t bri1, bri2, bri3 = 0;
 
                 pin1 = Jhead[i]["red"]["pin"];
+                pin1--;
                 cur1 = Jhead[i]["red"]["current"];
 
                 pin2 = Jhead[i]["green"]["pin"];
+                pin2--;
                 cur2 = Jhead[i]["green"]["current"];
 
                 pin3 = Jhead[i]["blue"]["pin"];
+                pin3--;
                 cur3 = Jhead[i]["blue"]["current"];
 
                 heads[i].head = new RGBHEAD(&output1, pin1, pin2, pin3);
@@ -626,6 +734,7 @@ void parseConfig()
                 if(!Jhead[i]["green"].as<JsonObject>().isNull())
                 {
                     pin1 = Jhead[i]["green"]["pin"];
+                    pin1--;
                     cur1 = Jhead[i]["green"]["current"];
                     briG = Jhead[i]["green"]["brightness"] | 255;
                 }
@@ -637,6 +746,7 @@ void parseConfig()
                 if(!Jhead[i]["amber"].as<JsonObject>().isNull())
                 {
                     pin2 = Jhead[i]["amber"]["pin"];
+                    pin2--;
                     cur2 = Jhead[i]["amber"]["current"];
                     briA = Jhead[i]["amber"]["brightness"] | 255;
                 }
@@ -648,6 +758,7 @@ void parseConfig()
                 if(!Jhead[i]["red"].as<JsonObject>().isNull())
                 {
                     pin3 = Jhead[i]["red"]["pin"];
+                    pin3--;
                     cur3 = Jhead[i]["red"]["current"];
                     briR = Jhead[i]["red"]["brightness"] | 255;
                 }
@@ -659,6 +770,7 @@ void parseConfig()
                 if(!Jhead[i]["lunar"].as<JsonObject>().isNull())
                 {
                     pin4 = Jhead[i]["lunar"]["pin"];
+                    pin4--;
                     cur4 = Jhead[i]["lunar"]["current"];
                     briL = Jhead[i]["lunar"]["brightness"] | 255;
                 }
@@ -705,8 +817,10 @@ void parseConfig()
         }
     }
 
-    JsonObject pins[] = {cfg["pin0"].as<JsonObject>(), cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(),
-                            cfg["pin4"].as<JsonObject>(), cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>()};
+    awakeIndicator = cfg["AwakePin"];
+
+    JsonObject pins[] = {cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(), cfg["pin4"].as<JsonObject>(),
+                            cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>(), cfg["pin8"].as<JsonObject>()};
 
     //Load the mode for up to 8 inputs
     for(int i = 0; i < MAXINPUTS; i++)
@@ -717,18 +831,22 @@ void parseConfig()
             {
                 inputs[i].mode = capture;
                 inputs[i].headNum = pins[i]["head1"];
+                inputs[i].headNum--;
 
                 if(!pins[i]["head2"].isNull())
                 {
                     inputs[i].mode = turnoutCapture;
                     inputs[i].headNum2 = pins[i]["head2"];
+                    inputs[i].headNum2--;
                     inputs[i].turnoutPinNum = pins[i]["turnout"];
+                    inputs[i].turnoutPinNum--;
                 }
             }
             else if(pins[i]["mode"] == "release")
             {
                 inputs[i].mode = release;
                 inputs[i].headNum = pins[i]["head"];
+                inputs[i].headNum--;
             }
             else if (pins[i]["mode"] == "turnout")
             {
@@ -805,7 +923,7 @@ int main()
     DPRINTF("ADC: %d\n", rawADC);
     DPRINTF("Battery: %2.2FV\n\n", bat);
 
-    if(bat < 8.0)
+    if(bat < 8.0 && bat > 3.5)
     {
         gpio_put(GOODLED, HIGH);
         gpio_put(ERRORLED, LOW);
@@ -830,7 +948,7 @@ int main()
     initi2c0();
     initspi0();
 
-    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
+    //watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
     //Set all PCA9674 pins as inputs
     input1.inputMask(0xFF);
@@ -868,6 +986,14 @@ int main()
             }
         }
         sleep_ms(1000);
+    }
+
+    memset(&buf, 0, sizeof(buf));
+
+    if(awakeIndicator < 16)
+    {
+        output1.setLEDcurrent(awakeIndicator, 58);
+        output1.setLEDbrightness(awakeIndicator, 255);
     }
 
     //Set up the RFM95 radio
@@ -918,6 +1044,8 @@ int main()
         }
     }
 
+    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
+
     //Auto release if the watchdog did not reboot the controller. Otherwise assume most restrictive condition for safety 
     if(!watchdog_caused_reboot())
     {
@@ -960,17 +1088,19 @@ int main()
             //Check if any packets have come in
             if(radio.available())
             {
+                memset(&buf, 0, sizeof(buf));
                 to = 0;
                 from = 0;
-                len = sizeof(transmission);
+                len = sizeof(buf);
                 bool localRelease = false;
 
                 //Load the packet into the correct data structure
-                radio.recv((uint8_t *)& transmission, &len, &from, &to);
+                radio.recv((uint8_t *)& buf, &len, &from, &to);
 
                 //Do not process if the correct size packet was read from the radio
                 if(len == sizeof(transmission))
                 {
+                    memcpy(&transmission, &buf, sizeof(transmission));
                     //Find the head the corresponding to the transmitting node
                     bool headFound = false;
                     uint8_t headNum = 0;
@@ -998,8 +1128,8 @@ int main()
                                 {
                                     transmit(from, 'G', true, false);
                                 }
-                                else
-                                {
+                                //else
+                                //{
                                     //Check if the release was from this node
                                     for(int i = 0; i < MAXINPUTS; i++)
                                     {
@@ -1009,7 +1139,7 @@ int main()
                                             break;
                                         }
                                     }
-                                }
+                                //}
 
                                 setLastActive(headNum, from, release);
 
@@ -1042,6 +1172,11 @@ int main()
                                                 heads[i].head->setHead(green);
                                             }
                                         }
+                                    }
+
+                                    if(awakeIndicator < 16)
+                                    {
+                                        output1.setLEDbrightness(awakeIndicator, 255);
                                     }
 
                                     headOn = true;
@@ -1161,6 +1296,12 @@ int main()
                                 }
                             }
 
+                            if(awakeIndicator < 16)
+                            {
+                                output1.setLEDbrightness(awakeIndicator, 255);
+                            }
+
+                            changed = true;
                             headOn = true;
                             headDim = false;
                         }
@@ -1179,12 +1320,124 @@ int main()
 
                         dimTimeout = get_absolute_time();
                     }
+
+                    DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
+                    DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
+
+                    printf(";%0x%0x%c%0x\n", from, transmission.destination, transmission.aspect, abs(radio.lastSNR()));
+                }
+                else if(len == sizeof(toCTC))
+                {
+                    memcpy(&toCTC, &buf, sizeof(toCTC));
+                    if(toCTC.captures <= 0xF && toCTC.releases <= 0xF && toCTC.turnouts <= 0xF)
+                    {
+                        printf(":%0x%c%c%c%c%x%x%x%0x%0x\n", toCTC.sender, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
+                                    toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI), toCTC.voltage);
+                    }
+                }
+                else if(len == sizeof(fromCTC))
+                {
+                    memcpy(&fromCTC, &buf, sizeof(fromCTC));
+
+                    if(fromCTC.dest == addr)
+                    {
+                        DPRINTF("From CTC cmd: %d\n", fromCTC.cmd);
+                        switch(fromCTC.cmd)
+                        {
+                            case 0: //ACK
+                                changed = false;
+                                ctcTries = 0;
+                                break;
+                            case 1: //Ping
+                                changed = true;
+                                ctcTries = 0;
+                                break;
+                            case 2: //Wake
+                                if(!headOn)
+                                {
+                                    output1.wake();
+
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+
+                                            if(heads[i].head->getColor() == off)
+                                            {
+                                                heads[i].head->setHead(green);
+                                            }
+                                        }
+                                    }
+
+                                    if(awakeIndicator < 16)
+                                    {
+                                        output1.setLEDbrightness(awakeIndicator, 255);
+                                    }
+
+                                    changed = true;
+                                    ctcTries = 0;
+                                    headOn = true;
+                                    headDim = false;
+                                }
+                                else if(headDim)
+                                {
+                                    for(int i = 0; i < MAXHEADS; i++)
+                                    {
+                                        if(heads[i].head)
+                                        {
+                                            heads[i].head->setHeadBrightness(255);
+                                        }
+                                    }
+
+                                    headDim = false;
+                                }
+
+                                dimTimeout = get_absolute_time();
+                                break;
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].headNum == (fromCTC.cmd - 3))
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                    }
+                                }
+                                break;
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].mode == release && inputs[i].headNum == (fromCTC.cmd - 7))
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                    }
+                                }
+                                break;
+                        }
+                    }
                 }
 
                 //Possibly adjust delay time each time a packet is received
 
-                DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
-                DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
+                if(from == heads[0].destAddr[0])
+                {
+                    if(avgRSSI == 0)
+                    {
+                        avgRSSI = radio.lastSNR();
+                    }
+                    else
+                    {
+                        avgRSSI = (radio.lastSNR() * ALPHA) + (avgRSSI * (1-ALPHA));
+                    }
+                }
             }
         } while ((anyRetries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
         #endif
@@ -1328,6 +1581,11 @@ int main()
                                 heads[i].head->setHeadBrightness(255);
                                 heads[i].head->setHead(green);
                             }
+                        }
+
+                        if(awakeIndicator < 16)
+                        {
+                            output1.setLEDbrightness(awakeIndicator, 255);
                         }
 
                         headOn = true;
@@ -1626,17 +1884,309 @@ int main()
                     }
                 }
 
+                if(awakeIndicator < 16)
+                {
+                    output1.setLEDbrightness(awakeIndicator, 0);
+                }
+
                 output1.sleep();
 
+                changed = true;
                 headOn = false;
             }
         }
 
-        if(ctcPresent && changed)
+        if(ctcPresent && changed && (absolute_time_diff_us(ctcTimer, get_absolute_time()) > 1000000))
         {
-            //TO DO: Overhaul CTC protocol
+            toCTC.sender = addr;
+            
+            if(heads[0].head)
+            {
+                switch(heads[0].head->getColor())
+                {
+                    case green:
+                        toCTC.head1 = 'G';
+                        break;
+                    case amber:
+                        toCTC.head1 = 'A';
+                        break;
+                    case red:
+                        toCTC.head1 = 'R';
+                        break;
+                    case lunar:
+                        toCTC.head1 = 'L';
+                        break;
+                    case off:
+                    default:
+                        toCTC.head1 = 'O';
+                        break;
+                }
+            }
+            else
+            {
+                toCTC.head1 = 'O';
+            }
 
-            changed = false;
+            if(heads[1].head)
+            {
+                switch(heads[1].head->getColor())
+                {
+                    case green:
+                        toCTC.head2 = 'G';
+                        break;
+                    case amber:
+                        toCTC.head2 = 'A';
+                        break;
+                    case red:
+                        toCTC.head2 = 'R';
+                        break;
+                    case lunar:
+                        toCTC.head2 = 'L';
+                        break;
+                    case off:
+                    default:
+                        toCTC.head2 = 'O';
+                        break;
+                }
+            }
+            else
+            {
+                toCTC.head2 = 'O';
+            }
+
+            if(heads[2].head)
+            {
+                switch(heads[2].head->getColor())
+                {
+                    case green:
+                        toCTC.head3 = 'G';
+                        break;
+                    case amber:
+                        toCTC.head3 = 'A';
+                        break;
+                    case red:
+                        toCTC.head3 = 'R';
+                        break;
+                    case lunar:
+                        toCTC.head3 = 'L';
+                        break;
+                    case off:
+                    default:
+                        toCTC.head3 = 'O';
+                        break;
+                }
+            }
+            else
+            {
+                toCTC.head3 = 'O';
+            }
+
+            if(heads[3].head)
+            {
+                switch(heads[3].head->getColor())
+                {
+                    case green:
+                        toCTC.head4 = 'G';
+                        break;
+                    case amber:
+                        toCTC.head4 = 'A';
+                        break;
+                    case red:
+                        toCTC.head4 = 'R';
+                        break;
+                    case lunar:
+                        toCTC.head4 = 'L';
+                        break;
+                    case off:
+                    default:
+                        toCTC.head4 = 'O';
+                        break;
+                }
+            }
+            else
+            {
+                toCTC.head4 = 'O';
+            }
+
+            toCTC.captures = 0;
+            toCTC.releases = 0;
+            toCTC.turnouts = 0;
+
+            uint8_t numTurnouts = 0;
+
+            for(uint8_t i = 0; i < 8; i++)
+            {
+                if(inputs[i].mode == capture && inputs[i].active)
+                {
+                    toCTC.captures |= (1 << inputs[i].headNum);
+                }
+                else if(inputs[i].mode == release && inputs[i].active)
+                {
+                    toCTC.releases |= (1 << inputs[i].active);
+                }
+                else if(inputs[i].mode == turnout && inputs[i].active)
+                {
+                    toCTC.turnouts |= (1 << numTurnouts);
+                    numTurnouts++;
+                }
+            }
+
+            toCTC.avgRSSI = (int8_t) avgRSSI;
+            toCTC.voltage = (uint8_t) (checkBattery() * 10);
+
+            printf(":%0x%c%c%c%c%x%x%x%0x%0x\n", toCTC.sender, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
+                        toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI), toCTC.voltage);
+
+            sendToCTC(toCTC);
+
+            ctcTries++;
+
+            if(ctcTries > maxRetries)
+            {
+                changed = false;
+                ctcTries = 0;
+            }
+
+            ctcTimer = get_absolute_time();
+        }
+
+        cin = getchar_timeout_us(0);
+        while(cin >= 0x00 && cin <= 0x7F && bufIdx < sizeof(inBuf))
+        {
+            printf("cin = %c\n", cin);
+            inBuf[bufIdx] = cin;
+            
+            if(bufIdx > 0)
+            {
+                bufIdx++;
+            }
+            if(cin == ':')
+            {
+                bufIdx = 1;
+            }
+            else if(bufIdx == 5)
+            {
+                DPRINTF("%c%c%c%c%c\n", inBuf[0], inBuf[1], inBuf[2], inBuf[3], inBuf[4]);
+                fromCTC.dest = 0;
+                fromCTC.dest += ((inBuf[1] >= 'A') ? (inBuf[1] >= 'a') ? (inBuf[1] - 'a' + 10) : (inBuf[1] - 'A' + 10) : (inBuf[1] - '0')) << 4;
+                fromCTC.dest += (inBuf[2] >= 'A') ? (inBuf[2] >= 'a') ? (inBuf[2] - 'a' + 10) : (inBuf[2] - 'A' + 10) : (inBuf[2] - '0');
+
+                fromCTC.cmd = 0;
+                fromCTC.cmd += ((inBuf[3] >= 'A') ? (inBuf[3] >= 'a') ? (inBuf[3] - 'a' + 10) : (inBuf[3] - 'A' + 10) : (inBuf[3] - '0')) << 4;
+                fromCTC.cmd += (inBuf[4] >= 'A') ? (inBuf[4] >= 'a') ? (inBuf[4] - 'a' + 10) : (inBuf[4] - 'A' + 10) : (inBuf[4] - '0');
+
+                bufIdx = 0;
+
+                if(fromCTC.dest == addr || fromCTC.dest == RFM95_BROADCAST_ADDR)
+                {
+                    switch(fromCTC.cmd)
+                    {
+                        case 0:
+                            changed = false;
+                            break;
+                        case 1:
+                            changed = true;
+                            break;
+                        case 2:
+                            if(!headOn)
+                            {
+                                output1.wake();
+
+                                for(int i = 0; i < MAXHEADS; i++)
+                                {
+                                    if(heads[i].head)
+                                    {
+                                        heads[i].head->setHeadBrightness(255);
+
+                                        if(heads[i].head->getColor() == off)
+                                        {
+                                            heads[i].head->setHead(green);
+                                        }
+                                    }
+                                }
+
+                                if(awakeIndicator < 16)
+                                {
+                                    output1.setLEDbrightness(awakeIndicator, 255);
+                                }
+
+                                changed = true;
+                                headOn = true;
+                                headDim = false;
+                            }
+                            else if(headDim)
+                            {
+                                for(int i = 0; i < MAXHEADS; i++)
+                                {
+                                    if(heads[i].head)
+                                    {
+                                        heads[i].head->setHeadBrightness(255);
+                                    }
+                                }
+
+                                headDim = false;
+                            }
+
+                            dimTimeout = get_absolute_time();
+                            break;
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                            if(fromCTC.dest == addr)
+                            {
+                                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].headNum == (fromCTC.cmd - 3))
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                    }
+                                }
+                            }
+                            break;
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                            if(fromCTC.dest == addr)
+                            {
+                                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                                {
+                                    if(inputs[i].mode == release && inputs[i].headNum == (fromCTC.cmd - 7))
+                                    {
+                                        inputs[i].active = true;
+                                        inputs[i].lastActive = false;
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    sendFromCTC(fromCTC);
+                }
+            }
+
+            cin = getchar_timeout_us(100);
+        }
+
+        if(absolute_time_diff_us(retryTimeout, get_absolute_time()) < 0)
+        {
+            retryTimeout = get_absolute_time();
+        }
+        if(absolute_time_diff_us(dimTimeout, get_absolute_time()) < 0)
+        {
+            dimTimeout = get_absolute_time();
+        }
+        if(absolute_time_diff_us(blinkTimer, get_absolute_time()) < 0)
+        {
+            blinkTimer = get_absolute_time();
+        }
+        if(absolute_time_diff_us(ctcTimer, get_absolute_time()) < 0)
+        {
+            ctcTimer = get_absolute_time();
         }
     }//end loop
 }

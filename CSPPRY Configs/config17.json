@@ -5,7 +5,8 @@
     "retryTime": 200,
     "lowBattery": 1,
     "batteryReset": 1,
-    "head0": {
+    "ctcPresent": true,
+    "head1": {
         "destination": [
             19,
             0,
@@ -16,22 +17,22 @@
         ],
         "dim": 50,
         "green": {
-            "pin": 3,
-            "current": 30,
-            "brightness": 255
-        },
-        "amber": {
             "pin": 4,
             "current": 30,
             "brightness": 255
         },
-        "red": {
+        "amber": {
             "pin": 5,
+            "current": 30,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 6,
             "current": 30,
             "brightness": 255
         }
     },
-    "head1": {
+    "head2": {
         "destination": [
             18,
             21,
@@ -42,36 +43,36 @@
         ],
         "dim": 50,
         "green": {
-            "pin": 0,
-            "current": 30,
-            "brightness": 255
-        },
-        "amber": {
             "pin": 1,
             "current": 30,
             "brightness": 255
         },
-        "red": {
+        "amber": {
             "pin": 2,
+            "current": 30,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 3,
             "current": 30,
             "brightness": 255
         }
     },
-    "pin0": {
+    "pin1": {
+        "mode": "release",
+        "head": 2
+    },
+    "pin2": {
+        "mode": "capture",
+        "head1": 1,
+        "head2": 2,
+        "turnout": 4
+    },
+    "pin3": {
         "mode": "release",
         "head": 1
     },
-    "pin1": {
-        "mode": "capture",
-        "head1": 0,
-        "head2": 1,
-        "turnout": 3
-    },
-    "pin2": {
-        "mode": "release",
-        "head": 0
-    },
-    "pin3": {
+    "pin4": {
         "mode": "turnout"
     }
 }
