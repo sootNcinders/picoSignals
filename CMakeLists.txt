@@ -24,7 +24,6 @@ pico_set_linker_script(picoSignals ${CMAKE_SOURCE_DIR}/picoSignals.ld)
 # pull in common dependencies and additional i2c hardware support
 target_link_libraries(picoSignals 
                         pico_stdlib 
-                        pico_multicore
                         pico_sync
                         hardware_i2c 
                         hardware_spi

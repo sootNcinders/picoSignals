@@ -4,7 +4,7 @@
     "sleepTime": 30,
     "lowBattery": 11.5,
     "batteryReset": 12,
-    "head0": {
+    "head1": {
         "destination": [
             2,
             0,
@@ -16,27 +16,27 @@
         "dim": 127,
         "release": 5,
         "green": {
-            "pin": 0,
-            "current": 58,
-            "brightness": 255
-        },
-        "amber": {
             "pin": 1,
             "current": 58,
             "brightness": 255
         },
-        "red": {
+        "amber": {
             "pin": 2,
+            "current": 58,
+            "brightness": 255
+        },
+        "red": {
+            "pin": 3,
             "current": 58,
             "brightness": 255
         }
     },
-    "pin0": {
-        "mode": "capture",
-        "head": 0
-    },
     "pin1": {
+        "mode": "capture",
+        "head1": 1
+    },
+    "pin2": {
         "mode": "release",
-        "head1": 0
+        "head": 1
     }
 }

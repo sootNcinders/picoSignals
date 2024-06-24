@@ -1,7 +1,5 @@
-import queue
 import threading
 from tkinter import *
-from tkinter import ttk
 import serial
 import serial.tools.list_ports
 import datetime
@@ -11,11 +9,22 @@ import platform
 
 GRAY = "#555"
 
+DEVH = 1080
+DEVW = 1920
+
+HOUR = 60*60 
+
+scale = 1
+
 #guis
 gui = Tk()
 gui.attributes('-fullscreen', True)
 gui.resizable(False, False)
-c = Canvas(gui, bg="black", height=1080, width=1920)
+
+screenW = gui.winfo_screenwidth()
+screenH = gui.winfo_screenheight()
+
+c = Canvas(gui, bg="black", height=screenH, width=screenW)
 m = Menu(gui, tearoff = 0) 
 
 serialSelect = Toplevel(gui)
@@ -55,23 +64,33 @@ class node:
         self.turnouts = [False for i in range(0,4)]
         self.rssi = 0
         self.voltage = 0.0
+        self.avgVoltage = 0.0
+        self.prevVoltages = [0 for i in range(0,10)]
+        self.ledError = [False for i in range(0,16)]
+        self.version = 0
+        self.revision = 0
 
 nodes = [node() for i in range(0,256)]
 rssis = [0 for i in range(0,256)]
 volts = [0 for i in range(0,256)]
 caps  = [[0 for i in range(0,4)] for j in range(0,256)]
 rels  = [[0 for i in range(0,4)] for j in range(0,256)]
+vers  = [0 for i in range(0,256)]
+leds  = [0 for i in range(0,256)]
+lastMsg = [0 for i in range(0,256)]
 
 diagVisible = False
+advDiagVisible = False
 
 changed = False
 
 def do_rclick(event):
     global dest
     global headNo
+    global scale
     
-    x = event.x_root
-    y = event.y_root
+    x = event.x_root/scale
+    y = event.y_root/scale
 
     if "Darwin" in platform.system():
         y = y - 40 #offset 40 pixels for mac with notch
@@ -79,37 +98,37 @@ def do_rclick(event):
     print("RCLICK X:" + str(x) + " Y:" + str(y))
 
     try:
-        if x >= 700 and x <= 720 and y >= 670 and y <= 690:
+        if x >= 785 and x <= 805 and y >= 670 and y <= 690:
             dest = 1
             headNo = 0
-            m.tk_popup(x, y)
+            m.tk_popup(event.x_root, event.y_root)
         elif x >= 220 and x <= 240 and y >= 710 and y <= 730:
             dest = 2
             headNo = 0
-            m.tk_popup(x, y)
-        elif x >= 990 and x <= 1010 and y >= 715 and y <= 755:
+            m.tk_popup(event.x_root, event.y_root)
+        elif x >= 1075 and x <= 1095 and y >= 715 and y <= 755:
             dest = 17
             if y >= 735:
                 headNo = 0
             else:
                 headNo = 1
-            m.tk_popup(x, y)
-        elif x >= 1680 and x <= 1700 and y >= 740 and y <= 760:
+            m.tk_popup(event.x_root, event.y_root)
+        elif x >= 1850 and x <= 1870 and y >= 740 and y <= 760:
             dest = 18
             headNo = 0
-            m.tk_popup(x, y)
-        elif x>= 1400 and x <= 1420 and y >= 1000 and y <= 1020:
+            m.tk_popup(event.x_root, event.y_root)
+        elif x>= 1570 and x <= 1590 and y >= 1000 and y <= 1020:
             dest = 19
             headNo = 0
-            m.tk_popup(x, y)
-        elif x >= 1370 and x <= 1390 and y >= 730 and y <= 750:
+            m.tk_popup(event.x_root, event.y_root)
+        elif x >= 1455 and x <= 1475 and y >= 730 and y <= 750:
             dest = 21
             headNo = 0
-            m.tk_popup(x, y)
+            m.tk_popup(event.x_root, event.y_root)
         else:
             dest = 255
             headNo = 0
-            m.tk_popup(x, y)
+            m.tk_popup(event.x_root, event.y_root)
             
     finally:
         m.grab_release()
@@ -118,22 +137,34 @@ c.bind("<Button-3>", do_rclick)
 c.bind("<Button-2>", do_rclick)
 
 def sendCmd(addr: int, cmd: int):
-    global radio
-    #Serial Out:
-    #: - Start Character
-    #00 - Destination node, 0-FF
-    #00 - Command, 0-FF
-    #       00 - ACK
-    #       01 - Ping
-    #       02 - Wake
-    #       03 - Capture 1
-    #       04 - Capture 2
-    #       05 - Capture 3
-    #       06 - Capture 4
-    #       07 - Release 1
-    #       08 - Release 2
-    #       09 - Release 3
-    #       0A - Release 4
+    """
+    Sends a command to a destination node via radio.
+
+    Args:
+        addr (int): The destination node address, in the range 0-255.
+        cmd (int): The command to send, in the range 0-255.
+
+    Returns:
+        None
+
+    Notes:
+        - The command is sent in a serial format, with the following structure:
+            - Start Character: ':'
+            - Destination node: encoded as a two-digit hexadecimal number
+            - Command: encoded as a two-digit hexadecimal number
+        - The following commands are supported:
+            - 00 - ACK
+            - 01 - Ping
+            - 02 - Wake
+            - 03 - Capture 1
+            - 04 - Capture 2
+            - 05 - Capture 3
+            - 06 - Capture 4
+            - 07 - Release 1
+            - 08 - Release 2
+            - 09 - Release 3
+            - 0A - Release 4
+    """
 
     out = ":"
     out = out + f'{addr:0>2x}'
@@ -195,82 +226,60 @@ def setSerial():
     print("Selected Option: {}".format(value_inside.get())) 
     serialSelect.destroy()
     dataThread.start()
-
-    for i in range(0, len(head)):
-        if head[i][0] != 0:
-            sendCmd(i, 1)
+    heartbeatThread.start()
     return None
-
-if(len(sys.argv) > 1):
-    value_inside.set(sys.argv[1])
-    setSerial()
-else:
-    #list all available ports
-    available_ports = list(serial.tools.list_ports.comports())
-    serial_ports = []
-    for port in available_ports:
-        serial_ports.append(port.device)
-    
-    # Set the default value of the variable 
-    value_inside.set("Select an Option") 
-
-    optionmenu = OptionMenu(serialSelect, value_inside, *serial_ports)
-    optionmenu.pack()
-
-    submit_button = Button(serialSelect, text='Submit', command=setSerial) 
-    submit_button.pack() 
 
 def loadHeads():
     global head
     #parrish east
     #head[ 1][0] = c.create_oval(1600,  270, 1620,  290, fill="black")
-    head[1][0] = c.create_oval(700,  670, 720,  690, fill="black")
+    head[1][0] = c.create_oval(785,  670, 805,  690, fill=GRAY)
     #etowah west
     #head[ 2][0] = c.create_oval( 300,  310,  320,  330, fill="black")
-    head[2][0] = c.create_oval(220,  710,  240,  730, fill="black")
+    head[2][0] = c.create_oval(220,  710,  240,  730, fill=GRAY)
     #Etowah East
-    c.create_oval(1500, 590, 1520, 570, fill="black")
+    head[3][0] = c.create_oval(1670, 590, 1690, 570, fill=GRAY)
     #Alloy
-    c.create_oval(1120, 630, 1140, 650, fill="black")
+    head[4][0] = c.create_oval(1290, 630, 1310, 650, fill=GRAY)
     #Reid West
-    c.create_oval(1000, 610, 1020, 630, fill="black")
+    head[5][0] = c.create_oval(1085, 610, 1105, 630, fill=GRAY)
     #Reid East
-    c.create_oval(700, 590, 720, 570, fill="black")
+    head[6][0] = c.create_oval(785, 590, 805, 570, fill=GRAY)
     #Cotton Mill
-    c.create_oval(320, 630, 340, 650, fill="black")
+    head[7][0] = c.create_oval(405, 630, 425, 650, fill=GRAY)
     #Midland West
-    c.create_oval(220, 610, 240, 630, fill="black")
+    head[8][0] = c.create_oval(220, 610, 240, 630, fill=GRAY)
     #Midland East
-    c.create_oval(1500, 490, 1520, 470, fill="black")
+    head[9][0] = c.create_oval(1670, 490, 1690, 470, fill=GRAY)
     #Sargent West
-    c.create_oval(1000, 510, 1020, 530, fill="black")
+    head[10][0] = c.create_oval(1085, 510, 1105, 530, fill=GRAY)
     #Sargent East
-    c.create_oval(700, 490, 720, 470, fill="black")
+    head[11][0] = c.create_oval(785, 490, 805, 470, fill=GRAY)
     #St. Paul West
-    c.create_oval(220, 510, 240, 530, fill="black")
+    head[12][0] = c.create_oval(220, 510, 240, 530, fill=GRAY)
     #St. Paul East
-    c.create_oval(1500, 370, 1520, 350, fill="black")
-    c.create_oval(1500, 390, 1520, 370, fill="black")
-    #Elizabeth West
-    c.create_oval(670, 60, 690, 80, fill="black")
-    #Elizabth East
-    c.create_oval(350, 50, 370, 70, fill="black")
+    head[13][0] = c.create_oval(1670, 370, 1690, 350, fill=GRAY)
+    head[13][1] = c.create_oval(1670, 390, 1690, 370, fill=GRAY)
+    #Elizabeth East
+    head[14][0] = c.create_oval(840, 60, 860, 80, fill=GRAY)
+    #Elizabth West
+    head[15][0] = c.create_oval(520, 50, 540, 70, fill=GRAY)
     #Toonigh
-    c.create_oval(520, 390, 540, 370, fill="black")
+    head[16][0] = c.create_oval(690, 390, 710, 370, fill=GRAY)
     #parrish west
     #head[17][0] = c.create_oval( 190,  520,  210,  540, fill="black")
     #head[17][1] = c.create_oval( 190,  540,  210,  560, fill="black")
-    head[17][0] = c.create_oval(990,  735,  1010,  755, fill="black")
-    head[17][1] = c.create_oval(990,  715,  1010,  735, fill="black")
+    head[17][0] = c.create_oval(1075,  735,  1095,  755, fill=GRAY)
+    head[17][1] = c.create_oval(1075,  715,  1095,  735, fill=GRAY)
     #greyrock
     #head[18][0] = c.create_oval(1090,  540, 1110,  560, fill="black")
-    head[18][0] = c.create_oval(1680,  740, 1700,  760, fill="black")
+    head[18][0] = c.create_oval(1860,  740, 1880,  760, fill=GRAY)
     #canton
     #head[19][0] = c.create_oval( 810,  900,  830,  920, fill="black")
-    head[19][0] = c.create_oval(1400, 1020, 1420, 1000, fill="black")
+    head[19][0] = c.create_oval(1570, 1020, 1590, 1000, fill=GRAY)
     #upper serivce leads
     #head[21][0] = c.create_oval( 670,  530,  690,  550, fill="black")
-    head[21][0] = c.create_oval(1370,  730, 1390,  750, fill="black")
+    head[21][0] = c.create_oval(1455,  730, 1475,  750, fill=GRAY)
 
     c.pack()
 
@@ -282,37 +291,167 @@ def loadDiags():
     global c
 
     #Parrish West
-    volts[1] = c.create_text(745, 675, text="00.0V", fill="black", font=('Times', 14))
-    rssis[1] = c.create_text(740, 690, text="-000", fill="black", font=('Times', 14))
-    caps[1][0] = c.create_text(735, 660, text="C1", fill="black", font=('Times', 14))
-    rels[1][0] = c.create_text(755, 660, text="R1", fill="black", font=('Times', 14))
-    #Etowah East
-    volts[2] = c.create_text(265, 715, text="00.0V", fill="black", font=('Times', 14))
-    rssis[2] = c.create_text(260, 730, text="-000", fill="black", font=('Times', 14))
-    caps[2][0] = c.create_text(255, 745, text="C1", fill="black", font=('Times', 14))
-    rels[2][0] = c.create_text(275, 745, text="R1", fill="black", font=('Times', 14))
+    rssis[1]   = c.create_text(825, 690, text="-000", fill="", font=('Times', 14))
+    vers[1]    = c.create_text(825, 660, text="V0R0", fill="", font=('Times', 14))
 
+    volts[1]   = c.create_text(830, 675, text="00.0V", fill="", font=('Times', 14))
+    leds[1]    = c.create_text(845, 690, text="LED Fault", fill="", font=('Times', 14))
+    caps[1][0] = c.create_text(820, 660, text="C1", fill="", font=('Times', 14))
+    rels[1][0] = c.create_text(840, 660, text="R1", fill="", font=('Times', 14))
+    #Etowah East
+    rssis[2]   = c.create_text(265, 730, text="-000", fill="", font=('Times', 14))
+    vers[2]    = c.create_text(265, 745, text="V0R0", fill="", font=('Times', 14))
+
+    volts[2]   = c.create_text(270, 715, text="00.0V", fill="", font=('Times', 14))
+    leds[2]    = c.create_text(285, 730, text="LED Fault", fill="", font=('Times', 14))
+    caps[2][0] = c.create_text(260, 745, text="C1", fill="", font=('Times', 14))
+    rels[2][0] = c.create_text(280, 745, text="R1", fill="", font=('Times', 14))
+    #Etowah West
+    rssis[3]   = c.create_text(1715, 590, text="-000", fill="", font=('Times', 14))
+    vers[3]    = c.create_text(1715, 560, text="V0R0", fill="", font=('Times', 14))
+
+    volts[3]   = c.create_text(1720, 575, text="00.0V", fill="", font=('Times', 14))
+    leds[3]    = c.create_text(1735, 590, text="LED Fault", fill="", font=('Times', 14))
+    caps[3][0] = c.create_text(1710, 560, text="C1", fill="", font=('Times', 14))
+    rels[3][0] = c.create_text(1730, 560, text="R1", fill="", font=('Times', 14))
+    #Alloy
+    rssis[4]   = c.create_text(1335, 650, text="-000", fill="", font=('Times', 14))
+    vers[4]    = c.create_text(1335, 665, text="V0R0", fill="", font=('Times', 14))
+
+    volts[4]   = c.create_text(1340, 635, text="00.0V", fill="", font=('Times', 14))
+    leds[4]    = c.create_text(1355, 650, text="LED Fault", fill="", font=('Times', 14))
+    caps[4][0] = c.create_text(1330, 665, text="C1", fill="", font=('Times', 14))
+    rels[4][0] = c.create_text(1350, 665, text="R1", fill="", font=('Times', 14))
+    #Reid East
+    rssis[5]   = c.create_text(1125, 630, text="-000", fill="", font=('Times', 14))
+    vers[5]    = c.create_text(1125, 645, text="V0R0", fill="", font=('Times', 14))
+
+    volts[5]   = c.create_text(1130, 615, text="00.0V", fill="", font=('Times', 14))
+    leds[5]    = c.create_text(1145, 630, text="LED Fault", fill="", font=('Times', 14))
+    caps[5][0] = c.create_text(1120, 645, text="C1", fill="", font=('Times', 14))
+    rels[5][0] = c.create_text(1140, 645, text="R1", fill="", font=('Times', 14))
+    #Reid West
+    rssis[6]   = c.create_text(825, 590, text="-000", fill="", font=('Times', 14))
+    vers[6]    = c.create_text(825, 560, text="V0R0", fill="", font=('Times', 14))
+
+    volts[6]   = c.create_text(830, 575, text="00.0V", fill="", font=('Times', 14))
+    leds[6]    = c.create_text(845, 590, text="LED Fault", fill="", font=('Times', 14))
+    caps[6][0] = c.create_text(820, 560, text="C1", fill="", font=('Times', 14))
+    rels[6][0] = c.create_text(840, 560, text="R1", fill="", font=('Times', 14))
+    #Cotton Mill
+    rssis[7]   = c.create_text(445, 650, text="-000", fill="", font=('Times', 14))
+    vers[7]    = c.create_text(445, 665, text="V0R0", fill="", font=('Times', 14))
+
+    volts[7]   = c.create_text(450, 635, text="00.0V", fill="", font=('Times', 14))
+    leds[7]    = c.create_text(465, 650, text="LED Fault", fill="", font=('Times', 14))
+    caps[7][0] = c.create_text(440, 665, text="C1", fill="", font=('Times', 14))
+    rels[7][0] = c.create_text(460, 665, text="R1", fill="", font=('Times', 14))
+    #Midland East
+    rssis[8]   = c.create_text(265, 630, text="-000", fill="", font=('Times', 14))
+    vers[8]    = c.create_text(265, 645, text="V0R0", fill="", font=('Times', 14))
+
+    volts[8]   = c.create_text(270, 615, text="00.0V", fill="", font=('Times', 14))
+    leds[8]    = c.create_text(285, 630, text="LED Fault", fill="", font=('Times', 14))
+    caps[8][0] = c.create_text(260, 645, text="C1", fill="", font=('Times', 14))
+    rels[8][0] = c.create_text(280, 645, text="R1", fill="", font=('Times', 14))
+    #Midland West
+    rssis[9]   = c.create_text(1715, 490, text="-000", fill="", font=('Times', 14))
+    vers[9]    = c.create_text(1715, 460, text="V0R0", fill="", font=('Times', 14))
+
+    volts[9]   = c.create_text(1720, 475, text="00.0V", fill="", font=('Times', 14))
+    leds[9]    = c.create_text(1735, 490, text="LED Fault", fill="", font=('Times', 14))
+    caps[9][0] = c.create_text(1710, 460, text="C1", fill="", font=('Times', 14))
+    rels[9][0] = c.create_text(1730, 460, text="R1", fill="", font=('Times', 14))
+    #Sargent East
+    rssis[10]   = c.create_text(1125, 530, text="-000", fill="", font=('Times', 14))
+    vers[10]    = c.create_text(1125, 545, text="V0R0", fill="", font=('Times', 14))
+
+    volts[10]   = c.create_text(1130, 515, text="00.0V", fill="", font=('Times', 14))
+    leds[10]    = c.create_text(1145, 530, text="LED Fault", fill="", font=('Times', 14))
+    caps[10][0] = c.create_text(1120, 545, text="C1", fill="", font=('Times', 14))
+    rels[10][0] = c.create_text(1140, 545, text="R1", fill="", font=('Times', 14))
+    #Sargent West
+    rssis[11]   = c.create_text(825, 490, text="-000", fill="", font=('Times', 14))
+    vers[11]    = c.create_text(825, 460, text="V0R0", fill="", font=('Times', 14))
+
+    volts[11]   = c.create_text(830, 475, text="00.0V", fill="", font=('Times', 14))
+    leds[11]    = c.create_text(845, 490, text="LED Fault", fill="", font=('Times', 14))
+    caps[11][0] = c.create_text(820, 460, text="C1", fill="", font=('Times', 14))
+    rels[11][0] = c.create_text(840, 460, text="R1", fill="", font=('Times', 14))
+    #St. Paul East
+    rssis[12]   = c.create_text(265, 530, text="-000", fill="", font=('Times', 14))
+    vers[12]    = c.create_text(265, 545, text="V0R0", fill="", font=('Times', 14))
+
+    volts[12]   = c.create_text(270, 515, text="00.0V", fill="", font=('Times', 14))
+    leds[12]    = c.create_text(285, 530, text="LED Fault", fill="", font=('Times', 14))
+    caps[12][0] = c.create_text(260, 545, text="C1", fill="", font=('Times', 14))
+    rels[12][0] = c.create_text(280, 545, text="R1", fill="", font=('Times', 14))
+    #St. Paul West
+    rssis[13]   = c.create_text(1715, 390, text="-000", fill="", font=('Times', 14))
+    vers[13]    = c.create_text(1715, 360, text="V0R0", fill="", font=('Times', 14))
+
+    volts[13]   = c.create_text(1720, 375, text="00.0V", fill="", font=('Times', 14))
+    leds[13]    = c.create_text(1735, 390, text="LED Fault", fill="", font=('Times', 14))
+    caps[13][0] = c.create_text(1710, 360, text="C1", fill="", font=('Times', 14))
+    rels[13][0] = c.create_text(1730, 360, text="R1", fill="", font=('Times', 14))
+    rels[13][1] = c.create_text(1750, 360, text="R2", fill="", font=('Times', 14))
+    #Elizabeth West
+    rssis[14]   = c.create_text(885, 85, text="-000", fill="", font=('Times', 14))
+    vers[14]    = c.create_text(885, 100, text="V0R0", fill="", font=('Times', 14))
+
+    volts[14]   = c.create_text(890, 70, text="00.0V", fill="", font=('Times', 14))
+    leds[14]    = c.create_text(905, 85, text="LED Fault", fill="", font=('Times', 14))
+    caps[14][0] = c.create_text(880, 100, text="C1", fill="", font=('Times', 14))
+    rels[14][0] = c.create_text(900, 100, text="R1", fill="", font=('Times', 14))
+    #Elizabeth East
+    rssis[15]   = c.create_text(485, 65, text="-000", fill="", font=('Times', 14))
+    vers[15]    = c.create_text(485, 80, text="V0R0", fill="", font=('Times', 14))
+
+    volts[15]   = c.create_text(490, 50, text="00.0V", fill="", font=('Times', 14))
+    leds[15]    = c.create_text(475, 65, text="LED Fault", fill="", font=('Times', 14))
+    caps[15][0] = c.create_text(480, 80, text="C1", fill="", font=('Times', 14))
+    rels[15][0] = c.create_text(500, 80, text="R1", fill="", font=('Times', 14))
+    #Toonigh
+    rssis[16]   = c.create_text(735, 375, text="-000", fill="", font=('Times', 14))
+    vers[16]    = c.create_text(735, 390, text="V0R0", fill="", font=('Times', 14))
+
+    volts[16]   = c.create_text(740, 360, text="00.0V", fill="", font=('Times', 14))
+    leds[16]    = c.create_text(755, 375, text="LED Fault", fill="", font=('Times', 14))
+    caps[16][0] = c.create_text(730, 390, text="C1", fill="", font=('Times', 14))
+    rels[16][0] = c.create_text(750, 390, text="R1", fill="", font=('Times', 14))
     #Parrish West
-    volts[17] = c.create_text(965, 735, text="00.0V", fill="black", font=('Times', 14))
-    rssis[17] = c.create_text(970, 750, text="-000", fill="black", font=('Times', 14))
-    caps[17][0] = c.create_text(955, 765, text="C1", fill="black", font=('Times', 14))
-    rels[17][0] = c.create_text(975, 765, text="R1", fill="black", font=('Times', 14))
-    rels[17][1] = c.create_text(995, 765, text="R2", fill="black", font=('Times', 14))
+    rssis[17]   = c.create_text(1055, 750, text="-000", fill="", font=('Times', 14))
+    vers[17]    = c.create_text(1055, 765, text="V0R0", fill="", font=('Times', 14))
+
+    volts[17]   = c.create_text(1050, 735, text="00.0V", fill="", font=('Times', 14))
+    leds[17]    = c.create_text(1035, 750, text="LED Fault", fill="", font=('Times', 14))
+    caps[17][0] = c.create_text(1040, 765, text="C1", fill="", font=('Times', 14))
+    rels[17][0] = c.create_text(1060, 765, text="R1", fill="", font=('Times', 14))
+    rels[17][1] = c.create_text(1080, 765, text="R2", fill="", font=('Times', 14))
     #Greyrock
-    volts[18] = c.create_text(1685, 700, text="00.0V", fill="black", font=('Times', 14))
-    rssis[18] = c.create_text(1690, 715, text="-000", fill="black", font=('Times', 14))
-    caps[18][0] = c.create_text(1675, 730, text="C1", fill="black", font=('Times', 14))
-    rels[18][0] = c.create_text(1695, 730, text="R1", fill="black", font=('Times', 14))
+    rssis[18]   = c.create_text(1860, 715, text="-000", fill="", font=('Times', 14))
+    vers[18]    = c.create_text(1860, 730, text="V0R0", fill="", font=('Times', 14))
+
+    volts[18]   = c.create_text(1855, 700, text="00.0V", fill="", font=('Times', 14))
+    leds[18]    = c.create_text(1875, 715, text="LED Fault", fill="", font=('Times', 14))
+    caps[18][0] = c.create_text(1845, 730, text="C1", fill="", font=('Times', 14))
+    rels[18][0] = c.create_text(1865, 730, text="R1", fill="", font=('Times', 14))
     #Canton
-    volts[19] = c.create_text(1445, 1005, text="00.0V", fill="black", font=('Times', 14))
-    rssis[19] = c.create_text(1440, 1020, text="-000", fill="black", font=('Times', 14))
-    caps[19][0] = c.create_text(1435, 990, text="C1", fill="black", font=('Times', 14))
-    rels[19][0] = c.create_text(1455, 990, text="R1", fill="black", font=('Times', 14))
+    rssis[19]   = c.create_text(1610, 1020, text="-000", fill="", font=('Times', 14))
+    vers[19]    = c.create_text(1610, 990, text="V0R0", fill="", font=('Times', 14))
+
+    volts[19]   = c.create_text(1615, 1005, text="00.0V", fill="", font=('Times', 14))
+    leds[19]    = c.create_text(1635, 1020, text="LED Fault", fill="", font=('Times', 14))
+    caps[19][0] = c.create_text(1605, 990, text="C1", fill="", font=('Times', 14))
+    rels[19][0] = c.create_text(1625, 990, text="R1", fill="", font=('Times', 14))
     #Upper Service Leads
-    volts[21] = c.create_text(1415, 735, text="00.0V", fill="black", font=('Times', 14))
-    rssis[21] = c.create_text(1410, 750, text="-000", fill="black", font=('Times', 14))
-    caps[21][0] = c.create_text(1405, 765, text="C1", fill="black", font=('Times', 14))
-    rels[21][0] = c.create_text(1425, 765, text="R1", fill="black", font=('Times', 14))
+    rssis[21]   = c.create_text(1495, 750, text="-000", fill="", font=('Times', 14))
+    vers[21]    = c.create_text(1495, 765, text="V0R0", fill="", font=('Times', 14))
+
+    volts[21]   = c.create_text(1500, 735, text="00.0V", fill="", font=('Times', 14))
+    leds[21]    = c.create_text(1520, 750, text="LED Fault", fill="", font=('Times', 14))
+    caps[21][0] = c.create_text(1490, 765, text="C1", fill="", font=('Times', 14))
+    rels[21][0] = c.create_text(1510, 765, text="R1", fill="", font=('Times', 14))
 
 def drawMap():
     lineWidth = 7
@@ -326,150 +465,150 @@ def drawMap():
     #c.create_line(0, 500, 200, 500, 180, 520, 0, 520, width=lineWidth, fill="white")
 
     #St. Paul Siding Upper
-    c.create_line(1750, 400, 1500, 400, 1520, 420, 1750, 420, width=lineWidth, fill="white")
+    c.create_line(1920, 400, 1670, 400, 1690, 420, 1920, 420, width=lineWidth, fill="white")
 
 
     #Bryan Wye
-    c.create_line(1420, 320, 1360, 400, width=lineWidth, fill=GRAY)
+    c.create_line(1590, 320, 1530, 400, width=lineWidth, fill=GRAY)
     #Eagle Ridge Spur
-    c.create_line(650, 70, 670, 90, 1200, 90, width=lineWidth, fill=GRAY)
+    c.create_line(820, 70, 860, 110, 1370, 110, width=lineWidth, fill=GRAY)
     #D&MT Jct
-    c.create_line(650, 70, 610, 110, 0, 110, width=lineWidth, fill=GRAY)
-    c.create_line(600, 90, 630, 90, width=lineWidth, fill=GRAY)
-    c.create_line(0, 210, 100, 110, width=lineWidth, fill=GRAY)
+    c.create_line(820, 70, 780, 110, 0, 110, width=lineWidth, fill=GRAY)
+    c.create_line(770, 90, 800, 90, width=lineWidth, fill=GRAY)
+    c.create_line(0, 310, 200, 110, width=lineWidth, fill=GRAY)
     #Toonigh Yard
-    c.create_line(360, 280, 460, 380, 500, 380, width=lineWidth, fill=GRAY)
-    c.create_line(380, 280, 480, 380, width=lineWidth, fill=GRAY)
-    c.create_line(400, 280, 520, 400, width=lineWidth, fill=GRAY)
-    #Elizabeth Loop Main
-    c.create_line(1460, 360, 1420, 320, 1420, 150, 1320, 50, 400, 50, 300, 150, 300, 300, 400, 400, 1443, 400, width=lineWidth, fill="white")
-    #Elizabeth Siding
-    c.create_line(380, 70, 650, 70, 670, 50, width=lineWidth, fill="white")
+    c.create_line(530, 280, 630, 380, 670, 380, width=lineWidth, fill=GRAY)
+    c.create_line(550, 280, 650, 380, width=lineWidth, fill=GRAY)
+    c.create_line(570, 280, 690, 400, width=lineWidth, fill=GRAY)
     #Harpur Spur
-    c.create_line(1400, 400, 1300, 300, 750, 300, width=lineWidth, fill="white")
-    c.create_line(750, 300, 500, 300, width=lineWidth, fill=GRAY)
+    c.create_line(1570, 400, 1470, 300, 920, 300, width=lineWidth, fill=GRAY)
+    c.create_line(920, 300, 670, 300, width=lineWidth, fill=GRAY)
+    #Elizabeth Loop Main
+    c.create_line(1630, 360, 1590, 320, 1590, 150, 1490, 50, 570, 50, 470, 150, 470, 300, 570, 400, 1613, 400, width=lineWidth, fill="white")
+    #Elizabeth Siding
+    c.create_line(550, 70, 820, 70, 840, 50, width=lineWidth, fill="white")
 
 
     global uWyeW
-    uWyeW = c.create_line(1500, 400, 1443, 400, width=lineWidth, fill=GRAY)
+    uWyeW = c.create_line(1670, 400, 1613, 400, width=lineWidth, fill=GRAY)
     global uWyeE
-    uWyeE = c.create_line(1500, 400, 1460, 360, width=lineWidth, fill="white")
+    uWyeE = c.create_line(1670, 400, 1630, 360, width=lineWidth, fill="white")
 
     #Midland - St. Paul Main
-    c.create_line(0, 500, 1750, 500, width=lineWidth, fill="white")
+    c.create_line(0, 500, 1920, 500, width=lineWidth, fill="white")
     #St. Paul Siding Lower
     c.create_line(0, 520, 200, 520, 220, 500, width=lineWidth, fill="white")
     #Sargent Siding
-    c.create_line(700, 500, 720, 520, 980, 520, 1000, 500, width=lineWidth, fill="white")
+    c.create_line(785, 500, 805, 520, 1065, 520, 1085, 500, width=lineWidth, fill="white")
     #Midland Siding Upper
-    c.create_line(1500, 500, 1520, 520, 1750, 520, width=lineWidth, fill="white")
+    c.create_line(1670, 500, 1690, 520, 1920, 520, width=lineWidth, fill="white")
 
     #Midland Siding Lower
     c.create_line(0, 620, 200, 620, 220, 600, width=lineWidth, fill="white")
     #Cotton Mill Spur
-    c.create_line(300, 600, 320, 620, 520, 620, width=lineWidth, fill=GRAY)
+    c.create_line(385, 600, 405, 620, 605, 620, width=lineWidth, fill=GRAY)
     #Reid Siding
-    c.create_line(700, 600, 720, 620, 980, 620, 1000, 600, width=lineWidth, fill="white")
+    c.create_line(785, 600, 805, 620, 1065, 620, 1085, 600, width=lineWidth, fill="white")
     #Alloy Spur
-    c.create_line(1100, 600, 1120, 620, 1320, 620, width=lineWidth, fill=GRAY)
+    c.create_line(1270, 600, 1290, 620, 1490, 620, width=lineWidth, fill=GRAY)
     #Etowah Siding Upper
-    c.create_line(1500, 600, 1520, 620, 1750, 620, width=lineWidth, fill="white")
+    c.create_line(1670, 600, 1690, 620, 1920, 620, width=lineWidth, fill="white")
     #Etowah - Midland Main
-    c.create_line(0, 600, 1750, 600, width=lineWidth, fill="white")
+    c.create_line(0, 600, 1920, 600, width=lineWidth, fill="white")
 
     #Parrish - Etowah Main
-    c.create_line(0, 700, 1000, 700, width=lineWidth, fill="white")
+    c.create_line(0, 700, 1085, 700, width=lineWidth, fill="white")
     #Parrish Siding
-    c.create_line(700, 700, 720, 720, 980, 720, 1000, 700, width=lineWidth, fill="white")
+    c.create_line(785, 700, 805, 720, 1065, 720, 1085, 700, width=lineWidth, fill="white")
     #Etowah Siding Lower
     c.create_line(0, 720, 200, 720, 220, 700, width=lineWidth, fill="white")
     #wye swtich
     global wyeE
     #wyeE = c.create_line(200, 500, 257, 500, width=lineWidth, fill="#333")
-    wyeE = c.create_line(1000, 700, 1057, 700, width=lineWidth, fill=GRAY)
+    wyeE = c.create_line(1085, 700, 1142, 700, width=lineWidth, fill=GRAY)
     global wyeW
     #wyeW = c.create_line(200, 500, 240, 540, width=lineWidth, fill="white")
-    wyeW = c.create_line(1000, 700, 1040, 740, width=lineWidth, fill="white")
+    wyeW = c.create_line(1085, 700, 1125, 740, width=lineWidth, fill="white")
     #wye 3rd leg
     #c.create_line(280, 580, 360, 500, width=lineWidth, fill="#333")
-    c.create_line(1080, 780, 1160, 700, width=lineWidth, fill=GRAY)
+    c.create_line(1165, 780, 1245, 700, width=lineWidth, fill=GRAY)
     #Canton Yard
-    c.create_line(1180, 1050, 850, 1050, width=lineWidth, fill=GRAY)
-    c.create_line(1000, 1050, 900, 950, width=lineWidth, fill=GRAY)
-    c.create_line(1160, 1030, 1000, 1030, width=lineWidth, fill=GRAY)
-    c.create_line(1140, 1030, 1060, 950, 1060, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1120, 1030, 1040, 950, 1040, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1100, 1030, 1020, 950, 1020, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1080, 1030, 1000, 950, 1000, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1060, 1030, 980, 950, 980, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1040, 1030, 960, 950, 960, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1020, 1030, 940, 950, 940, 800, width=lineWidth, fill=GRAY)
-    c.create_line(1000, 1030, 920, 950, 920, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1265, 1050, 935, 1050, width=lineWidth, fill=GRAY)
+    c.create_line(1085, 1050, 985, 950, width=lineWidth, fill=GRAY)
+    c.create_line(1245, 1030, 1085, 1030, width=lineWidth, fill=GRAY)
+    c.create_line(1225, 1030, 1145, 950, 1145, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1205, 1030, 1125, 950, 1125, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1185, 1030, 1105, 950, 1105, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1165, 1030, 1085, 950, 1085, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1145, 1030, 1065, 950, 1065, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1125, 1030, 1045, 950, 1045, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1105, 1030, 1025, 950, 1025, 800, width=lineWidth, fill=GRAY)
+    c.create_line(1085, 1030, 1005, 950, 1005, 800, width=lineWidth, fill=GRAY)
     #canton loop
     #c.create_line(240, 540, 280, 580, 280, 850, 380, 950, 1000, 950, 1100, 850, 1100, 580, 1080, 560, width=lineWidth, fill="white")
-    c.create_line(1040, 740, 1080, 780, 1080, 950, 1180, 1050, 1600, 1050, 1700, 950, 1700, 780, 1680, 760, width=lineWidth, fill="white")
+    c.create_line(1125, 740, 1165, 780, 1165, 950, 1265, 1050, 1770, 1050, 1870, 950, 1870, 780, 1850, 760, width=lineWidth, fill="white")
     #canton loop tunnel to service track switch
     #c.create_line(1020, 500, 850, 500, width=lineWidth, fill="white")
-    c.create_line(1620, 700, 1450, 700, width=lineWidth, fill="white")
+    c.create_line(1790, 700, 1535, 700, width=lineWidth, fill="white")
     #canton loop wye to service track swtich
     #c.create_line(822, 500, 257, 500, width=lineWidth, fill="white")
-    c.create_line(1422, 700, 1057, 700, width=lineWidth, fill="white")
+    c.create_line(1507, 700, 1142, 700, width=lineWidth, fill="white")
     #tunnel
     #c.create_line(1080, 560, 1020, 500, width=lineWidth, fill="white", dash=(7, 7))
-    c.create_line(1680, 760, 1620, 700, width=lineWidth, fill="white", dash=(7, 7))
+    c.create_line(1850, 760, 1790, 700, width=lineWidth, fill="white", dash=(7, 7))
     #canton siding
     #c.create_line(400, 930, 800, 930, 820, 950, width=lineWidth, fill="white")
-    c.create_line(1200, 1030, 1400, 1030, 1420, 1050, width=lineWidth, fill="white")
+    c.create_line(1285, 1030, 1485, 1030, 1505, 1050, width=lineWidth, fill="white")
     #greyrock siding 
     #c.create_line(800, 930, 990, 930, 1080, 840, 1080, 560, width=lineWidth, fill="white")
-    c.create_line(1400, 1030, 1590, 1030, 1680, 940, 1680, 760, width=lineWidth, fill="white")
+    c.create_line(1485, 1030, 1760, 1030, 1850, 940, 1850, 760, width=lineWidth, fill="white")
     #upper service lead switch
     global serviceSwitch1s
     #serviceSwitch1s = c.create_line(850, 500, 830, 520, width=lineWidth, fill="#333")
-    serviceSwitch1s = c.create_line(1450, 700, 1430, 720, width=lineWidth, fill=GRAY)
+    serviceSwitch1s = c.create_line(1535, 700, 1515, 720, width=lineWidth, fill=GRAY)
     global serviceSwitch1m
     #serviceSwitch1m = c.create_line(850, 500, 822, 500, width=lineWidth, fill="white")
-    serviceSwitch1m = c.create_line(1450, 700, 1422, 700, width=lineWidth, fill="white")
+    serviceSwitch1m = c.create_line(1535, 700, 1507, 700, width=lineWidth, fill="white")
     #lower service lead switch 
     global serviceSwitch2s
     #serviceSwitch2s = c.create_line(400, 930, 380, 910, width=lineWidth, fill="#333")
-    serviceSwitch2s = c.create_line(1200, 1030, 1180, 1010, width=lineWidth, fill=GRAY)
+    serviceSwitch2s = c.create_line(1285, 1030, 1265, 1010, width=lineWidth, fill=GRAY)
     global serviceSwitch2m
     #serviceSwitch2m = c.create_line(400, 930, 380, 950, width=lineWidth, fill="white")
-    serviceSwitch2m = c.create_line(1200, 1030, 1180, 1050, width=lineWidth, fill="white")
+    serviceSwitch2m = c.create_line(1285, 1030, 1265, 1050, width=lineWidth, fill="white")
     #service leads
     #c.create_line(380, 910, 300, 830, 300, 590, 370, 520, 830, 520, width=lineWidth, fill="white")
-    c.create_line(1180, 1010, 1100, 930, 1100, 790, 1170, 720, 1430, 720, width=lineWidth, fill="white")
+    c.create_line(1265, 1010, 1185, 930, 1185, 790, 1255, 720, 1515, 720, width=lineWidth, fill="white")
     #c.create_line(360, 890, 360, 860, 320, 820, 320, 600, 380, 540, 650, 540, 670, 520, width=lineWidth, fill="white")
-    c.create_line(1160, 990, 1160, 960, 1120, 920, 1120, 800, 1180, 740, 1350, 740, 1370, 720, width=lineWidth, fill="white")
+    c.create_line(1245, 990, 1245, 960, 1205, 920, 1205, 800, 1265, 740, 1435, 740, 1455, 720, width=lineWidth, fill="white")
 
     #siding labels
-    c.create_text(500, 90, text="Elizabeth", fill="white", font=('Times', 16))
-    c.create_text(800, 110, text="Eagle Ridge Branch", fill="white", font=('Times', 16))
+    c.create_text(670, 90, text="Elizabeth", fill="white", font=('Times', 16))
+    c.create_text(970, 130, text="Eagle Ridge Branch", fill="white", font=('Times', 16))
     c.create_text(100, 90, text="Duluth & Mt. Tabor RR", fill="white", font=('Times', 16))
-    c.create_text(400, 260, text="Toonigh", fill="white", font=('Times', 16))
-    c.create_text(650, 280, text="Harpur", fill="white", font=('Times', 16))
-    c.create_text(1650, 440, text="St. Paul", fill="white", font=('Times', 16))
+    c.create_text(570, 260, text="Toonigh", fill="white", font=('Times', 16))
+    c.create_text(820, 280, text="Harpur", fill="white", font=('Times', 16))
+    c.create_text(1820, 440, text="St. Paul", fill="white", font=('Times', 16))
     c.create_text(75, 540, text="St. Paul", fill="white", font=('Times', 16))
-    c.create_text(850, 540, text="Sargent", fill="white", font=('Times', 16))
-    c.create_text(1650, 540, text="Midland", fill="white", font=('Times', 16))
+    c.create_text(935, 540, text="Sargent", fill="white", font=('Times', 16))
+    c.create_text(1820, 540, text="Midland", fill="white", font=('Times', 16))
     c.create_text(75, 640, text="Midland", fill="white", font=('Times', 16))
-    c.create_text(400, 640, text="Cotton Mill", fill="white", font=('Times', 16))
-    c.create_text(850, 640, text="Reid", fill="white", font=('Times', 16))
-    c.create_text(1200, 640, text="Alloy", fill="white", font=('Times', 16))
+    c.create_text(535, 640, text="Cotton Mill", fill="white", font=('Times', 16))
+    c.create_text(935, 640, text="Reid", fill="white", font=('Times', 16))
+    c.create_text(1420, 640, text="Alloy", fill="white", font=('Times', 16))
     #c.create_text(1800, 280, text="Parrish", fill="white", font=('Times', 16))
     #c.create_text(100, 480, text="Parrish", fill="white", font=('Times', 16))
-    c.create_text(850, 740, text="Parrish", fill="white", font=('Times', 16))
+    c.create_text(935, 740, text="Parrish", fill="white", font=('Times', 16))
     #c.create_text(150, 260, text="Etowah", fill="white", font=('Times', 16))
     c.create_text(75, 740, text="Etowah", fill="white", font=('Times', 16))
-    c.create_text(1650, 640, text="Etowah", fill="white", font=('Times', 16))
+    c.create_text(1820, 640, text="Etowah", fill="white", font=('Times', 16))
     #c.create_text(600, 910, text="Canton", fill="white", font=('Times', 16))
-    c.create_text(1300, 1010, text="Canton", fill="white", font=('Times', 16))
+    c.create_text(1385, 1010, text="Canton", fill="white", font=('Times', 16))
     #c.create_text(1150, 700, text="Greyrock", fill="white", font=('Times', 16))
-    c.create_text(1625, 800, text="Greyrock", fill="white", font=('Times', 16))
+    c.create_text(11795, 800, text="Greyrock", fill="white", font=('Times', 16))
 
-    c.create_text(450, 850, text="Canton, St. Paul, & Pacfic Rwy.", fill="white", font=('Times', 60))
-    c.create_text(450, 1000, text="E <-> W", fill="white", font=('Times', 60))
+    c.create_text(535, 850, text="Canton, St. Paul, & Pacfic Rwy.", fill="white", font=('Times', 50))
+    c.create_text(535, 1000, text="E <-> W", fill="white", font=('Times', 60))
 
     c.pack()
 
@@ -490,38 +629,87 @@ def quit_gui():
 def drawDiag():
     global c
     global diagVisible
+    global advDiagVisible
     global rssis
     global volts
     global caps
     global rels
+    global leds
+    global vers
 
     for i in range(0, len(rssis)):
         if rssis[i] != 0:
-            if diagVisible:
-                c.itemconfigure(rssis[i], fill="black")
-            else:
-                c.itemconfigure(rssis[i], fill="white")
+            c.itemconfigure(rssis[i], fill="")
+        if vers[i] != 0:
+            c.itemconfigure(vers[i], fill="")
+        
         if volts[i] != 0:
             if diagVisible:
-                c.itemconfigure(volts[i], fill="black")
+                c.itemconfigure(volts[i], fill="")
             else:
                 c.itemconfigure(volts[i], fill="white")
+
+        if leds[i] != 0:
+            if diagVisible:
+                c.itemconfigure(leds[i], fill="")
+            else:
+                c.itemconfigure(leds[i], fill=GRAY)
         for x in range(0,4):
             if caps[i][x] != 0:
                 if diagVisible:
-                    c.itemconfigure(caps[i][x], fill="black")
+                    c.itemconfigure(caps[i][x], fill="")
                 else:
                     c.itemconfigure(caps[i][x], fill=GRAY)
             if rels[i][x] != 0:
                 if diagVisible:
-                    c.itemconfigure(rels[i][x], fill="black")
+                    c.itemconfigure(rels[i][x], fill="")
                 else:
                     c.itemconfigure(rels[i][x], fill=GRAY)
     diagVisible = not diagVisible
+    advDiagVisible = False
+
+def drawAdvDiag():
+    global advDiagVisible
+    global diagVisible
+    global c
+    global rssis
+    global volts
+    global caps
+    global rels
+    global leds
+    global vers
+
+    for i in range(0, len(rssis)):
+        if leds[i] != 0:
+            c.itemconfigure(leds[i], fill="")
+        for x in range(0,4):
+            if caps[i][x] != 0:
+                c.itemconfigure(caps[i][x], fill="")
+            if rels[i][x] != 0:
+                c.itemconfigure(rels[i][x], fill="")
+
+        if volts[i] != 0:
+            if advDiagVisible:
+                c.itemconfigure(volts[i], fill="")
+            else:
+                c.itemconfigure(volts[i], fill="white")
+        if rssis[i] != 0:
+            if advDiagVisible:
+                c.itemconfigure(rssis[i], fill="")
+            else:
+                c.itemconfigure(rssis[i], fill="white")
+        if vers[i] != 0:
+            if advDiagVisible:
+                c.itemconfigure(vers[i], fill="")
+            else:
+                c.itemconfigure(vers[i], fill="white")
+    advDiagVisible = not advDiagVisible
+    diagVisible = False
 
 def drawButtons():
     Button(gui, text="QUIT", command=quit_gui).place(x=0, y=0)
     Button(gui, text="TOGGLE DIAG", command=drawDiag).place(x=65, y=0)
+    Button(gui, text="TOGGLE ADV DIAG", command=drawAdvDiag).place(x=185, y=0)
 
 def get_data():
     global radio
@@ -567,6 +755,26 @@ def get_data():
                 nodes[node].rssi = -1 * int(lnIn[10] + lnIn[11], 16)
                 nodes[node].voltage = (int(lnIn[12] + lnIn[13], 16)/10.0)    
 
+                if 0 in nodes[node].prevVoltages:
+                    for i in range(0, len(nodes[node].prevVoltages)):
+                        nodes[node].prevVoltages[i] = nodes[node].voltage
+                        nodes[node].avgVoltage = nodes[node].voltage
+                else:
+                    nodes[node].prevVoltages.pop()
+                    nodes[node].prevVoltages.append(nodes[node].voltage)
+
+                    nodes[node].avgVoltage = 0
+                    for i in range(0, len(nodes[node].prevVoltages)):
+                        nodes[node].avgVoltage += nodes[node].prevVoltages[i]
+                    nodes[node].avgVoltage /= len(nodes[node].prevVoltages)
+
+                leds = int(lnIn[14] + lnIn[15] + lnIn[16] + lnIn[17], 16)
+                for i in range(0, 16):
+                    nodes[node].ledError[i] = (((leds >> i) & 0x01) == 1)
+
+                nodes[node].version = int(lnIn[18] + lnIn[19], 16)
+                nodes[node].revision = int(lnIn[20] + lnIn[21], 16)
+
                 changed = True    
 
                 #ACK
@@ -581,6 +789,9 @@ def get_data():
                 print("Turnouts: " + lnIn[9])
                 print("Voltage: " + str(nodes[node].voltage))
                 print("RSSI: " + str(nodes[node].rssi) + "\n")
+                print("LED Errors: " + str(leds))
+                print("Version: " + str(nodes[node].version))
+                print("Revision: " + str(nodes[node].revision))
                 
                 f.write(str(datetime.datetime.now()) + "\n") 
                 f.write("Sender: " + str(node) + "\n")
@@ -590,7 +801,12 @@ def get_data():
                 f.write("Releases: " + lnIn[8] + "\n")
                 f.write("Turnouts: " + lnIn[9] + "\n")
                 f.write("Voltage: " + str(nodes[node].voltage) + "\n")
-                f.write("RSSI: " + str(nodes[node].rssi) + "\n\n")
+                f.write("RSSI: " + str(nodes[node].rssi) + "\n")
+                f.write("LED Errors: " + str(leds) + "\n")
+                f.write("Version: " + str(nodes[node].version) + "\n")
+                f.write("Revision: " + str(nodes[node].revision) + "\n\n")
+
+                lastMsg[node] = time.time()
 
             elif lnIn[0] == ';':
                 #;  - start code
@@ -624,79 +840,162 @@ def update_gui():
     global diagVisible
     global caps
     global rels
+    global lastMsg
 
     while True:
         if changed:
-            for i in range(0, len(head)):
-                for x in range(0, 4):
-                    if head[i][x] != 0:
-                        if nodes[i].heads[x] == 'G' or nodes[i].heads[x] == 'g':
-                            c.itemconfigure(head[i][x], fill="green")
-                        elif nodes[i].heads[x] == 'A' or nodes[i].heads[x] == 'a':
-                            c.itemconfigure(head[i][x], fill="yellow")
-                        elif nodes[i].heads[x] == 'R' or nodes[i].heads[x] == 'r':
-                            c.itemconfigure(head[i][x], fill="red")
-                        elif nodes[i].heads[x] == 'L' or nodes[i].heads[x] == 'l':
-                            c.itemconfigure(head[i][x], fill="#88F")
-                        else:
-                            c.itemconfigure(head[i][x], fill="black")
-
-                        if volts[i] != 0:
-                            c.itemconfigure(volts[i], text=(format(nodes[i].voltage, '02.1f')+"V"))
-                        if rssis[i] != 0:
-                            c.itemconfigure(rssis[i], text=(format(nodes[i].rssi, '03d')))
-
-                        if diagVisible:
-                            for y in range(0,4):
-                                if caps[i][y] != 0:
-                                    if nodes[i].captures[y]:
-                                        c.itemconfigure(caps[i][y], fill="white")
-                                    else:
-                                        c.itemconfigure(caps[i][y], fill=GRAY)
-                                if rels[i][y] != 0:
-                                    if nodes[i].releases[y]:
-                                        c.itemconfigure(rels[i][y], fill="white")
-                                    else:
-                                        c.itemconfigure(rels[i][y], fill=GRAY)
-
-                        if i == 17:
-                            if nodes[i].turnouts[0]:
-                                c.itemconfigure(wyeW, fill=GRAY)
-                                c.itemconfigure(wyeE, fill="white")
-                            else:
-                                c.itemconfigure(wyeE, fill=GRAY)
-                                c.itemconfigure(wyeW, fill="white")
-                        elif i == 18:
-                            if nodes[i].turnouts[0]:
-                                c.itemconfigure(serviceSwitch1m, fill=GRAY)
-                                c.itemconfigure(serviceSwitch1s, fill="white")
-                            else:
-                                c.itemconfigure(serviceSwitch1s, fill=GRAY)
-                                c.itemconfigure(serviceSwitch1m, fill="white")
-                        elif i == 19:
-                            if nodes[i].turnouts[1]:
-                                c.itemconfigure(serviceSwitch2m, fill=GRAY)
-                                c.itemconfigure(serviceSwitch2s, fill="white")
-                            else:
-                                c.itemconfigure(serviceSwitch2s, fill=GRAY)
-                                c.itemconfigure(serviceSwitch2m, fill="white")
             changed = False
+            for i in range(0, len(head)):
+                if head[i][0] != 0:
+                    for x in range(0, 4):
+                        if head[i][x] != 0:
+                            if nodes[i].heads[x] == 'G' or nodes[i].heads[x] == 'g':
+                                c.itemconfigure(head[i][x], fill="green")
+                            elif nodes[i].heads[x] == 'A' or nodes[i].heads[x] == 'a':
+                                c.itemconfigure(head[i][x], fill="yellow")
+                            elif nodes[i].heads[x] == 'R' or nodes[i].heads[x] == 'r':
+                                c.itemconfigure(head[i][x], fill="red")
+                            elif nodes[i].heads[x] == 'L' or nodes[i].heads[x] == 'l':
+                                c.itemconfigure(head[i][x], fill="#88F")
+                            elif lastMsg[i] != 0:
+                                c.itemconfigure(head[i][x], fill=GRAY)
+                            else:
+                                c.itemconfigure(head[i][x], fill="#222")
+
+                            if diagVisible:
+                                if True in nodes[i].ledError:
+                                    c.itemconfigure(leds[i], fill="white")
+                                else:
+                                    c.itemconfigure(leds[i], fill=GRAY)
+
+                            c.itemconfigure(vers[i], text=("V"+format(nodes[i].version, '2d')+"R"+format(nodes[i].revision, '2d')))
+
+                            if volts[i] != 0:
+                                c.itemconfigure(volts[i], text=(format(nodes[i].voltage, '02.1f')+"V"))
+                                if i < 17:
+                                    if nodes[i].voltage < 11.5 and nodes[i].voltage > 0:
+                                        c.itemconfigure(volts[i], fill="yellow")
+                                    elif diagVisible:
+                                        if nodes[i].avgVoltage + 0.1 < nodes[i].voltage:
+                                            c.itemconfigure(volts[i], fill="green")
+                                        elif nodes[i].avgVoltage - 0.1 > nodes[i].voltage:
+                                            c.itemconfigure(volts[i], fill="red")
+                                        else:
+                                            c.itemconfigure(volts[i], fill="white")
+                            if rssis[i] != 0:
+                                c.itemconfigure(rssis[i], text=(format(nodes[i].rssi, '03d')))
+
+                            if diagVisible:
+                                for y in range(0,4):
+                                    if caps[i][y] != 0:
+                                        if nodes[i].captures[y]:
+                                            c.itemconfigure(caps[i][y], fill="white")
+                                        else:
+                                            c.itemconfigure(caps[i][y], fill=GRAY)
+                                    if rels[i][y] != 0:
+                                        if nodes[i].releases[y]:
+                                            c.itemconfigure(rels[i][y], fill="white")
+                                        else:
+                                            c.itemconfigure(rels[i][y], fill=GRAY)
+
+                            if i == 17:
+                                if nodes[i].turnouts[0]:
+                                    c.itemconfigure(wyeW, fill=GRAY)
+                                    c.itemconfigure(wyeE, fill="white")
+                                else:
+                                    c.itemconfigure(wyeE, fill=GRAY)
+                                    c.itemconfigure(wyeW, fill="white")
+                            elif i == 18:
+                                if nodes[i].turnouts[0]:
+                                    c.itemconfigure(serviceSwitch1m, fill=GRAY)
+                                    c.itemconfigure(serviceSwitch1s, fill="white")
+                                else:
+                                    c.itemconfigure(serviceSwitch1s, fill=GRAY)
+                                    c.itemconfigure(serviceSwitch1m, fill="white")
+                            elif i == 19:
+                                if nodes[i].turnouts[1]:
+                                    c.itemconfigure(serviceSwitch2m, fill=GRAY)
+                                    c.itemconfigure(serviceSwitch2s, fill="white")
+                                else:
+                                    c.itemconfigure(serviceSwitch2s, fill=GRAY)
+                                    c.itemconfigure(serviceSwitch2m, fill="white")
+
         time.sleep(0.5)
+
+def heartbeat():
+    global lastMsg
+    global nodes
+
+    for i in range(0,256):
+        sendCmd(i, 1)
+        time.sleep(0.3)
+
+    while True:
+        time.sleep(5)
+        for i in range(0, 256):
+            if lastMsg[i] != 0:
+                if (lastMsg[i] + HOUR) < time.time():
+                    sendCmd(i, 1)
+                    time.sleep(0.2)
+                
+                if (lastMsg[i] + HOUR + 250) < time.time():
+                    lastMsg[i] = 0
+                    nodes[i].heads = ['O' for x in range(0,4)]
+                    nodes[i].captures = [False for x in range(0,4)]
+                    nodes[i].releases = [False for x in range(0,4)]
+                    nodes[i].turnouts = [False for x in range(0,4)]
+                    nodes[i].ledError = [False for x in range(0,16)]
 
 #Button(gui, text="QUIT", command=quit_gui).place(x=0, y=0)
 
 #threads
 dataThread = threading.Thread(target=get_data)
-dataThread.daemon = True
+dataThread.daemon = True 
 
 guiThread = threading.Thread(target=update_gui)
 guiThread.daemon = True
-guiThread.start()
+
+heartbeatThread = threading.Thread(target=heartbeat)
+heartbeatThread.daemon = True
 
 #main function calls
 loadHeads()
 loadDiags()
 drawMap()
 drawButtons()
+
+sW = screenW/DEVW
+sH = screenH/DEVH
+
+scale = min(sW, sH)
+
+c.scale('all', 0, 0, scale, scale)
+
+if(len(sys.argv) > 1):
+    value_inside.set(sys.argv[1])
+    setSerial()
+else:
+    #list all available ports
+    available_ports = list(serial.tools.list_ports.comports())
+    serial_ports = []
+    for port in available_ports:
+        serial_ports.append(port.device)
+
+    if len(serial_ports) == 0:
+        print("NO SERIAL DEVICES")
+        sys.exit("NO SERIAL DEVICES")
+    
+    # Set the default value of the variable 
+    value_inside.set("Select an Option") 
+
+    optionmenu = OptionMenu(serialSelect, value_inside, *serial_ports)
+    optionmenu.pack()
+
+    submit_button = Button(serialSelect, text='Submit', command=setSerial) 
+    submit_button.pack()
+    
+    serialSelect.attributes('-topmost', True)
+
+guiThread.start()
 
 gui.mainloop()

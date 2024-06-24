@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
-#include "pico/multicore.h"
 #include "pico/sync.h"
 #include "hardware/i2c.h"
 #include "hardware/spi.h"
@@ -24,7 +23,7 @@
 #include <tusb.h>
 
 #define VERSION 2
-#define REVISION 0
+#define REVISION 2
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -46,7 +45,8 @@
 
 #define BLINK_INTERVAL 500 //ms
 
-#define ALPHA (2/11)
+#define NUMSAMPLES (4)
+#define ALPHA (2/(1+NUMSAMPLES))
 
 //Battery voltage conversion factor
 #define CONVERSION_FACTOR (12.0/1284) //((3.3f / 0xFFF) * 10)
@@ -137,6 +137,9 @@ struct TOCTC
     uint8_t turnouts;
     int8_t avgRSSI;
     uint8_t voltage;
+    uint16_t ledError;
+    const uint8_t version = VERSION;
+    const uint8_t revision = REVISION;
 };
 TOCTC toCTC;
 
@@ -191,6 +194,7 @@ uint8_t blinkCounter = 0; //Counter for blinking the heads
 bool batteryLow = false; //low battery flag
 bool blinkOff = false; //current head state for blinking, used to prevent reset leaving the head off
 float bat = 0.0; //measured battery voltage
+float lastBat = 0.0;
 
 volatile bool alarmSet = false; //flag so only one stat light timer can be set at a time, prevents overloading the hardware timers
 
@@ -201,8 +205,6 @@ absolute_time_t statBlink; //Absolute time of last change of stat light
 bool changed = false;
 bool ctcPresent = false;
 
-critical_section_t i2cCS; //Mutex for i2c bus, only used for multicore 
-
 char cin = 0;
 char inBuf[255];
 uint8_t bufIdx = 0;
@@ -210,6 +212,8 @@ uint8_t bufIdx = 0;
 uint8_t ctcTries = 0;
 
 uint8_t awakeIndicator = 255;
+
+bool monLEDs = false;
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -320,6 +324,13 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
     }
 }
 
+/**
+ * Sends data to the CTC (Central Traffic Control) system.
+ *
+ * @param data The data to be sent to the CTC system.
+ *
+ * @throws None
+ */
 void sendToCTC(TOCTC data)
 {
     DPRINTF("Sending To CTC\n");
@@ -341,6 +352,13 @@ void sendToCTC(TOCTC data)
     }
 }
 
+/**
+ * Sends data from the CTC (Central Traffic Control) system to a specified destination.
+ *
+ * @param data The data to be sent, containing the destination and command.
+ *
+ * @throws None
+ */
 void sendFromCTC(FROMCTC data)
 {
     DPRINTF("Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
@@ -403,180 +421,14 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
     }
 }
 
-#ifdef MULTICORE
-void core1loop()
-{
-    while(1)
-    {
-        retryTimeout = get_absolute_time();
-        do
-        {
-            if(radio.available())
-            {
-                to = 0;
-                from = 0;
-                len = sizeof(transmission);
-                bool localRelease = false;
-
-                radio.recv((uint8_t *)& transmission, &len, &from, &to);
-
-                if(len == sizeof(transmission))
-                {
-                    bool headFound = false;
-                    uint8_t headNum = 0;
-                    for(int i = 0; i < MAXHEADS; i++)
-                    {
-                        if(from == heads[i].destAddr)
-                        {
-                            headNum = i;
-                            headFound = true;
-                        }
-                    }
-
-                    if(transmission.destination == addr && !transmission.isCode && headFound)
-                    {
-                        switch(transmission.aspect)
-                        {
-                            case 'G':
-                            case 'g':
-                                if(!transmission.isACK)
-                                {
-                                    transmit(from, 'G', true, false);
-                                }
-                                
-                                for(int i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
-                                    {
-                                        localRelease = inputs[i].active;
-                                        inputs[i].lastActive = true;
-                                        break;
-                                    }
-                                }
-
-                                if(heads[headNum].head->getColor() == amber && !localRelease)
-                                {
-                                    if(!heads[headNum].delayClearStarted)
-                                    {
-                                        add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[headNum], true);
-                                        heads[headNum].delayClearStarted = true;
-                                    }
-                                }
-                                else
-                                {
-                                    heads[headNum].head->setHead(green);
-                                    changed = true;
-                                }
-
-                                retries = 0;
-                                dimTimeout = get_absolute_time();
-                                break;
-
-                            case 'A':
-                            case 'a':
-                                if(!transmission.isACK)
-                                {
-                                    transmit(from, 'R', true, false);
-                                }
-
-                                if(heads[headNum].head->getColor() == green || heads[headNum].head->getColor() == amber || heads[headNum].head->getColor() == off)
-                                {                                   
-                                    heads[headNum].head->setHead(amber);
-
-                                    changed = true;
-
-                                    for(int i = 0; i < MAXINPUTS; i++)
-                                    {
-                                        if(inputs[i].headNum == headNum && inputs[i].mode == capture)
-                                        {
-                                            inputs[i].lastActive = true;
-                                            break;
-                                        }
-                                    }
-
-                                    retries = 0;
-                                    dimTimeout = get_absolute_time();
-                                    heads[0].releaseTimer = get_absolute_time();
-                                }
-                                break;
-                            
-                            case 'R':
-                            case 'r':
-                                if(!transmission.isACK)
-                                {
-                                    transmit(from, 'A', true, false);
-                                }
-                                
-                                heads[headNum].head->setHead(red);
-
-                                changed = true;
-
-                                for(int i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == release)
-                                    {
-                                        inputs[i].lastActive = true;
-                                    }
-
-                                    if(inputs[i].headNum == headNum && inputs[i].mode == capture)
-                                    {
-                                        inputs[i].lastActive = true;
-                                    }
-                                }
-
-                                retries = 0;
-                                dimTimeout = get_absolute_time();
-
-                                heads[0].releaseTimer = get_absolute_time();
-                                break;
-                        }
-                    }
-
-                    if(transmission.aspect == 'A' || transmission.aspect == 'a' || transmission.aspect == 'R' || transmission.aspect == 'r')
-                    {
-                        if(!headOn)
-                        {
-                            output1.wake();
-
-                            for(int i = 0; i < MAXHEADS; i++)
-                            {
-                                if(heads[i].head)
-                                {
-                                    heads[i].head->setHeadBrightness(255);
-
-                                    if(heads[i].head->getColor() == off)
-                                    {
-                                        heads[i].head->setHead(green);
-                                    }
-                                }
-                            }
-
-                            headOn = true;
-                            headDim = false;
-                        }
-                        else if(headDim)
-                        {
-                            for(int i = 0; i < MAXHEADS; i++)
-                            {
-                                if(heads[i].head)
-                                {
-                                    heads[i].head->setHeadBrightness(255);
-                                }
-                            }
-
-                            headDim = false;
-                        }
-                    }
-                }
-
-                DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
-                DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
-            }
-        } while ((retries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
-    }
-}
-#endif
-
+/**
+ * Writes the given JSON data to the flash memory if it is different from the
+ * existing JSON data.
+ *
+ * @param in pointer to the JSON data to be written
+ *
+ * @throws None
+ */
 void writeFlashJSON(uint8_t* in)
 {
     flashJson = (uint8_t*) FLASHJSONADDR;
@@ -593,7 +445,7 @@ void writeFlashJSON(uint8_t* in)
     }
 }
 
-//config JSON file parser
+
 void parseConfig()
 {
     FIL file; //config file 
@@ -672,7 +524,7 @@ void parseConfig()
 
     maxRetries = cfg["retries"] | 10; //Number of retries, default to 10 if not specified 
 
-    retryTime = cfg["retryTime"] | 150; //Time to wait for a response, default to 150ms if not specified 
+    retryTime = cfg["retryTime"] | 100; //Time to wait for a response, default to 100ms if not specified 
 
     dimTime = cfg["dimTime"] | 15; //Time to dim the head(s), default to 15min if not specified
 
@@ -682,6 +534,8 @@ void parseConfig()
     lowBatReset     = cfg["batteryReset"] | 12.0; //Voltage to reset low battery warning, 12v if not specified
 
     ctcPresent = cfg["ctcPresent"];
+
+    monLEDs = cfg["monitorLEDs"]|false;
 
     //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
@@ -817,7 +671,14 @@ void parseConfig()
         }
     }
 
-    awakeIndicator = cfg["AwakePin"];
+    if(!cfg["AwakePin"].isNull())
+    {
+        awakeIndicator = cfg["AwakePin"];
+    }
+    else
+    {
+        awakeIndicator = 255;
+    }
 
     JsonObject pins[] = {cfg["pin1"].as<JsonObject>(), cfg["pin2"].as<JsonObject>(), cfg["pin3"].as<JsonObject>(), cfg["pin4"].as<JsonObject>(),
                             cfg["pin5"].as<JsonObject>(), cfg["pin6"].as<JsonObject>(), cfg["pin7"].as<JsonObject>(), cfg["pin8"].as<JsonObject>()};
@@ -858,6 +719,11 @@ void parseConfig()
     }
 }
 
+/**
+ * Reads the raw ADC value from the battery and converts it to a battery voltage.
+ *
+ * @return The battery voltage as a floating-point number.
+ */
 float checkBattery()
 {
     uint16_t rawADC;
@@ -867,6 +733,102 @@ float checkBattery()
     bat = (float)rawADC * CONVERSION_FACTOR;
 
     return bat;
+}
+
+/**
+ * Processes the command received from the CTC.
+ *
+ * @param f the FROMCTC structure containing the command to be processed
+ *
+ * @throws None
+ */
+void processFromCTC(FROMCTC f)
+{
+    switch(f.cmd)
+    {
+        case 0:
+            changed = false;
+            ctcTries = 0;
+            break;
+        case 1:
+            changed = true;
+            ctcTries = 0;
+            break;
+        case 2:
+            if(!headOn)
+            {
+                output1.wake();
+
+                for(int i = 0; i < MAXHEADS; i++)
+                {
+                    if(heads[i].head)
+                    {
+                        heads[i].head->setHeadBrightness(255);
+
+                        if(heads[i].head->getColor() == off)
+                        {
+                            heads[i].head->setHead(green);
+                        }
+                    }
+                }
+
+                if(awakeIndicator < 16)
+                {
+                    output1.setLEDbrightness(awakeIndicator, 255);
+                }
+
+                changed = true;
+                headOn = true;
+                headDim = false;
+            }
+            else if(headDim)
+            {
+                for(int i = 0; i < MAXHEADS; i++)
+                {
+                    if(heads[i].head)
+                    {
+                        heads[i].head->setHeadBrightness(255);
+                    }
+                }
+
+                headDim = false;
+            }
+
+            dimTimeout = get_absolute_time();
+            break;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            if(f.dest == addr)
+            {
+                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                {
+                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].headNum == (f.cmd - 3))
+                    {
+                        inputs[i].active = true;
+                        inputs[i].lastActive = false;
+                    }
+                }
+            }
+            break;
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+            if(f.dest == addr)
+            {
+                for(uint8_t i = 0; i < MAXINPUTS; i++)
+                {
+                    if(inputs[i].mode == release && inputs[i].headNum == (f.cmd - 7))
+                    {
+                        inputs[i].active = true;
+                        inputs[i].lastActive = false;
+                    }
+                }
+            }
+            break;
+    }
 }
 
 int main()
@@ -914,6 +876,8 @@ int main()
     //Delay to allow serial monitor to connect
     sleep_ms(5000);
 
+    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
+
     //print the current version and revision
     DPRINTF("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
 
@@ -937,12 +901,6 @@ int main()
             bat = checkBattery();
         }
     }
-
-    #ifdef MULTICORE
-    critical_section_init(&i2cCS);
-    input1.setCriticalSection(&i2cCS);
-    output1.setCriticalSection(&i2cCS);
-    #endif
 
     //Start the SPI and i2c buses 
     initi2c0();
@@ -1023,10 +981,6 @@ int main()
 
     //radio.printRegisters();
 
-    #ifdef MULTICORE
-    multicore_launch_core1(core1loop);
-    #endif
-
     /*for(int i = 0; i < MAXHEADS; i++)
     {
         if(heads[i].head)
@@ -1043,8 +997,6 @@ int main()
             heads[i].head->setHead(red);
         }
     }
-
-    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
     //Auto release if the watchdog did not reboot the controller. Otherwise assume most restrictive condition for safety 
     if(!watchdog_caused_reboot())
@@ -1066,12 +1018,6 @@ int main()
     while(1)
     {
         watchdog_update(); //kick the dog
-
-        #ifdef MULTICORE
-        //Hold checking IO during message transmision and response
-        absolute_time_t retryTimeoutd = get_absolute_time();
-        while ((retries > 0) && ((absolute_time_diff_us(retryTimeoutd, get_absolute_time()) / 1000) <= retryTime));
-        #else
 
         //Check to see if any head is currently transmitting
         uint8_t anyRetries = 0;
@@ -1331,8 +1277,10 @@ int main()
                     memcpy(&toCTC, &buf, sizeof(toCTC));
                     if(toCTC.captures <= 0xF && toCTC.releases <= 0xF && toCTC.turnouts <= 0xF)
                     {
-                        printf(":%0x%c%c%c%c%x%x%x%0x%0x\n", toCTC.sender, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
-                                    toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI), toCTC.voltage);
+                        printf(":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", toCTC.sender>>4, toCTC.sender&0xF, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
+                                    toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI)>>4, abs(toCTC.avgRSSI)&0xF, toCTC.voltage>>4, toCTC.voltage&0xF, 
+                                    (toCTC.ledError>>12)&0xF, (toCTC.ledError>>8)&0xF, (toCTC.ledError>>4)&0xF, toCTC.ledError & 0xF,
+                                    toCTC.version>>4, toCTC.version&0xF, toCTC.revision>>4, toCTC.revision&0xF);
                     }
                 }
                 else if(len == sizeof(fromCTC))
@@ -1342,86 +1290,7 @@ int main()
                     if(fromCTC.dest == addr)
                     {
                         DPRINTF("From CTC cmd: %d\n", fromCTC.cmd);
-                        switch(fromCTC.cmd)
-                        {
-                            case 0: //ACK
-                                changed = false;
-                                ctcTries = 0;
-                                break;
-                            case 1: //Ping
-                                changed = true;
-                                ctcTries = 0;
-                                break;
-                            case 2: //Wake
-                                if(!headOn)
-                                {
-                                    output1.wake();
-
-                                    for(int i = 0; i < MAXHEADS; i++)
-                                    {
-                                        if(heads[i].head)
-                                        {
-                                            heads[i].head->setHeadBrightness(255);
-
-                                            if(heads[i].head->getColor() == off)
-                                            {
-                                                heads[i].head->setHead(green);
-                                            }
-                                        }
-                                    }
-
-                                    if(awakeIndicator < 16)
-                                    {
-                                        output1.setLEDbrightness(awakeIndicator, 255);
-                                    }
-
-                                    changed = true;
-                                    ctcTries = 0;
-                                    headOn = true;
-                                    headDim = false;
-                                }
-                                else if(headDim)
-                                {
-                                    for(int i = 0; i < MAXHEADS; i++)
-                                    {
-                                        if(heads[i].head)
-                                        {
-                                            heads[i].head->setHeadBrightness(255);
-                                        }
-                                    }
-
-                                    headDim = false;
-                                }
-
-                                dimTimeout = get_absolute_time();
-                                break;
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                                for(uint8_t i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].headNum == (fromCTC.cmd - 3))
-                                    {
-                                        inputs[i].active = true;
-                                        inputs[i].lastActive = false;
-                                    }
-                                }
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                            case 10:
-                                for(uint8_t i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].mode == release && inputs[i].headNum == (fromCTC.cmd - 7))
-                                    {
-                                        inputs[i].active = true;
-                                        inputs[i].lastActive = false;
-                                    }
-                                }
-                                break;
-                        }
+                        processFromCTC(fromCTC);
                     }
                 }
 
@@ -1440,8 +1309,8 @@ int main()
                 }
             }
         } while ((anyRetries > 0) && ((absolute_time_diff_us(retryTimeout, get_absolute_time()) / 1000) <= retryTime));
-        #endif
 
+        //blink the status LED
         if((absolute_time_diff_us(statBlink, get_absolute_time()) / 1000) >= 1000)
         {
             statState = !statState;
@@ -1621,6 +1490,7 @@ int main()
                             {
                                 if(!heads[inputs[i].headNum2].destResponded[x])
                                 {
+                                    changed = false;
                                     transmit(heads[inputs[i].headNum2].destAddr[x], 'R', false, false);
                                     heads[inputs[i].headNum2].retries++;
                                     DPRINTF("Sending Capture %d to %d\n", inputs[i].headNum2, heads[inputs[i].headNum2].destAddr[x]);
@@ -1663,6 +1533,7 @@ int main()
                             {
                                 if(!heads[inputs[i].headNum].destResponded[x])
                                 {
+                                    changed = false;
                                     transmit(heads[inputs[i].headNum].destAddr[x], 'R', false, false);
                                     heads[inputs[i].headNum].retries++;
                                     DPRINTF("Sending Capture %d to %d\n", inputs[i].headNum, heads[inputs[i].headNum].destAddr[x]);
@@ -1708,6 +1579,7 @@ int main()
                     {
                         if(!heads[inputs[i].headNum].destResponded[x])
                         {
+                            changed = false;
                             transmit(heads[inputs[i].headNum].destAddr[x], 'G', false, false);
                             heads[inputs[i].headNum].retries++;
                             DPRINTF("Sending Release %d to %d\n", inputs[i].headNum, heads[inputs[i].headNum].destAddr[x]);
@@ -1761,22 +1633,25 @@ int main()
                 batteryLow = true;
                 DPRINTF("Battery: %2.2FV\n\n", bat);
 
-                while(bat < (lowBatThreshold - 1))
+                if(lowBatReset - 1 > 0)
                 {
-                    for(int i = 0; i < MAXHEADS; i++)
+                    while(bat < (lowBatThreshold - 1))
                     {
-                        if(heads[i].head)
+                        for(int i = 0; i < MAXHEADS; i++)
                         {
-                            heads[i].head->setHead(off);
+                            if(heads[i].head)
+                            {
+                                heads[i].head->setHead(off);
+                            }
                         }
+
+                        radio.setModeSleep();
+
+                        sleep_ms(60000);
+                        bat = checkBattery();
                     }
-
-                    radio.setModeSleep();
-
-                    sleep_ms(60000);
-                    bat = checkBattery();
+                    radio.setModeRX();
                 }
-                radio.setModeRX();
             }
             else if(bat > lowBatReset)
             {
@@ -1847,6 +1722,12 @@ int main()
                     }
                     blinkOff = false;
                 }
+            }
+
+            if(bat - lastBat > 0.25 || lastBat - bat > 0.25)
+            {
+                changed = true;
+                lastBat = bat;
             }
 
             blinkTimer = get_absolute_time();
@@ -2016,13 +1897,13 @@ int main()
 
             for(uint8_t i = 0; i < 8; i++)
             {
-                if(inputs[i].mode == capture && inputs[i].active)
+                if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].active)
                 {
                     toCTC.captures |= (1 << inputs[i].headNum);
                 }
                 else if(inputs[i].mode == release && inputs[i].active)
                 {
-                    toCTC.releases |= (1 << inputs[i].active);
+                    toCTC.releases |= (1 << inputs[i].headNum);
                 }
                 else if(inputs[i].mode == turnout && inputs[i].active)
                 {
@@ -2034,8 +1915,23 @@ int main()
             toCTC.avgRSSI = (int8_t) avgRSSI;
             toCTC.voltage = (uint8_t) (checkBattery() * 10);
 
-            printf(":%0x%c%c%c%c%x%x%x%0x%0x\n", toCTC.sender, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
-                        toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI), toCTC.voltage);
+            toCTC.ledError = 0;
+            output1.checkErrors();
+            if(monLEDs)
+            {
+                for(uint8_t i = 0; i < 16; i++)
+                {
+                    if(output1.getError(i) != 0)
+                    {
+                        toCTC.ledError |= (1 << i);
+                    }
+                }
+            }
+
+            printf(":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", toCTC.sender>>4, toCTC.sender&0xF, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
+                    toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI)>>4, abs(toCTC.avgRSSI)&0xF, toCTC.voltage>>4, toCTC.voltage&0xF, 
+                    (toCTC.ledError>>12)&0xF, (toCTC.ledError>>8)&0xF, (toCTC.ledError>>4)&0xF, toCTC.ledError & 0xF,
+                    toCTC.version>>4, toCTC.version&0xF, toCTC.revision>>4, toCTC.revision&0xF);
 
             sendToCTC(toCTC);
 
@@ -2051,9 +1947,9 @@ int main()
         }
 
         cin = getchar_timeout_us(0);
-        while(cin >= 0x00 && cin <= 0x7F && bufIdx < sizeof(inBuf))
+        while(((cin >= '0' && cin <= '9') || (cin >='A' && cin <= 'F') || (cin >='a' && cin <= 'f') || cin==':') && bufIdx < sizeof(inBuf))
         {
-            printf("cin = %c\n", cin);
+            printf("cin = %c (0x%x)\n", cin, cin);
             inBuf[bufIdx] = cin;
             
             if(bufIdx > 0)
@@ -2075,98 +1971,25 @@ int main()
                 fromCTC.cmd += ((inBuf[3] >= 'A') ? (inBuf[3] >= 'a') ? (inBuf[3] - 'a' + 10) : (inBuf[3] - 'A' + 10) : (inBuf[3] - '0')) << 4;
                 fromCTC.cmd += (inBuf[4] >= 'A') ? (inBuf[4] >= 'a') ? (inBuf[4] - 'a' + 10) : (inBuf[4] - 'A' + 10) : (inBuf[4] - '0');
 
+                DPRINTF("Dest: %d CMD: %d\n", fromCTC.dest, fromCTC.cmd);
+
                 bufIdx = 0;
 
                 if(fromCTC.dest == addr || fromCTC.dest == RFM95_BROADCAST_ADDR)
                 {
-                    switch(fromCTC.cmd)
+                    processFromCTC(fromCTC);
+
+                    if(fromCTC.dest == RFM95_BROADCAST_ADDR)
                     {
-                        case 0:
-                            changed = false;
-                            break;
-                        case 1:
-                            changed = true;
-                            break;
-                        case 2:
-                            if(!headOn)
-                            {
-                                output1.wake();
-
-                                for(int i = 0; i < MAXHEADS; i++)
-                                {
-                                    if(heads[i].head)
-                                    {
-                                        heads[i].head->setHeadBrightness(255);
-
-                                        if(heads[i].head->getColor() == off)
-                                        {
-                                            heads[i].head->setHead(green);
-                                        }
-                                    }
-                                }
-
-                                if(awakeIndicator < 16)
-                                {
-                                    output1.setLEDbrightness(awakeIndicator, 255);
-                                }
-
-                                changed = true;
-                                headOn = true;
-                                headDim = false;
-                            }
-                            else if(headDim)
-                            {
-                                for(int i = 0; i < MAXHEADS; i++)
-                                {
-                                    if(heads[i].head)
-                                    {
-                                        heads[i].head->setHeadBrightness(255);
-                                    }
-                                }
-
-                                headDim = false;
-                            }
-
-                            dimTimeout = get_absolute_time();
-                            break;
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            if(fromCTC.dest == addr)
-                            {
-                                for(uint8_t i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].headNum == (fromCTC.cmd - 3))
-                                    {
-                                        inputs[i].active = true;
-                                        inputs[i].lastActive = false;
-                                    }
-                                }
-                            }
-                            break;
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                            if(fromCTC.dest == addr)
-                            {
-                                for(uint8_t i = 0; i < MAXINPUTS; i++)
-                                {
-                                    if(inputs[i].mode == release && inputs[i].headNum == (fromCTC.cmd - 7))
-                                    {
-                                        inputs[i].active = true;
-                                        inputs[i].lastActive = false;
-                                    }
-                                }
-                            }
-                            break;
+                        sendFromCTC(fromCTC);
                     }
                 }
                 else
                 {
                     sendFromCTC(fromCTC);
                 }
+
+                ctcPresent = true;
             }
 
             cin = getchar_timeout_us(100);

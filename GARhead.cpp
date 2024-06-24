@@ -43,122 +43,40 @@ void GARHEAD::init(float gCurrent, float aCurrent, float rCurrent, float lCurren
 bool GARHEAD::setHead(uint8_t color)
 {
     bool rtn = true;
-    /*uint8_t b = 0;
-
-    switch(color)
-    {
-        case green:
-            b = (uint8_t)(_brightness[green] * _headBrightness);
-
-            if(b < 8)
-            {
-                b = 8;
-            }
-
-            _driver->setLEDbrightness(_gPin, b);
-            _driver->setLEDbrightness(_aPin, 0);
-            _driver->setLEDbrightness(_rPin, 0);
-            _driver->setLEDbrightness(_lPin, 0);
-
-            _driver->checkErrors();
-            rtn = !_driver->getError(_gPin);
-
-            _color = green;
-
-            #ifdef GAR_DEBUG
-            printf("GAR HEAD: Setting Green Brightness: %d Actual: %d\n", _brightness[green], b);
-            #endif
-            break;
-
-        case amber:
-            b = (uint8_t)(_brightness[amber] * _headBrightness);
-
-            if(b < 8)
-            {
-                b = 8;
-            }
-
-            _driver->setLEDbrightness(_gPin, 0);
-            _driver->setLEDbrightness(_aPin, b);
-            _driver->setLEDbrightness(_rPin, 0);
-            _driver->setLEDbrightness(_lPin, 0);
-
-            _driver->checkErrors();
-            rtn = !_driver->getError(_aPin);
-
-            _color = amber;
-
-            #ifdef GAR_DEBUG
-            printf("GAR HEAD: Setting Amber Brightness: %d Actual: %d\n", _brightness[amber], b);
-            #endif
-            break;
-
-        case red:
-            b = (uint8_t)(_brightness[red] * _headBrightness);
-
-            if(b < 8)
-            {
-                b = 8;
-            }
-
-            _driver->setLEDbrightness(_gPin, 0);
-            _driver->setLEDbrightness(_aPin, 0);
-            _driver->setLEDbrightness(_rPin, b);
-            _driver->setLEDbrightness(_lPin, 0);
-
-            _driver->checkErrors();
-            rtn = !_driver->getError(_rPin);
-
-            _color = red;
-
-            #ifdef GAR_DEBUG
-            printf("GAR HEAD: Setting Red Brightness: %d Actual: %d\n", _brightness[red], b);
-            #endif
-            break;
-
-        case lunar:
-            b = (uint8_t)(_brightness[lunar] * _headBrightness);
-
-            if(b < 8)
-            {
-                b = 8;
-            }
-
-            _driver->setLEDbrightness(_gPin, 0);
-            _driver->setLEDbrightness(_aPin, 0);
-            _driver->setLEDbrightness(_rPin, 0);
-            _driver->setLEDbrightness(_lPin, b);
-
-            _driver->checkErrors();
-            rtn = !_driver->getError(_lPin);
-
-            _color = red;
-
-            #ifdef GAR_DEBUG
-            printf("GAR HEAD: Setting Red Brightness: %d Actual: %d\n", _brightness[red], b);
-            #endif
-            break;
-        
-        default:
-            _driver->setLEDbrightness(_gPin, 0);
-            _driver->setLEDbrightness(_aPin, 0);
-            _driver->setLEDbrightness(_rPin, 0);
-            _driver->setLEDbrightness(_lPin, 0);
-
-
-            _color = off;
-
-            #ifdef GAR_DEBUG
-            printf("GAR HEAD: off\n");
-            #endif
-            break;
-    }*/
+    uint8_t pin = 255;
+    uint8_t cb = (uint8_t)(_brightness[color] * _headBrightness);
 
     if(color <= off && color != _color)
     {
         fade(_color, color);
         _color = color;
         rtn = !getError();
+    }
+    else if(color <= off)
+    {
+        switch (color)
+        {
+            case green:
+                pin = _gPin;
+                break;
+
+            case amber:
+                pin = _aPin;
+                break;
+
+            case red:
+                pin = _rPin;
+                break;
+
+            case lunar:
+                pin = _lPin;
+                break;
+
+            default:
+                pin = 255;
+                break;
+        }
+        _driver->setLEDbrightness(pin, cb);
     }
 
     return rtn;

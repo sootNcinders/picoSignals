@@ -33,11 +33,11 @@
     },
     "pin1": {
         "mode": "release",
-        "head1": 1
+        "head": 1
     },
     "pin2": {
         "mode": "capture",
-        "head": 1
+        "head1": 1
     },
     "pin3": {
         "mode": "turnout"

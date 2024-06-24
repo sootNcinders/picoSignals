@@ -1,14 +1,14 @@
 {
-    "address": 18,
-    "dimTime": 60,
-    "sleepTime": 120,
+    "address": 99,
+    "dimTime": 3,
+    "sleepTime": 5,
+    "retryTime": 200,
     "lowBattery": 1,
     "batteryReset": 1,
-    "ctcPresent": true,
     "head1": {
         "destination": [
-            17,
-            21,
+            98,
+            0,
             0,
             0,
             0,
@@ -23,13 +23,18 @@
         "amber": {
             "pin": 2,
             "current": 30,
-            "brightness": 170
+            "brightness": 255
         },
         "red": {
             "pin": 3,
             "current": 30,
             "brightness": 255
-        }
+        },
+        "release": 1
+    },
+    "pin1": {
+        "mode": "release",
+        "head": 1
     },
     "pin2": {
         "mode": "capture",
@@ -38,8 +43,7 @@
     "pin3": {
         "mode": "turnout"
     },
-    "pin8": {
-        "mode": "release",
-        "head": 1
+    "pin4": {
+        "mode": "turnout"
     }
 }

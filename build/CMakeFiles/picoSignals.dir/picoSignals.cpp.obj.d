@@ -86,7 +86,6 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \

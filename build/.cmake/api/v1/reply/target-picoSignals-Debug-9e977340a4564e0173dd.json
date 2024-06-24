@@ -62,7 +62,7 @@
 			{
 				"command" : 6,
 				"file" : 0,
-				"line" : 44,
+				"line" : 43,
 				"parent" : 0
 			},
 			{
@@ -206,10 +206,6 @@
 				{
 					"backtrace" : 2,
 					"define" : "LIB_PICO_MEM_OPS_PICO=1"
-				},
-				{
-					"backtrace" : 2,
-					"define" : "LIB_PICO_MULTICORE=1"
 				},
 				{
 					"backtrace" : 2,
@@ -505,10 +501,6 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include"
-				},
-				{
-					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -657,10 +649,6 @@
 				},
 				{
 					"backtrace" : 2,
-					"define" : "LIB_PICO_MULTICORE=1"
-				},
-				{
-					"backtrace" : 2,
 					"define" : "LIB_PICO_PLATFORM=1"
 				},
 				{
@@ -953,10 +941,6 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include"
-				},
-				{
-					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -1082,8 +1066,7 @@
 				91,
 				92,
 				93,
-				94,
-				95
+				94
 			]
 		},
 		{
@@ -1170,10 +1153,6 @@
 				{
 					"backtrace" : 2,
 					"define" : "LIB_PICO_MEM_OPS_PICO=1"
-				},
-				{
-					"backtrace" : 2,
-					"define" : "LIB_PICO_MULTICORE=1"
 				},
 				{
 					"backtrace" : 2,
@@ -1469,10 +1448,6 @@
 				{
 					"backtrace" : 2,
 					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include"
-				},
-				{
-					"backtrace" : 2,
-					"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include"
 				},
 				{
 					"backtrace" : 2,
@@ -2471,8 +2446,7 @@
 				91,
 				92,
 				93,
-				94,
-				95
+				94
 			]
 		},
 		{
@@ -2955,12 +2929,6 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 1,
 			"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 1,
-			"path" : "/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c",
 			"sourceGroupIndex" : 0
 		},
 		{

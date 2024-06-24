@@ -2,7 +2,6 @@
     "address": 17,
     "dimTime": 60,
     "sleepTime": 120,
-    "retryTime": 200,
     "lowBattery": 1,
     "batteryReset": 1,
     "ctcPresent": true,
