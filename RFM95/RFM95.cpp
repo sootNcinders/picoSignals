@@ -1223,3 +1223,10 @@ void RFM95::clearRX()
         gpio_put(RXled, 1);
     }
 }
+
+uint8_t RFM95::getMode()
+{
+    uint8_t buf[1];
+    readRegister(0x01, buf);
+    return buf[0];
+}

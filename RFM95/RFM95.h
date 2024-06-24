@@ -394,6 +394,10 @@ class RFM95
 
         void clearRX();
 
+        /// @brief Gets the operation mode
+        /// @return the contents of the operation mode register
+        uint8_t getMode();
+
         volatile bool rxAlarmSet;
         volatile bool txAlarmSet;
     

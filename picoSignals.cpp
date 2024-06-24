@@ -215,6 +215,9 @@ uint8_t awakeIndicator = 255;
 
 bool monLEDs = false;
 
+absolute_time_t radioCheck;
+uint8_t radioFaults = 0;
+
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
 {
@@ -524,7 +527,7 @@ void parseConfig()
 
     maxRetries = cfg["retries"] | 10; //Number of retries, default to 10 if not specified 
 
-    retryTime = cfg["retryTime"] | 100; //Time to wait for a response, default to 100ms if not specified 
+    retryTime = cfg["retryTime"] | 150; //Time to wait for a response, default to 150ms if not specified 
 
     dimTime = cfg["dimTime"] | 15; //Time to dim the head(s), default to 15min if not specified
 
@@ -831,12 +834,45 @@ void processFromCTC(FROMCTC f)
     }
 }
 
+void initRadio(uint8_t addr)
+{
+    //Set up the RFM95 radio
+    //12500bps datarate
+    radio.init();
+    radio.setLEDS(RXLED, TXLED);
+    radio.setAddress(addr);
+    //Preamble length: 8
+    radio.setPreambleLength(8);
+    //Center Frequency
+    radio.setFrequency(915.0);
+    //Set TX power to Max
+    radio.setTxPower(20);
+    //Set Bandwidth 500kHz
+    radio.setSignalBandwidth(500000);
+    //Set Coding Rate 4/5
+    radio.setCodingRate(5);
+    //Spreading Factor of 10 gives 3906bps - ~130ms round trip - Too slow?
+    //Spreading Factor of 9 gives  7031bps - ~70ms round trip
+    //Spreading Factor of 8 gives 12500bps - ~45ms round trip
+    //Spreading Factor of 7 gives 21875bps - ~24ms round trip ****Insufficient Range****
+    radio.setSpreadingFactor(9);
+    //Accept all packets
+    radio.setPromiscuous(true);
+
+    radio.setModeRX();
+
+    radioFaults = 0;
+    radioCheck = get_absolute_time();
+}
+
 int main()
 {
     set_sys_clock_48mhz();
 
     //Initialize for printf
     stdio_init_all();
+
+    watchdog_enable(30000, true); // Set watchdog up, will trip after 30 seconds
 
     //Initialize the input interrupt 
     gpio_init(SWITCHINT);
@@ -875,8 +911,6 @@ int main()
 
     //Delay to allow serial monitor to connect
     sleep_ms(5000);
-
-    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
     //print the current version and revision
     DPRINTF("PICO SIGNAL V%dR%d\n", VERSION, REVISION);
@@ -954,30 +988,7 @@ int main()
         output1.setLEDbrightness(awakeIndicator, 255);
     }
 
-    //Set up the RFM95 radio
-    //12500bps datarate
-    radio.init();
-    radio.setLEDS(RXLED, TXLED);
-    radio.setAddress(addr);
-    //Preamble length: 8
-    radio.setPreambleLength(8);
-    //Center Frequency
-    radio.setFrequency(915.0);
-    //Set TX power to Max
-    radio.setTxPower(20);
-    //Set Bandwidth 500kHz
-    radio.setSignalBandwidth(500000);
-    //Set Coding Rate 4/5
-    radio.setCodingRate(5);
-    //Spreading Factor of 10 gives 3906bps - ~130ms round trip - Too slow?
-    //Spreading Factor of 9 gives  7031bps - ~70ms round trip
-    //Spreading Factor of 8 gives 12500bps - ~45ms round trip
-    //Spreading Factor of 7 gives 21875bps - ~24ms round trip ****Insufficient Range****
-    radio.setSpreadingFactor(9);
-    //Accept all packets
-    radio.setPromiscuous(true);
-
-    radio.setModeRX();
+    initRadio(addr);
 
     //radio.printRegisters();
 
@@ -1014,6 +1025,9 @@ int main()
 
     gpio_put(GOODLED,  LOW);
     gpio_put(ERRORLED, HIGH);
+
+    watchdog_update();
+    watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
     while(1)
     {
@@ -1633,7 +1647,7 @@ int main()
                 batteryLow = true;
                 DPRINTF("Battery: %2.2FV\n\n", bat);
 
-                if(lowBatReset - 1 > 0)
+                if(lowBatThreshold > 1 && bat < (lowBatThreshold - 1))
                 {
                     while(bat < (lowBatThreshold - 1))
                     {
@@ -1645,11 +1659,13 @@ int main()
                             }
                         }
 
+                        output1.sleep();
                         radio.setModeSleep();
 
                         sleep_ms(60000);
                         bat = checkBattery();
                     }
+                    output1.wake();
                     radio.setModeRX();
                 }
             }
@@ -1995,6 +2011,23 @@ int main()
             cin = getchar_timeout_us(100);
         }
 
+        if(absolute_time_diff_us(radioCheck, get_absolute_time()) > 1000000)
+        {
+            if(radio.getMode() != RFM95_MODE_RXCONTINUOUS)
+            {
+                radioFaults++;
+                DPRINTF("Radio fault %d\n", radioFaults);
+            }
+
+            if(radioFaults > 10)
+            {
+                initRadio(addr);
+                DPRINTF("Radio reset\n");
+            }
+
+            radioCheck = get_absolute_time();
+        }
+
         if(absolute_time_diff_us(retryTimeout, get_absolute_time()) < 0)
         {
             retryTimeout = get_absolute_time();
@@ -2010,6 +2043,10 @@ int main()
         if(absolute_time_diff_us(ctcTimer, get_absolute_time()) < 0)
         {
             ctcTimer = get_absolute_time();
+        }
+        if(absolute_time_diff_us(radioCheck, get_absolute_time()) < 0)
+        {
+            radioCheck = get_absolute_time();
         }
     }//end loop
 }
