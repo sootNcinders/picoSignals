@@ -13,6 +13,7 @@ DEVH = 1080
 DEVW = 1920
 
 HOUR = 60*60 
+SIXMIN = 6*60
 
 scale = 1
 
@@ -934,9 +935,15 @@ def heartbeat():
         time.sleep(5)
         for i in range(0, 256):
             if lastMsg[i] != 0:
-                if (lastMsg[i] + HOUR) < time.time():
-                    sendCmd(i, 1)
-                    time.sleep(0.2)
+
+                if 'G' in nodes[i].heads or 'A' in nodes[i].heads or 'R' in nodes[i].heads:
+                    if (lastMsg[i] + SIXMIN) < time.time():
+                        sendCmd(i, 1)
+                        time.sleep(0.2)
+                else:
+                    if (lastMsg[i] + HOUR) < time.time():
+                        sendCmd(i, 1)
+                        time.sleep(0.2)
                 
                 if (lastMsg[i] + HOUR + 250) < time.time():
                     lastMsg[i] = 0

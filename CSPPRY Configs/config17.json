@@ -62,7 +62,7 @@
         "mode": "release",
         "head": 2
     },
-    "pin2": {
+    "pin8": {
         "mode": "capture",
         "head1": 1,
         "head2": 2,

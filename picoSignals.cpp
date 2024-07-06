@@ -58,6 +58,8 @@
 #define FLASHJSONADDR ((XIP_BASE + PICO_FLASH_SIZE_BYTES) - FILESIZE)
 uint8_t* flashJson = (uint8_t*) FLASHJSONADDR;
 
+#define BLINKTIME 20
+
 //input type
 typedef enum
 {
@@ -98,6 +100,7 @@ typedef struct
 
 
 //Packet Structure
+//On Air Time - SF9: 31ms
 struct RCL
 {
   uint8_t destination; //Unsigned 8 bit integer destination address, 0-255
@@ -125,6 +128,7 @@ O - Head 4
 0 - Turnouts, 0-F
 00 - absolute value of average RSSI to primary partner, 0-FF
 00 - Voltage x10, 0-FF */
+//On Air Time - SF9: 41ms
 struct TOCTC
 {
     uint8_t sender;
@@ -138,8 +142,8 @@ struct TOCTC
     int8_t avgRSSI;
     uint8_t voltage;
     uint16_t ledError;
-    const uint8_t version = VERSION;
-    const uint8_t revision = REVISION;
+    uint8_t version = VERSION;
+    uint8_t revision = REVISION;
 };
 TOCTC toCTC;
 
@@ -235,6 +239,15 @@ int64_t delayedClear(alarm_id_t id, void *user_data)
     return 0;
 }
 
+int64_t blinkOn(alarm_id_t id, void *user_data)
+{
+    if(user_data)
+    {
+        ((headInfo*)user_data)->head->setHeadBrightness(255);
+    }
+
+    return 0;
+}
 //Interrupt Service Routine for all GPIO pins, handles interrupt signals from the radio transciever
 void gpio_isr(uint gpio, uint32_t event_mask)
 {
@@ -834,13 +847,13 @@ void processFromCTC(FROMCTC f)
     }
 }
 
-void initRadio(uint8_t addr)
+void initRadio(uint8_t a)
 {
     //Set up the RFM95 radio
     //12500bps datarate
     radio.init();
     radio.setLEDS(RXLED, TXLED);
-    radio.setAddress(addr);
+    radio.setAddress(a);
     //Preamble length: 8
     radio.setPreambleLength(8);
     //Center Frequency
@@ -851,7 +864,9 @@ void initRadio(uint8_t addr)
     radio.setSignalBandwidth(500000);
     //Set Coding Rate 4/5
     radio.setCodingRate(5);
-    //Spreading Factor of 10 gives 3906bps - ~130ms round trip - Too slow?
+    //Spreading Factor of 12 gives 1172bps - ~425ms round trip - Too Slow
+    //Spreading Factor of 11 gives 2148bps - ~260ms round trip - Untested, Maybe too slow
+    //Spreading Factor of 10 gives 3906bps - ~130ms round trip - Untested
     //Spreading Factor of 9 gives  7031bps - ~70ms round trip
     //Spreading Factor of 8 gives 12500bps - ~45ms round trip
     //Spreading Factor of 7 gives 21875bps - ~24ms round trip ****Insufficient Range****
@@ -954,6 +969,7 @@ int main()
 
     //Read config file from the micro SD card 
     parseConfig();
+    watchdog_update();
 
     DPRINTF("\nNODE: %d\n", addr);
 
@@ -1284,7 +1300,7 @@ int main()
                     DPRINTF("REC: Len: %d To: %d From: %d RSSI:%d\n", len, to, from, radio.lastSNR());
                     DPRINTF("Dest: %d Aspect: %c ACK: %d CODE: %d\n\n", transmission.destination, transmission.aspect, transmission.isACK, transmission.isCode);
 
-                    printf(";%0x%0x%c%0x\n", from, transmission.destination, transmission.aspect, abs(radio.lastSNR()));
+                    printf(";%x%x%x%x%c%x%x\n", from>>4, from&0xF, transmission.destination>>4, transmission.destination&0xF, transmission.aspect, abs(radio.lastSNR())>>4, abs(radio.lastSNR())&0xF);
                 }
                 else if(len == sizeof(toCTC))
                 {
@@ -1318,7 +1334,7 @@ int main()
                     }
                     else
                     {
-                        avgRSSI = (radio.lastSNR() * ALPHA) + (avgRSSI * (1-ALPHA));
+                        avgRSSI = (radio.lastSNR() * (float)ALPHA) + (avgRSSI * (1-(float)ALPHA));
                     }
                 }
             }
@@ -1408,8 +1424,8 @@ int main()
             //Latch capture or release signals
             if(inputs[i].mode == capture || inputs[i].mode == release || inputs[i].mode == turnoutCapture)
             {
-                //raw input must stay inactive for 2500ms before the clear is latched
-                if((/*inputs[i].active ||*/ inputs[i].lastActive) && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (/*50*/2500*1000)))
+                //raw input must stay inactive for 500ms before the clear is latched
+                if((/*inputs[i].active ||*/ inputs[i].lastActive) && !inputs[i].raw && (absolute_time_diff_us(inputs[i].lastChange, get_absolute_time()) > (/*50*/500*1000)))
                 {
                     inputs[i].active = inputs[i].lastActive = false;
                 }
@@ -1504,6 +1520,8 @@ int main()
                             {
                                 if(!heads[inputs[i].headNum2].destResponded[x])
                                 {
+                                    heads[inputs[i].headNum2].head->setHeadBrightness(0);
+                                    add_alarm_in_ms(BLINKTIME, blinkOn, &heads[inputs[i].headNum2], true);
                                     changed = false;
                                     transmit(heads[inputs[i].headNum2].destAddr[x], 'R', false, false);
                                     heads[inputs[i].headNum2].retries++;
@@ -1547,6 +1565,8 @@ int main()
                             {
                                 if(!heads[inputs[i].headNum].destResponded[x])
                                 {
+                                    heads[inputs[i].headNum].head->setHeadBrightness(0);
+                                    add_alarm_in_ms(BLINKTIME, blinkOn, &heads[inputs[i].headNum], true);
                                     changed = false;
                                     transmit(heads[inputs[i].headNum].destAddr[x], 'R', false, false);
                                     heads[inputs[i].headNum].retries++;
@@ -1593,6 +1613,8 @@ int main()
                     {
                         if(!heads[inputs[i].headNum].destResponded[x])
                         {
+                            heads[inputs[i].headNum].head->setHeadBrightness(0);
+                            add_alarm_in_ms(BLINKTIME, blinkOn, &heads[inputs[i].headNum], true);
                             changed = false;
                             transmit(heads[inputs[i].headNum].destAddr[x], 'G', false, false);
                             heads[inputs[i].headNum].retries++;
@@ -1634,6 +1656,7 @@ int main()
 
                         heads[i].head->setHead(green);
                         heads[i].releaseTimer = get_absolute_time();
+                        changed = true;
                     }
                 }
             }
@@ -1793,7 +1816,7 @@ int main()
             }
         }
 
-        if(ctcPresent && changed && (absolute_time_diff_us(ctcTimer, get_absolute_time()) > 1000000))
+        if(ctcPresent && changed && (absolute_time_diff_us(ctcTimer, get_absolute_time()) > 500000))
         {
             toCTC.sender = addr;
             
@@ -1913,15 +1936,15 @@ int main()
 
             for(uint8_t i = 0; i < 8; i++)
             {
-                if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].active)
+                if((inputs[i].mode == capture || inputs[i].mode == turnoutCapture) && inputs[i].active && inputs[i].lastActive)
                 {
                     toCTC.captures |= (1 << inputs[i].headNum);
                 }
-                else if(inputs[i].mode == release && inputs[i].active)
+                else if(inputs[i].mode == release && inputs[i].active && inputs[i].lastActive)
                 {
                     toCTC.releases |= (1 << inputs[i].headNum);
                 }
-                else if(inputs[i].mode == turnout && inputs[i].active)
+                else if(inputs[i].mode == turnout && inputs[i].active && inputs[i].lastActive)
                 {
                     toCTC.turnouts |= (1 << numTurnouts);
                     numTurnouts++;
@@ -1943,6 +1966,9 @@ int main()
                     }
                 }
             }
+
+            toCTC.version = VERSION;
+            toCTC.revision = REVISION;
 
             printf(":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", toCTC.sender>>4, toCTC.sender&0xF, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
                     toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI)>>4, abs(toCTC.avgRSSI)&0xF, toCTC.voltage>>4, toCTC.voltage&0xF, 
@@ -2011,16 +2037,22 @@ int main()
             cin = getchar_timeout_us(100);
         }
 
-        if(absolute_time_diff_us(radioCheck, get_absolute_time()) > 1000000)
+        if(absolute_time_diff_us(radioCheck, get_absolute_time()) > 1100000)
         {
-            if(radio.getMode() != RFM95_MODE_RXCONTINUOUS)
+            uint8_t mode = radio.getMode()&0x7; //Only Bits 0-2 represent mode
+            if(mode != RFM95_MODE_RXCONTINUOUS && mode != RFM95_MODE_RXSINGLE && mode != RFM95_MODE_TX && mode != RFM95_MODE_CAD)
             {
                 radioFaults++;
-                DPRINTF("Radio fault %d\n", radioFaults);
+                DPRINTF("Radio fault %d Mode: %d\n", radioFaults, mode);
+            }
+            else
+            {
+                radioFaults = 0;
             }
 
             if(radioFaults > 10)
             {
+                radio.setModeSleep();
                 initRadio(addr);
                 DPRINTF("Radio reset\n");
             }
