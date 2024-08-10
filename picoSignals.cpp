@@ -3,6 +3,7 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/sync.h"
+#include "pico/flash.h"
 #include "hardware/i2c.h"
 #include "hardware/spi.h"
 #include "hardware/adc.h"
@@ -23,7 +24,7 @@
 #include <tusb.h>
 
 #define VERSION 2
-#define REVISION 2
+#define REVISION 4
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -49,7 +50,8 @@
 #define ALPHA (2/(1+NUMSAMPLES))
 
 //Battery voltage conversion factor
-#define CONVERSION_FACTOR (12.0/1284) //((3.3f / 0xFFF) * 10)
+#define CONVERSION_FACTOR (11.2f/1269) //((3.3f / (1 << 12)) * 10) //(12.0/1284)
+#define DIODEDROP 0.8f
 
 #define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
 
@@ -59,6 +61,20 @@
 uint8_t* flashJson = (uint8_t*) FLASHJSONADDR;
 
 #define BLINKTIME 20
+
+#define ERRORPERIOD 250
+
+//Error codes
+#define DEADBATTERY 1
+#define SDMOUNT 2
+#define CONFIGREAD 3
+#define CONFIGBAD 4
+#define TRANSMISSIONFAIL 5
+
+//POST Codes
+#define BADINPUT 1
+#define BADOUTPUT 2
+#define BADRADIO 3
 
 //input type
 typedef enum
@@ -188,6 +204,7 @@ uint8_t sleepTime = 15;//time before putting the signal heads in minutes
 uint8_t clearDelayTime = 10;//time before letting amber go to green in seconds, used to help traffic flow alternate
 float   lowBatThreshold = 11.75; //Voltage to trigger low battery warning
 float   lowBatReset = 12.1; //Voltage to reset low battery warning
+float   lowBatShutdown = 10.0; //Voltage to shut down the system
 
 absolute_time_t retryTimeout; //abolute time of last packet send attempt
 absolute_time_t dimTimeout; //absolute time of last time the signal head changed colors
@@ -199,6 +216,9 @@ bool batteryLow = false; //low battery flag
 bool blinkOff = false; //current head state for blinking, used to prevent reset leaving the head off
 float bat = 0.0; //measured battery voltage
 float lastBat = 0.0;
+
+#define NUMBATSAMPLES 10
+float rawBat[NUMBATSAMPLES];
 
 volatile bool alarmSet = false; //flag so only one stat light timer can be set at a time, prevents overloading the hardware timers
 
@@ -217,10 +237,15 @@ uint8_t ctcTries = 0;
 
 uint8_t awakeIndicator = 255;
 
-bool monLEDs = false;
+bool monLEDsOpen = false;
+bool monLEDsShort = false;
 
 absolute_time_t radioCheck;
 uint8_t radioFaults = 0;
+
+uint8_t errorCode = 0;
+uint8_t errorCount = 0;
+bool errorLEDstate = HIGH;
 
 //alarm call back function to set the head to green from amber after the delay
 int64_t delayedClear(alarm_id_t id, void *user_data)
@@ -248,6 +273,45 @@ int64_t blinkOn(alarm_id_t id, void *user_data)
 
     return 0;
 }
+
+int64_t errorBlink(alarm_id_t id, void *user_data)
+{
+    if(errorCode != 0)
+    {
+        if(errorCount < errorCode)
+        {
+            errorLEDstate = !errorLEDstate;
+            gpio_put(ERRORLED, errorLEDstate);
+
+            if(errorLEDstate == LOW)
+            {
+                errorCount++;
+            }
+        }
+        else
+        {
+            gpio_put(ERRORLED, HIGH);
+            errorLEDstate = HIGH;
+            errorCount++;
+
+            if(errorCount >= errorCode + 6)
+            {
+                errorCount = 0;
+            }
+        }
+
+        add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+    }
+    else
+    {
+        gpio_put(GOODLED, LOW);
+        gpio_put(ERRORLED, HIGH);
+        errorCount = 0;
+        errorLEDstate = HIGH;
+    }
+    return 0;
+}
+
 //Interrupt Service Routine for all GPIO pins, handles interrupt signals from the radio transciever
 void gpio_isr(uint gpio, uint32_t event_mask)
 {
@@ -310,6 +374,38 @@ void gpio_isr(uint gpio, uint32_t event_mask)
     gpio_acknowledge_irq(gpio, event_mask);
 }
 
+void eraseFlashJSON()
+{
+    watchdog_update();
+    flash_range_erase((FLASHJSONADDR - XIP_BASE), FILESIZE);
+}
+
+/**
+ * Writes the given JSON data to the flash memory if it is different from the
+ * existing JSON data.
+ *
+ * @param in pointer to the JSON data to be written
+ *
+ * @throws None
+ */
+void writeFlashJSON(uint8_t* in)
+{
+    flashJson = (uint8_t*) FLASHJSONADDR;
+    if(memcmp(flashJson, in, FILESIZE) != 0)
+    {
+        eraseFlashJSON();
+
+        watchdog_update();
+        flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
+
+        DPRINTF("JSON written to flash\n");
+    }
+    else
+    {
+        DPRINTF("JSON matched, not written\n");
+    }
+}
+
 bool sendError = false;
 //transmit a certain packet out
 //Transmit time: 2ms
@@ -327,15 +423,24 @@ void transmit(uint8_t dest, char asp, bool ack, bool code)
     {
         //if the send failed set the error light
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = TRANSMISSIONFAIL;
         sendError = true;
     }
     //If the radio recovers, clear the error light
     else if(sendError)
     {
         //if the transciever driver recovers, clear the error
-        gpio_put(GOODLED, LOW);
-        gpio_put(ERRORLED, HIGH);
+        if(errorCode == TRANSMISSIONFAIL)
+        {
+            errorCode = 0;
+        }
         sendError = false;
     }
 }
@@ -355,15 +460,24 @@ void sendToCTC(TOCTC data)
     {
         //if the send failed set the error light
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = TRANSMISSIONFAIL;
         sendError = true;
     }
     //If the radio recovers, clear the error light
     else if(sendError)
     {
         //if the transciever driver recovers, clear the error
-        gpio_put(GOODLED, LOW);
-        gpio_put(ERRORLED, HIGH);
+        if(errorCode == TRANSMISSIONFAIL)
+        {
+            errorCode = 0;
+        }
         sendError = false;
     }
 }
@@ -383,15 +497,24 @@ void sendFromCTC(FROMCTC data)
     {
         //if the send failed set the error light
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = TRANSMISSIONFAIL;
         sendError = true;
     }
     //If the radio recovers, clear the error light
     else if(sendError)
     {
         //if the transciever driver recovers, clear the error
-        gpio_put(GOODLED, LOW);
-        gpio_put(ERRORLED, HIGH);
+        if(errorCode == TRANSMISSIONFAIL)
+        {
+            errorCode = 0;
+        }
         sendError = false;
     }
 }
@@ -437,31 +560,6 @@ void setLastActive(uint8_t hN, uint8_t f, uint8_t m)
     }
 }
 
-/**
- * Writes the given JSON data to the flash memory if it is different from the
- * existing JSON data.
- *
- * @param in pointer to the JSON data to be written
- *
- * @throws None
- */
-void writeFlashJSON(uint8_t* in)
-{
-    flashJson = (uint8_t*) FLASHJSONADDR;
-    if(memcmp(flashJson, in, FILESIZE) != 0)
-    {
-        flash_range_erase((FLASHJSONADDR - XIP_BASE), FILESIZE);
-        flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
-
-        DPRINTF("JSON written to flash\n");
-    }
-    else
-    {
-        DPRINTF("JSON matched, not written\n");
-    }
-}
-
-
 void parseConfig()
 {
     FIL file; //config file 
@@ -470,6 +568,8 @@ void parseConfig()
     DIR dir; //Directory of the file
     FILINFO fInfo; //Information on the file
     sd_card_t *pSD; //SD card driver pointer
+    bool sdMounted = true;
+    bool fileFound = true;
 
     if(!sd_card_detect(0))
     {
@@ -484,46 +584,90 @@ void parseConfig()
     fr = f_mount(&fs, "0:", 1);
     if (fr != FR_OK)
     {
+        sdMounted = false;
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = SDMOUNT;
         //panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
     //Locate the config file in the file system, fault out if it cant be found
-    fr = f_findfirst(&dir, &fInfo, "", "config*.json");
-    if(fr != FR_OK)
+    if(sdMounted)
     {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        //panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+        fr = f_findfirst(&dir, &fInfo, "", "config*.json");
+        if(fr != FR_OK)
+        {
+            fileFound = false;
+            gpio_put(GOODLED, HIGH);
+            if(errorCode == 0)
+            {
+                errorLEDstate = HIGH;
+                //errorLEDstate = LOW;
+                //gpio_put(ERRORLED, LOW);
+                add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+            }
+            errorCode = CONFIGREAD;
+            //panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+        }
     }
-
     //Open the config file, if it fails set the error light and stop execution
     //const char* const filename = "config.json";
-    const char* const filename = fInfo.fname;
-    fr = f_open(&file, filename, FA_READ);
-    if (fr != FR_OK && fr != FR_EXIST)
+    if(sdMounted && fileFound)
     {
-        gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        //panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+        const char* const filename = fInfo.fname;
+        fr = f_open(&file, filename, FA_READ);
+        if (fr != FR_OK && fr != FR_EXIST)
+        {
+            gpio_put(GOODLED, HIGH);
+            if(errorCode == 0)
+            {
+                errorLEDstate = HIGH;
+                //errorLEDstate = LOW;
+                //gpio_put(ERRORLED, LOW);
+                add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+            }
+            errorCode = CONFIGREAD;
+            //panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+        }
     }
 
     //Read the config file into RAM, if it fails set error light and stop execution
     char cfgRaw[FILESIZE]; //May need to expand for more complex config files
     UINT readSize = 0;
+    if(sdMounted && fileFound)
+    {
     fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
     if(fr != FR_OK)
     {
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+            if(errorCode == 0)
+            {
+                errorLEDstate = HIGH;
+                //errorLEDstate = LOW;
+                //gpio_put(ERRORLED, LOW);
+                add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+            }
+            errorCode = CONFIGREAD;
         //panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
         memcpy(cfgRaw, flashJson, sizeof(cfgRaw));
     }
     else
     {
         DPRINTF("Read %d characters of config file\n", readSize);
-        writeFlashJSON((uint8_t*)cfgRaw);
+        //writeFlashJSON((uint8_t*)cfgRaw);
+
+        flash_safe_execute((void(*)(void*))writeFlashJSON, (void *)cfgRaw, 10000);
+    }
+    }
+    else
+    {
+        memcpy(cfgRaw, flashJson, sizeof(cfgRaw));
     }
 
     //Parse the JSON file into objects for easier handling, if it fails set the error light and stop execution
@@ -532,8 +676,20 @@ void parseConfig()
     if(error)
     {
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("Config JSON error: %s\n", error.c_str());
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = CONFIGREAD;
+        //panic("Config JSON error: %s\n", error.c_str());
+        DPRINTF("Config JSON error: %s\n", error.c_str());
+        while(1)
+        {
+            tight_loop_contents();
+        }
     }
 
     addr = cfg["address"]; //Address of this node
@@ -546,19 +702,46 @@ void parseConfig()
 
     sleepTime = cfg["sleepTime"] | 30; //Time to put the heads to sleep, 30min if not specified
 
-    lowBatThreshold = cfg["lowBattery"] | 11.0; //Voltage to activate low battery warning, 11v if not specified
-    lowBatReset     = cfg["batteryReset"] | 12.0; //Voltage to reset low battery warning, 12v if not specified
+    lowBatThreshold = cfg["lowBattery"] | 11.75; //Voltage to activate low battery warning, 11.75v if not specified
+    lowBatReset     = cfg["batteryReset"] | 12.1; //Voltage to reset low battery warning, 12.1v if not specified
+    lowBatShutdown  = cfg["batteryShutdown"] | 10.0; //Voltage to shut down the system, 10.0v if not specified
 
     ctcPresent = cfg["ctcPresent"];
 
-    monLEDs = cfg["monitorLEDs"]|false;
+    if(cfg["monitorLEDs"] == 2)
+    {
+    monLEDsOpen = true; 
+    monLEDsShort = true;
+    }
+    else if(cfg["monitorLEDs"] == 1)
+    {
+    monLEDsOpen = true; 
+    monLEDsShort = false;
+    }   
+    else
+    {
+        monLEDsOpen = false;
+        monLEDsShort = false;
+    }
 
     //address 0 is not used and node can not join the network without an ID
     if(addr == 0)
     {
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
-        panic("Invalid Address\n");
+            if(errorCode == 0)
+            {
+                errorLEDstate = HIGH;
+                //errorLEDstate = LOW;
+                //gpio_put(ERRORLED, LOW);
+                add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+            }
+            errorCode = CONFIGBAD;
+        //panic("Invalid Address\n");
+        DPRINTF("Invalid Address\n");
+        while(1)
+        {
+            tight_loop_contents();
+        }
     }
 
     uint8_t pin1, pin2, pin3, pin4, cur1, cur2, cur3, cur4 = 255;
@@ -675,8 +858,21 @@ void parseConfig()
             if(heads[i].numDest == 0)
             {
                 gpio_put(GOODLED, HIGH);
-                gpio_put(ERRORLED, LOW);
-                panic("No Destination configured\n");
+                if(errorCode == 0)
+                {
+                    errorLEDstate = HIGH;
+                    //errorLEDstate = LOW;
+                    //gpio_put(ERRORLED, LOW);
+                    add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+                }
+                errorCode = CONFIGBAD;
+                //panic("No Destination configured\n");
+                DPRINTF("No Destination configured\n");
+                while(1)
+                {
+                    tight_loop_contents();
+                }
+                
             }
 
             heads[i].dimBright = Jhead[i]["dim"] | 255; //Set the dim brightness value, default to 255 (full brightness) if not specified 
@@ -733,6 +929,8 @@ void parseConfig()
             inputs[i].active = inputs[i].lastActive = false;
         }
     }
+
+    //errorCode = 0;
 }
 
 /**
@@ -743,12 +941,31 @@ void parseConfig()
 float checkBattery()
 {
     uint16_t rawADC;
-    float bat;
+    float batt;
 
     rawADC = adc_read();
-    bat = (float)rawADC * CONVERSION_FACTOR;
+    batt = (float)rawADC * CONVERSION_FACTOR;
+    batt += DIODEDROP;
 
-    return bat;
+    for(int i = 0; i < NUMBATSAMPLES - 1; i++)
+    {
+        rawBat[i] = rawBat[i + 1];
+
+        if(rawBat[i] == 0)
+        {
+            rawBat[i] = batt;
+        }
+    }
+    rawBat[NUMBATSAMPLES - 1] = batt;
+
+    batt = 0.0;
+    for(int i = 0; i < NUMBATSAMPLES; i++)
+    {
+        batt += rawBat[i];
+    }
+    batt /= NUMBATSAMPLES;
+
+    return batt;
 }
 
 /**
@@ -762,15 +979,15 @@ void processFromCTC(FROMCTC f)
 {
     switch(f.cmd)
     {
-        case 0:
+        case 0: //ACK
             changed = false;
             ctcTries = 0;
             break;
-        case 1:
+        case 1: //Ping
             changed = true;
             ctcTries = 0;
             break;
-        case 2:
+        case 2: //Wake
             if(!headOn)
             {
                 output1.wake();
@@ -812,7 +1029,7 @@ void processFromCTC(FROMCTC f)
 
             dimTimeout = get_absolute_time();
             break;
-        case 3:
+        case 3: //Capture
         case 4:
         case 5:
         case 6:
@@ -828,7 +1045,7 @@ void processFromCTC(FROMCTC f)
                 }
             }
             break;
-        case 7:
+        case 7: //Release
         case 8:
         case 9:
         case 10:
@@ -844,6 +1061,19 @@ void processFromCTC(FROMCTC f)
                 }
             }
             break;
+        case 11: //Clear Flash Config
+            DPRINTF("Erase Config\n");
+            //eraseFlashJSON();
+            flash_safe_execute((void(*)(void*))eraseFlashJSON, NULL, 10000);
+            break;
+        case 12: //Hold in loop for watchdog reboot
+            DPRINTF("Reboot\n");
+            while(1)
+            {
+                tight_loop_contents();
+            }
+            break;
+            
     }
 }
 
@@ -878,6 +1108,107 @@ void initRadio(uint8_t a)
 
     radioFaults = 0;
     radioCheck = get_absolute_time();
+}
+
+void post()
+{
+    bool ledState = HIGH;
+    if(!input1.inputMask(0xFF))
+    {
+        DPRINTF("Input Fault\n");
+        while(1)
+        {
+            if(blinkCounter < BADINPUT)
+            {
+                ledState = !ledState;
+                gpio_put(GOODLED, ledState);
+                gpio_put(ERRORLED, ledState);
+
+                if(ledState == LOW)
+                {
+                    errorCount++;
+                }
+            }
+            else
+            {
+                gpio_put(ERRORLED, HIGH);
+                gpio_put(GOODLED, HIGH);
+                ledState = HIGH;
+                blinkCounter++;
+            }
+            
+            if(blinkCounter >= BADINPUT + 6)
+            {
+                blinkCounter = 0;
+            }
+
+            sleep_ms(BLINK_INTERVAL);
+        }
+    }
+    else if(!output1.ping())
+    {
+        DPRINTF("Output Fault\n");
+        while(1)
+        {
+            if(blinkCounter < BADOUTPUT)
+            {
+                ledState = !ledState;
+                gpio_put(GOODLED, ledState);
+                gpio_put(ERRORLED, ledState);
+
+                if(ledState == LOW)
+                {
+                    errorCount++;
+                }
+            }
+            else
+            {
+                gpio_put(ERRORLED, HIGH);
+                gpio_put(GOODLED, HIGH);
+                ledState = HIGH;
+                blinkCounter++;
+            }
+            
+            if(blinkCounter >= BADOUTPUT + 6)
+            {
+                blinkCounter = 0;
+            }
+
+            sleep_ms(BLINK_INTERVAL);
+        }
+    }
+    else if(radio.getDeviceVersion() == 0x00)
+    {
+        DPRINTF("Radio Fault\n");
+        while(1)
+        {
+            if(blinkCounter < BADRADIO)
+            {
+                ledState = !ledState;
+                gpio_put(GOODLED, ledState);
+                gpio_put(ERRORLED, ledState);
+
+                if(ledState == LOW)
+                {
+                    errorCount++;
+                }
+            }
+            else
+            {
+                gpio_put(ERRORLED, HIGH);
+                gpio_put(GOODLED, HIGH);
+                ledState = HIGH;
+                blinkCounter++;
+            }
+            
+            if(blinkCounter >= BADRADIO + 6)
+            {
+                blinkCounter = 0;
+            }
+
+            sleep_ms(BLINK_INTERVAL);
+        }
+    }
 }
 
 int main()
@@ -936,24 +1267,41 @@ int main()
     DPRINTF("ADC: %d\n", rawADC);
     DPRINTF("Battery: %2.2FV\n\n", bat);
 
-    if(bat < 8.0 && bat > 3.5)
+    if(bat < 8.0 && bat > 4.5)
     {
         gpio_put(GOODLED, HIGH);
-        gpio_put(ERRORLED, LOW);
+        if(errorCode == 0)
+        {
+            errorLEDstate = HIGH;
+            //errorLEDstate = LOW;
+            //gpio_put(ERRORLED, LOW);
+            add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
+        }
+        errorCode = DEADBATTERY;
+
         DPRINTF("Low Battery! %2.2f\n", bat);
 
         radio.setModeSleep();
 
         while(bat < lowBatReset)
         {
-            sleep_ms(60000);
+            watchdog_update();
+
+            sleep_ms(5000);
             bat = checkBattery();
         }
+    }
+    if(errorCode == DEADBATTERY)
+    {
+        errorCode = 0;
     }
 
     //Start the SPI and i2c buses 
     initi2c0();
     initspi0();
+
+    watchdog_update();
+    post();
 
     //watchdog_enable(10000, true); // Set watchdog up, will trip after 10 seconds
 
@@ -1665,31 +2013,58 @@ int main()
         if(absolute_time_diff_us(blinkTimer, get_absolute_time()) / 1000 >= BLINK_INTERVAL)
         {
             bat = checkBattery();
+
+            DPRINTF("Battery: %2.2FV\n\n", bat);
+
             if(bat < lowBatThreshold)
             {
                 batteryLow = true;
-                DPRINTF("Battery: %2.2FV\n\n", bat);
 
-                if(lowBatThreshold > 1 && bat < (lowBatThreshold - 1))
+                if(lowBatShutdown > 8 && bat < lowBatShutdown && bat > 3.5)
                 {
-                    while(bat < (lowBatThreshold - 1))
+                    gpio_put(GOODLED, HIGH);
+                    if(errorCode == 0)
                     {
-                        for(int i = 0; i < MAXHEADS; i++)
-                        {
-                            if(heads[i].head)
-                            {
-                                heads[i].head->setHead(off);
-                            }
-                        }
-
-                        output1.sleep();
-                        radio.setModeSleep();
-
-                        sleep_ms(60000);
-                        bat = checkBattery();
+                        errorLEDstate = HIGH;
+                        //errorLEDstate = LOW;
+                        //gpio_put(ERRORLED, LOW);
+                        add_alarm_in_ms(ERRORPERIOD, errorBlink, NULL, true);
                     }
+                    errorCode = DEADBATTERY;
+
+                    for(int i = 0; i < MAXHEADS; i++)
+                    {
+                        if(heads[i].head)
+                        {
+                            heads[i].head->setHead(off);
+                        }
+                    }
+
+                    output1.sleep();
+                    radio.setModeSleep();
+                    
+                    //if system reaches low battery warning voltage, return to operation. 
+                    while(bat < lowBatThreshold)
+                    {
+                        watchdog_update();
+
+                        sleep_ms(5000);
+                        bat = checkBattery();
+
+                        DPRINTF("Battery: %2.2FV\n\n", bat);
+                    }
+                    watchdog_update();
+                    errorCode = 0;
                     output1.wake();
-                    radio.setModeRX();
+                    initRadio(addr);
+
+                    for(int i = 0; i < MAXHEADS; i++)
+                    {
+                        if(heads[i].head)
+                        {
+                            heads[i].head->setHead(green);
+                        }
+                    }
                 }
             }
             else if(bat > lowBatReset)
@@ -1956,11 +2331,21 @@ int main()
 
             toCTC.ledError = 0;
             output1.checkErrors();
-            if(monLEDs)
+            if(monLEDsOpen && output1.checkOpenCircuits())
             {
                 for(uint8_t i = 0; i < 16; i++)
                 {
-                    if(output1.getError(i) != 0)
+                    if(output1.getError(i) != LEDopen)
+                    {
+                        toCTC.ledError |= (1 << i);
+                    }
+                }
+            }
+            if(monLEDsShort && output1.checkShortCircuits())
+            {
+                for(uint8_t i = 0; i < 16; i++)
+                {
+                    if(output1.getError(i) != LEDshort)
                     {
                         toCTC.ledError |= (1 << i);
                     }

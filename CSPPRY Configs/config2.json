@@ -1,9 +1,10 @@
 {
   "address": 2,
-  "dimTime" : 15,
-  "sleepTime": 20,
-  "lowBattery": 11.5,
-  "batteryReset": 12,
+  "dimTime" : 5,
+  "sleepTime": 30,
+  "lowBattery": 11.75,
+  "batteryReset": 12.1,
+  "batteryShutdown": 10.0,
   "retryTime": 100,
   "ctcPresent": true,
   "head1": {

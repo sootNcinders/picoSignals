@@ -1388,6 +1388,30 @@ Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
 
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.obj
+
+# target to build an object file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.i: Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.i
+
+# target to preprocess a source file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.s: Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.s
+
+# target to generate assembly for a file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s
+
 Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj
 
@@ -1835,6 +1859,30 @@ Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumerati
 Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.obj
+
+# target to build an object file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.i: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.i
+
+# target to preprocess a source file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i
+
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.s: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.s
+
+# target to generate assembly for a file
+Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s
+.PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s
 
 Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 .PHONY : Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj
@@ -2517,6 +2565,9 @@ help:
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.i"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.s"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.obj"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.i"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.s"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s"
@@ -2573,6 +2624,9 @@ help:
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.obj"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.i"
+	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.s"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj"
 	@echo "... Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i"

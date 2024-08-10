@@ -37,12 +37,4 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flas
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/include/hardware/exception.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h

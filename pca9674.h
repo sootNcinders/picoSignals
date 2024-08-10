@@ -18,7 +18,7 @@ class pca9674
 
         /// @brief Set which pins will be used for inputs and which will be ignored
         /// @param mask Single byte, each bit representing a pin
-        void inputMask(uint8_t mask);
+        bool inputMask(uint8_t mask);
 
         /// @brief Returns the input state of a specified pin
         /// @param num Pin to check

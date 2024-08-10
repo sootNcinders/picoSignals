@@ -165,6 +165,8 @@ def sendCmd(addr: int, cmd: int):
             - 08 - Release 2
             - 09 - Release 3
             - 0A - Release 4
+            - 0B - Clear Flash
+            - 0C - Reboot
     """
 
     out = ":"
@@ -877,12 +879,7 @@ def update_gui():
                                     if nodes[i].voltage < 11.5 and nodes[i].voltage > 0:
                                         c.itemconfigure(volts[i], fill="yellow")
                                     elif diagVisible:
-                                        if nodes[i].avgVoltage + 0.1 < nodes[i].voltage:
-                                            c.itemconfigure(volts[i], fill="green")
-                                        elif nodes[i].avgVoltage - 0.1 > nodes[i].voltage:
-                                            c.itemconfigure(volts[i], fill="red")
-                                        else:
-                                            c.itemconfigure(volts[i], fill="white")
+                                        c.itemconfigure(volts[i], fill="white")
                             if rssis[i] != 0:
                                 c.itemconfigure(rssis[i], text=(format(nodes[i].rssi, '03d')))
 

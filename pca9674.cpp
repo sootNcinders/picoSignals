@@ -11,8 +11,9 @@ pca9674::pca9674(i2c_inst_t *i2cbus, uint8_t addr)
     address = addr;
 }
 
-void pca9674::inputMask(uint8_t mask)  
+bool pca9674::inputMask(uint8_t mask)  
 {
+    bool rtn = false;
     //i2c_write_blocking(bus, address, &mask, 1, false);
 
     for(int i = 0; i < 5; i++)
@@ -21,6 +22,7 @@ void pca9674::inputMask(uint8_t mask)
         if(i2c_write_timeout_us(bus, address, &mask, 1, false, 500) == 1)
         {
             if(critSec) critical_section_exit(critSec);
+            rtn = true;
             break;
         }
         if(critSec) critical_section_exit(critSec);
@@ -28,6 +30,8 @@ void pca9674::inputMask(uint8_t mask)
     }
 
     busy_wait_us(5);//Back to back access delay
+
+    return rtn;
 }
 
 bool pca9674::getInput(uint8_t num, bool update)

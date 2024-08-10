@@ -36,6 +36,14 @@ class PCA9955
         /// @return true if error is found
         bool checkErrors();
 
+        /// @brief Checks for open circuit faults
+        /// @return true if there is an open circuit
+        bool checkOpenCircuits();
+
+        /// @brief Checks for short circuit faults
+        /// @return true if there is a short circuit
+        bool checkShortCircuits();
+
         /// @brief Prints all PCA9955 Registers for debugging
         void printRegisters();
 
@@ -53,6 +61,8 @@ class PCA9955
         /// @brief Set the critical section used to protect the i2c bus
         /// @param cs Critical section pointer
         void setCriticalSection(critical_section_t* cs);
+
+        bool ping();
 
     private:
         i2c_inst_t* _bus;

@@ -21026,3 +21026,9351 @@ Destination: 2
 Aspect: G
 RSSI: -88
 
+2024-06-30 13:37:04.130312
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -96
+
+2024-06-30 13:37:04.491306
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -96
+
+2024-06-30 13:37:05.105234
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-06-30 13:37:05.311656
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-06-30 13:37:38.435039
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:38.640860
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -87
+
+2024-06-30 13:37:38.846862
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:39.053041
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:39.259044
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:39.465110
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:39.671100
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:39.877147
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:40.083107
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:40.289156
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-06-30 13:37:40.495239
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-06-30 13:37:40.701001
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-06-30 13:37:40.907015
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-06-30 13:37:41.113055
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-06-30 13:37:51.282300
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-06-30 13:38:52.653386
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-06-30 13:38:52.859240
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-06-30 13:38:53.065220
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-06-30 13:38:53.271153
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-06-30 13:56:39.061274
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-06-30 13:56:39.420311
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -95
+
+2024-06-30 13:56:40.371107
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -99
+
+2024-06-30 13:56:40.573318
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-06-30 14:12:33.852105
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -88
+
+2024-06-30 14:12:34.213325
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-06-30 14:13:33.858459
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-06-30 14:13:34.064540
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-06-30 14:13:43.353592
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -98
+
+2024-06-30 14:13:43.559419
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-06-30 14:14:37.678264
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:20:14.467175
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -86
+
+2024-06-30 14:22:09.531858
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -81
+
+2024-06-30 14:22:09.737975
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -82
+
+2024-06-30 14:22:09.943959
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -115
+
+2024-06-30 14:22:25.020442
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -100
+
+2024-06-30 14:22:25.222639
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -96
+
+2024-06-30 14:22:25.879427
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -98
+
+2024-06-30 14:22:26.081618
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -70
+
+2024-06-30 14:26:05.723966
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:05.930165
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:26:06.136316
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:06.342398
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:26:06.601892
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-06-30 14:26:06.806405
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:07.008573
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:26:07.210724
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:07.412835
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-06-30 14:26:07.614976
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-06-30 14:26:07.817094
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:26:08.019217
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-06-30 14:26:08.221331
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:08.474537
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:26:08.676687
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-06-30 14:26:08.880001
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:32:09.039621
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-06-30 14:32:09.398872
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -95
+
+2024-06-30 14:32:10.004633
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -91
+
+2024-06-30 14:32:10.206819
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-06-30 14:33:29.463151
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:33:29.669360
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-06-30 14:33:29.875368
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -96
+
+2024-06-30 14:33:30.081432
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-06-30 14:33:30.287476
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-06-30 14:35:09.200097
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -100
+
+2024-06-30 14:35:09.402295
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-01 19:31:01.531051
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -104
+
+2024-07-01 19:31:01.892063
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -104
+
+2024-07-01 19:31:02.554358
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -103
+
+2024-07-01 19:31:02.757314
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-01 19:33:32.903452
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-01 19:33:33.109294
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-01 19:33:33.315334
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-01 19:33:33.521361
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:33.727362
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:33.933369
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:34.139359
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:34.345555
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:34.551593
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:34.757612
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:34.963596
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:35.169610
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:35.375625
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-01 19:33:35.581685
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-01 19:34:18.981287
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-01 19:34:19.187378
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-01 19:37:38.507294
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-02 17:34:50.913451
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-02 17:34:51.274673
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-02 17:37:46.355435
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -92
+
+2024-07-02 17:37:46.561640
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-02 17:39:22.088293
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -101
+
+2024-07-02 17:39:22.294541
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -103
+
+2024-07-02 17:39:22.960461
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -104
+
+2024-07-02 17:39:23.162654
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-02 17:39:23.364796
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -99
+
+2024-07-02 17:39:23.617908
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -100
+
+2024-07-02 17:39:23.820091
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-02 17:40:03.277711
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-02 17:40:03.483832
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -107
+
+2024-07-02 17:40:03.689915
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-02 17:40:03.895893
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-02 17:40:04.102102
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-02 17:40:04.308179
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:04.514271
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-02 17:40:04.720302
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:04.926397
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:05.132869
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:05.338973
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:05.545078
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-02 17:40:05.751135
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-02 17:40:05.957197
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-02 17:41:54.479111
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -91
+
+2024-07-02 17:41:54.685222
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-02 17:43:35.228250
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-02 19:16:26.266194
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -91
+
+2024-07-02 19:16:26.620366
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -91
+
+2024-07-02 19:18:11.254798
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -92
+
+2024-07-02 19:18:23.012165
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -112
+
+2024-07-02 19:22:51.479758
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -113
+
+2024-07-02 19:22:51.681976
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -106
+
+2024-07-02 19:23:32.195431
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -101
+
+2024-07-02 19:23:32.401684
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -106
+
+2024-07-02 19:23:33.062025
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-02 19:23:33.264219
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-02 19:24:16.993177
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-02 19:24:17.195398
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -101
+
+2024-07-02 19:24:17.397546
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:17.599696
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:24:17.801828
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:18.054925
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:24:18.257085
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:18.459572
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:18.661742
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:18.863887
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:19.065997
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:24:35.211797
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-02 19:26:03.113042
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-02 19:33:12.919197
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -101
+
+2024-07-02 19:33:13.278428
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -101
+
+2024-07-02 19:33:14.551964
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -101
+
+2024-07-02 19:33:14.754139
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-02 19:33:56.416949
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -66
+
+2024-07-02 19:33:56.623121
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -101
+
+2024-07-02 19:33:56.829033
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:57.034967
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:57.240944
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:57.446858
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:57.653000
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:57.859000
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:58.065026
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:58.271031
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-02 19:33:58.477092
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:33:58.683083
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-02 19:33:58.889019
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-02 19:33:59.095040
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-02 19:34:15.810667
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-02 19:35:44.125054
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -86
+
+2024-07-02 19:54:52.722995
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-02 19:54:53.135649
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-02 19:56:05.313309
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-02 19:56:15.250422
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -104
+
+2024-07-02 19:56:15.452620
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -100
+
+2024-07-02 19:56:15.705972
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -100
+
+2024-07-02 19:56:15.909092
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -70
+
+2024-07-02 19:56:59.872985
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -102
+
+2024-07-02 19:57:00.079177
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -100
+
+2024-07-02 19:57:00.285266
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-02 19:57:00.491343
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-02 19:57:15.663832
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -107
+
+2024-07-02 19:57:15.870033
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -99
+
+2024-07-02 19:58:38.662245
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-02 19:58:38.868376
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-02 19:59:47.331198
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-02 20:13:12.909255
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-02 20:13:13.270565
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-02 20:14:22.854640
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-02 20:14:23.060623
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-02 20:14:32.138830
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -101
+
+2024-07-02 20:14:32.799938
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -101
+
+2024-07-02 20:14:33.002120
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-02 20:15:05.342326
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -104
+
+2024-07-02 20:15:05.548507
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -102
+
+2024-07-02 20:15:05.754597
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-02 20:15:05.960722
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-02 20:15:17.366698
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -108
+
+2024-07-02 20:15:17.568915
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -100
+
+2024-07-02 20:16:05.685984
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -102
+
+2024-07-02 20:16:05.891855
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -111
+
+2024-07-02 20:16:17.202110
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-02 20:16:17.404292
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-02 20:17:25.874057
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-02 20:17:26.079783
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-03 19:40:34.444649
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -88
+
+2024-07-03 19:40:34.805243
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-07-03 19:42:44.512000
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-03 19:42:44.718151
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-03 19:42:57.611969
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -109
+
+2024-07-03 19:42:58.268962
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -104
+
+2024-07-03 19:42:58.471165
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-03 19:43:46.618348
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -102
+
+2024-07-03 19:43:46.824472
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -107
+
+2024-07-03 19:43:47.030551
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -101
+
+2024-07-03 19:43:47.236643
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -107
+
+2024-07-03 19:43:47.442673
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-03 19:43:47.648855
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-03 19:43:47.907361
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-03 19:43:48.113573
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-03 19:43:48.318478
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-03 19:43:48.522823
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-03 19:44:04.337399
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -109
+
+2024-07-03 19:44:04.543157
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -107
+
+2024-07-03 19:44:52.917178
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -104
+
+2024-07-03 19:44:53.123362
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -113
+
+2024-07-03 19:45:10.096776
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-03 19:45:10.302857
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -115
+
+2024-07-03 19:46:41.556613
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-03 19:46:41.758777
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-03 19:46:48.143455
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -114
+
+2024-07-03 19:46:48.349541
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-03 19:48:23.369995
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-03 19:48:23.576051
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-03 19:48:37.256133
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -109
+
+2024-07-03 19:48:37.458333
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-03 19:48:38.115184
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -102
+
+2024-07-03 19:48:38.317350
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-03 19:49:33.771507
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -100
+
+2024-07-03 19:49:33.977631
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -108
+
+2024-07-03 19:49:34.183675
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -100
+
+2024-07-03 19:49:34.389733
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-03 19:49:55.133736
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -111
+
+2024-07-03 19:49:55.339557
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -107
+
+2024-07-03 19:52:17.159327
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -103
+
+2024-07-03 19:52:17.365606
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -113
+
+2024-07-03 19:52:38.106906
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-03 19:52:38.313000
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-03 19:53:55.848960
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-03 20:08:21.115940
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-03 20:08:21.477277
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-03 20:09:40.352008
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-03 20:09:40.558264
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-03 20:09:49.522070
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -111
+
+2024-07-03 20:09:49.728275
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-03 20:09:50.394029
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -105
+
+2024-07-03 20:09:50.596238
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-03 20:10:22.526021
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -102
+
+2024-07-03 20:10:22.732163
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -108
+
+2024-07-03 20:10:22.938111
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-03 20:10:23.144265
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-03 20:10:37.834033
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -111
+
+2024-07-03 20:10:38.036254
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -107
+
+2024-07-03 20:11:30.203842
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -71
+
+2024-07-03 20:11:30.410041
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-03 20:11:30.616150
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -107
+
+2024-07-03 20:12:12.395253
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -108
+
+2024-07-03 20:12:13.060221
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-03 20:12:13.262391
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:13:38.527951
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -71
+
+2024-07-03 20:13:38.734154
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -108
+
+2024-07-03 20:13:38.940160
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -71
+
+2024-07-03 20:13:39.146267
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -105
+
+2024-07-03 20:13:49.930585
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-03 20:13:50.136721
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -108
+
+2024-07-03 20:13:50.342795
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -107
+
+2024-07-03 20:13:50.548876
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-03 20:13:50.754953
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -106
+
+2024-07-03 20:13:51.012944
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-03 20:16:54.560171
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -108
+
+2024-07-03 20:16:54.762367
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-03 20:16:55.419783
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -111
+
+2024-07-03 20:16:55.621999
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-03 20:20:14.669624
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-03 20:20:14.875815
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -107
+
+2024-07-03 20:20:15.081827
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:15.287815
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:15.493824
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:15.752260
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:15.958579
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-03 20:20:16.163037
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-03 20:20:16.365191
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:16.567334
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:16.769446
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:17.374986
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:17.577103
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:20:17.779250
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -105
+
+2024-07-03 20:21:22.166204
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -102
+
+2024-07-03 20:21:22.371929
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -108
+
+2024-07-03 20:21:23.041726
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -108
+
+2024-07-03 20:21:23.244007
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-03 20:27:13.693935
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -109
+
+2024-07-03 20:27:14.054395
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -109
+
+2024-07-03 20:27:14.261899
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:14.817132
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:15.019338
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:15.221450
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:15.423581
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:15.625708
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-03 20:27:15.827847
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:16.029972
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:16.232094
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-03 20:27:16.434213
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -100
+
+2024-07-03 20:27:30.458675
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-03 20:27:30.664807
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-03 20:28:42.387698
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-03 20:28:42.593779
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-04 06:22:16.849514
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -88
+
+2024-07-04 06:22:17.210473
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-07-04 06:23:51.279877
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-04 06:23:51.486022
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-04 06:24:06.132815
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -112
+
+2024-07-04 06:24:06.335045
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -105
+
+2024-07-04 06:24:06.991773
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -103
+
+2024-07-04 06:24:07.193950
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -70
+
+2024-07-04 06:24:52.451945
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -99
+
+2024-07-04 06:24:52.657767
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -107
+
+2024-07-04 06:24:52.863793
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-04 06:24:53.069843
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -106
+
+2024-07-04 06:24:53.275879
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-04 06:24:53.482082
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-04 06:26:40.868070
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-04 06:28:16.316960
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-04 06:28:16.522614
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-04 10:30:58.374378
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -111
+
+2024-07-04 10:30:58.735189
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -111
+
+2024-07-04 10:30:59.392508
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -102
+
+2024-07-04 10:30:59.595003
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-04 10:31:42.173972
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:42.380072
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-04 10:31:42.586102
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 10:31:42.792069
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:42.998107
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:43.204064
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:43.410083
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:43.616068
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 10:31:43.822098
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:44.028058
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:44.234081
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:44.440031
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:44.646059
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 10:31:44.852066
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-04 10:32:24.545111
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-04 10:33:40.750758
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-04 10:33:40.956875
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-04 19:34:02.051203
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-07-04 19:35:32.030254
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-04 19:35:32.236372
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-04 19:35:44.829182
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -104
+
+2024-07-04 19:35:45.031708
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -102
+
+2024-07-04 19:35:45.233914
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -101
+
+2024-07-04 19:35:45.487748
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -101
+
+2024-07-04 19:35:45.690041
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -111
+
+2024-07-04 19:36:46.935965
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-04 19:37:48.326456
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -114
+
+2024-07-04 19:37:48.532592
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -114
+
+2024-07-04 19:37:48.738616
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -113
+
+2024-07-04 19:37:48.944636
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-07-04 19:39:11.342129
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-04 19:39:11.548178
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-04 19:39:24.527119
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -104
+
+2024-07-04 19:39:24.729326
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -112
+
+2024-07-04 19:40:20.500161
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -112
+
+2024-07-04 19:40:20.706019
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -103
+
+2024-07-04 19:40:52.987997
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -100
+
+2024-07-04 19:40:53.194195
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -99
+
+2024-07-04 19:40:53.858573
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -103
+
+2024-07-04 19:40:54.060755
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-04 19:41:33.065888
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-04 19:41:33.272002
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -100
+
+2024-07-04 19:41:33.478036
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:41:33.683895
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:41:33.890030
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:41:34.096020
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-04 19:41:34.301983
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-04 19:41:34.508001
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:41:34.714137
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:41:34.920202
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:41:35.126296
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:41:35.332350
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-04 19:41:35.538393
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:41:35.744496
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-04 19:44:00.345119
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -102
+
+2024-07-04 19:44:00.551356
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -101
+
+2024-07-04 19:44:01.213671
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -100
+
+2024-07-04 19:44:01.415874
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-04 19:44:42.565580
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -102
+
+2024-07-04 19:44:42.771637
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:44:42.977745
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -105
+
+2024-07-04 19:44:43.183751
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -98
+
+2024-07-04 19:44:43.389853
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -104
+
+2024-07-04 19:44:43.595875
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:44:43.801946
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-04 19:44:44.007925
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -104
+
+2024-07-04 19:44:44.214023
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-04 19:44:44.419936
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-04 19:44:44.625937
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-04 19:45:56.312486
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -100
+
+2024-07-04 19:45:56.518645
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -105
+
+2024-07-04 19:45:57.185971
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-04 19:46:41.466162
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-04 19:46:41.671890
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-04 19:46:41.877953
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:42.083897
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:42.290099
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:42.496161
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:42.702331
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:42.908386
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:43.114427
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:43.320428
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:43.526467
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:43.732460
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:43.938487
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-04 19:46:44.144477
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-04 19:46:58.603793
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-04 19:48:23.205160
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-04 19:48:23.410831
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-05 10:36:57.727519
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -85
+
+2024-07-05 10:38:38.233536
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-05 10:38:38.439692
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-05 10:38:50.786067
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -105
+
+2024-07-05 10:38:50.992371
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -96
+
+2024-07-05 10:38:51.653423
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -106
+
+2024-07-05 10:38:51.855814
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-05 10:40:23.286753
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-05 10:40:23.492946
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-05 10:40:23.699045
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:40:23.905107
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:24.111138
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-05 10:40:24.369457
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:24.575389
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:24.777563
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:40:24.979691
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:40:25.181809
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:25.383949
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:26.041595
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 10:40:26.243782
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 10:40:26.446223
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -104
+
+2024-07-05 10:54:17.759066
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -114
+
+2024-07-05 10:54:18.121258
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-05 10:54:37.200957
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -70
+
+2024-07-05 10:54:37.407051
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -95
+
+2024-07-05 10:54:37.613089
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 10:54:37.819177
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -101
+
+2024-07-05 10:55:03.433435
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-05 10:55:03.639582
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:03.845626
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:04.051540
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:04.309126
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:04.513861
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:04.719230
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:04.924495
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:05.130626
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 10:55:06.155557
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -103
+
+2024-07-05 10:55:06.361639
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-05 10:55:06.567661
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-05 10:55:06.773746
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-05 11:33:53.706021
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-05 11:33:54.066875
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-05 11:33:54.678013
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -100
+
+2024-07-05 11:33:54.880198
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -98
+
+2024-07-05 11:33:55.083535
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -101
+
+2024-07-05 11:33:55.285755
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-05 11:34:37.623435
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 11:34:37.829166
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -67
+
+2024-07-05 11:34:38.035131
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-05 11:34:38.241161
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-05 11:34:38.447095
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -95
+
+2024-07-05 11:34:38.653143
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-05 11:34:49.741762
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-05 11:34:49.943953
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-05 11:36:01.554451
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-05 11:36:01.760504
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-05 12:59:47.335474
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -105
+
+2024-07-05 12:59:47.695826
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -105
+
+2024-07-05 12:59:49.051294
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -98
+
+2024-07-05 12:59:49.304397
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -98
+
+2024-07-05 12:59:49.506853
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-05 13:00:32.041466
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-05 13:00:32.247531
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -95
+
+2024-07-05 13:00:32.453615
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:00:59.245490
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -114
+
+2024-07-05 13:00:59.451520
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -87
+
+2024-07-05 13:02:02.165210
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-05 13:02:02.371246
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-05 13:02:10.454314
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -98
+
+2024-07-05 13:02:10.660203
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -103
+
+2024-07-05 13:02:11.319949
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -98
+
+2024-07-05 13:02:11.522183
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-05 13:02:40.215087
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -95
+
+2024-07-05 13:02:43.234084
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -103
+
+2024-07-05 13:02:43.436278
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-05 13:02:43.638399
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -99
+
+2024-07-05 13:02:43.840514
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-07-05 13:02:44.042640
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-05 13:02:44.244763
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:03:36.134870
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -113
+
+2024-07-05 13:03:36.341019
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -96
+
+2024-07-05 13:04:05.993544
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -96
+
+2024-07-05 13:04:06.199578
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -96
+
+2024-07-05 13:04:06.862552
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-05 13:04:52.859551
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:04:53.065301
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-05 13:04:53.271220
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:04:53.477268
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-05 13:04:53.683182
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:04:53.889181
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -96
+
+2024-07-05 13:04:54.095157
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-05 13:09:24.880024
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -71
+
+2024-07-05 13:09:25.086151
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -95
+
+2024-07-05 13:09:25.292126
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 13:09:25.498189
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -99
+
+2024-07-05 13:10:39.308980
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:10:39.515060
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -79
+
+2024-07-05 13:10:39.721099
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:10:39.927050
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-05 13:10:40.133209
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:10:40.391408
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -66
+
+2024-07-05 13:10:40.597568
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-05 13:10:40.799931
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 13:10:41.002073
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 13:10:41.204208
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:10:41.406326
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:10:41.608427
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-05 13:10:42.266446
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:10:42.468616
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 13:10:42.670765
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-05 14:16:57.690453
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -96
+
+2024-07-05 14:16:58.095844
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -96
+
+2024-07-05 15:52:45.742911
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -64
+
+2024-07-05 15:52:46.156118
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -88
+
+2024-07-05 15:52:46.358284
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-07-05 15:52:46.913503
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -67
+
+2024-07-05 15:52:47.115706
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -88
+
+2024-07-05 15:52:47.721216
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-05 15:52:48.025284
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -98
+
+2024-07-05 15:52:48.279483
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -99
+
+2024-07-05 15:52:48.583545
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -98
+
+2024-07-05 15:52:48.786013
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -113
+
+2024-07-05 15:53:03.922742
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-05 15:53:04.180991
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 15:53:04.844477
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 15:53:05.046647
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -88
+
+2024-07-05 15:53:05.248766
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 16:07:28.375744
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -91
+
+2024-07-05 16:07:28.736996
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -101
+
+2024-07-05 16:07:28.943641
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -101
+
+2024-07-05 16:07:41.447022
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-05 16:07:41.652804
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-05 16:07:41.858865
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:42.064952
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:42.271117
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:42.528410
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:42.734086
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:42.938972
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:43.141217
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:07:43.343437
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 16:07:43.545619
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 16:07:44.203461
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 16:07:44.405662
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 16:07:44.607884
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -100
+
+2024-07-05 16:10:27.900915
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -71
+
+2024-07-05 16:10:28.106610
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -92
+
+2024-07-05 16:10:28.312685
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 16:10:28.623442
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 16:10:28.825632
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -100
+
+2024-07-05 16:10:32.619688
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-05 16:10:32.821877
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:10:33.074978
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-05 16:10:33.277747
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-05 16:10:33.480044
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 16:10:33.683834
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-05 16:19:34.219527
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -90
+
+2024-07-05 16:19:35.056311
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-05 16:19:35.258974
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-05 16:19:35.465008
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -101
+
+2024-07-05 16:20:45.935690
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -68
+
+2024-07-05 16:20:46.141411
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -91
+
+2024-07-05 16:20:46.347427
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -68
+
+2024-07-05 16:20:46.553595
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -100
+
+2024-07-05 16:21:00.688772
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-05 16:21:00.894881
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-05 16:21:01.101232
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -100
+
+2024-07-05 16:21:01.306082
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -64
+
+2024-07-05 16:21:01.512065
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-05 16:21:01.770423
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-05 16:21:39.379167
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -63
+
+2024-07-05 16:21:39.637610
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-07-05 16:21:40.298320
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-07-05 16:21:40.500742
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-07-05 16:21:40.702918
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-05 16:21:40.905053
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-05 18:47:15.941668
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -87
+
+2024-07-05 18:47:16.301815
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-05 18:47:16.508263
+Sender: 17
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-05 18:47:16.764254
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 18:47:16.966417
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-05 18:47:32.446951
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -70
+
+2024-07-05 18:47:32.652675
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -86
+
+2024-07-05 18:47:32.858722
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 18:47:33.064841
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -96
+
+2024-07-05 18:47:46.750163
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-07-05 18:47:46.955864
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -87
+
+2024-07-05 18:47:47.161947
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-05 18:47:47.420330
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -88
+
+2024-07-05 18:47:47.626936
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-05 18:47:47.834331
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -65
+
+2024-07-05 18:47:48.036502
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -66
+
+2024-07-05 18:48:06.530281
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -71
+
+2024-07-05 18:48:06.735963
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -87
+
+2024-07-05 18:48:06.942019
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -66
+
+2024-07-05 18:48:07.252321
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-05 18:48:07.458457
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -97
+
+2024-07-05 18:48:20.662132
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -97
+
+2024-07-05 18:48:20.867834
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -81
+
+2024-07-05 18:48:21.073964
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 18:48:21.280029
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-05 18:48:21.486104
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-05 18:58:05.316227
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -99
+
+2024-07-05 18:58:05.670429
+Sender: 18
+Destination: 18
+Aspect: G
+RSSI: -83
+
+2024-07-05 18:58:05.873462
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -83
+
+2024-07-05 18:59:05.148114
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -87
+
+2024-07-05 18:59:05.353937
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-05 18:59:06.015491
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -87
+
+2024-07-05 18:59:06.217655
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -97
+
+2024-07-05 18:59:06.419803
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -82
+
+2024-07-05 18:59:06.621927
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-05 19:00:19.560663
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -89
+
+2024-07-05 19:00:19.766804
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:00:20.427638
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-05 19:00:20.629809
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 19:04:40.706144
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-05 19:04:40.912253
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -97
+
+2024-07-05 19:04:41.118354
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-05 19:04:41.376567
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-05 19:04:41.583455
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:13:53.520190
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-05 19:15:18.174149
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:18:44.039370
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-05 19:18:44.245149
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -84
+
+2024-07-05 19:18:44.451141
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-05 19:18:44.711196
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-05 19:18:44.913547
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -86
+
+2024-07-05 19:18:45.115737
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:18:45.317862
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-05 19:18:45.976208
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -91
+
+2024-07-05 19:18:46.229598
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -91
+
+2024-07-05 19:18:46.535428
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -90
+
+2024-07-05 19:18:46.737620
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -111
+
+2024-07-05 19:21:51.083623
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:22:00.899859
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -85
+
+2024-07-05 19:22:01.105973
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-05 19:25:04.037410
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -86
+
+2024-07-05 19:38:27.910144
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -87
+
+2024-07-05 19:39:47.297869
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:39:56.803628
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -97
+
+2024-07-05 19:39:57.009479
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-05 19:40:40.091457
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -106
+
+2024-07-05 19:40:40.297609
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:41:04.734707
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -88
+
+2024-07-05 19:41:04.940961
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -98
+
+2024-07-05 19:41:05.608759
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -87
+
+2024-07-05 19:41:05.814608
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-05 19:41:41.743481
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:41:41.949629
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-05 19:41:42.155604
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:41:42.361588
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-05 19:41:42.567632
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:41:42.773630
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-05 19:41:42.979700
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -98
+
+2024-07-05 19:41:43.185718
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-05 19:41:43.391874
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:41:43.597923
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-05 19:41:43.803908
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-05 19:41:44.009990
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-05 19:42:09.326650
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -87
+
+2024-07-05 19:43:05.830853
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:43:14.741719
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -97
+
+2024-07-05 19:43:14.947523
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -111
+
+2024-07-05 19:48:00.081199
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-05 19:48:00.283415
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -97
+
+2024-07-05 19:58:08.681510
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-05 19:58:09.042338
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -95
+
+2024-07-05 19:58:09.650100
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -86
+
+2024-07-05 19:58:09.853123
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-05 19:58:48.033166
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-05 19:58:48.239220
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:58:48.445294
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-05 19:58:48.651325
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -87
+
+2024-07-05 19:58:48.857314
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 19:58:49.063331
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-05 19:58:49.269374
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-05 19:59:03.984540
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-05 20:00:20.968400
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-05 20:00:21.174438
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -86
+
+2024-07-11 13:49:29.227974
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-11 13:51:34.798926
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -91
+
+2024-07-11 13:51:48.941022
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -91
+
+2024-07-11 13:51:49.146828
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-11 13:52:56.871766
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -114
+
+2024-07-11 13:52:57.077555
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -91
+
+2024-07-11 14:29:13.313185
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-11 14:29:13.668669
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-11 14:29:14.274410
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -91
+
+2024-07-11 14:29:14.476567
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -66
+
+2024-07-11 14:30:05.247078
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-11 14:30:05.452814
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-11 14:30:05.658866
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-11 14:30:05.864937
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-11 14:30:06.071107
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-11 14:30:06.276847
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-11 14:30:06.482918
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-11 14:30:29.711516
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -91
+
+2024-07-11 14:30:29.917676
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-11 14:32:21.492312
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-11 14:32:21.698346
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-11 14:52:49.357722
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-11 14:54:56.588697
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-11 14:54:56.794725
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-11 14:54:57.000709
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-11 14:54:57.206694
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-11 14:54:57.412643
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-11 14:54:57.618641
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-11 14:55:12.496424
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -95
+
+2024-07-11 14:55:12.702609
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-11 14:56:31.932478
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-11 14:56:32.138669
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -89
+
+2024-07-11 14:57:14.427095
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -93
+
+2024-07-11 14:57:14.632887
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-11 14:57:15.295162
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -89
+
+2024-07-11 14:57:15.497320
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-11 14:57:15.699438
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-11 14:57:15.952645
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-11 14:57:16.155545
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -69
+
+2024-07-11 18:34:20.255463
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -87
+
+2024-07-11 19:12:00.370193
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -92
+
+2024-07-11 19:12:00.724443
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -92
+
+2024-07-11 19:12:01.483681
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-11 19:12:01.685852
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -69
+
+2024-07-11 19:13:18.077111
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-11 19:13:18.283034
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -92
+
+2024-07-11 19:13:18.489063
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-11 19:13:18.695046
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-11 19:13:18.901062
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -65
+
+2024-07-11 19:33:59.366510
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -114
+
+2024-07-11 19:33:59.726923
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-11 19:35:05.728724
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -115
+
+2024-07-11 19:35:05.934761
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 05:30:40.130242
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -86
+
+2024-07-12 06:49:53.769623
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -90
+
+2024-07-12 06:49:54.129604
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -90
+
+2024-07-12 06:49:54.787380
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-12 06:49:54.989550
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -69
+
+2024-07-12 06:51:01.055232
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -88
+
+2024-07-12 06:51:01.260694
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 06:51:01.466745
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-12 06:51:01.672884
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-12 06:56:34.048708
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 06:57:49.348880
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 07:26:07.756386
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 07:28:28.592604
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -95
+
+2024-07-12 07:28:28.794833
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-12 07:30:36.172347
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -96
+
+2024-07-12 07:30:36.378524
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -93
+
+2024-07-12 07:30:37.046980
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-12 07:30:37.250630
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-12 07:31:34.868032
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 07:31:35.074175
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-12 07:31:35.280161
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 07:31:35.486142
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -87
+
+2024-07-12 07:31:35.692073
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-12 07:31:35.898136
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 07:31:36.104196
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 07:31:36.310242
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-12 07:31:36.516239
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 07:31:36.722273
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 07:31:36.928290
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-12 07:31:37.134353
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -66
+
+2024-07-12 08:04:10.940688
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 08:04:11.301705
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 08:04:11.908060
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-12 08:04:12.110258
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -68
+
+2024-07-12 08:05:18.919139
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:19.125312
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:05:19.331314
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:19.537366
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-12 08:05:19.743384
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:05:19.949529
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:20.155666
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:20.361643
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:20.567688
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:05:20.773817
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:05:44.762860
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 08:07:49.811826
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 08:09:57.291830
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-12 08:20:28.859464
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -111
+
+2024-07-12 08:20:29.220702
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -111
+
+2024-07-12 08:29:28.769336
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -93
+
+2024-07-12 08:29:29.130541
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -93
+
+2024-07-12 08:29:30.082642
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-12 08:29:30.288728
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-12 08:30:53.281884
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:30:53.487808
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-12 08:30:53.693880
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:30:53.899893
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 08:30:54.106008
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:30:54.311990
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:30:54.518169
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:30:54.724251
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 08:31:20.061403
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-12 08:35:45.376232
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 08:43:58.633475
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -64
+
+2024-07-12 08:43:59.045924
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-12 08:43:59.299091
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:43:59.501248
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-12 08:44:00.056420
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:08.970113
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:09.228056
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:09.430244
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-12 08:44:10.035779
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:10.289207
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:10.491456
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-12 08:44:19.424022
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:19.681477
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:19.888564
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-12 08:44:20.494321
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-12 08:44:20.747449
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-12 08:44:20.950041
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:21.153284
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-12 08:44:21.355437
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:44:21.557563
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-12 08:44:21.759714
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:22.418064
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-12 08:44:22.620330
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-12 08:44:22.873495
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 08:44:23.075896
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 08:44:23.278294
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:23.480475
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 08:44:23.682631
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 08:44:23.884741
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 09:55:17.762517
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -90
+
+2024-07-12 09:55:18.123849
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-12 09:57:24.678211
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 09:57:39.408705
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -96
+
+2024-07-12 09:57:39.614528
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -111
+
+2024-07-12 09:58:46.023862
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -111
+
+2024-07-12 09:58:46.230022
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 09:59:24.509437
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -98
+
+2024-07-12 09:59:24.715172
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 09:59:25.379220
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-12 09:59:25.581439
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 10:00:55.542709
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -95
+
+2024-07-12 10:00:55.749064
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 10:00:55.954789
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -95
+
+2024-07-12 10:00:56.160906
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -88
+
+2024-07-12 10:00:56.366927
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -97
+
+2024-07-12 10:00:56.573159
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 10:00:56.779179
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-12 10:00:56.985261
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 10:00:57.191295
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-12 10:00:57.397401
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-12 10:00:57.603386
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 10:00:57.809423
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-12 10:16:37.525704
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 10:16:37.886913
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 10:16:38.496025
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -98
+
+2024-07-12 10:16:38.698648
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 10:17:33.917263
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:34.122944
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 10:17:34.329002
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:34.535029
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -86
+
+2024-07-12 10:17:34.741089
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -98
+
+2024-07-12 10:17:34.947103
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:35.153158
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:35.359722
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 10:17:35.565482
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:35.771515
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 10:17:35.977571
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-12 10:17:36.235910
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 10:17:36.441964
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 10:17:59.526343
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-12 10:19:53.424396
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 10:19:53.630564
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 10:19:53.836530
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 10:57:06.161670
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 10:59:23.955362
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 10:59:39.992537
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -91
+
+2024-07-12 10:59:40.198765
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-12 11:00:51.429129
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-12 11:00:51.634854
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 11:01:33.188337
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-12 11:01:33.394539
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 11:01:34.062632
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-12 11:01:34.264813
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 11:24:43.063232
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 11:24:43.424624
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 11:24:44.033875
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -89
+
+2024-07-12 11:24:44.236408
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -67
+
+2024-07-12 11:26:04.535076
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 11:26:04.741192
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 11:26:04.947161
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -89
+
+2024-07-12 11:26:05.153210
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -84
+
+2024-07-12 11:26:05.359159
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 11:26:05.565237
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 11:26:26.591998
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-12 11:26:26.798168
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-12 11:28:18.424493
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 11:28:18.630557
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 12:08:29.537420
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 12:10:46.998774
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-12 12:10:59.684644
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -93
+
+2024-07-12 12:10:59.886856
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-12 12:13:22.627593
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-12 12:13:22.833383
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -90
+
+2024-07-12 12:15:22.068603
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -113
+
+2024-07-12 12:15:22.274287
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -88
+
+2024-07-12 12:22:20.132458
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -107
+
+2024-07-12 12:22:20.494251
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -107
+
+2024-07-12 13:30:41.317084
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -113
+
+2024-07-12 13:30:41.678613
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-12 13:32:46.079639
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-12 13:32:46.285309
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-12 15:05:35.960049
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -91
+
+2024-07-12 15:05:36.320214
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -91
+
+2024-07-12 15:08:08.985442
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-12 15:08:09.191592
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-12 15:08:30.557594
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -92
+
+2024-07-12 15:08:30.763782
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-12 15:09:36.836028
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -107
+
+2024-07-12 15:09:37.041804
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:10:13.263747
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-12 15:10:13.469935
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-12 15:10:14.133238
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -89
+
+2024-07-12 15:10:14.335444
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 15:11:06.299361
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 15:11:06.505150
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 15:11:06.711141
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:11:06.917262
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -87
+
+2024-07-12 15:11:07.123285
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -89
+
+2024-07-12 15:11:07.329483
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 15:11:07.535545
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:11:07.741579
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 15:11:07.947581
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-12 15:11:08.153639
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:11:08.359621
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:11:08.565707
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -69
+
+2024-07-12 15:11:08.771739
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:11:21.579695
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -70
+
+2024-07-12 15:11:21.783939
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -90
+
+2024-07-12 15:11:21.989973
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -69
+
+2024-07-12 15:11:22.195930
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -91
+
+2024-07-12 15:23:50.984189
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 15:23:51.347886
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 15:23:51.955096
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -91
+
+2024-07-12 15:23:52.157378
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-12 15:25:08.017200
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 15:25:08.222817
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-12 15:25:08.428479
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 15:25:08.634526
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 15:25:08.840544
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 15:25:09.046560
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 15:25:09.252790
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 15:25:41.508562
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-12 15:25:41.714024
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-12 15:27:53.502806
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 15:27:53.708931
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-12 16:30:46.439532
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-12 16:30:46.800030
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 16:32:33.273438
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 16:32:33.479559
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 16:32:47.024414
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -95
+
+2024-07-12 16:32:47.226651
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-12 16:34:00.751399
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-12 16:34:00.957213
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 16:34:40.932005
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -93
+
+2024-07-12 16:34:41.138251
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -93
+
+2024-07-12 16:34:41.797982
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-12 16:34:42.000161
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -89
+
+2024-07-12 16:34:42.202300
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-12 16:36:54.391178
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:54.593347
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 16:36:54.795478
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:54.997589
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -87
+
+2024-07-12 16:36:55.200039
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-12 16:36:55.402202
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:55.604361
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:55.806545
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 16:36:56.008665
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 16:36:56.210798
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:56.412919
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-12 16:36:56.615048
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 16:36:56.817164
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 17:01:29.158295
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 17:01:29.922431
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-12 17:01:30.125043
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-12 17:01:30.782222
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -91
+
+2024-07-12 17:01:30.984409
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 17:02:47.019165
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 17:02:47.224960
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-12 17:02:47.431023
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 17:02:47.637119
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 17:02:47.843314
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 17:02:48.049561
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 17:02:48.255594
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-12 17:02:48.461711
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 17:03:04.093789
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 17:04:44.119114
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-12 17:04:44.324863
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 17:26:19.194532
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -86
+
+2024-07-12 17:28:16.468531
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-12 17:28:16.670729
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 17:28:30.447648
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -92
+
+2024-07-12 17:28:30.653806
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-12 17:30:08.303769
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-12 17:30:08.509599
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 17:30:09.171503
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-12 17:30:09.373690
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -70
+
+2024-07-12 17:37:30.413529
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 17:39:44.248437
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 17:39:44.454371
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 18:15:31.918616
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 18:17:50.407659
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 18:17:50.613745
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 18:18:05.853871
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -89
+
+2024-07-12 18:18:06.060173
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -108
+
+2024-07-12 18:19:15.819092
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-12 18:19:16.025317
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-12 18:22:03.716623
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 18:22:17.317803
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -108
+
+2024-07-12 18:22:17.523906
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -93
+
+2024-07-12 18:23:28.517933
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-12 18:23:43.810710
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -96
+
+2024-07-12 18:23:44.012892
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -91
+
+2024-07-12 18:23:44.669753
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-12 18:23:44.871975
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -70
+
+2024-07-12 18:24:47.845917
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-12 18:24:48.051926
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 18:24:48.257972
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 18:24:48.464007
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 19:03:02.342328
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-12 19:03:02.703388
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -93
+
+2024-07-12 19:03:02.909732
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -92
+
+2024-07-12 19:03:03.169667
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-12 19:03:03.371857
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-12 19:03:03.927294
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 19:03:45.800191
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -88
+
+2024-07-12 19:03:46.006377
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 19:03:46.212405
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 19:03:46.418469
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:03:46.624509
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 19:03:46.830535
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:03:47.036517
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 19:03:47.242680
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 19:03:47.448800
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-12 19:03:47.705909
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:03:47.908085
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-12 19:04:04.933941
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 19:04:09.021608
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-12 19:04:09.223799
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -93
+
+2024-07-12 19:04:09.425920
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-12 19:04:09.628059
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-12 19:04:58.644358
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-12 19:04:58.850442
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:04:59.056429
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-12 19:04:59.262420
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:04:59.468427
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-12 19:04:59.674593
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-12 19:04:59.880669
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-12 19:05:35.253426
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 19:10:28.145984
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-12 19:12:00.179118
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -111
+
+2024-07-12 19:12:00.384806
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 19:32:41.214347
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-12 19:32:41.627207
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-12 19:34:28.938736
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-12 19:34:29.144939
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-12 19:34:42.975030
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-12 19:34:43.181215
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -90
+
+2024-07-12 19:34:43.843022
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-12 19:34:44.045229
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-12 19:35:51.554981
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:35:51.761057
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-12 19:35:51.966988
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-12 19:35:52.173087
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-12 19:50:51.050545
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-12 19:50:51.411729
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-12 19:50:52.026296
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-12 19:50:52.232006
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-12 19:51:41.883589
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:51:42.089710
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-12 19:51:42.295710
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:51:42.501722
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -86
+
+2024-07-12 19:51:42.707770
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -89
+
+2024-07-12 19:51:42.914198
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:51:43.120284
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:51:43.326124
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-12 19:51:43.532203
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-12 19:51:43.738241
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-12 19:51:43.944264
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-12 19:51:44.150330
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-12 19:52:04.103911
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-12 19:52:04.309714
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-12 19:53:58.666104
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -115
+
+2024-07-12 19:53:58.871782
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-13 06:21:03.803046
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -85
+
+2024-07-13 06:23:11.211138
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -85
+
+2024-07-13 06:23:31.345007
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -92
+
+2024-07-13 06:23:31.547228
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -109
+
+2024-07-13 06:25:42.317754
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-13 06:25:42.523820
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -90
+
+2024-07-13 06:25:43.184056
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 06:25:43.386243
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-13 06:26:40.627807
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -90
+
+2024-07-13 06:26:40.833927
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 06:26:41.039864
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -90
+
+2024-07-13 06:26:41.245845
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -84
+
+2024-07-13 06:26:41.451933
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-13 06:26:41.657940
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 06:26:41.863958
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 06:26:42.070003
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 06:26:42.275922
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 06:26:42.481914
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 06:26:42.687925
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-13 06:26:42.894020
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -67
+
+2024-07-13 07:12:35.575644
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-13 07:14:40.865697
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 07:14:41.071776
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -114
+
+2024-07-13 07:14:55.837177
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -90
+
+2024-07-13 07:14:56.039358
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -103
+
+2024-07-13 07:14:56.292409
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -89
+
+2024-07-13 07:14:56.495919
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -70
+
+2024-07-13 07:16:56.942687
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 07:16:57.148672
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 07:16:57.354837
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 07:16:57.560946
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 07:16:57.819355
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -105
+
+2024-07-13 07:16:58.025438
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 07:16:58.231436
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 07:16:58.433730
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 07:16:58.635948
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-13 07:16:58.838088
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 07:16:59.040237
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -103
+
+2024-07-13 07:16:59.242349
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-13 07:16:59.444496
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 07:16:59.646675
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-13 08:10:26.572316
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-13 08:10:26.934696
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-13 08:10:27.540931
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-13 08:10:27.743118
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -69
+
+2024-07-13 08:14:16.763232
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 08:14:16.969387
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -99
+
+2024-07-13 08:14:17.175411
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-13 08:14:17.381437
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -99
+
+2024-07-13 08:14:17.587432
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 08:14:17.793437
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 08:14:17.999399
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-13 08:14:18.205592
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 08:14:41.318357
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -87
+
+2024-07-13 08:16:13.205881
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-13 08:22:48.953948
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -90
+
+2024-07-13 08:22:49.314933
+Sender: 21
+Destination: 21
+Aspect: A
+RSSI: -70
+
+2024-07-13 08:22:49.521297
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -70
+
+2024-07-13 08:22:50.181012
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -66
+
+2024-07-13 08:22:50.383364
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -69
+
+2024-07-13 08:22:50.988896
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -90
+
+2024-07-13 08:24:01.081537
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-13 08:24:01.286414
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -90
+
+2024-07-13 08:24:01.953552
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-13 08:24:02.158946
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -69
+
+2024-07-13 08:24:24.651594
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -108
+
+2024-07-13 08:24:24.857719
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -90
+
+2024-07-13 08:28:41.857641
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -90
+
+2024-07-13 08:28:42.063405
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -109
+
+2024-07-13 08:29:08.813738
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -86
+
+2024-07-13 08:32:16.982674
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -87
+
+2024-07-13 09:16:55.470444
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-13 09:16:55.833572
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-13 09:16:56.439499
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:16:56.641673
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -69
+
+2024-07-13 09:16:56.843828
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:16:57.045952
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -88
+
+2024-07-13 09:16:57.804866
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:16:58.007847
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-13 09:17:25.289669
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:17:25.495792
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 09:17:25.701826
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:17:25.907830
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:17:26.113875
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 09:17:26.319829
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:17:26.525851
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:17:26.731809
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-13 09:17:26.937825
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-13 09:20:22.258156
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -98
+
+2024-07-13 09:21:02.411758
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -96
+
+2024-07-13 09:21:03.528003
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -96
+
+2024-07-13 09:21:03.730152
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -97
+
+2024-07-13 09:21:03.932311
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-13 09:23:01.478101
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 09:23:01.684065
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -95
+
+2024-07-13 09:23:01.890046
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 09:23:02.095975
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -96
+
+2024-07-13 09:24:17.343564
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:24:17.549195
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -93
+
+2024-07-13 09:24:17.755764
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:24:18.015151
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:24:18.217290
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -93
+
+2024-07-13 09:31:02.319579
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-13 09:31:02.681223
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-13 09:31:03.287526
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-13 09:31:03.489701
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-13 09:31:27.798621
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -93
+
+2024-07-13 09:32:17.215092
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:32:17.421173
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 09:32:17.627074
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:32:17.833019
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -85
+
+2024-07-13 09:32:18.038952
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -97
+
+2024-07-13 09:32:18.245011
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:32:18.451038
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:32:18.657238
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 09:32:18.863235
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -97
+
+2024-07-13 09:32:19.069308
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:32:19.275340
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-13 09:32:19.481410
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-13 09:33:59.024347
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -95
+
+2024-07-13 09:33:59.230461
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 09:34:16.654819
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -92
+
+2024-07-13 09:34:16.861002
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -95
+
+2024-07-13 09:34:17.528827
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-13 09:34:17.731052
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-13 09:35:24.950823
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 09:35:25.156959
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:35:25.362984
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:35:25.569098
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 09:35:47.339785
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -93
+
+2024-07-13 09:35:47.546022
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -91
+
+2024-07-13 09:35:48.214001
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 09:35:48.416245
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-13 09:36:58.901161
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:36:59.107316
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 09:36:59.313560
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:36:59.519543
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -85
+
+2024-07-13 09:36:59.725562
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-13 09:36:59.931559
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:37:00.137587
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:37:00.343615
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 09:37:00.549840
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 09:37:00.755825
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -73
+
+2024-07-13 09:37:00.961901
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:37:01.167742
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 09:38:54.612653
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -113
+
+2024-07-13 09:38:54.818638
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -96
+
+2024-07-13 09:40:08.977854
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -95
+
+2024-07-13 09:42:14.239296
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:42:14.497940
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:42:15.159194
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -99
+
+2024-07-13 09:42:15.361466
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:42:15.563644
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 09:42:16.220105
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-13 09:42:16.422564
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:43:20.548411
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -88
+
+2024-07-13 09:43:20.807195
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 09:43:21.467721
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -89
+
+2024-07-13 09:43:21.669865
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 09:43:22.275387
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-13 09:43:22.528883
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:43:22.731813
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 09:43:22.933972
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:43:23.136156
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:43:23.440778
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -90
+
+2024-07-13 09:43:23.643250
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -108
+
+2024-07-13 09:43:49.796850
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:43:50.002646
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -92
+
+2024-07-13 09:43:50.669321
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:43:50.871502
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -71
+
+2024-07-13 09:59:39.666553
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-13 09:59:40.026875
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -90
+
+2024-07-13 09:59:40.977153
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 09:59:41.179370
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -105
+
+2024-07-13 10:01:09.275839
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-13 10:01:09.481993
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 10:01:09.687932
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:01:09.894110
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 10:01:10.100197
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -106
+
+2024-07-13 10:01:10.306246
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 10:01:10.512236
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:01:10.718319
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-13 10:01:10.924314
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:01:41.713322
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -92
+
+2024-07-13 10:05:19.384030
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 10:05:19.590118
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -95
+
+2024-07-13 10:16:39.070653
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -95
+
+2024-07-13 10:16:39.431509
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -95
+
+2024-07-13 10:18:07.219019
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 10:18:07.425119
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 10:18:07.631110
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:18:20.055418
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-13 10:18:20.257604
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -97
+
+2024-07-13 10:18:20.914294
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-13 10:18:21.116515
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -72
+
+2024-07-13 10:31:55.807174
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-13 10:31:56.167120
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -90
+
+2024-07-13 10:31:56.777954
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 10:31:56.980785
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -72
+
+2024-07-13 10:33:38.902908
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -82
+
+2024-07-13 10:33:39.109023
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 10:33:39.315006
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:33:39.521232
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -85
+
+2024-07-13 10:33:39.727237
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:33:39.933451
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:33:40.139531
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:33:40.345590
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -68
+
+2024-07-13 10:33:40.551759
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 10:33:40.758293
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:33:40.964018
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+
+2024-07-13 10:33:41.170104
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-13 10:33:41.428455
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:33:41.635787
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-13 10:35:07.621933
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -91
+
+2024-07-13 10:35:07.827665
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -90
+
+2024-07-13 10:35:08.491247
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -89
+
+2024-07-13 10:35:08.693448
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -66
+
+2024-07-13 10:38:12.219976
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 10:38:12.425479
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 10:38:12.631286
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:12.836760
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -85
+
+2024-07-13 10:38:13.043181
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:13.248619
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:13.454635
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:13.660653
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -72
+
+2024-07-13 10:38:13.866752
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:14.072887
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:14.279030
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -72
+
+2024-07-13 10:38:14.485136
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -68
+
+2024-07-13 10:38:14.743209
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 10:38:14.945549
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-13 10:39:39.305385
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -93
+
+2024-07-13 10:39:39.511090
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -92
+
+2024-07-13 10:39:40.177484
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 10:39:40.379799
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-13 11:07:52.610064
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-13 11:07:53.022169
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -90
+
+2024-07-13 11:07:53.628793
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -90
+
+2024-07-13 11:07:53.830978
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-13 11:09:34.781176
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 11:09:34.986789
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -92
+
+2024-07-13 11:09:35.192875
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 11:09:35.398879
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 11:09:35.604525
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 11:09:35.810511
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -85
+
+2024-07-13 11:09:36.016527
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-13 11:10:14.591766
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -95
+
+2024-07-13 11:10:14.797509
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -112
+
+2024-07-13 11:12:46.320630
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 11:12:46.526385
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -95
+
+2024-07-13 11:14:50.646662
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -70
+
+2024-07-13 11:14:50.852731
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -89
+
+2024-07-13 11:14:51.931477
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -70
+
+2024-07-13 11:14:52.133661
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 11:20:50.145610
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -84
+
+2024-07-13 11:20:50.506019
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -84
+
+2024-07-13 11:20:50.764162
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -91
+
+2024-07-13 11:20:50.966335
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -88
+
+2024-07-13 11:20:51.168466
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -91
+
+2024-07-13 11:20:51.723267
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 11:20:52.431396
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -104
+
+2024-07-13 11:21:29.740218
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -92
+
+2024-07-13 11:21:29.942405
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -89
+
+2024-07-13 11:21:30.599714
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 11:21:30.801896
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -74
+
+2024-07-13 11:26:15.919659
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:26:16.125703
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -88
+
+2024-07-13 11:26:16.331652
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:26:16.537843
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:26:16.743831
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:26:16.950058
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+
+2024-07-13 11:31:12.654877
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -88
+
+2024-07-13 11:31:12.913646
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -88
+
+2024-07-13 11:37:49.464564
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -90
+
+2024-07-13 11:37:49.826409
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-13 11:40:35.136639
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -92
+
+2024-07-13 11:40:35.342399
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -101
+
+2024-07-13 11:40:55.771290
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -99
+
+2024-07-13 11:40:55.977069
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -93
+
+2024-07-13 11:43:18.807380
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -113
+
+2024-07-13 11:43:19.013110
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-13 11:43:39.501726
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-13 11:43:39.707833
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -96
+
+2024-07-13 11:43:40.187326
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-13 11:43:40.393236
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -75
+
+2024-07-13 11:44:50.736865
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -96
+
+2024-07-13 11:44:50.942577
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:44:51.148667
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -75
+
+2024-07-13 11:44:51.354619
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -92
+
+2024-07-13 11:44:51.560351
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -75
+
+2024-07-13 11:44:51.766446
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-13 11:45:27.731456
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 11:45:27.937178
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 11:54:38.659785
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -96
+
+2024-07-13 11:54:39.022350
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -96
+
+2024-07-13 11:54:39.969607
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-13 11:54:40.171797
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -75
+
+2024-07-13 11:55:14.355596
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -96
+
+2024-07-13 11:55:14.561694
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:55:14.767764
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -73
+
+2024-07-13 11:55:14.973799
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 11:55:15.179804
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-13 11:55:15.385998
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-13 11:55:15.591988
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 11:55:15.798067
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-13 11:55:27.185370
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-13 11:55:27.387534
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -113
+
+2024-07-13 11:56:29.471943
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 11:56:29.678032
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 12:01:14.558773
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-13 12:01:14.764530
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -111
+
+2024-07-13 12:03:11.214842
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -111
+
+2024-07-13 12:03:11.420570
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -88
+
+2024-07-13 12:06:19.643952
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -97
+
+2024-07-13 12:06:19.850168
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -95
+
+2024-07-13 12:06:20.515180
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 12:06:20.721404
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -76
+
+2024-07-13 12:07:24.377170
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 12:07:24.583843
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -75
+
+2024-07-13 12:07:24.790051
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-13 12:07:24.996056
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -96
+
+2024-07-13 12:07:25.202076
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -75
+
+2024-07-13 12:07:25.408024
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-13 12:07:25.614052
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 12:07:25.820009
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -75
+
+2024-07-13 12:07:26.026073
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -71
+
+2024-07-13 12:07:35.092704
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -111
+
+2024-07-13 12:07:35.294879
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-13 12:10:34.665640
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 12:10:34.871334
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -108
+
+2024-07-13 12:10:37.225141
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -91
+
+2024-07-13 12:10:37.431198
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -109
+
+2024-07-13 12:10:47.000033
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -89
+
+2024-07-13 12:10:47.202211
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -91
+
+2024-07-13 12:10:47.404361
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -92
+
+2024-07-13 12:10:47.708395
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-13 12:10:47.910843
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -92
+
+2024-07-13 12:10:48.113010
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-13 12:10:48.315145
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -91
+
+2024-07-13 12:10:48.517268
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-13 12:10:48.719396
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -77
+
+2024-07-13 12:11:35.802843
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -97
+
+2024-07-13 12:11:36.008668
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-13 12:11:36.214658
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-13 12:11:36.420846
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -76
+
+2024-07-13 12:12:45.258332
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -84
+
+2024-07-13 12:21:55.738367
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-13 12:21:56.099486
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-13 12:23:02.773377
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -89
+
+2024-07-13 12:23:02.979471
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 12:23:16.001732
+Sender: 17
+Destination: 19
+Aspect: R
+RSSI: -96
+
+2024-07-13 12:23:16.203928
+Sender: 19
+Destination: 17
+Aspect: A
+RSSI: -91
+
+2024-07-13 12:45:34.381724
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -90
+
+2024-07-13 12:45:34.744376
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -90
+
+2024-07-13 12:47:55.748167
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 12:47:55.950331
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 12:48:17.237939
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-13 12:48:17.440141
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -98
+
+2024-07-13 12:48:18.097502
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -92
+
+2024-07-13 12:48:18.299748
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -74
+
+2024-07-13 12:49:33.170910
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -98
+
+2024-07-13 12:49:33.376959
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 12:49:33.582977
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -96
+
+2024-07-13 12:49:33.789040
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -75
+
+2024-07-13 14:03:55.754219
+Sender: 18
+Destination: 17
+Aspect: R
+RSSI: -95
+
+2024-07-13 14:03:56.166360
+Sender: 17
+Destination: 18
+Aspect: A
+RSSI: -95
+
+2024-07-13 14:03:56.773428
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-13 14:03:56.976613
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -71
+
+2024-07-13 14:03:57.178871
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-13 14:03:57.381132
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -96
+
+2024-07-13 14:03:58.038358
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -85
+
+2024-07-13 14:03:58.240572
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -74
+
+2024-07-13 14:03:58.494091
+Sender: 18
+Destination: 21
+Aspect: R
+RSSI: -95
+
+2024-07-13 14:03:58.696408
+Sender: 21
+Destination: 18
+Aspect: A
+RSSI: -74
+
+2024-07-13 14:05:04.365166
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -93
+
+2024-07-13 14:05:04.571251
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-13 14:05:04.777403
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+
+2024-07-13 14:05:04.983567
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-13 14:05:05.189621
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 14:05:05.395613
+Sender: 17
+Destination: 21
+Aspect: G
+RSSI: -93
+
+2024-07-13 14:05:05.601687
+Sender: 21
+Destination: 17
+Aspect: G
+RSSI: -74
+
+2024-07-13 14:05:25.760882
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -89
+
+2024-07-13 14:05:25.966659
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -114
+
+2024-07-13 14:08:31.887954
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -85
+
+2024-07-13 14:30:40.271641
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-13 14:30:40.632600
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-13 14:32:05.265373
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 14:32:05.471523
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 14:32:24.025482
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -93
+
+2024-07-13 14:32:24.231193
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -97
+
+2024-07-13 14:32:24.892326
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -93
+
+2024-07-13 14:32:25.094522
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -74
+
+2024-07-13 14:33:40.656679
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -95
+
+2024-07-13 14:33:40.862457
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -95
+
+2024-07-13 14:33:41.068533
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -95
+
+2024-07-13 14:33:41.274648
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -71
+
+2024-07-13 15:57:27.695162
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -98
+
+2024-07-13 15:57:28.055845
+Sender: 21
+Destination: 21
+Aspect: A
+RSSI: -74
+
+2024-07-13 15:57:28.258197
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:57:28.460397
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:57:29.015184
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:57:29.217322
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -72
+
+2024-07-13 15:57:29.470404
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:57:29.672822
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -91
+
+2024-07-13 15:58:26.650151
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -92
+
+2024-07-13 15:58:26.856373
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 15:58:27.516660
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -101
+
+2024-07-13 15:58:27.718870
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+
+2024-07-13 15:58:39.165180
+Sender: 21
+Destination: 18
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:58:39.367379
+Sender: 18
+Destination: 21
+Aspect: A
+RSSI: -104
+
+2024-07-13 15:58:39.569522
+Sender: 21
+Destination: 17
+Aspect: R
+RSSI: -74
+
+2024-07-13 15:58:39.771694
+Sender: 17
+Destination: 21
+Aspect: A
+RSSI: -91
+
+2024-07-13 15:58:46.436778
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -90
+
+2024-07-13 15:58:46.642945
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -91
+
+2024-07-13 15:59:13.711765
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -105
+
+2024-07-13 15:59:13.917896
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 15:59:15.132736
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -104
+
+2024-07-13 15:59:15.334943
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+
+2024-07-13 15:59:50.349639
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -88
+
+2024-07-13 15:59:50.555439
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -87
+
+2024-07-13 15:59:50.761530
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -87
+
+2024-07-13 15:59:50.967587
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -86
+
+2024-07-13 15:59:51.173634
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -87
+
+2024-07-13 15:59:51.379637
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -89
+
+2024-07-13 15:59:51.585701
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-13 15:59:51.791760
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -91
+
+2024-07-13 16:00:03.321197
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -88
+
+2024-07-13 16:00:03.523399
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -86
+
+2024-07-13 16:00:04.181167
+Sender: 19
+Destination: 17
+Aspect: R
+RSSI: -89
+
+2024-07-13 16:00:04.383394
+Sender: 17
+Destination: 19
+Aspect: A
+RSSI: -91
+
+2024-07-13 16:00:08.633814
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -90
+
+2024-07-13 16:00:48.464776
+Sender: 17
+Destination: 19
+Aspect: G
+RSSI: -92
+
+2024-07-13 16:00:48.671231
+Sender: 19
+Destination: 17
+Aspect: G
+RSSI: -90
+
+2024-07-13 16:01:37.149425
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -109
+
+2024-07-13 16:01:37.355488
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 16:01:48.995999
+Sender: 1
+Destination: 2
+Aspect: R
+RSSI: -91
+
+2024-07-13 16:01:49.198170
+Sender: 2
+Destination: 1
+Aspect: A
+RSSI: -112
+
+2024-07-13 16:02:56.837789
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -113
+
+2024-07-13 16:02:57.043681
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 16:02:57.249692
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -112
+
+2024-07-13 16:02:57.455650
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 17:53:54.396787
+Sender: 2
+Destination: 1
+Aspect: R
+RSSI: -89
+
+2024-07-13 17:53:54.758269
+Sender: 1
+Destination: 2
+Aspect: A
+RSSI: -89
+
+2024-07-13 17:54:52.200810
+Sender: 1
+Destination: 2
+Aspect: G
+RSSI: -90
+
+2024-07-13 17:54:52.406911
+Sender: 2
+Destination: 1
+Aspect: G
+RSSI: -111
+
+2024-07-13 17:55:02.789644
+Sender: 17
+Destination: 18
+Aspect: R
+RSSI: -91
+
+2024-07-13 17:55:02.996155
+Sender: 18
+Destination: 17
+Aspect: A
+RSSI: -105
+
+2024-07-13 17:55:03.655955
+Sender: 17
+Destination: 21
+Aspect: R
+RSSI: -91
+
+2024-07-13 17:55:03.858150
+Sender: 21
+Destination: 17
+Aspect: A
+RSSI: -73
+
+2024-07-13 17:55:45.162655
+Sender: 18
+Destination: 17
+Aspect: G
+RSSI: -103
+
+2024-07-13 17:55:45.368412
+Sender: 17
+Destination: 18
+Aspect: G
+RSSI: -92
+
+2024-07-13 17:55:45.574830
+Sender: 18
+Destination: 21
+Aspect: G
+RSSI: -102
+
+2024-07-13 17:55:45.781066
+Sender: 21
+Destination: 18
+Aspect: G
+RSSI: -74
+

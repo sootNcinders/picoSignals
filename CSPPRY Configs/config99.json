@@ -2,9 +2,10 @@
     "address": 99,
     "dimTime": 3,
     "sleepTime": 5,
-    "retryTime": 200,
     "lowBattery": 1,
     "batteryReset": 1,
+    "batteryShutdown": 1,
+    "retryTime": 200,
     "head1": {
         "destination": [
             98,

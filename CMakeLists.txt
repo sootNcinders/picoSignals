@@ -25,12 +25,14 @@ pico_set_linker_script(picoSignals ${CMAKE_SOURCE_DIR}/picoSignals.ld)
 target_link_libraries(picoSignals 
                         pico_stdlib 
                         pico_sync
+                        pico_flash
                         hardware_i2c 
                         hardware_spi
                         hardware_adc
                         hardware_timer
                         hardware_watchdog
                         hardware_flash
+                        hardware_exception
                         FatFs_SPI
                         ArduinoJson
                         )

@@ -4,6 +4,7 @@
     "sleepTime": 120,
     "lowBattery": 1,
     "batteryReset": 1,
+    "batteryShutdown": 1,
     "retryTime": 100,
     "ctcPresent": true,
     "head1": {

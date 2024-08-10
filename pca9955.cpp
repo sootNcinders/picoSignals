@@ -97,6 +97,7 @@ bool PCA9955::checkErrors()
     uint8_t buffer[2];
     bool rtn = false;
     uint32_t error;
+    uint8_t outReg;
 
     clearFaults();
 
@@ -162,8 +163,51 @@ bool PCA9955::checkErrors()
                     break;
 
                 default:
-                    _errors[i] = LEDnormal;
+                    outReg = 0x02 + (uint8_t)(i/4);
+
+                    if(ledState[outReg-0x02] != 0x00)
+                    {
+                        _errors[i] = LEDnormal;
+                    }
                     break;
+            }
+        }
+    }
+
+    return rtn;
+}
+
+bool PCA9955::checkOpenCircuits()
+{
+    bool rtn = false;
+
+    if(checkErrors())
+    {
+        for(int i = 0; i < 16; i++)
+        {
+            if(_errors[i] == LEDopen)
+            {
+                rtn = true;
+                break;
+            }
+        }
+    }
+
+    return rtn;
+}
+
+bool PCA9955::checkShortCircuits()
+{
+    bool rtn = false;
+
+    if(checkErrors())
+    {
+        for(int i = 0; i < 16; i++)
+        {
+            if(_errors[i] == LEDshort)
+            {
+                rtn = true;
+                break;
             }
         }
     }
@@ -196,6 +240,26 @@ void PCA9955::printRegisters()
 
         busy_wait_us(10);
     }
+}
+
+bool PCA9955::ping()
+{
+    bool rtn = true;
+    uint8_t buf[2];
+
+    buf[0] = 0x01;
+    buf[1] = 0b10001001;
+
+    if(critSec) critical_section_enter_blocking(critSec);
+
+    if(i2c_write_timeout_us(_bus, _address, buf, 2, false, 500) == PICO_ERROR_GENERIC)
+    {
+        rtn = false;
+    }
+
+    if(critSec) critical_section_exit(critSec);
+
+    return rtn;
 }
 
 void PCA9955::clearFaults()

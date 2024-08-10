@@ -92,6 +92,8 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
  /Users/tleavitt/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/include/pico/flash.h \
+ /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/include/hardware/i2c.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/i2c.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/i2c.h \
@@ -104,7 +106,6 @@ CMakeFiles/picoSignals.dir/picoSignals.cpp.obj: \
  /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h \
  /Users/tleavitt/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h \
- /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h \
  /Users/tleavitt/pico/projects/picoSignals/inits.h \
  /Users/tleavitt/pico/projects/picoSignals/pca9674.h \
  /Users/tleavitt/pico/projects/picoSignals/pca9955.h \

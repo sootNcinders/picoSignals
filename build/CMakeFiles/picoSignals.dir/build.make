@@ -1136,10 +1136,24 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.s
+
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i: cmake_force
@@ -1153,7 +1167,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.i: cmake_force
@@ -1167,7 +1181,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.i: cmake_force
@@ -1178,10 +1192,24 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.s"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.s
 
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj: CMakeFiles/picoSignals.dir/flags.make
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c > CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.i
+
+CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.s
+
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffsystem.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.i: cmake_force
@@ -1195,7 +1223,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ffunicode.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.i: cmake_force
@@ -1209,7 +1237,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/ff15/source/ff.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.i: cmake_force
@@ -1223,7 +1251,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_spi.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_spi.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.i: cmake_force
@@ -1237,7 +1265,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/demo_logging.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.i: cmake_force
@@ -1251,7 +1279,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/demo_logging.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/spi.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.i: cmake_force
@@ -1265,7 +1293,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/sd_card.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.i: cmake_force
@@ -1279,7 +1307,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/crc.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/sd_driver/crc.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.i: cmake_force
@@ -1293,7 +1321,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/glue.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/glue.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.i: cmake_force
@@ -1307,7 +1335,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/f_util.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/f_util.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.i: cmake_force
@@ -1321,7 +1349,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/f_util.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/ff_stdio.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/ff_stdio.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.i: cmake_force
@@ -1335,7 +1363,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/ff_stdio.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/my_debug.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/my_debug.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.i: cmake_force
@@ -1349,7 +1377,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.s: cmake_force
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj: /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/rtc.c
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj -MF CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj.d -o CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj -c /Users/tleavitt/pico/projects/picoSignals/FatFs_SPI/src/rtc.c
 
 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.i: cmake_force
@@ -1363,7 +1391,7 @@ CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.s: cmake_force
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i: cmake_force
@@ -1377,7 +1405,7 @@ CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj: CMakeFiles/picoSignals.dir/flags.make
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj: CMakeFiles/picoSignals.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building C object CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj -MF CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj.d -o CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj -c /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c
 
 CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.i: cmake_force
@@ -1467,9 +1495,11 @@ picoSignals_OBJECTS = \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj" \
 "CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj" \
+"CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj" \
 "CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj" \
@@ -1566,9 +1596,11 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tin
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
+picoSignals.elf: CMakeFiles/picoSignals.dir/Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
 picoSignals.elf: CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
@@ -1588,7 +1620,7 @@ picoSignals.elf: CMakeFiles/picoSignals.dir/build.make
 picoSignals.elf: pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
 picoSignals.elf: /Users/tleavitt/pico/projects/picoSignals/picoSignals.ld
 picoSignals.elf: CMakeFiles/picoSignals.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Linking CXX executable picoSignals.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Linking CXX executable picoSignals.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/picoSignals.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/arm-none-eabi-objcopy -Oihex /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf picoSignals.hex
 	/opt/homebrew/bin/arm-none-eabi-objcopy -Obinary /Users/tleavitt/pico/projects/picoSignals/build/picoSignals.elf picoSignals.bin
