@@ -17,20 +17,41 @@
             0
         ],
         "dim": 50,
-        "green": {
-            "pin": 4,
-            "current": 30,
-            "brightness": 255
-        },
-        "amber": {
+        "blue": {
             "pin": 2,
-            "current": 30,
-            "brightness": 170
+            "current" : 50
         },
         "red": {
             "pin": 3,
-            "current": 30,
-            "brightness": 255
+            "current": 50,
+            "rgb": [
+                170,
+                0,
+                0
+            ]
+        },
+        "green": {
+            "pin": 4,
+            "current": 50,
+            "rgb": [
+                0,
+                170,
+                0
+            ]
+        },
+        "amber": {
+            "rgb": [
+                155,
+                100,
+                0
+            ]
+        },
+        "lunar": {
+            "rgb": [
+                67,
+                67,
+                121
+            ]
         }
     },
     "pin2": {
