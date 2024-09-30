@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "FreeRTOS.h"
+#include "task.h"
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/sync.h"
@@ -23,8 +25,8 @@
 #include "ArduinoJson.h"
 #include <tusb.h>
 
-#define VERSION 2
-#define REVISION 4
+#define VERSION 3
+#define REVISION 0
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -1142,7 +1144,7 @@ void post()
                 blinkCounter = 0;
             }
 
-            sleep_ms(BLINK_INTERVAL);
+            busy_wait_ms(BLINK_INTERVAL);
         }
     }
     else if(!output1.ping())
@@ -1174,7 +1176,7 @@ void post()
                 blinkCounter = 0;
             }
 
-            sleep_ms(BLINK_INTERVAL);
+            busy_wait_ms(BLINK_INTERVAL);
         }
     }
     else if(radio.getDeviceVersion() == 0x00)
@@ -1206,7 +1208,7 @@ void post()
                 blinkCounter = 0;
             }
 
-            sleep_ms(BLINK_INTERVAL);
+            busy_wait_ms(BLINK_INTERVAL);
         }
     }
 }

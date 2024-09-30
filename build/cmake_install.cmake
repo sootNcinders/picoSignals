@@ -39,6 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/cmake_install.cmake")
   include("/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/cmake_install.cmake")
   include("/Users/tleavitt/pico/projects/picoSignals/build/build/cmake_install.cmake")
   include("/Users/tleavitt/pico/projects/picoSignals/build/ArduinoJson/cmake_install.cmake")

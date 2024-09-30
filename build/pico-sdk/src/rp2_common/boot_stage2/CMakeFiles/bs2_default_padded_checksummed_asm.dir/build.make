@@ -70,7 +70,7 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_as
 
 pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S: pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating bs2_default_padded_checksummed.S"
-	cd /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2 && /Library/Frameworks/Python.framework/Versions/3.10/bin/python3.10 /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2/pad_checksum -s 0xffffffff /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
+	cd /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2 && /opt/homebrew/Frameworks/Python.framework/Versions/3.11/bin/python3.11 /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/boot_stage2/pad_checksum -s 0xffffffff /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
 
 pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin: pico-sdk/src/rp2_common/boot_stage2/bs2_default.elf
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating bs2_default.bin"
@@ -91,6 +91,6 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_as
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/clean
 
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/depend:
-	cd /Users/tleavitt/pico/projects/picoSignals/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/tleavitt/pico/projects/picoSignals /Users/tleavitt/pico/pico-sdk/src/rp2_common/boot_stage2 /Users/tleavitt/pico/projects/picoSignals/build /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2 /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/tleavitt/pico/projects/picoSignals/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/tleavitt/pico/projects/picoSignals /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/boot_stage2 /Users/tleavitt/pico/projects/picoSignals/build /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2 /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/depend
 

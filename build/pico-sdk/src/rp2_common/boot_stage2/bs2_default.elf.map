@@ -62,8 +62,8 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000000       0x22 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
 
-.debug_line     0x0000000000000000      0x199
- .debug_line    0x0000000000000000      0x199 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
+.debug_line     0x0000000000000000      0x1c3
+ .debug_line    0x0000000000000000      0x1c3 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
 
 .debug_info     0x0000000000000000       0x26
  .debug_info    0x0000000000000000       0x26 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
@@ -75,5 +75,5 @@ LOAD linker stubs
  .debug_aranges
                 0x0000000000000000       0x20 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
 
-.debug_str      0x0000000000000000       0xab
- .debug_str     0x0000000000000000       0xab CMakeFiles/bs2_default.dir/compile_time_choice.S.obj
+.debug_str      0x0000000000000000       0xc0
+ .debug_str     0x0000000000000000       0xc0 CMakeFiles/bs2_default.dir/compile_time_choice.S.obj

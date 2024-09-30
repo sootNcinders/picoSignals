@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Users/tleavitt/pico/pico-sdk/tools/pioasm"
+  "/Users/tleavitt/pico/projects/picoSignals/pico-sdk/tools/pioasm"
   "/Users/tleavitt/pico/projects/picoSignals/build/pioasm"
   "/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm"
   "/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp"

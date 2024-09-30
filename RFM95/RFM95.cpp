@@ -42,7 +42,7 @@ RFM95::RFM95(spi_inst_t *spiBus, uint8_t csPin, uint8_t intPin, uint8_t address)
     txAlarmSet = false;
 }
 
-bool RFM95::init()
+bool RFM95::init(SemaphoreHandle_t mutex)
 {
     uint8_t buf[3];
 
@@ -55,6 +55,8 @@ bool RFM95::init()
     _tail = 0;
     _lastRSSI = 0;
     _lastSNR = 0;
+
+    _mutex = mutex;
 
     _promiscuous = true;
 
@@ -103,7 +105,7 @@ bool RFM95::init()
     spi_write_blocking(_bus, buf, 2);
     chipDeselect();
 
-    sleep_ms(10);
+    busy_wait_ms(10);
     //readRegister(RFM95_REG_01_OP_MODE, _buf);
     buf[0] = RFM95_REG_01_OP_MODE & ~RFM95_WRITE_BIT;
 
@@ -161,24 +163,30 @@ bool RFM95::init()
 void RFM95::handleInterrupt(void)
 {
     uint8_t buf[2];
+    BaseType_t higherPriorityTaskWoken = pdFALSE;
+
+    if(_mutex != NULL)
+    {
+        xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
+    }
 
     //readRegister(RFM95_REG_12_IRQ_FLAGS, _buf);
     buf[0] = RFM95_REG_12_IRQ_FLAGS & ~RFM95_WRITE_BIT;
 
-    chipSelect();
+    chipSelectFromISR();
     spi_write_blocking(_bus, buf, 1);
     spi_read_blocking(_bus, 0x77, buf+1, 1);
-    chipDeselect();
+    chipDeselectFromISR();
 
     uint8_t irq_flags = buf[1];
 
     //readRegister(RFM95_REG_1C_HOP_CHANNEL, _buf);
     buf[0] = RFM95_REG_1C_HOP_CHANNEL & ~RFM95_WRITE_BIT;
 
-    chipSelect();
+    chipSelectFromISR();
     spi_write_blocking(_bus, buf, 1);
     spi_read_blocking(_bus, 0x88, buf+1, 1);
-    chipDeselect();
+    chipDeselectFromISR();
 
     uint8_t hop_channel = buf[1];
 
@@ -199,10 +207,10 @@ void RFM95::handleInterrupt(void)
         //readRegister(RFM95_REG_13_RX_NB_BYTES, _buf);
         buf[0] = RFM95_REG_13_RX_NB_BYTES & ~RFM95_WRITE_BIT;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 1);
         spi_read_blocking(_bus, 0x99, buf+1, 1);
-        chipDeselect();
+        chipDeselectFromISR();
 
         _payloadLen[_head] = buf[1];
 
@@ -211,22 +219,22 @@ void RFM95::handleInterrupt(void)
 
         buf[0] = RFM95_REG_10_FIFO_RX_CURRENT_ADDR & ~RFM95_WRITE_BIT;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 1);
         spi_read_blocking(_bus, 0xAA, buf+1, 1);
-        chipDeselect();
+        chipDeselectFromISR();
 
         buf[0] = RFM95_REG_0D_FIFO_ADDR_PTR | RFM95_WRITE_BIT;
         
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 2);
-        chipDeselect();
+        chipDeselectFromISR();
 
         buf[0] = RFM95_REG_00_FIFO & ~0x80;
         uint8_t len = _payloadLen[_head];
         uint8_t index = 0;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 1);
         while(len--)
         {
@@ -234,25 +242,25 @@ void RFM95::handleInterrupt(void)
             _payloadBuf[_head][index] = buf[1];
             index++;
         }
-        chipDeselect();
+        chipDeselectFromISR();
 
         //readRegister(RFM95_REG_19_PKT_SNR_VALUE, _buf);
         buf[0] = RFM95_REG_19_PKT_SNR_VALUE & ~RFM95_WRITE_BIT;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 1);
         spi_read_blocking(_bus, 0xBB, buf+1, 1);
-        chipDeselect();
+        chipDeselectFromISR();
 
         _lastSNR = (int8_t)(buf[1]/4);
 
         //readRegister(RFM95_REG_1A_PKT_RSSI_VALUE, _buf);
         buf[0] = RFM95_REG_1A_PKT_RSSI_VALUE & ~RFM95_WRITE_BIT;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 1);
         spi_read_blocking(_bus, 0xCC, buf+1, 1);
-        chipDeselect();
+        chipDeselectFromISR();
 
         _lastRSSI = buf[1];
 
@@ -299,9 +307,9 @@ void RFM95::handleInterrupt(void)
         buf[0] = RFM95_REG_10_FIFO_RX_CURRENT_ADDR | RFM95_WRITE_BIT;
         buf[1] = 0x00;
 
-        chipSelect();
+        chipSelectFromISR();
         spi_write_blocking(_bus, buf, 2);
-        chipDeselect();
+        chipDeselectFromISR();
 
         if(_mode == RFMModeRxSingle)
         {
@@ -334,9 +342,16 @@ void RFM95::handleInterrupt(void)
     buf[0] = RFM95_REG_12_IRQ_FLAGS | RFM95_WRITE_BIT;
     buf[1] = 0xFF;
 
-    chipSelect();
+    chipSelectFromISR();
     spi_write_blocking(_bus, buf, 2);
-    chipDeselect();
+    chipDeselectFromISR();
+
+    if(_mutex != NULL)
+    {
+        xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+
+        portYIELD_FROM_ISR(higherPriorityTaskWoken);
+    }
 }
 
 void RFM95::isr0()
@@ -416,7 +431,7 @@ bool RFM95::available()
     if(_mode != RFMModeRx  && _mode != RFMModeTx)
     {
         setModeIdle();
-        sleep_ms(10);
+        busy_wait_ms(10);
         setModeRX();
     }
 
@@ -585,7 +600,7 @@ bool RFM95::channelActive()
 
     absolute_time_t t = get_absolute_time();
     int64_t tDiff = 0;
-    while(_mode == RFMModeCad && (tDiff < (1000*1000)))
+    while(_mode == RFMModeCad && (tDiff/1000 < 1000))
     {
         busy_wait_ms(1);
         tDiff = absolute_time_diff_us(t, get_absolute_time());
@@ -593,7 +608,7 @@ bool RFM95::channelActive()
     
     if(_mode == RFMModeCad)
     {
-        printf("RFM95 CAD Timeout time: %d\n", tDiff);
+        printf("RFM95 CAD Timeout time: %lld\n", tDiff);
         return true;
         
     }
@@ -601,7 +616,7 @@ bool RFM95::channelActive()
     {
         t = get_absolute_time();
         tDiff = 0;
-        while(_mode != RFMModeIdle && (tDiff < (100*1000)))
+        while(_mode != RFMModeIdle && (tDiff/1000 < 100))
         {
             busy_wait_ms(1);
             tDiff = absolute_time_diff_us(t, get_absolute_time());
@@ -656,7 +671,7 @@ bool RFM95::setFrequency(float center)
         spi_write_blocking(_bus, buf, 4);
         chipDeselect();
 
-        sleep_ms(10);
+        busy_wait_ms(10);
 
         
 
@@ -1096,12 +1111,36 @@ void RFM95::readRegister(uint8_t reg, uint8_t *buf)
 
 void RFM95::chipSelect()
 {
+    if(_mutex != NULL)
+    {
+        xSemaphoreTake(_mutex, portMAX_DELAY);
+    }
+
+    busy_wait_us(1);
+    gpio_put(_cs, 0);  // Active low
+    busy_wait_us(1);
+}
+
+void RFM95::chipSelectFromISR()
+{
     busy_wait_us(1);
     gpio_put(_cs, 0);  // Active low
     busy_wait_us(1);
 }
 
 void RFM95::chipDeselect()
+{
+    busy_wait_us(1);
+    gpio_put(_cs, 1);  // Active low
+    busy_wait_us(1);
+
+    if(_mutex != NULL)
+    {
+        xSemaphoreGive(_mutex);
+    }
+}
+
+void RFM95::chipDeselectFromISR()
 {
     busy_wait_us(1);
     gpio_put(_cs, 1);  // Active low

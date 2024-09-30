@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tleavitt/pico/pico-sdk/src/rp2_common/hardware_exception
+# Install script for directory: /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/hardware_exception
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

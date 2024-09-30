@@ -1,11 +1,19 @@
 {
     "cmake.environment": {
-        "PICO_SDK_PATH":"../../../pico-sdk"
+        "PICO_SDK_PATH":"../pico-sdk",
+        "FREERTOS_KERNEL_PATH": "../FreeRTOS-Kernel"
     },
     "cortex-debug.variableUseNaturalFormat": true,
     "files.associations": {
         "*.cps": "javascript",
         "sd_card.h": "c",
-        "f_util.h": "c"
+        "f_util.h": "c",
+        "*.tcc": "cpp",
+        "unordered_map": "cpp",
+        "fstream": "cpp",
+        "istream": "cpp",
+        "numeric": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp"
     },
 }

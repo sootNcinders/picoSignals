@@ -57,7 +57,7 @@ RM = /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/tleavitt/pico/pico-sdk/tools/pioasm
+CMAKE_SOURCE_DIR = /Users/tleavitt/pico/projects/picoSignals/pico-sdk/tools/pioasm
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /Users/tleavitt/pico/projects/picoSignals/build/pioasm
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/tleavitt/pico/projects/picoSignals/build/pioasm
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/Cellar/cmake/3.24.3/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache

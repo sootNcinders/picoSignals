@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tleavitt/pico/pico-sdk/tools
+# Install script for directory: /Users/tleavitt/pico/projects/picoSignals/pico-sdk/tools
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

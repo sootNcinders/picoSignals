@@ -3,6 +3,10 @@
 #include "hardware/spi.h"
 #include <string.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "semphr.h"
+
 #ifndef RFM95_H
 #define RFM95_H
 
@@ -264,7 +268,7 @@ class RFM95
 
         /// @brief Initializes RFM95 Radio
         /// @return true if initialization successful 
-        bool init();
+        bool init(SemaphoreHandle_t mutex);
 
         /// @brief Prints the value of all registers to STDIO
         void printRegisters();
@@ -428,11 +432,17 @@ class RFM95
         volatile uint8_t RXled;
         volatile uint8_t TXled;
 
+        SemaphoreHandle_t _mutex;
+
         /// @brief select this chip
         void chipSelect();
 
+        void chipSelectFromISR();
+
         /// @brief delect this chip
         void chipDeselect();
+
+        void chipDeselectFromISR();
 
         /// @brief sets the low data rate flag if symbol time exceeds 16ms
         void setLowDatarate();

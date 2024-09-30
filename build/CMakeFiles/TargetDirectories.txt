@@ -6,6 +6,12 @@
 /Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles/install.dir
 /Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles/install/local.dir
 /Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles/install/strip.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/list_install_components.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/install.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/install/local.dir
+/Users/tleavitt/pico/projects/picoSignals/build/FREERTOS_KERNEL/CMakeFiles/install/strip.dir
 /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/CMakeFiles/edit_cache.dir
 /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/CMakeFiles/rebuild_cache.dir
 /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/CMakeFiles/list_install_components.dir

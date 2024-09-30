@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Users/tleavitt/pico/pico-sdk/tools/elf2uf2"
+  "/Users/tleavitt/pico/projects/picoSignals/pico-sdk/tools/elf2uf2"
   "/Users/tleavitt/pico/projects/picoSignals/build/elf2uf2"
   "/Users/tleavitt/pico/projects/picoSignals/build/elf2uf2"
   "/Users/tleavitt/pico/projects/picoSignals/build/elf2uf2/tmp"

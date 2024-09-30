@@ -28,9 +28,7 @@ void PCA9955::setLEDcurrent(uint8_t num, float mAmps)
         buffer[0] = 0x18 + num;
         buffer[1] = (uint8_t)((mAmps/57.375)*255);
         
-        if(critSec) critical_section_enter_blocking(critSec);
         i2c_write_blocking(_bus, _address, buffer, 2, false);
-        if(critSec) critical_section_exit(critSec);
 
         #ifdef PCA9955_DEBUG
         printf("PCA9955 Write Reg 0x%x 0x%x\n", buffer[0], buffer[1]);
@@ -71,9 +69,7 @@ void PCA9955::setLEDbrightness(uint8_t num, uint8_t brightness)
         printf("PCA9955 Write Reg 0x%x 0x%x\n", buffer[0], buffer[1]);
         #endif
 
-        if(critSec) critical_section_enter_blocking(critSec);
         i2c_write_blocking(_bus, _address, buffer, 2, false);
-        if(critSec) critical_section_exit(critSec);
 
         busy_wait_us(10);
 
@@ -84,9 +80,7 @@ void PCA9955::setLEDbrightness(uint8_t num, uint8_t brightness)
         printf("PCA9955 Write Reg 0x%x 0x%x\n", buffer[0], buffer[1]);
         #endif
         
-        if(critSec) critical_section_enter_blocking(critSec);
         i2c_write_blocking(_bus, _address, buffer, 2, false);
-        if(critSec) critical_section_exit(critSec);
 
         busy_wait_us(10);
     }
@@ -105,10 +99,8 @@ bool PCA9955::checkErrors()
 
     buffer[0] = 0x01;
 
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buffer, 1, true);
     i2c_read_blocking(_bus, _address, buffer, 1, false);
-    if(critSec) critical_section_exit(critSec);
 
     #ifdef PCA9955_DEBUG
     printf("PCA9955 Mode 2: 0x%x\n", buffer[0]);
@@ -118,7 +110,9 @@ bool PCA9955::checkErrors()
 
     if((buffer[0] >> 7) & 0x01)
     {
+        #ifdef PCA9955_DEBUG
         printf("PCA9955 OVERTEMP!\n");
+        #endif
         rtn = true;
     }
     if((buffer[0] >> 6) & 0x01)
@@ -129,10 +123,8 @@ bool PCA9955::checkErrors()
         {
             buffer[0] = 0x46 + i;
 
-            if(critSec) critical_section_enter_blocking(critSec);
             i2c_write_blocking(_bus, _address, buffer, 1, true);
             i2c_read_blocking(_bus, _address, buffer, 1, false);
-            if(critSec) critical_section_exit(critSec);
 
             #ifdef PCA9955_DEBUG
             printf("PCA9955 Error %d: 0x%x\n", i, buffer[0]);
@@ -153,13 +145,19 @@ bool PCA9955::checkErrors()
                 case 0x01:
                     _errors[i] = LEDshort;
                     rtn = true;
+
+                    #ifdef PCA9955_DEBUG
                     printf("PCA9955 LED %d Short Circuit\n", i);
+                    #endif
                     break;
 
                 case 0x02:
                     _errors[i] = LEDopen;
                     rtn = true;
+
+                    #ifdef PCA9955_DEBUG
                     printf("PCA9955 LED %d Open Circuit\n", i);
+                    #endif
                     break;
 
                 default:
@@ -231,10 +229,8 @@ void PCA9955::printRegisters()
         buf[0] = i;
         buf[1] = 0;
 
-        if(critSec) critical_section_enter_blocking(critSec);
         i2c_write_blocking(_bus, _address, buf, 1, true);
         i2c_read_blocking(_bus, _address, buf+1, 1, false);
-        if(critSec) critical_section_exit(critSec);
 
         printf("Reg 0x%x: 0x%x\n", buf[0], buf[1]);
 
@@ -250,14 +246,10 @@ bool PCA9955::ping()
     buf[0] = 0x01;
     buf[1] = 0b10001001;
 
-    if(critSec) critical_section_enter_blocking(critSec);
-
     if(i2c_write_timeout_us(_bus, _address, buf, 2, false, 500) == PICO_ERROR_GENERIC)
     {
         rtn = false;
     }
-
-    if(critSec) critical_section_exit(critSec);
 
     return rtn;
 }
@@ -268,9 +260,7 @@ void PCA9955::clearFaults()
     buffer[0] = 0x01;
     buffer[1] = 0x10;
 
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buffer, 2, false);
-    if(critSec) critical_section_exit(critSec);
 
     busy_wait_us(10);
 }
@@ -280,7 +270,9 @@ void PCA9955::sleep()
     uint8_t i;
     uint8_t buf[2];
 
+    #ifdef PCA9955_DEBUG
     printf("Sleeping PCA9955B\n");
+    #endif
 
     for(i = 0; i < 16; i++)
     {
@@ -289,18 +281,14 @@ void PCA9955::sleep()
 
     buf[0] = 0x00; //Mode 1 register;
     
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buf, 1, true);
     i2c_read_blocking(_bus, _address, buf+1, 1, false);
-    if(critSec) critical_section_exit(critSec);
 
     busy_wait_us(5);//Back to back access delay
 
     buf[1] |= (0x01 << 4);
 
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buf, 2, false);
-    if(critSec) critical_section_exit(critSec);
 
     busy_wait_us(5);//Back to back access delay
 
@@ -311,29 +299,22 @@ void PCA9955::wake()
 {
     uint8_t buf[2];
 
+    #ifdef PCA9955_DEBUG
     printf("Waking PCA9955B\n");
+    #endif
 
     buf[0] = 0x00; //Mode 1 register;
     
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buf, 1, true);
     i2c_read_blocking(_bus, _address, buf+1, 1, false);
-    if(critSec) critical_section_exit(critSec);
 
     busy_wait_us(5);//Back to back access delay
 
     buf[1] &= ~(0x01 << 4);
 
-    if(critSec) critical_section_enter_blocking(critSec);
     i2c_write_blocking(_bus, _address, buf, 2, false);
-    if(critSec) critical_section_exit(critSec);
 
     busy_wait_us(500); //Delay to allow oscillator to stablize
 
     //printRegisters();
-}
-
-void PCA9955::setCriticalSection(critical_section_t* cs)
-{
-    critSec = cs;
 }

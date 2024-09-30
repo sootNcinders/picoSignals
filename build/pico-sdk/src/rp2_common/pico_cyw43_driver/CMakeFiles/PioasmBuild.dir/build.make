@@ -89,7 +89,7 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBui
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Debug.cmake
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/tleavitt/pico/projects/picoSignals/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'PioasmBuild'"
-	cd /Users/tleavitt/pico/projects/picoSignals/build/pioasm && /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make "-GUnix Makefiles" -C/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Debug.cmake /Users/tleavitt/pico/pico-sdk/tools/pioasm
+	cd /Users/tleavitt/pico/projects/picoSignals/build/pioasm && /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make "-GUnix Makefiles" -C/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Debug.cmake /Users/tleavitt/pico/projects/picoSignals/pico-sdk/tools/pioasm
 	cd /Users/tleavitt/pico/projects/picoSignals/build/pioasm && /opt/homebrew/Cellar/cmake/3.24.3/bin/cmake -E touch /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-source_dirinfo.txt
@@ -139,6 +139,6 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/clean:
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/clean
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/depend:
-	cd /Users/tleavitt/pico/projects/picoSignals/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/tleavitt/pico/projects/picoSignals /Users/tleavitt/pico/pico-sdk/src/rp2_common/pico_cyw43_driver /Users/tleavitt/pico/projects/picoSignals/build /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/tleavitt/pico/projects/picoSignals/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/tleavitt/pico/projects/picoSignals /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/pico_cyw43_driver /Users/tleavitt/pico/projects/picoSignals/build /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver /Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/depend
 
