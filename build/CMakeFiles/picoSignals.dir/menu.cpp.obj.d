@@ -364,4 +364,5 @@ CMakeFiles/picoSignals.dir/menu.cpp.obj: \
  /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/hardware_adc/include/hardware/adc.h \
  /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/adc.h \
  /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/adc.h \
- /Users/tleavitt/pico/projects/picoSignals/./Headers/led.h
+ /Users/tleavitt/pico/projects/picoSignals/./Headers/led.h \
+ /Users/tleavitt/pico/projects/picoSignals/./Headers/main.h

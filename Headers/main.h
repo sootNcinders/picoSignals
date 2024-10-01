@@ -38,9 +38,7 @@
 #define TXLED    9
 #define ADCIN    26
 
-static bool dprint = true;
-
-#define DPRINTF(...){if(dprint){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}}
+#define DPRINTF(...){printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));printf(__VA_ARGS__);}
 //#define DPRINTF(...){printf(__VA_ARGS__);}
 
 #define BLINKTIME 20
@@ -101,6 +99,7 @@ class Main
         static void loadConfig(void);
         static void eraseFlashJSON(void);
         static void writeFlashJSON(uint8_t* in);
+        static void reset(void);
 
         static JsonDocument cfg;
         static uint8_t* flashJson;

@@ -127,6 +127,7 @@ void Main::loadConfig(void)
 
     //Read the config file into RAM, if it fails set error light and stop execution
     char cfgRaw[FILESIZE]; //May need to expand for more complex config files
+    memcpy(cfgRaw, 0, sizeof(cfgRaw));
     UINT readSize = 0;
     if(sdMounted && fileFound)
     {
@@ -178,7 +179,8 @@ void Main::writeFlashJSON(uint8_t* in)
     bool irq[26];
 
     flashJson = (uint8_t*) FLASHJSONADDR;
-    uint8_t cmp = memcmp(flashJson, in, FILESIZE);
+    int cmp = memcmp(flashJson, in, FILESIZE);
+
     if(cmp != 0)
     {
         vTaskSuspendAll();
@@ -212,4 +214,20 @@ void Main::writeFlashJSON(uint8_t* in)
 void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName )
 {
     panic("Stack overflow in task %s\n", pcTaskName);
+}
+
+void Main::reset(void)
+{
+    DPRINTF("Reboot\n");
+
+    vTaskSuspendAll();
+
+    watchdog_enable(500, true);
+
+    while(1)
+    {
+        tight_loop_contents();
+    }
+
+    xTaskResumeAll();
 }

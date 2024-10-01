@@ -264,18 +264,7 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                 xTaskResumeAll();
                 break;
             case 0x0C: //Cause a watchdog reboot after 500ms to clear UART
-                DPRINTF("Reboot\n");
-
-                vTaskSuspendAll();
-
-                watchdog_enable(500, true);
-
-                while(1)
-                {
-                    tight_loop_contents();
-                }
-
-                xTaskResumeAll();
+                Main::reset();
                 break;
                 
         }

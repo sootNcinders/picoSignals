@@ -1,11 +1,16 @@
 #include "menu.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "ctc.h"
 #include "heads.h"
 #include "io.h"
 #include "radio.h"
 #include "battery.h"
 #include "led.h"
+#include "main.h"
 
 uint8_t MENU::addr;
 
@@ -20,8 +25,10 @@ void MENU::menuTask(void *pvParameters)
 {
     char cin;
     char inBuf[255];
+    char buf[40*MAXPRIORITY];
 
     uint8_t bufIdx = 0;
+    uint8_t head = 0;
 
     bool ctc = false;
     bool menu = false;
@@ -95,59 +102,94 @@ void MENU::menuTask(void *pvParameters)
                     Radio::sendFromCTC(fromCTC);
                 }
             }
-            else if(menu && bufIdx >= 2)
+            else if(menu && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
             {
                 priority = uxTaskPriorityGet(NULL);
 
                 vTaskPrioritySet(NULL, MAXPRIORITY);
 
                 printf("\n");
-                switch(inBuf[1])
+
+                if(strncasecmp(inBuf+1, "bat", 3) == 0)
                 {
-                    case 'b':
-                    case 'B':
-                        printf("> Battery Voltage: %2.2fV\n", Battery::getBatteryVoltage());
-                        break;
-                    case 'c':
-                    case 'C':
+                    printf("> Battery Voltage: %2.2fV\n", Battery::getBatteryVoltage());
+                }
+                else if(strncasecmp(inBuf+1, "err", 3) == 0)
+                {
+                    if(strncasecmp(inBuf+5, "clr", 3) == 0)
+                    {
                         printf("> Errors Cleared\n");
                         LED::setError(NOERROR);
-                        break;
-                    case 'd':
-                    case 'D':
-                        dprint = !dprint;
-                        printf("> Debug: %s\n", dprint ? "On" : "Off");
-                        break;
-                    case 'e':
-                    case 'E':
+                    }
+                    else
+                    {
                         printf("> Error Code: %d - %s\n", LED::getError(), errorCodes[LED::getError()]);
-                        break;
-                    case 'h':
-                    case 'H':
-                        for(uint8_t i = 0; i < MAXHEADS; i++)
-                        {
-                            printf("> Head %d: %c\n", i, HEADS::getHead(i));
-                        }
-                        break;
-                    case 'i':
-                    case 'I':
-                        IO::getSwitchInfo((switchInfo*) &info);
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "head", 4) == 0)
+                {
+                    for(uint8_t i = 0; i < MAXHEADS; i++)
+                    {
+                        printf("> Head %d: %c\n", i+1, HEADS::getHead(i));
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "in", 2) == 0)
+                {
+                    IO::getSwitchInfo((switchInfo*) &info);
 
-                        for(uint8_t i = 0; i < MAXINPUTS; i++)
-                        {
-                            printf("> Input %d: %s:%s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0");
-                        }
-                        break;
-                    case 'r':
-                    case 'R':
-                        printf("> Radio RSSI: %d\n", Radio::getAvgRSSI());
-                        break;
-                    case 's':
-                    case 'S':
-                        char buf[40*MAXPRIORITY];
-                        vTaskList(buf);
-                        printf("%s\n", buf);
-                        break;
+                    for(uint8_t i = 0; i < MAXINPUTS; i++)
+                    {
+                        printf("> Input %d: %s:%s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0");
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "rssi", 4) == 0)
+                {
+                    printf("> Radio RSSI: %d\n", Radio::getAvgRSSI());
+                }
+                else if(strncasecmp(inBuf+1, "sys", 3) == 0)
+                {
+                    vTaskList(buf);
+                    printf("%s\n", buf);
+                }
+                else if(strncasecmp(inBuf+1, "cap", 3) == 0)
+                {
+                    head = atoi(inBuf+4) - 1;
+
+                    if(head < MAXHEADS)
+                    {
+                        IO::setCapture(head);
+                        HEADS::startComm(head);
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "rel", 3) == 0)
+                {
+                    head = atoi(inBuf+4) - 1;
+
+                    if(head < MAXHEADS)
+                    {
+                        IO::setRelease(head);
+                        HEADS::startComm(head);
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "wake", 4) == 0)
+                {
+                    HEADS::wake();
+                }
+                else if(strncasecmp(inBuf+1, "flash", 5) == 0)
+                {
+                    if(strncasecmp(inBuf+6, "clr", 3) == 0)
+                    {
+                        Main::eraseFlashJSON();
+                        printf("> Flash Cleared\n");
+                    }
+                }
+                else if(strncasecmp(inBuf+1, "rst", 3) == 0)
+                {
+                    Main::reset();
+                }
+                else
+                {
+                    printHelp();
                 }
 
                 vTaskPrioritySet(NULL, priority);
@@ -168,15 +210,19 @@ void MENU::printHelp(void)
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    printf("> Pico Signals V%dR%d:\n", VERSION, REVISION);
+    printf("> Pico Signals V%dR%d: Help\n", VERSION, REVISION);
     printf("> > Command Start Character\n");
-    printf("> >b - Print Battery Voltage\n");
-    printf("> >c - Clear Error\n");
-    //printf("> >d - Toggle Debug Mode\n");
-    printf("> >e - Print Error Code\n");
-    printf("> >h - Print Head Status\n");
-    printf("> >i - Print Input Status\n");
-    printf("> >r - Print Radio RSSI\n");
+    printf("> >bat - Print Battery Voltage\n");
+    printf("> >err - Print Error Code\n");
+    printf("> >err clr - Clear Error Code\n");
+    printf("> >head - Print Head Status\n");
+    printf("> >in - Print Input Status\n");
+    printf("> >rssi - Print Radio RSSI\n");
+    printf("> >cap x - Capture head x 1-4\n");
+    printf("> >rel x - Release head x 1-4\n");
+    printf("> >wake - Wake Signal\n");
+    printf("> >flash clr - Clear Flash\n");
+    printf("> >rst - Reset\n");
 
     vTaskPrioritySet(NULL, priority);
 }
