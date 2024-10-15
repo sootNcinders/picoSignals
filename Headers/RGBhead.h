@@ -51,6 +51,8 @@ class RGBHEAD: public Head
         /// @param brightness 8 bit brightness level 0-255
         void setHeadBrightness(float brightness);
 
+        void setHeadBrightnessFromISR(float brightness);
+
     private:
         PCA9955 *_driver;
 

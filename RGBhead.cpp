@@ -170,7 +170,7 @@ bool RGBHEAD::setHeadFromISR(uint8_t color)
 
             xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
             _driver->setLEDbrightness(_rPin, brightness);
-            xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
 
             #ifdef RGB_DEBUG
             printf("R: Set: %d Actual: %d ", _levels[color][r],brightness);
@@ -183,9 +183,9 @@ bool RGBHEAD::setHeadFromISR(uint8_t color)
                 brightness = 8;
             }
 
-            xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);            
+            //xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);            
             _driver->setLEDbrightness(_gPin, brightness);
-            xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
 
             #ifdef RGB_DEBUG
             printf("G: Set: %d Actual: %d ", _levels[color][g],brightness);
@@ -198,32 +198,35 @@ bool RGBHEAD::setHeadFromISR(uint8_t color)
                 brightness = 8;
             }
 
-            xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
             _driver->setLEDbrightness(_bPin, brightness);
-            xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
 
             #ifdef RGB_DEBUG
             printf("B: Set: %d Actual: %d ", _levels[color][b],brightness);
             #endif
 
-            xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
             _driver->checkErrors();
 
             if(_driver->getError(_rPin) || _driver->getError(_gPin) || _driver->getError(_bPin))
             {
                 rtn = false;
             }
-            xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+            //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+            xSemaphoreGive(_mutex);
 
             _color = color;
             break;
         
         default:
 
-            xSemaphoreTake(_mutex, portMAX_DELAY);
+            xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
             _driver->setLEDbrightness(_rPin, 0);
             _driver->setLEDbrightness(_gPin, 0);
             _driver->setLEDbrightness(_bPin, 0);
+            //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+
             xSemaphoreGive(_mutex);
 
             _color = off;
@@ -245,6 +248,7 @@ uint8_t RGBHEAD::getError()
     uint8_t rtn = 0;
 
     xSemaphoreTake(_mutex, portMAX_DELAY);
+
     rtn |= (_driver->getError(_rPin) & 0x03) << 4;
     rtn |= (_driver->getError(_gPin) & 0x03) << 2;
     rtn |= (_driver->getError(_bPin) & 0x03);
@@ -269,4 +273,11 @@ void RGBHEAD::setHeadBrightness(float brightness)
     _headBrightness = brightness/255.0;
 
     setHead(_color);
+}
+
+void RGBHEAD::setHeadBrightnessFromISR(float brightness)
+{
+    _headBrightness = brightness/255.0;
+
+    setHeadFromISR(_color);
 }

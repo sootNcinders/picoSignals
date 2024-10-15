@@ -367,7 +367,7 @@ void HEADS::headCommTask(void *pvParameters)
                 missingResponse = false;
                 for(int x = 0; x < heads[headNum].numDest; x++)
                 {
-                    if(heads[headNum].destResponded[x] == false)
+                    if(heads[headNum].destResponded[x] == false && heads[headNum].destAddr[x] != 0)
                     {
                         missingResponse = true;
                         heads[headNum].retries = 0;
@@ -404,6 +404,7 @@ void HEADS::headCommTask(void *pvParameters)
 
         if(IO::getCapture(headNum))
         {
+            wake();
             CTC::pause(true);
 
             if(!headsOn || headsDim)
@@ -437,10 +438,16 @@ void HEADS::headCommTask(void *pvParameters)
 
                 IO::setLastActive(headNum, release);
             }
+            else
+            {
+                IO::setLastActive(headNum, capture);
+                IO::setLastActive(headNum, turnoutCapture);
+            }
         }
         
         if(IO::getRelease(headNum))
         {
+            wake();
             CTC::pause(true);
 
             for(int x = 0; x < heads[headNum].numDest; x++)
@@ -470,6 +477,10 @@ void HEADS::headCommTask(void *pvParameters)
                 IO::setLastActive(headNum, capture);
                 IO::setLastActive(headNum, turnoutCapture);
             }
+            else
+            {
+                IO::setLastActive(headNum, release);
+            }
         }
 
         if(IO::getCapture(headNum) || IO::getRelease(headNum))
@@ -479,6 +490,10 @@ void HEADS::headCommTask(void *pvParameters)
         else
         {
             CTC::pause(false);
+
+            IO::setLastActive(headNum, capture);
+            IO::setLastActive(headNum, turnoutCapture);
+            IO::setLastActive(headNum, release);
 
             xTaskNotifyWait(0, ULONG_MAX, NULL, portMAX_DELAY);
         }
@@ -508,6 +523,9 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
     if(msg.destination == addr && !msg.isCode && headFound && from != addr)
     {
         DPRINTF("Head %d received %c from %d\n", headNum, msg.aspect, from);
+
+        wake();
+
         switch(msg.aspect)
         {
             case 'G':
@@ -534,44 +552,6 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                 {
                     heads[headNum].head->setHead(green);
                     CTC::update();
-                }
-
-                if(!headsOn)
-                {
-                    output.wake();
-
-                    for(int i = 0; i < MAXHEADS; i++)
-                    {
-                        if(heads[i].head)
-                        {
-                            heads[i].head->setHeadBrightness(255);
-
-                            if(heads[i].head->getColor() == off)
-                            {
-                                heads[i].head->setHead(green);
-                            }
-                        }
-                    }
-
-                    if(awakeIndicator < 16)
-                    {
-                        output.setLEDbrightness(awakeIndicator, 255);
-                    }
-
-                    headsOn = true;
-                    headsDim = false;
-                }
-                else if(headsDim)
-                {
-                    for(int i = 0; i < MAXHEADS; i++)
-                    {
-                        if(heads[i].head)
-                        {
-                            heads[i].head->setHeadBrightness(255);
-                        }
-                    }
-
-                    headsDim = false;
                 }
 
                 heads[headNum].retries = 0;
@@ -665,7 +645,7 @@ void HEADS::setLastActive(uint8_t hN, uint8_t f, uint8_t m)
     //If all of the destinations have responded, set lastActive to prevent further transmissions
     if(!missingResponse)
     {
-        if(m == capture)
+        if(m == capture || m == turnoutCapture)
         {
             IO::setLastActive(hN, capture);
             IO::setLastActive(hN, turnoutCapture);
@@ -675,7 +655,6 @@ void HEADS::setLastActive(uint8_t hN, uint8_t f, uint8_t m)
             IO::setLastActive(hN, m);
         }
 
-        IO::setLastActive(hN, m);
         for(int x = 0; x < heads[hN].numDest; x++)
         {
             heads[hN].destResponded[x] = false;
@@ -687,6 +666,8 @@ void HEADS::wake(void)
 {
     if(!headsOn || headsDim)
     {
+        output.wake();
+
         for(int i = 0; i < MAXHEADS; i++)
         {
             if(heads[i].head)
@@ -698,6 +679,11 @@ void HEADS::wake(void)
                     heads[i].head->setHead(green);
                 }
             }
+        }
+
+        if(awakeIndicator != 255)
+        {
+            output.setLEDbrightness(awakeIndicator, 255);
         }
 
         headsOn = true;
@@ -731,6 +717,11 @@ void HEADS::sleep(void)
         }
     }
 
+    if(awakeIndicator != 255)
+    {
+        output.setLEDbrightness(awakeIndicator, 0);
+    }
+
     headsOn = false;
 }
 
@@ -738,7 +729,7 @@ int64_t HEADS::blinkOn(alarm_id_t id, void *user_data)
 {
     if(user_data)
     {
-        ((headInfo*)user_data)->head->setHeadBrightness(255);
+        ((headInfo*)user_data)->head->setHeadBrightnessFromISR(255);
     }
 
     return 0;

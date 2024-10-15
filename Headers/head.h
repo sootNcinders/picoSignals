@@ -35,5 +35,7 @@ class Head
         /// @brief Sets the brightness level for the whole head
         /// @param brightness 8 bit brightness level 0-255
         virtual void setHeadBrightness(float brightness){}
+
+        virtual void setHeadBrightnessFromISR(float brightness){}
 };
 #endif

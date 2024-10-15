@@ -43,7 +43,7 @@ void LED::ledTask(void *pvParameters)
 
         if(!firstPass)
         {
-            //watchdog_enable(8000, true);
+            watchdog_enable(8000, true);
             firstPass = true;
         }
 

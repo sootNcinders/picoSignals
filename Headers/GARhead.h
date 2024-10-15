@@ -49,11 +49,15 @@ class GARHEAD: public Head
         /// @param brightness 8 bit brightness level 0-255
         void setHeadBrightness(float brightness);
 
+        void setHeadBrightnessFromISR(float brightness);
+
     private:
         /// @brief Fades from one color to the next
         /// @param oldColor current color
         /// @param newColor next color
         void fade(uint8_t oldColor, uint8_t newColor);
+
+        BaseType_t fadeFromISR(uint8_t oldColor, uint8_t newColor);
 
         PCA9955 *_driver;
 

@@ -2,6 +2,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include <string.h>
+
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/sync.h"
@@ -158,6 +160,19 @@ void Main::loadConfig(void)
     {
         DPRINTF("Config JSON error: %s\n", error.c_str());
         LED::errorLoop(CONFIGREAD);
+    }
+
+    if(strncasecmp(cfg["mode"], "ctc", 3) == 0)
+    {
+        Main::mode = CTC;
+    }
+    else if(strncasecmp(cfg["mode"], "overlay", 7) == 0)
+    {
+        Main::mode = OVL;
+    }
+    else
+    {
+        Main::mode = STD;
     }
 }
 

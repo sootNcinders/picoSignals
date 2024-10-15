@@ -102,9 +102,9 @@ bool GARHEAD::setHeadFromISR(uint8_t color)
 
     if(color <= off && color != _color)
     {
-        fade(_color, color);
+        higherPriorityTaskWoken = fadeFromISR(_color, color);
         _color = color;
-        rtn = !getError();
+        //rtn = !getError();
     }
     else if(color <= off)
     {
@@ -133,7 +133,8 @@ bool GARHEAD::setHeadFromISR(uint8_t color)
 
         xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
         _driver->setLEDbrightness(pin, cb);
-        xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+        //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+        xSemaphoreGive(_mutex);
     }
 
     portYIELD_FROM_ISR(higherPriorityTaskWoken);
@@ -195,6 +196,13 @@ void GARHEAD::setHeadBrightness(float level)
     setHead(_color);
 }
 
+void GARHEAD::setHeadBrightnessFromISR(float level)
+{
+    _headBrightness = level/255.0;
+
+    setHeadFromISR(_color);
+}
+
 #define FADE_TIME 50
 void GARHEAD::fade(uint8_t oldColor, uint8_t newColor)
 {
@@ -248,18 +256,90 @@ void GARHEAD::fade(uint8_t oldColor, uint8_t newColor)
             break;
     }
 
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+
     for(int i = 0; i <= FADE_TIME; i++)
     {
         oBri = (uint8_t)(ocb - ((ocb * i)/FADE_TIME));
         nBri = (uint8_t)((ncb * i)/FADE_TIME);
 
-        xSemaphoreTake(_mutex, portMAX_DELAY);
+        _driver->setLEDbrightness(oPin, oBri);
+        _driver->setLEDbrightness(nPin, nBri);
+
+        busy_wait_ms(1);
+    }
+
+    xSemaphoreGive(_mutex);
+}
+
+BaseType_t GARHEAD::fadeFromISR(uint8_t oldColor, uint8_t newColor)
+{
+    BaseType_t higherPriorityTaskWoken = pdFALSE;
+    uint8_t ocb = (uint8_t)(_brightness[oldColor] * _headBrightness);
+    uint8_t ncb = (uint8_t)(_brightness[newColor] * _headBrightness);
+    uint8_t oPin, nPin, oBri, nBri = 0;
+
+    switch (oldColor)
+    {
+        case green:
+            oPin = _gPin;
+            break;
+
+        case amber:
+            oPin = _aPin;
+            break;
+
+        case red:
+            oPin = _rPin;
+            break;
+
+        case lunar:
+            oPin = _lPin;
+            break;
+
+        default:
+            oPin = 255;
+            break;
+    }
+
+    switch (newColor)
+    {
+        case green:
+            nPin = _gPin;
+            break;
+
+        case amber:
+            nPin = _aPin;
+            break;
+
+        case red:
+            nPin = _rPin;
+            break;
+
+        case lunar:
+            nPin = _lPin;
+            break;
+
+        default:
+            nPin = 255;
+            break;
+    }
+
+    xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
+
+    for(int i = 0; i <= FADE_TIME; i++)
+    {
+        oBri = (uint8_t)(ocb - ((ocb * i)/FADE_TIME));
+        nBri = (uint8_t)((ncb * i)/FADE_TIME);
 
         _driver->setLEDbrightness(oPin, oBri);
         _driver->setLEDbrightness(nPin, nBri);
 
-        xSemaphoreGive(_mutex);
-
         busy_wait_ms(1);
     }
+
+    //xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
+    xSemaphoreGive(_mutex);
+    
+    return higherPriorityTaskWoken;
 }
