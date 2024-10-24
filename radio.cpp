@@ -15,7 +15,6 @@
 #include "heads.h"
 
 SemaphoreHandle_t Radio::radioMutex; 
-SemaphoreHandle_t Radio::RFM95mutex;
 RFM95 Radio::radio = RFM95(spi0, PICO_DEFAULT_SPI_CSN_PIN, RADIOINT, 0);
 bool Radio::sendError = false;
 bool Radio::sleeping = false;
@@ -54,7 +53,6 @@ void Radio::init(void)
     primaryPartner = Main::cfg["head1"]["destination"][0];
 
     radioMutex = xSemaphoreCreateMutex();
-    RFM95mutex = NULL; //xSemaphoreCreateMutex();
 
     spi_init(spi0, 5000 * 1000);
     gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
@@ -87,7 +85,7 @@ void Radio::initRadio(void)
     
     //Set up the RFM95 radio
     //12500bps datarate
-    radio.init(RFM95mutex);
+    radio.init(NULL);
     radio.setLEDS(RXLED, TXLED);
     radio.setAddress(addr);
     //Preamble length: 8
@@ -244,11 +242,12 @@ void Radio::transmit(uint8_t dest, char asp, bool ack, bool code)
 void Radio::sendToCTC(TOCTC data)
 {
     xSemaphoreTake(radioMutex, portMAX_DELAY);
-    DPRINTF("Sending To CTC\n");
 
     UBaseType_t priority = uxTaskPriorityGet(NULL);
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
+
+    DPRINTF("Sending To CTC\n");
 
     //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &data, sizeof(data)))
@@ -281,11 +280,12 @@ void Radio::sendToCTC(TOCTC data)
 void Radio::sendFromCTC(FROMCTC data)
 {
     xSemaphoreTake(radioMutex, portMAX_DELAY);
-    DPRINTF("Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
 
     UBaseType_t priority = uxTaskPriorityGet(NULL);
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
+
+    DPRINTF("Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
 
     //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &data, sizeof(data)))

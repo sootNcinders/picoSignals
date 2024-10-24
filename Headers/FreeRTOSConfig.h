@@ -48,7 +48,7 @@
 #define configCPU_CLOCK_HZ                      /*120000000*/48000000
 #define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                    32
-#define configMINIMAL_STACK_SIZE                ( configSTACK_DEPTH_TYPE ) 256
+#define configMINIMAL_STACK_SIZE                ( configSTACK_DEPTH_TYPE ) 1024
 #define configUSE_16_BIT_TICKS                  0
 
 #define configIDLE_SHOULD_YIELD                 1
@@ -63,7 +63,7 @@
 #define configUSE_TIME_SLICING                  1
 #define configUSE_NEWLIB_REENTRANT              1//0
 #define configENABLE_BACKWARD_COMPATIBILITY     0
-#define configNUM_THREAD_LOCAL_STORAGE_POINTERS 5
+#define configNUM_THREAD_LOCAL_STORAGE_POINTERS 10
 
 /* System */
 #define configSTACK_DEPTH_TYPE                  uint32_t
@@ -76,14 +76,16 @@
 #define configAPPLICATION_ALLOCATED_HEAP        0
 
 /* Hook function related definitions. */
-#define configCHECK_FOR_STACK_OVERFLOW          1
-#define configUSE_MALLOC_FAILED_HOOK            0
+#define configCHECK_FOR_STACK_OVERFLOW          3
+#define configUSE_MALLOC_FAILED_HOOK            1
 #define configUSE_DAEMON_TASK_STARTUP_HOOK      0
 
 /* Run time and task stats gathering related definitions. */
 #define configGENERATE_RUN_TIME_STATS           0
 #define configUSE_TRACE_FACILITY                1
 #define configUSE_STATS_FORMATTING_FUNCTIONS    1
+
+#define configRECORD_STACK_HIGH_ADDRESS         1
 
 /* Co-routine related definitions. */
 #define configUSE_CO_ROUTINES                   0
@@ -93,7 +95,7 @@
 #define configUSE_TIMERS                        1
 #define configTIMER_TASK_PRIORITY               ( configMAX_PRIORITIES - 1 )
 #define configTIMER_QUEUE_LENGTH                10
-#define configTIMER_TASK_STACK_DEPTH            1024
+#define configTIMER_TASK_STACK_DEPTH            512
 
 /* Interrupt nesting behaviour configuration. */
 /*

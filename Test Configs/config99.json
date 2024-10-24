@@ -1,159 +1,166 @@
 {
     "address": 99,
-    "head0": {
+    "dimTime" : 5,
+    "sleepTime": 30,
+    "lowBattery": 3,
+    "batteryReset": 3.1,
+    "batteryShutdown": 3,
+    "retryTime": 100,
+    "ctcPresent": true,
+    "head1": {
         "destination": [
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-        ],
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+     ],
         "dim": 10,
         "green": {
-            "pin": 0,
-            "current": 30,
-            "brightness": 255
-        },
-        "amber": {
             "pin": 1,
             "current": 30,
             "brightness": 255
         },
-        "red": {
+        "amber": {
             "pin": 2,
             "current": 30,
             "brightness": 255
         },
-        "lunar": {
+        "red": {
             "pin": 3,
+            "current": 30,
+            "brightness": 255
+        },
+        "lunar": {
+            "pin": 4,
             "current": 30,
             "brightness": 255
         }
     },
-    "head1": {
+    "head2": {
         "destination": [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
         ],
         "dim": 10,
         "green": {
-            "pin": 4,
-            "current": 30,
-            "brightness": 191
-        },
-        "amber": {
             "pin": 5,
             "current": 30,
             "brightness": 191
         },
-        "red": {
+        "amber": {
             "pin": 6,
             "current": 30,
             "brightness": 191
         },
-        "lunar": {
+        "red": {
             "pin": 7,
+            "current": 30,
+            "brightness": 191
+        },
+        "lunar": {
+            "pin": 8,
             "current": 30,
             "brightness": 191
         }
     },
-    "head2": {
+    "head3": {
         "destination": [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
         ],
         "dim": 10,
         "green": {
-            "pin": 8,
-            "current": 30,
-            "brightness": 127
-        },
-        "amber": {
             "pin": 9,
             "current": 30,
             "brightness": 127
         },
-        "red": {
+        "amber": {
             "pin": 10,
             "current": 30,
             "brightness": 127
         },
-        "lunar": {
+        "red": {
             "pin": 11,
+            "current": 30,
+            "brightness": 127
+        },
+        "lunar": {
+            "pin": 12,
             "current": 30,
             "brightness": 127
         }
     },
-    "head3": {
+    "head4": {
         "destination": [
-            4,
-            0,
-            0,
-            0,
-            0,
-            0
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
         ],
         "dim": 10,
         "green": {
-            "pin": 12,
-            "current": 30,
-            "brightness": 64
-        },
-        "amber": {
             "pin": 13,
             "current": 30,
             "brightness": 64
         },
-        "red": {
+        "amber": {
             "pin": 14,
             "current": 30,
             "brightness": 64
         },
-        "lunar": {
+        "red": {
             "pin": 15,
+            "current": 30,
+            "brightness": 64
+        },
+        "lunar": {
+            "pin": 16,
             "current": 30,
             "brightness": 64
         }
     },
-    "pin0": {
-        "mode": "capture",
-        "head1": 0
-    },
     "pin1": {
-        "mode": "release",
-        "head": 0
-    },
-    "pin2": {
         "mode": "capture",
         "head1": 1
     },
-    "pin3": {
+    "pin2": {
         "mode": "release",
         "head": 1
     },
-    "pin4": {
+    "pin3": {
         "mode": "capture",
         "head1": 2
     },
-    "pin5": {
+    "pin4": {
         "mode": "release",
         "head": 2
     },
-    "pin6": {
+    "pin5": {
         "mode": "capture",
         "head1": 3
     },
-    "pin7": {
+    "pin6": {
         "mode": "release",
         "head": 3
+    },
+    "pin7": {
+        "mode": "capture",
+        "head1": 4
+    },
+    "pin8": {
+        "mode": "release",
+        "head": 4
     }
 }

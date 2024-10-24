@@ -14,7 +14,6 @@
 #ifndef HEADS_H
 #define HEADS_H
 
-#define MAXHEADS 4
 #define MAXDESTINATIONS 6
 
 //signal head info
@@ -76,6 +75,8 @@ class HEADS
         static bool headsDim;
 
         static uint8_t awakeIndicator;
+
+        static uint16_t ledErrors;
 
         static absolute_time_t dimTimeout;
 

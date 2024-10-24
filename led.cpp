@@ -43,7 +43,7 @@ void LED::ledTask(void *pvParameters)
 
         if(!firstPass)
         {
-            watchdog_enable(8000, true);
+            watchdog_enable(5000, true);
             firstPass = true;
         }
 
@@ -134,6 +134,8 @@ void LED::errorLEDtask(void *pvParameters)
 
 void LED::setError(uint8_t code)
 {
+    DPRINTF("Error: %d\n", code);
+
     if(error == 0 || code == 0)
     {
         error = code;
@@ -144,6 +146,8 @@ void LED::setError(uint8_t code)
 
 void LED::setPOST(uint8_t code)
 {
+    DPRINTF("POST: %d\n", code);
+
     post = code;
     
     vTaskResume(errorHandle);
@@ -152,6 +156,8 @@ void LED::setPOST(uint8_t code)
 void LED::errorLoop(uint8_t code)
 {
     uint8_t count = 0;
+
+    DPRINTF("Error Loop! Code: %d\n", code);
 
     while(true)
     {

@@ -1699,7 +1699,7 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
+				"fragment" : "-Wl,--print-memory-usage",
 				"role" : "flags"
 			},
 			{

@@ -7,7 +7,7 @@
 #include "hardware/i2c.h"
 #include "hardware/watchdog.h"
 
-PCA9955 HEADS::output = PCA9955(i2c0, 0x01, 57.375);
+PCA9955 HEADS::output = PCA9955(i2c0, 0x01, 57.375); 
 headInfo HEADS::heads[MAXHEADS];
 
 uint8_t HEADS::maxRetries;
@@ -23,6 +23,8 @@ bool HEADS::headsDim;
 
 uint8_t HEADS::awakeIndicator;
 
+uint16_t HEADS::ledErrors;
+
 absolute_time_t HEADS::dimTimeout;
 
 TaskHandle_t HEADS::headsTaskHandle;
@@ -30,9 +32,12 @@ TaskHandle_t HEADS::headCommTaskHandle[MAXHEADS];
 
 void HEADS::init(void)
 {
+    ledErrors = 0;
     uint8_t pin1, pin2, pin3, pin4, cur1, cur2, cur3, cur4 = 255;
 
     JsonObject Jhead[] = {Main::cfg["head1"].as<JsonObject>(), Main::cfg["head2"].as<JsonObject>(), Main::cfg["head3"].as<JsonObject>(), Main::cfg["head4"].as<JsonObject>()};
+
+    output = PCA9955(i2c0, 0x01, 57.375);
 
     //Initialize all LED pins 
     for(int i = 0; i < 16; i++)
@@ -259,9 +264,9 @@ void HEADS::init(void)
     {
         if(heads[i].head)
         {
-            xTaskCreate(headCommTask, "headCommTask", 640, (void*)i, HEADSCOMMPRIORITY, &headCommTaskHandle[i]);
+            xTaskCreate(headCommTask, "headCommTask", 400, (void*)i, (HEADSCOMMPRIORITY + MAXHEADS) - i, &headCommTaskHandle[i]);
 
-            DPRINTF("Head %d Comm Task Initialized\n", i);
+            DPRINTF("Head %d Comm Task Initialized\n", i+1);
         }
     }
 }
@@ -426,9 +431,9 @@ void HEADS::headCommTask(void *pvParameters)
                 {
                     if(!heads[headNum].destResponded[x])
                     {
+                        Radio::transmit(heads[headNum].destAddr[x], 'R', false, false);
                         heads[headNum].head->setHeadBrightness(0);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
-                        Radio::transmit(heads[headNum].destAddr[x], 'R', false, false);
                         heads[headNum].retries++;
                         DPRINTF("Sending Capture %d to %d\n", headNum, heads[headNum].destAddr[x]);
                         transmitted = true;
@@ -464,9 +469,9 @@ void HEADS::headCommTask(void *pvParameters)
                 {
                     if(!heads[headNum].destResponded[x])
                     {
+                        Radio::transmit(heads[headNum].destAddr[x], 'G', false, false);
                         heads[headNum].head->setHeadBrightness(0);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
-                        Radio::transmit(heads[headNum].destAddr[x], 'G', false, false);
                         heads[headNum].retries++;
                         DPRINTF("Sending Release %d to %d\n", headNum, heads[headNum].destAddr[x]);
                         transmitted = true;
@@ -788,7 +793,7 @@ uint16_t HEADS::getLEDErrors()
     {
         for(uint8_t i = 0; i < 16; i++)
         {
-            if(output.getError(i) != LEDopen)
+            if(output.getError(i) == LEDopen)
             {
                 rtn |= (1 << i);
             }
@@ -798,7 +803,7 @@ uint16_t HEADS::getLEDErrors()
     {
         for(uint8_t i = 0; i < 16; i++)
         {
-            if(output.getError(i) != LEDshort)
+            if(output.getError(i) == LEDshort)
             {
                 rtn |= (1 << i);
             }

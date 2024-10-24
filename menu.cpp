@@ -177,10 +177,29 @@ void MENU::menuTask(void *pvParameters)
                 }
                 else if(strncasecmp(inBuf+1, "flash", 5) == 0)
                 {
-                    if(strncasecmp(inBuf+6, "clr", 3) == 0)
+                    if(strncasecmp(inBuf+7, "clr", 3) == 0)
                     {
+                        DPRINTF("Erase Config\n");
+
+                        bool irq[26];
+
+                        vTaskSuspendAll();
+
+                        for(uint8_t i = 0; i < sizeof(irq); i++)
+                        {
+                            irq[i] = irq_is_enabled(i);
+                            irq_set_enabled(i, false);
+                        }
+
                         Main::eraseFlashJSON();
-                        printf("> Flash Cleared\n");
+                        //flash_safe_execute((void(*)(void*))eraseFlashJSON, NULL, 10000);
+
+                        for(uint8_t i = 0; i < sizeof(irq); i++)
+                        {
+                            irq_set_enabled(i, irq[i]);
+                        }
+
+                        xTaskResumeAll();
                     }
                 }
                 else if(strncasecmp(inBuf+1, "rst", 3) == 0)

@@ -33,18 +33,18 @@
             "brightness": 255
         }
     },
-    "pin1": {
-        "mode": "release",
-        "head": 1
-    },
     "pin2": {
         "mode": "capture",
         "head1": 1
     },
     "pin3": {
-        "mode": "turnout"
+        "mode": "release",
+        "head": 1
     },
     "pin4": {
+        "mode": "turnout"
+    },
+    "pin5": {
         "mode": "turnout"
     }
 }

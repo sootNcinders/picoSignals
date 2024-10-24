@@ -208,7 +208,11 @@ bool IO::getRelease(uint8_t headNum)
     {
         if(inputs[i].mode == release && inputs[i].headNum == headNum)
         {
-            rtn = (inputs[i].active && !inputs[i].lastActive);
+            if(inputs[i].active && !inputs[i].lastActive)
+            {
+                rtn = true;
+                break;
+            }
         }
     }
 

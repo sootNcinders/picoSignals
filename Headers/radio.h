@@ -117,7 +117,6 @@ class Radio
         static float avgRSSI;
 
         static SemaphoreHandle_t radioMutex;
-        static SemaphoreHandle_t RFM95mutex;
 };
 
 #endif

@@ -65,7 +65,7 @@ class PCA9955
         uint8_t _address;
         float _maxCurrent;
         uint8_t ledState[4];
-        uint8_t _errors[8];
+        uint8_t _errors[16];
 
         //
         void clearFaults();

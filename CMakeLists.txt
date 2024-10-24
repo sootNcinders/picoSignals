@@ -59,3 +59,5 @@ pico_enable_stdio_uart(picoSignals 1)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(picoSignals)
+
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")

@@ -55,11 +55,11 @@ int main(void)
     if(Main::mode == STD)
     {
         DPRINTF("\nStandard Signal Mode\n")
-        Radio::init();
         Battery::init();
         IO::init();
         HEADS::init();
         CTC::init();
+        Radio::init();
     }
     else if(Main::mode == CTC)
     {
@@ -229,6 +229,11 @@ void Main::writeFlashJSON(uint8_t* in)
 void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName )
 {
     panic("Stack overflow in task %s\n", pcTaskName);
+}
+
+void vApplicationMallocFailedHook( void )
+{
+    panic("Failed to allocate memory\n");
 }
 
 void Main::reset(void)
