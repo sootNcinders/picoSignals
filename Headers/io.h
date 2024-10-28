@@ -15,10 +15,13 @@ typedef enum
     capture, //Capture input
     turnoutCapture, //Capture input, target based on turnout state
     release, //Release input
-    turnout //Turnout input
+    turnout, //Turnout input
+    ovlGreen, //Overlay Green
+    ovlAmber, //Overlay Amber
+    ovlRed    //Overlay Red
 }switchMode;
 
-static const char* switchModes[] = {"Unused  ", "Capture ", "Turnout Capture ", "Release ", "Turnout "};
+static const char* switchModes[] = {"Unused  ", "Capture ", "Turnout Capture ", "Release ", "Turnout ", "Ovrlay G", "Ovrlay A", "Ovrlay R"};
 
 //input pin info
 typedef struct
@@ -47,8 +50,13 @@ class IO
         static void setRelease(uint8_t headNum);
         static bool getCapture(uint8_t headNum);
         static bool getRelease(uint8_t headNum);
+        static bool getOvlG(uint8_t headNum);
+        static bool getOvlA(uint8_t headNum);
+        static bool getOvlR(uint8_t headNum);
 
         static void setLastActive(uint8_t headNum, uint8_t mode);
+
+        static uint8_t getNumOvlHeads();
 
     private:
         static void ioTask(void *pvParameters);
@@ -56,6 +64,8 @@ class IO
         static SemaphoreHandle_t ioMutex;
         static pca9674 input;
         static switchInfo inputs[MAXINPUTS];
+
+        static uint8_t ovlHeads;
 };
 
 #endif

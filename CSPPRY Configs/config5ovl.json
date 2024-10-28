@@ -1,0 +1,21 @@
+{
+    "mode": "overlay",
+    "address": 5,
+    "lowBattery": 1.0,
+    "batteryReset": 1.0,
+    "batteryShutdown": 1.0,
+    "ctcPresent": true,
+
+    "pin1": {
+        "mode": "ovlGreen",
+        "head": 1
+    },
+    "pin2": {
+        "mode": "ovlAmber",
+        "head": 1
+    },
+    "pin3": {
+        "mode": "ovlRed",
+        "head": 1
+    }
+}

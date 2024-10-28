@@ -139,7 +139,7 @@ void MENU::menuTask(void *pvParameters)
 
                     for(uint8_t i = 0; i < MAXINPUTS; i++)
                     {
-                        printf("> Input %d: %s:%s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0");
+                        printf("> Input %d: %s:%s %s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
                     }
                 }
                 else if(strncasecmp(inBuf+1, "rssi", 4) == 0)
@@ -181,6 +181,10 @@ void MENU::menuTask(void *pvParameters)
                     {
                         DPRINTF("Erase Config\n");
 
+                        priority = uxTaskPriorityGet(NULL);
+
+                        vTaskPrioritySet(NULL, MAXPRIORITY);
+
                         bool irq[26];
 
                         vTaskSuspendAll();
@@ -198,6 +202,8 @@ void MENU::menuTask(void *pvParameters)
                         {
                             irq_set_enabled(i, irq[i]);
                         }
+
+                        vTaskPrioritySet(NULL, priority);
 
                         xTaskResumeAll();
                     }

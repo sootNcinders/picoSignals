@@ -65,6 +65,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/picoSignals.dir/main.cpp.obj.d"
   "CMakeFiles/picoSignals.dir/menu.cpp.obj"
   "CMakeFiles/picoSignals.dir/menu.cpp.obj.d"
+  "CMakeFiles/picoSignals.dir/overlay.cpp.obj"
+  "CMakeFiles/picoSignals.dir/overlay.cpp.obj.d"
   "CMakeFiles/picoSignals.dir/pca9674.cpp.obj"
   "CMakeFiles/picoSignals.dir/pca9674.cpp.obj.d"
   "CMakeFiles/picoSignals.dir/pca9955.cpp.obj"

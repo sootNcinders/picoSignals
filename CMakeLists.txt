@@ -21,6 +21,7 @@ add_executable(picoSignals
                 ctc.cpp
                 heads.cpp
                 menu.cpp
+                overlay.cpp
                 pca9674.cpp
                 pca9955.cpp
                 RFM95/RFM95.cpp

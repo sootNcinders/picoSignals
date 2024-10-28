@@ -8,6 +8,8 @@ pca9674 IO::input = pca9674(i2c0, 0x20);
 SemaphoreHandle_t IO::ioMutex;
 switchInfo IO::inputs[MAXINPUTS];
 
+uint8_t IO::ovlHeads = 0;
+
 void IO::init() 
 {
     JsonObject pins[] = {Main::cfg["pin1"].as<JsonObject>(), Main::cfg["pin2"].as<JsonObject>(), Main::cfg["pin3"].as<JsonObject>(), Main::cfg["pin4"].as<JsonObject>(),
@@ -55,6 +57,42 @@ void IO::init()
             else if (pins[i]["mode"] == "turnout")
             {
                 inputs[i].mode = turnout;
+            }
+            else if(pins[i]["mode"] == "ovlGreen")
+            {
+                inputs[i].mode = ovlGreen;
+                inputs[i].headNum = pins[i]["head"];
+
+                if(inputs[i].headNum > ovlHeads)
+                {
+                    ovlHeads = inputs[i].headNum;
+                }
+
+                inputs[i].headNum--;
+            }
+            else if(pins[i]["mode"] == "ovlAmber")
+            {
+                inputs[i].mode = ovlAmber;
+                inputs[i].headNum = pins[i]["head"];
+
+                if(inputs[i].headNum > ovlHeads)
+                {
+                    ovlHeads = inputs[i].headNum;
+                }
+
+                inputs[i].headNum--;
+            }
+            else if(pins[i]["mode"] == "ovlRed")
+            {
+                inputs[i].mode = ovlRed;
+                inputs[i].headNum = pins[i]["head"];
+
+                if(inputs[i].headNum > ovlHeads)
+                {
+                    ovlHeads = inputs[i].headNum;
+                }
+
+                inputs[i].headNum--;
             }
             else
             {
@@ -190,10 +228,14 @@ bool IO::getCapture(uint8_t headNum)
 
     for(uint8_t i = 0; i < MAXINPUTS; i++)
     {
-        if((inputs[i].headNum == headNum || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active)) 
-                            && (inputs[i].mode == capture || inputs[i].mode == turnoutCapture))
+        if((inputs[i].mode == capture && inputs[i].headNum == headNum) 
+            || (inputs[i].mode == turnoutCapture && ((inputs[i].headNum == headNum && !inputs[inputs[i].turnoutPinNum].active) 
+                    || (inputs[i].headNum2 == headNum && inputs[inputs[i].turnoutPinNum].active))))
         {
-            rtn = (inputs[i].active && !inputs[i].lastActive);
+            if(inputs[i].active && !inputs[i].lastActive)
+            {
+                rtn = true;
+            }
         }
     }
 
@@ -217,4 +259,66 @@ bool IO::getRelease(uint8_t headNum)
     }
 
     return rtn;
+}
+
+bool IO::getOvlG(uint8_t headNum)
+{
+    bool rtn = false;
+
+    for(uint8_t i = 0; i < MAXINPUTS; i++)
+    {
+        if(inputs[i].mode == ovlGreen && inputs[i].headNum == headNum)
+        {
+            if(inputs[i].active && !inputs[i].lastActive)
+            {
+                rtn = true;
+                break;
+            }
+        }
+    }
+
+    return rtn;
+}
+
+bool IO::getOvlA(uint8_t headNum)
+{
+    bool rtn = false;    
+
+    for(uint8_t i = 0; i < MAXINPUTS; i++)
+    {
+        if(inputs[i].mode == ovlAmber && inputs[i].headNum == headNum)
+        {
+            if(inputs[i].active && !inputs[i].lastActive)
+            {
+                rtn = true;
+                break;
+            }
+        }
+    }
+
+    return rtn;
+}
+
+bool IO::getOvlR(uint8_t headNum)
+{
+    bool rtn = false;    
+
+    for(uint8_t i = 0; i < MAXINPUTS; i++)
+    {
+        if(inputs[i].mode == ovlRed && inputs[i].headNum == headNum)
+        {
+            if(inputs[i].active && !inputs[i].lastActive)
+            {
+                rtn = true;
+                break;
+            }
+        }
+    }
+
+    return rtn;
+}
+
+uint8_t IO::getNumOvlHeads()
+{
+    return ovlHeads;
 }

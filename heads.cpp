@@ -309,7 +309,7 @@ void HEADS::headsTask(void *pvParameters)
         {
             if(heads[i].head)
             {
-                if(heads[i].head->getColor() == red || heads[i].head->getColor() == amber)
+                if(heads[i].head->getColor() == red || heads[i].head->getColor() == amber || heads[i].head->getColor() == lunar)
                 {
                     if((absolute_time_diff_us(heads[i].releaseTimer, get_absolute_time())/60000000) > heads[i].releaseTime)
                     {
@@ -318,6 +318,7 @@ void HEADS::headsTask(void *pvParameters)
 
                         CTC::update();
                     }
+                    dimTimeout = get_absolute_time();
                 }
             }
         }
@@ -499,6 +500,8 @@ void HEADS::headCommTask(void *pvParameters)
             IO::setLastActive(headNum, capture);
             IO::setLastActive(headNum, turnoutCapture);
             IO::setLastActive(headNum, release);
+
+            heads[headNum].retries = 0;
 
             xTaskNotifyWait(0, ULONG_MAX, NULL, portMAX_DELAY);
         }

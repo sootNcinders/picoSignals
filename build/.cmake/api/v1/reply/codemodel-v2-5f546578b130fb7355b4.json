@@ -1209,7 +1209,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ELF2UF2Build::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ELF2UF2Build-Debug-82c5af6cad5c7422d94a.json",
+					"jsonFile" : "target-ELF2UF2Build-Debug-eb73479645c139a84720.json",
 					"name" : "ELF2UF2Build",
 					"projectIndex" : 0
 				},
@@ -1251,7 +1251,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "picoSignals::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-picoSignals-Debug-85f6b8cd5fa5ca8170bd.json",
+					"jsonFile" : "target-picoSignals-Debug-0118fafd19397429e04e.json",
 					"name" : "picoSignals",
 					"projectIndex" : 0
 				}

@@ -34,6 +34,7 @@ class CTC
 
         static bool updateNeeded;
         static bool paused;
+        static bool ovlMode;
 
         static TaskHandle_t ctcTaskHandle;
         static uint8_t addr;

@@ -27,6 +27,7 @@
 #include "ctc.h"
 #include "heads.h"
 #include "menu.h"
+#include "overlay.h"
 
 JsonDocument Main::cfg = JsonDocument();
 uint8_t* Main::flashJson = (uint8_t*) FLASHJSONADDR;
@@ -54,7 +55,7 @@ int main(void)
 
     if(Main::mode == STD)
     {
-        DPRINTF("\nStandard Signal Mode\n")
+        DPRINTF("\nStandard Signal Mode\n");
         Battery::init();
         IO::init();
         HEADS::init();
@@ -63,8 +64,17 @@ int main(void)
     }
     else if(Main::mode == CTC)
     {
-        DPRINTF("\nCTC Mode\n")
+        DPRINTF("\nCTC Mode\n");
         Radio::init();
+    }
+    else if(Main::mode == OVL)
+    {
+        DPRINTF("\nOverlay Mode\n");
+        Battery::init();
+        IO::init();
+        CTC::init();
+        Radio::init();
+        OVERLAY::init();
     }
 
     DPRINTF("Init complete\n");

@@ -11,9 +11,11 @@
 #include "radio.h"
 #include "io.h"
 #include "heads.h"
+#include "overlay.h"
 
 bool CTC::updateNeeded = false;
 bool CTC::paused = false;
+bool CTC::ovlMode = false;
 TaskHandle_t CTC::ctcTaskHandle;
 uint8_t CTC::addr;
 uint8_t CTC::tries;
@@ -30,6 +32,11 @@ void CTC::init(void)
     ctcNodes[0].addr = addr;
     ctcNodes[0].triesRemaining = MAXTRIES;
     ctcNodes[0].responded = false;
+
+    if(Main::mode == OVL)
+    {
+        ovlMode = true;
+    }
 
     xTaskCreate(ctcTask, "CTC Task", 512, NULL, CTCPRIORITY, &ctcTaskHandle);
 
@@ -64,17 +71,17 @@ void CTC::ctcTask(void *pvParameters)
 
         for(uint8_t i = 0; i < MAXINPUTS; i++)
         {
-            if((info[i].mode == capture || info[i].mode == turnoutCapture) && info[i].active && info[i].lastActive)
+            if((info[i].mode == capture || info[i].mode == turnoutCapture) && info[i].active)
             {
-                toCTC.captures |= (1 << info[i].headNum);
+                caps |= (1 << info[i].headNum);
             }
-            else if(info[i].mode == release && info[i].active && info[i].lastActive)
+            else if(info[i].mode == release && info[i].active)
             {
-                toCTC.releases |= (1 << info[i].headNum);
+                rels |= (1 << info[i].headNum);
             }
-            else if(info[i].mode == turnout && info[i].active && info[i].lastActive)
+            else if(info[i].mode == turnout && info[i].active)
             {
-                toCTC.turnouts |= (1 << numTurnouts);
+                turnouts |= (1 << numTurnouts);
                 numTurnouts++;
             }
         }
@@ -89,17 +96,34 @@ void CTC::ctcTask(void *pvParameters)
         if(updateNeeded && !paused)
         {
             toCTC.sender = addr;
-            toCTC.head1 = HEADS::getHead(0);
-            toCTC.head2 = HEADS::getHead(1);
-            toCTC.head3 = HEADS::getHead(2);
-            toCTC.head4 = HEADS::getHead(3);
-            toCTC.captures = caps;
-            toCTC.releases = rels;
-            toCTC.turnouts = turnouts;
-            toCTC.avgRSSI = Radio::getAvgRSSI();
+
+            if(ovlMode)
+            {
+                toCTC.head1 = OVERLAY::getHead(0);
+                toCTC.head2 = OVERLAY::getHead(1);
+                toCTC.head3 = OVERLAY::getHead(2);
+                toCTC.head4 = OVERLAY::getHead(3);
+                toCTC.captures = 0;
+                toCTC.releases = 0;
+                toCTC.turnouts = 0;
+                toCTC.avgRSSI  = 0;
+                toCTC.ledError = 0;
+            }
+            else
+            {
+                toCTC.head1 = HEADS::getHead(0);
+                toCTC.head2 = HEADS::getHead(1);
+                toCTC.head3 = HEADS::getHead(2);
+                toCTC.head4 = HEADS::getHead(3);
+                toCTC.captures = caps;
+                toCTC.releases = rels;
+                toCTC.turnouts = turnouts;
+                toCTC.avgRSSI  = Radio::getAvgRSSI();
+                toCTC.ledError = HEADS::getLEDErrors();
+            }
+
             toCTC.voltage = (uint8_t) (bat * 10);
             lastBat = bat;
-            toCTC.ledError = HEADS::getLEDErrors();
             toCTC.version = VERSION;
             toCTC.revision = REVISION;
             
@@ -184,6 +208,7 @@ TaskHandle_t CTC::getTaskHandle(void)
 void CTC::processFromMsg(FROMCTC msg, uint8_t from)
 {
     bool allResponded = true;
+    UBaseType_t priority = uxTaskPriorityGet(NULL);
 
     if(ctcTaskHandle)
     {
@@ -220,12 +245,15 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                     tries = 0;
                 }
                 break;
+                
             case 0x01: //Ping
                 update();
                 break;
+
             case 0x02: //Wake
                 HEADS::wake();
                 break;
+
             case 0x03: //Capture
             case 0x04:
             case 0x05:
@@ -233,6 +261,7 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                 IO::setCapture(msg.cmd - 3);
                 HEADS::startComm(msg.cmd - 3);
                 break;
+
             case 0x07: //Release
             case 0x08:
             case 0x09:
@@ -240,8 +269,11 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                 IO::setRelease(msg.cmd - 7);
                 HEADS::startComm(msg.cmd - 7);
                 break;
+
             case 0x0B: //Clear Flash Config
                 DPRINTF("Erase Config\n");
+
+                vTaskPrioritySet(NULL, MAXPRIORITY);
 
                 bool irq[26];
 
@@ -261,8 +293,11 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                     irq_set_enabled(i, irq[i]);
                 }
 
+                vTaskPrioritySet(NULL, priority);
+
                 xTaskResumeAll();
                 break;
+                
             case 0x0C: //Cause a watchdog reboot after 500ms to clear UART
                 Main::reset();
                 break;

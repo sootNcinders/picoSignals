@@ -1044,6 +1044,30 @@ menu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/menu.cpp.s
 .PHONY : menu.cpp.s
 
+overlay.obj: overlay.cpp.obj
+.PHONY : overlay.obj
+
+# target to build an object file
+overlay.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/overlay.cpp.obj
+.PHONY : overlay.cpp.obj
+
+overlay.i: overlay.cpp.i
+.PHONY : overlay.i
+
+# target to preprocess a source file
+overlay.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/overlay.cpp.i
+.PHONY : overlay.cpp.i
+
+overlay.s: overlay.cpp.s
+.PHONY : overlay.s
+
+# target to generate assembly for a file
+overlay.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picoSignals.dir/build.make CMakeFiles/picoSignals.dir/overlay.cpp.s
+.PHONY : overlay.cpp.s
+
 pca9674.obj: pca9674.cpp.obj
 .PHONY : pca9674.obj
 
@@ -2906,6 +2930,9 @@ help:
 	@echo "... menu.obj"
 	@echo "... menu.i"
 	@echo "... menu.s"
+	@echo "... overlay.obj"
+	@echo "... overlay.i"
+	@echo "... overlay.s"
 	@echo "... pca9674.obj"
 	@echo "... pca9674.i"
 	@echo "... pca9674.s"
