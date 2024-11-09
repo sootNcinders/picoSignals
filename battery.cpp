@@ -29,7 +29,7 @@ void Battery::batteryTask(void *pvParameters)
 {
     uint16_t rawADC;
     float batt;
-    float rawBat[NUMBATSAMPLES];
+    float rawBat[NUMBATSAMPLES] = {0.0};
 
     bool batteryLow = false;
     bool lastLow = false;
@@ -49,7 +49,7 @@ void Battery::batteryTask(void *pvParameters)
         {
             rawBat[i] = rawBat[i + 1];
 
-            if(rawBat[i] == 0)
+            if(rawBat[i] == 0.0)
             {
                 rawBat[i] = batt;
             }

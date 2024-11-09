@@ -30,6 +30,23 @@ typedef struct
     bool delayClearStarted;
 }headInfo;
 
+enum
+{
+    notUsed = 0,
+    liGreen,
+    liAmber,
+    liRed,
+    liBlue,
+    liLunar,
+};
+
+typedef struct
+{
+    uint8_t headNum;
+    uint8_t color;
+}ledInfo;
+
+
 class HEADS
 {
     public:
@@ -48,6 +65,10 @@ class HEADS
         static char getHead(uint8_t headNum);
 
         static uint16_t getLEDErrors();
+
+        static uint32_t getRawErrors();
+
+        static ledInfo* getLedInfo();
 
     private:
         static void headsTask(void *pvParameters);
@@ -83,6 +104,8 @@ class HEADS
         static TaskHandle_t headsTaskHandle;
 
         static TaskHandle_t headCommTaskHandle[MAXHEADS];
+
+        static ledInfo leds[16];
 };
 
 #endif

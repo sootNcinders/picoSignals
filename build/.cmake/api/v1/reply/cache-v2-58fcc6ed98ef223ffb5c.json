@@ -331,10 +331,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "/opt/homebrew/bin/arm-none-eabi-g++"
 		},
 		{
@@ -459,10 +459,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "/opt/homebrew/bin/arm-none-eabi-gcc"
 		},
 		{
@@ -1891,7 +1891,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : " /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs"
+			"value" : " /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs"
 		},
 		{
 			"name" : "PICO_DOXYGEN_PATHS",

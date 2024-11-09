@@ -12,6 +12,11 @@ PCA9955::PCA9955(i2c_inst_t *i2cbus, uint8_t addr, float maxCurrent)
     _bus = i2cbus;
     _address = addr;
     _maxCurrent = maxCurrent;
+
+    for(uint8_t i = 0; i < 16; i++)
+    {
+        _errors[i] = LEDnormal;
+    }
 }
 
 void PCA9955::setLEDcurrent(uint8_t num, float mAmps)
@@ -130,7 +135,7 @@ bool PCA9955::checkErrors()
             printf("PCA9955 Error %d: 0x%x\n", i, buffer[0]);
             #endif
 
-            error |= buffer[0] << (i*8);
+            error |= (buffer[0] << (i*8));
             busy_wait_us(10);
         }
 
@@ -161,9 +166,7 @@ bool PCA9955::checkErrors()
                     break;
 
                 default:
-                    outReg = 0x02 + (uint8_t)(i/4);
-
-                    if(ledState[outReg-0x02] != 0x00)
+                    if(((ledState[(uint8_t)(i/4)] >> ((i % 4) * 2)) & 0x03) != 0x00)
                     {
                         _errors[i] = LEDnormal;
                     }

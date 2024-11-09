@@ -42,7 +42,7 @@ void MENU::menuTask(void *pvParameters)
     while(true)
     {
         cin = getchar_timeout_us(0);
-        while(cin >= 0x0A && cin <= 0x7F && bufIdx < sizeof(inBuf))
+        while(cin >= 0x08 && cin <= 0x7F && bufIdx < sizeof(inBuf))
         {
             inBuf[bufIdx] = cin;
             
@@ -68,7 +68,17 @@ void MENU::menuTask(void *pvParameters)
                 printHelp();
             }
 
-            if(menu)
+            //backspace, but cant backspace over the start character
+            if((cin == 0x08 || cin == 0x7F) && bufIdx > 0)
+            {
+                inBuf[bufIdx - 1] = 0;
+                bufIdx--;
+                inBuf[bufIdx - 1] = 0;
+                bufIdx--;
+
+                printf("\b");
+            }
+            else if(menu)
             {
                 printf("%c", inBuf[bufIdx - 1]);
             }
@@ -212,6 +222,68 @@ void MENU::menuTask(void *pvParameters)
                 {
                     Main::reset();
                 }
+                else if(strncasecmp(inBuf+1, "LED", 3) == 0)
+                {
+                    uint32_t leds = HEADS::getRawErrors();
+
+                    ledInfo* info = HEADS::getLedInfo();
+
+                    uint8_t headNum = 0;
+
+                    for(uint8_t i = 0; i < 16; i++)
+                    {
+                        headNum = info[i].headNum;
+
+                        if(i < 9)
+                        {
+                            printf("LED  %d: Head: %d ", i+1, headNum);
+                        }
+                        else
+                        {
+                            printf("LED %d: Head: %d ", i+1, headNum);
+                        }
+
+                        switch(info[i].color)
+                        {
+                            case notUsed:
+                                printf("Not Used - ");
+                                break;
+                            
+                            case liGreen:
+                                printf("Green    - ");
+                                break;
+
+                            case liAmber:
+                                printf("Amber    - ");
+                                break;
+
+                            case liRed:
+                                printf("Red      - ");
+                                break;
+
+                            case liBlue:
+                                printf("Blue     - ");
+                                break;
+
+                            case liLunar:
+                                printf("Lunar    - ");
+                                break;
+                        }
+
+                        if(((leds >> (i*2)) & 0x3) == LEDshort)
+                        {
+                            printf("Shorted\n");
+                        }
+                        else if(((leds >> (i*2)) & 0x3) == LEDopen)
+                        {
+                            printf("Open\n");
+                        }
+                        else
+                        {
+                            printf("OK\n");
+                        }
+                    }
+                }
                 else
                 {
                     printHelp();
@@ -248,6 +320,8 @@ void MENU::printHelp(void)
     printf("> >wake - Wake Signal\n");
     printf("> >flash clr - Clear Flash\n");
     printf("> >rst - Reset\n");
+    printf("> >sys - Print Thread Status List\n");
+    printf("> >LED - Prints LED Status\n");
 
     vTaskPrioritySet(NULL, priority);
 }

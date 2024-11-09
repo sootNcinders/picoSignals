@@ -13,6 +13,9 @@
 #include "heads.h"
 #include "overlay.h"
 
+#include <stdio.h>
+#include <cmath>
+
 bool CTC::updateNeeded = false;
 bool CTC::paused = false;
 bool CTC::ovlMode = false;
@@ -122,7 +125,7 @@ void CTC::ctcTask(void *pvParameters)
                 toCTC.ledError = HEADS::getLEDErrors();
             }
 
-            toCTC.voltage = (uint8_t) (bat * 10);
+            toCTC.voltage = (uint8_t) round(bat * 10);
             lastBat = bat;
             toCTC.version = VERSION;
             toCTC.revision = REVISION;

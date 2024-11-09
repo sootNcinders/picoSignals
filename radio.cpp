@@ -82,6 +82,8 @@ void Radio::init(void)
 void Radio::initRadio(void)
 {
     DPRINTF("Initializing Radio\n");
+
+    uint16_t timeout = (Main::cfg["retryTime"] | 150)/2;
     
     //Set up the RFM95 radio
     //12500bps datarate
@@ -107,6 +109,8 @@ void Radio::initRadio(void)
     radio.setSpreadingFactor(9);
     //Accept all packets
     radio.setPromiscuous(true);
+
+    radio.setCADTimeout(timeout);
 
     radio.setModeRX();
 }
@@ -154,7 +158,10 @@ void Radio::radioTask(void *pvParameters)
                 else if(size == sizeof(FROMCTC) && (to == addr || to == 255))
                 {
                     memcpy(&fromCtc, buf, sizeof(FROMCTC));
-                    CTC::processFromMsg(fromCtc, from);
+                    if(fromCtc.dest == addr)
+                    {
+                        CTC::processFromMsg(fromCtc, from);
+                    }
                 }
 
                 if(from == primaryPartner)

@@ -56,6 +56,8 @@ bool RFM95::init(SemaphoreHandle_t mutex)
     _lastRSSI = 0;
     _lastSNR = 0;
 
+    _cadTimeout = 500;
+
     _mutex = mutex;
 
     _promiscuous = true;
@@ -314,6 +316,7 @@ void RFM95::handleInterrupt(void)
         if(_mode == RFMModeRxSingle)
         {
             _mode = RFMModeIdle;
+            _cad = false;
         }
     }
     else if(_mode == RFMModeTx && (irq_flags & RFM95_TX_DONE))
@@ -327,7 +330,7 @@ void RFM95::handleInterrupt(void)
     }
     else if(_mode == RFMModeCad && (irq_flags & RFM95_CAD_DONE))
     {
-        _cad = irq_flags & RFM95_CAD_DETECTED;
+        _cad = ((irq_flags & RFM95_CAD_DETECTED) != 0);
 
         if(_cad)
         {
@@ -488,9 +491,9 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
 
     setTX();
 
-    while(_mode != RFMModeIdle && _mode != RFMModeRx)
+    while(_mode != RFMModeIdle && _mode != RFMModeRx && _mode != RFMModeRxSingle)
     {
-        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 1000)
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= _cadTimeout*4)
         {
             printf("Mode Fault   Mode = %d\n", _mode);
 
@@ -511,7 +514,7 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     t = get_absolute_time();
     while(channelActive())
     {  
-        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= 500)
+        if((absolute_time_diff_us(t, get_absolute_time()) / 1000) >= _cadTimeout*5)
         {
             printOpMode();
             busy_wait_ms(1);
@@ -597,10 +600,11 @@ bool RFM95::channelActive()
     chipDeselect();
 
     _mode = RFMModeCad;
+    _cad = false;
 
     absolute_time_t t = get_absolute_time();
     int64_t tDiff = 0;
-    while(_mode == RFMModeCad && (tDiff/1000 < 1000))
+    while(_mode == RFMModeCad && (tDiff/1000 < _cadTimeout))
     {
         busy_wait_ms(1);
         tDiff = absolute_time_diff_us(t, get_absolute_time());
@@ -616,10 +620,14 @@ bool RFM95::channelActive()
     {
         t = get_absolute_time();
         tDiff = 0;
-        while(_mode != RFMModeIdle && (tDiff/1000 < 100))
+        while(_mode != RFMModeIdle && (tDiff/1000 < _cadTimeout*5))
         {
             busy_wait_ms(1);
             tDiff = absolute_time_diff_us(t, get_absolute_time());
+        }
+        if(_mode != RFMModeIdle)
+        {
+            _cad = false;
         }
 
         return _cad;
@@ -1268,4 +1276,9 @@ uint8_t RFM95::getMode()
     uint8_t buf[1];
     readRegister(0x01, buf);
     return buf[0];
+}
+
+void RFM95::setCADTimeout(uint16_t timeout)
+{
+    _cadTimeout = timeout;
 }

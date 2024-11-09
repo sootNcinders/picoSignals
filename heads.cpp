@@ -30,6 +30,8 @@ absolute_time_t HEADS::dimTimeout;
 TaskHandle_t HEADS::headsTaskHandle;
 TaskHandle_t HEADS::headCommTaskHandle[MAXHEADS];
 
+ledInfo HEADS::leds[16];
+
 void HEADS::init(void)
 {
     ledErrors = 0;
@@ -44,6 +46,9 @@ void HEADS::init(void)
     {
         output.setLEDcurrent(i, 0);
         output.setLEDbrightness(i, 0);
+
+        leds[i].color = notUsed;
+        leds[i].headNum = 0;
     }
 
     maxRetries = Main::cfg["retries"]   | 10; //Number of retries, default to 10 if not specified 
@@ -90,6 +95,13 @@ void HEADS::init(void)
                 pin3--;
                 cur3 = Jhead[i]["blue"]["current"];
 
+                leds[pin1].color = liRed;
+                leds[pin2].color = liGreen;
+                leds[pin3].color = liBlue;
+                leds[pin1].headNum = i+1;
+                leds[pin2].headNum = i+1;
+                leds[pin3].headNum = i+1;
+
                 heads[i].head = new RGBHEAD(&output, IO::getIOmutex(), pin1, pin2, pin3);
                 rgb = (RGBHEAD*)heads[i].head;
                 rgb->init(cur1, cur2, cur3);
@@ -109,6 +121,9 @@ void HEADS::init(void)
                     pin1--;
                     cur1 = Jhead[i]["green"]["current"];
                     briG = Jhead[i]["green"]["brightness"] | 255;
+
+                    leds[pin1].color = liGreen;
+                    leds[pin1].headNum = i+1;
                 }
                 else
                 {
@@ -121,6 +136,9 @@ void HEADS::init(void)
                     pin2--;
                     cur2 = Jhead[i]["amber"]["current"];
                     briA = Jhead[i]["amber"]["brightness"] | 255;
+
+                    leds[pin2].color = liAmber;
+                    leds[pin2].headNum = i+1;
                 }
                 else
                 {
@@ -133,6 +151,9 @@ void HEADS::init(void)
                     pin3--;
                     cur3 = Jhead[i]["red"]["current"];
                     briR = Jhead[i]["red"]["brightness"] | 255;
+
+                    leds[pin3].color = liRed;
+                    leds[pin3].headNum = i+1;
                 }
                 else
                 {
@@ -145,6 +166,9 @@ void HEADS::init(void)
                     pin4--;
                     cur4 = Jhead[i]["lunar"]["current"];
                     briL = Jhead[i]["lunar"]["brightness"] | 255;
+
+                    leds[pin4].color = liLunar;
+                    leds[pin4].headNum = i+1;
                 }
                 else
                 {
@@ -625,7 +649,11 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                 break;
         }
     }
-
+    //If the message was for a different node and was Amber or Red, wake this head.
+    else if(msg.destination != addr && from != addr && (msg.aspect == 'A' || msg.aspect == 'a' || msg.aspect == 'R' || msg.aspect == 'r'))
+    {
+        wake();
+    }
 }
 
 //Function to handle when the transmission sequence is complete for multiple destinations
@@ -792,6 +820,9 @@ uint16_t HEADS::getLEDErrors()
     xSemaphoreTake(IO::getIOmutex(), portMAX_DELAY);
 
     output.checkErrors();
+
+    xSemaphoreGive(IO::getIOmutex());
+
     if(monLEDsOpen && output.checkOpenCircuits())
     {
         for(uint8_t i = 0; i < 16; i++)
@@ -813,7 +844,23 @@ uint16_t HEADS::getLEDErrors()
         }
     }
 
+    return rtn;
+}
+
+uint32_t HEADS::getRawErrors()
+{
+    uint32_t rtn = 0;
+
+    xSemaphoreTake(IO::getIOmutex(), portMAX_DELAY);
+
+    output.checkErrors();
+
     xSemaphoreGive(IO::getIOmutex());
+
+    for(uint8_t i = 0; i < 16; i++)
+    {
+        rtn |= (output.getError(i) << (i*2));
+    }
 
     return rtn;
 }
@@ -833,4 +880,9 @@ int64_t HEADS::delayedClear(alarm_id_t id, void *user_data)
     }
 
     return 0;
+}
+
+ledInfo* HEADS::getLedInfo()
+{
+    return (ledInfo*) &leds;
 }

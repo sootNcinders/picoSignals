@@ -8,11 +8,16 @@ uint8_t OVERLAY::heads[MAXHEADS];
 
 void OVERLAY::init(void) 
 {
+    for(uint8_t i = 0; i < MAXHEADS; i++)
+    {
+        heads[i] = off;
+    }
+
     for(uint32_t i = 0; i < IO::getNumOvlHeads(); i++)
     {
         xTaskCreate(overlayTask, "overlayTask", 400, (void*)i, (HEADSCOMMPRIORITY + MAXHEADS) - i, NULL);
 
-        DPRINTF("Head %d Comm Task Initialized\n", i+1);
+        DPRINTF("Overlay Head %d Task Initialized\n", i+1);
     }
 }
 
@@ -54,5 +59,26 @@ void OVERLAY::overlayTask(void *pvParameters)
 
 uint8_t OVERLAY::getHead(uint8_t headNum)
 {
-    return heads[headNum];
+    char rtn = 'O';
+
+    switch(heads[headNum])
+    {
+        case green:
+            rtn = 'G';
+            break;
+        case amber:
+            rtn = 'A';
+            break;
+        case red:
+            rtn = 'R';
+            break;
+        case lunar:
+            rtn = 'L';
+            break;
+        default:
+            rtn = 'O';
+            break;
+    }
+    
+    return rtn;
 }

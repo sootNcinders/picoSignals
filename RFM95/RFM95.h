@@ -402,6 +402,8 @@ class RFM95
         /// @return the contents of the operation mode register
         uint8_t getMode();
 
+        void setCADTimeout(uint16_t timeout);
+
         volatile bool rxAlarmSet;
         volatile bool txAlarmSet;
     
@@ -433,6 +435,8 @@ class RFM95
         volatile uint8_t TXled;
 
         SemaphoreHandle_t _mutex;
+
+        uint16_t _cadTimeout;
 
         /// @brief select this chip
         void chipSelect();

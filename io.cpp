@@ -154,7 +154,8 @@ void IO::ioTask(void *pvParameters)
                 }
             }
             //get direct input for turnout monitoring, input must be stable for 50ms to latch
-            else if(inputs[i].mode == turnout && inputs[i].active != inputs[i].raw && ((absolute_time_diff_us(inputs[i].lastChange, get_absolute_time())/1000) > 50))
+            else if((inputs[i].mode == turnout || inputs[i].mode == ovlGreen || inputs[i].mode == ovlAmber || inputs[i].mode == ovlRed) 
+                        && inputs[i].active != inputs[i].raw && ((absolute_time_diff_us(inputs[i].lastChange, get_absolute_time())/1000) > 50))
             {
                 DPRINTF("Turnout %d = %d\n", i, inputs[i].raw);
                 inputs[i].active = inputs[i].raw;

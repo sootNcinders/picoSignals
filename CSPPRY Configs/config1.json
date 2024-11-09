@@ -7,6 +7,7 @@
   "batteryShutdown": 10.0,
   "retryTime": 100,
   "ctcPresent": true,
+  "monitorLEDS": 1,
   "head1": {
       "destination": [
         2,
@@ -17,6 +18,7 @@
         0
     ],
       "dim" : 50,
+      "release:": 6,
       "green": {
         "pin": 1,
         "current": 30,
