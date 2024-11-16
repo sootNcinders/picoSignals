@@ -1,0 +1,66 @@
+{
+    "address": 21,
+    "dimTime" : 60,
+    "sleepTime": 120,
+    "lowBattery": 1,
+    "batteryReset": 1,
+    "batteryShutdown": 1,
+    "retryTime": 100,
+    "ctcPresent": true,
+    "monitorLEDs": 1,
+    "head1": {
+        "destination": [
+            18,
+            17,
+            0,
+            0,
+            0,
+            0
+        ],
+        "dim": 50,
+        "blue": {
+            "pin": 2,
+            "current" : 50
+        },
+        "red": {
+            "pin": 3,
+            "current": 50,
+            "rgb": [
+                255,
+                0,
+                0
+            ]
+        },
+        "green": {
+            "pin": 1,
+            "current": 50,
+            "rgb": [
+                0,
+                255,
+                0
+            ]
+        },
+        "amber": {
+            "rgb": [
+                255,
+                165,
+                0
+            ]
+        },
+        "lunar": {
+            "rgb": [
+                141,
+                141,
+                255
+            ]
+        }
+    },
+    "pin1": {
+        "mode": "capture",
+        "head1": 1
+    },
+    "pin2": {
+        "mode": "release",
+        "head": 1
+    }
+}

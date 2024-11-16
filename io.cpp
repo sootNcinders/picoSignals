@@ -323,3 +323,15 @@ uint8_t IO::getNumOvlHeads()
 {
     return ovlHeads;
 }
+
+bool IO::post()
+{
+    bool rtn = false;
+
+    if(input.inputMask(0xFF))
+    {
+        rtn = true;
+    }
+
+    return rtn;
+}

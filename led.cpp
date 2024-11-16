@@ -188,3 +188,36 @@ uint8_t LED::getError(void)
 {
     return error;
 }
+
+void LED::postLoop(uint8_t code)
+{
+    uint8_t count = 0;
+
+    DPRINTF("POST Loop! Code: %d\n", code);
+
+    while(true)
+    {
+        if(count < code)
+        {
+            gpio_put(GOODLED, HIGH);
+            gpio_put(ERRORLED, HIGH);
+            busy_wait_ms(ERRORPERIOD);
+
+            gpio_put(GOODLED, LOW);
+            gpio_put(ERRORLED, LOW);
+            busy_wait_ms(ERRORPERIOD);
+        }
+        else
+        {
+            gpio_put(GOODLED, HIGH);
+            gpio_put(ERRORLED, HIGH);
+            busy_wait_ms(ERRORPERIOD);
+        }
+        count++;
+
+        if(count >= code + 6)
+        {
+            count = 0;
+        }
+    }  
+}

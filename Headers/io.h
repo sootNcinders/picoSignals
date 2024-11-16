@@ -58,6 +58,8 @@ class IO
 
         static uint8_t getNumOvlHeads();
 
+        static bool post(void);
+
     private:
         static void ioTask(void *pvParameters);
 

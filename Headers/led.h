@@ -23,6 +23,8 @@ class LED
 
         static void errorLoop(uint8_t code);
 
+        static void postLoop(uint8_t code);
+
         static uint8_t getError(void);
 
     private:

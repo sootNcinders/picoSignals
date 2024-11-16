@@ -336,3 +336,15 @@ void Radio::wake()
     radio.setModeRX();
     sleeping = false;
 }
+
+bool Radio::post()
+{
+    bool rtn = false;
+
+    if(radio.getDeviceVersion() != 0x00)
+    {
+        rtn = true;
+    }
+
+    return rtn;
+}

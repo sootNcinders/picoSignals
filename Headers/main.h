@@ -100,6 +100,7 @@ class Main
         static void eraseFlashJSON(void);
         static void writeFlashJSON(uint8_t* in);
         static void reset(void);
+        static void post(void);
 
         static JsonDocument cfg;
         static uint8_t* flashJson;

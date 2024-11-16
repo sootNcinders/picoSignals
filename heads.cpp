@@ -886,3 +886,15 @@ ledInfo* HEADS::getLedInfo()
 {
     return (ledInfo*) &leds;
 }
+
+bool HEADS::post(void)
+{
+    bool rtn = false;
+
+    if(output.ping())
+    {
+        rtn = true;
+    }
+
+    return rtn;
+}

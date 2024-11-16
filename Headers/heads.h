@@ -70,6 +70,8 @@ class HEADS
 
         static ledInfo* getLedInfo();
 
+        static bool post(void);
+
     private:
         static void headsTask(void *pvParameters);
 

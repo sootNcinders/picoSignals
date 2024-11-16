@@ -77,6 +77,8 @@ int main(void)
         OVERLAY::init();
     }
 
+    Main::post();
+
     DPRINTF("Init complete\n");
 
     vTaskStartScheduler();
@@ -260,4 +262,24 @@ void Main::reset(void)
     }
 
     xTaskResumeAll();
+}
+
+void Main::post()
+{
+    bool ledState = HIGH;
+    if(!IO::post())
+    {
+        DPRINTF("Input Fault\n");
+        LED::postLoop(BADINPUT);
+    }
+    else if(!HEADS::post())
+    {
+        DPRINTF("Output Fault\n");
+        LED::postLoop(BADOUTPUT);
+    }
+    else if(!Radio::post())
+    {
+        DPRINTF("Radio Fault\n");
+        LED::postLoop(BADRADIO);
+    }
 }

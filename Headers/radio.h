@@ -94,9 +94,11 @@ class Radio
 
         static uint8_t getAddr(void);
 
-        static void sleep();
+        static void sleep(void);
 
-        static void wake();
+        static void wake(void);
+
+        static bool post(void);
 
         static TaskHandle_t radioTaskHandle;
 
