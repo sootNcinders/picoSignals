@@ -17,10 +17,16 @@ class OVERLAY
 
         static uint8_t getHead(uint8_t headNum);
 
+        static uint16_t getLEDErrors(void);
+
     private:
         static void overlayTask(void *pvParameters);
 
         static uint8_t heads[MAXHEADS];
+        static uint8_t partner;
+
+        static bool monOpenCircuits;
+        static bool monMultipleCircuits;
 };
 
 #endif

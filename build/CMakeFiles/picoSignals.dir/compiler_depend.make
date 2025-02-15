@@ -4533,7 +4533,8 @@ CMakeFiles/picoSignals.dir/overlay.cpp.obj: /Users/tleavitt/pico/projects/picoSi
   /Users/tleavitt/pico/projects/picoSignals/Headers/pca9674.h \
   /Users/tleavitt/pico/projects/picoSignals/Headers/ctc.h \
   /Users/tleavitt/pico/projects/picoSignals/Headers/radio.h \
-  /Users/tleavitt/pico/projects/picoSignals/RFM95/RFM95.h
+  /Users/tleavitt/pico/projects/picoSignals/RFM95/RFM95.h \
+  /Users/tleavitt/pico/projects/picoSignals/Headers/radio.h
 
 CMakeFiles/picoSignals.dir/pca9674.cpp.obj: /Users/tleavitt/pico/projects/picoSignals/pca9674.cpp \
   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdio.h \

@@ -16,7 +16,7 @@
 #define MAIN_H
 
 #define VERSION 3
-#define REVISION 0
+#define REVISION 1
 
 #define MAXHEADS 4
 #define MAXINPUTS 8

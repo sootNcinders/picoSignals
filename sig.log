@@ -17293,3 +17293,348 @@ LED Errors: 0
 Version: 3
 Revision: 0
 
+2024-11-16 17:36:48.585147
+Sender: 1
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 13.0
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:49.284423
+Sender: 2
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.8
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:53.463976
+Sender: 17
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 1
+Voltage: 12.2
+RSSI: -87
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:53.782667
+Sender: 18
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.1
+RSSI: -109
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:54.088166
+Sender: 19
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.2
+RSSI: -85
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:54.613409
+Sender: 21
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.1
+RSSI: -109
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:36:55.605329
+Sender: 21
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.1
+RSSI: -109
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:37:08.245858
+Sender: 2
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.8
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:37:25.233260
+Sender: 2
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.8
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:37:49.464321
+Sender: 1
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.9
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:03.532380
+Sender: 1
+Head 0: O
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 13.0
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:10.307191
+Sender: 1
+Head 0: R
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 13.0
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:10.502748
+Sender: 2
+Head 0: A
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:30.926715
+Sender: 17
+Head 0: G
+Head 1: G
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 1
+Voltage: 12.0
+RSSI: -87
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:36.973794
+Sender: 1
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:38:40.854486
+Sender: 2
+Head 0: R
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:07.902949
+Sender: 2
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:09.362402
+Sender: 21
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.1
+RSSI: -109
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:11.576532
+Sender: 19
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.1
+RSSI: -85
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:16.996949
+Sender: 1
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:23.805824
+Sender: 2
+Head 0: R
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:30.628926
+Sender: 2
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -86
+LED Errors: 0
+Version: 3
+Revision: 0
+
+2024-11-16 17:39:40.595627
+Sender: 1
+Head 0: G
+Head 1: O
+Head 2: O
+Head 3: O
+Captures: 0
+Releases: 0
+Turnouts: 0
+Voltage: 12.7
+RSSI: -116
+LED Errors: 0
+Version: 3
+Revision: 0
+

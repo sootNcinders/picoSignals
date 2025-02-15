@@ -149,6 +149,15 @@ void Radio::radioTask(void *pvParameters)
                 {
                     memcpy(&msg, buf, sizeof(RCL));
                     HEADS::processRxMsg(msg, from);
+
+                    if(avgRSSI == 0)
+                    {
+                        avgRSSI = radio.lastSNR();
+                    }
+                    else
+                    {
+                        avgRSSI = (radio.lastSNR() * (float)ALPHA) + (avgRSSI * (1-(float)ALPHA));
+                    }
                 }
                 else if(size == sizeof(TOCTC) && (to == addr || to == 255))
                 {
@@ -164,17 +173,7 @@ void Radio::radioTask(void *pvParameters)
                     }
                 }
 
-                if(from == primaryPartner)
-                {
-                    if(avgRSSI == 0)
-                    {
-                        avgRSSI = radio.lastSNR();
-                    }
-                    else
-                    {
-                        avgRSSI = (radio.lastSNR() * (float)ALPHA) + (avgRSSI * (1-(float)ALPHA));
-                    }
-                }
+                DPRINTF("RSSI: %d\n", radio.lastSNR());
             }
 
             mode = radio.getMode()&0x7; //Only Bits 0-2 represent mode

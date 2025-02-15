@@ -18,7 +18,8 @@ typedef enum
     turnout, //Turnout input
     ovlGreen, //Overlay Green
     ovlAmber, //Overlay Amber
-    ovlRed    //Overlay Red
+    ovlRed,   //Overlay Red
+    ovlAuxIn  //Overlay Auxillary Input
 }switchMode;
 
 static const char* switchModes[] = {"Unused  ", "Capture ", "Turnout Capture ", "Release ", "Turnout ", "Ovrlay G", "Ovrlay A", "Ovrlay R"};
@@ -53,6 +54,7 @@ class IO
         static bool getOvlG(uint8_t headNum);
         static bool getOvlA(uint8_t headNum);
         static bool getOvlR(uint8_t headNum);
+        static uint8_t getOvlAuxIn(void);
 
         static void setLastActive(uint8_t headNum, uint8_t mode);
 

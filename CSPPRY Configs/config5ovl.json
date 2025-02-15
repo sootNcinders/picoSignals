@@ -5,7 +5,8 @@
     "batteryReset": 1.0,
     "batteryShutdown": 1.0,
     "ctcPresent": true,
-
+    "monitorLEDS": 1,
+    "partner": 3,
     "pin1": {
         "mode": "ovlGreen",
         "head": 1

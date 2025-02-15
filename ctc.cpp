@@ -106,11 +106,11 @@ void CTC::ctcTask(void *pvParameters)
                 toCTC.head2 = OVERLAY::getHead(1);
                 toCTC.head3 = OVERLAY::getHead(2);
                 toCTC.head4 = OVERLAY::getHead(3);
-                toCTC.captures = 0;
+                toCTC.captures = IO::getOvlAuxIn();
                 toCTC.releases = 0;
                 toCTC.turnouts = 0;
                 toCTC.avgRSSI  = 0;
-                toCTC.ledError = 0;
+                toCTC.ledError = OVERLAY::getLEDErrors();
             }
             else
             {
@@ -185,7 +185,7 @@ void CTC::ctcTask(void *pvParameters)
         }
         else
         {
-            vTaskDelay(1000/portTICK_PERIOD_MS);
+            vTaskDelay(500/portTICK_PERIOD_MS);
         }
     }
 }

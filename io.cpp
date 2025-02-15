@@ -94,6 +94,10 @@ void IO::init()
 
                 inputs[i].headNum--;
             }
+            else if(pins[i]["mode"] == "ovlAuxIn")
+            {
+                inputs[i].mode = ovlAuxIn;
+            }
             else
             {
                 inputs[i].headNum = 0xFF;
@@ -154,7 +158,7 @@ void IO::ioTask(void *pvParameters)
                 }
             }
             //get direct input for turnout monitoring, input must be stable for 50ms to latch
-            else if((inputs[i].mode == turnout || inputs[i].mode == ovlGreen || inputs[i].mode == ovlAmber || inputs[i].mode == ovlRed) 
+            else if((inputs[i].mode == turnout || inputs[i].mode == ovlGreen || inputs[i].mode == ovlAmber || inputs[i].mode == ovlRed || inputs[i].mode == ovlAuxIn) 
                         && inputs[i].active != inputs[i].raw && ((absolute_time_diff_us(inputs[i].lastChange, get_absolute_time())/1000) > 50))
             {
                 DPRINTF("Turnout %d = %d\n", i, inputs[i].raw);
@@ -331,6 +335,23 @@ bool IO::post()
     if(input.inputMask(0xFF))
     {
         rtn = true;
+    }
+
+    return rtn;
+}
+
+uint8_t IO::getOvlAuxIn()
+{
+    uint8_t rtn = 0;
+    uint8_t pos = 0;
+
+    for(uint8_t i = 0; i < MAXINPUTS; i++)
+    {
+        if(inputs[i].mode == ovlAuxIn)
+        {
+            rtn |= (inputs[i].active << pos);
+            pos++;
+        }
     }
 
     return rtn;
