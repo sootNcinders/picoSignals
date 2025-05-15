@@ -161,7 +161,11 @@ void IO::ioTask(void *pvParameters)
             else if((inputs[i].mode == turnout || inputs[i].mode == ovlGreen || inputs[i].mode == ovlAmber || inputs[i].mode == ovlRed || inputs[i].mode == ovlAuxIn) 
                         && inputs[i].active != inputs[i].raw && ((absolute_time_diff_us(inputs[i].lastChange, get_absolute_time())/1000) > 50))
             {
-                DPRINTF("Turnout %d = %d\n", i, inputs[i].raw);
+                if(inputs[i].mode == turnout)
+                {
+                    DPRINTF("Turnout %d = %d\n", i, inputs[i].raw);
+                }
+
                 inputs[i].active = inputs[i].raw;
                 CTC::update();
             }

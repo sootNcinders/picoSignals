@@ -61,6 +61,17 @@ int main(void)
         HEADS::init();
         CTC::init();
         Radio::init();
+
+        if(!IO::post())
+        {
+            DPRINTF("Input Fault\n");
+            LED::postLoop(BADINPUT);
+        }
+        else if(!HEADS::post())
+        {
+            DPRINTF("Output Fault\n");
+            LED::postLoop(BADOUTPUT);
+        }
     }
     else if(Main::mode == CTC)
     {
@@ -75,9 +86,20 @@ int main(void)
         CTC::init();
         Radio::init();
         OVERLAY::init();
+
+        if(!IO::post())
+        {
+            DPRINTF("Input Fault\n");
+            LED::postLoop(BADINPUT);
+        }
     }
 
-    Main::post();
+    //Main::post();
+    if(!Radio::post())
+    {
+        DPRINTF("Radio Fault\n");
+        LED::postLoop(BADRADIO);
+    }
 
     DPRINTF("Init complete\n");
 

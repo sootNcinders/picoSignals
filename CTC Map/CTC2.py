@@ -18,6 +18,10 @@ SIXMIN = 6*60
 LABELSIZE = 26
 DIAGSIZE = 20
 
+if "Darwin" in platform.system():
+    LABELSIZE = 20
+    DIAGSIZE = 14
+
 scale = 1
 
 #guis
@@ -618,10 +622,19 @@ def drawMap():
     #c.create_text(1150, 700, text="Greyrock", fill="white", font=('Times', LABELSIZE))
     c.create_text(11795, 800, text="Greyrock", fill="white", font=('Times', LABELSIZE))
 
-    c.create_text(535, 850, text="Canton, St. Paul, & Pacfic Rwy.", fill="white", font=('Times', 70))
-    c.create_text(535, 1000, text="E <-> W", fill="white", font=('Times', 80))
+    RRSIZE = 70
+    EWSIZE = 80
+    COUNTERSIZE = 50
 
-    counter = c.create_text(150, 50, text="Train Movements: 0", fill="white", font=('Times', 50))
+    if "Darwin" in platform.system():
+        RRSIZE = 50
+        EWSIZE = 60
+        COUNTERSIZE = 30
+
+    c.create_text(535, 850, text="Canton, St. Paul, & Pacfic Rwy.", fill="white", font=('Times', RRSIZE))
+    c.create_text(535, 1000, text="E <-> W", fill="white", font=('Times', EWSIZE))
+
+    counter = c.create_text(150, 50, text="Train Movements: 0", fill="white", font=('Times', COUNTERSIZE))
 
     c.pack()
 
@@ -837,6 +850,9 @@ def get_data():
                 #handle overlay nodes
                 if node == 5: #Reid, Etowah-Reid
                     nodes[4].heads[0] = nodes[5].heads[0]
+                    lastMsg[4] = time.time()
+                    lastMsg[3] = time.time()
+
                     if nodes[5].heads[0] == 'A':
                         nodes[3].heads[0] = 'R'
                     elif nodes[5].heads[0] == 'R':
@@ -845,6 +861,9 @@ def get_data():
                         nodes[3].heads[0] = nodes[5].heads[0]
                 elif node == 6: #Reid, Reid-Midland
                     nodes[7].heads[0] = nodes[6].heads[0]
+                    lastMsg[7] = time.time()
+                    lastMsg[8] = time.time()
+
                     if nodes[6].heads[0] == 'A':
                         nodes[8].heads[0] = 'R'
                     elif nodes[6].heads[0] == 'R':
@@ -852,6 +871,8 @@ def get_data():
                     else:
                         nodes[8].heads[0] = nodes[6].heads[0]
                 elif node == 9: #Midland, Midland-Sargent
+                    lastMsg[10] = time.time()
+
                     if nodes[9].heads[0] == 'A':
                         nodes[10].heads[0] = 'R'
                     elif nodes[9].heads[0] == 'R':
@@ -859,6 +880,8 @@ def get_data():
                     else:
                         nodes[10].heads[0] = nodes[9].heads[0]
                 elif node == 12: #St Paul, Sargent-St Paul
+                    lastMsg[11] = time.time()
+
                     if nodes[12].heads[0] == 'A':
                         nodes[11].heads[0] = 'R'
                     elif nodes[12].heads[0] == 'R':
@@ -866,6 +889,10 @@ def get_data():
                     else:
                         nodes[11].heads[0] = nodes[12].heads[0]
                 elif node == 13: #St Paul, St Paul-Elizabeth
+                    lastMsg[14] = time.time()
+                    lastMsg[15] = time.time()
+                    lastMsg[16] = time.time()
+                    
                     if nodes[13].heads[0] == 'A':
                         nodes[14].heads[0] = 'R'
                     elif nodes[13].heads[0] == 'R':
