@@ -104,6 +104,8 @@ int main(void)
     DPRINTF("Init complete\n");
 
     vTaskStartScheduler();
+
+    while(1);
 }
 
 void Main::loadConfig(void)
@@ -119,13 +121,14 @@ void Main::loadConfig(void)
 
     flashJson = (uint8_t*) FLASHJSONADDR;
 
-    if(!sd_card_detect(0))
+    //Get the SD card and start its driver
+    pSD = sd_get_by_num(0); 
+
+    if(!sd_card_detect(pSD))
     {
         DPRINTF("No SD Card Detected\n");
     }
     
-    //Get the SD card and start its driver
-    pSD = sd_get_by_num(0); 
     sd_init_driver();
 
     //Mount the SD card file system, if it fails set the error light and stop execution
@@ -167,21 +170,19 @@ void Main::loadConfig(void)
     UINT readSize = 0;
     if(sdMounted && fileFound)
     {
-    fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
-    if(fr != FR_OK)
-    {
-        LED::setError(CONFIGREAD);
-        //panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
-        memcpy(cfgRaw, flashJson, sizeof(cfgRaw));
-    }
-    else
-    {
-        DPRINTF("Read %d characters of config file\n", readSize);
-        //writeFlashJSON((uint8_t*)cfgRaw);
+        fr = f_read(&file, &cfgRaw, sizeof(cfgRaw), &readSize);
+        if(fr != FR_OK)
+        {
+            LED::setError(CONFIGREAD);
+            //panic("f_read(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            memcpy(cfgRaw, flashJson, sizeof(cfgRaw));
+        }
+        else
+        {
+            DPRINTF("Read %d characters of config file\n", readSize);
 
-        //flash_safe_execute((void(*)(void*))writeFlashJSON, (void *)cfgRaw, 10000);
-        writeFlashJSON((uint8_t*)cfgRaw);
-    }
+            writeFlashJSON((uint8_t*)cfgRaw);
+        }
     }
     else
     {
@@ -208,11 +209,18 @@ void Main::loadConfig(void)
     {
         Main::mode = STD;
     }
+
+    f_unmount("0:");
 }
 
 void Main::eraseFlashJSON(void)
 {
     flash_range_erase((FLASHJSONADDR - XIP_BASE), FILESIZE);
+}
+
+void Main::writeJSON(uint8_t* in)
+{
+    flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
 }
 
 /**
@@ -240,10 +248,12 @@ void Main::writeFlashJSON(uint8_t* in)
             irq_set_enabled(i, false);
         }
 
-        eraseFlashJSON();
+        //eraseFlashJSON();
+        flash_safe_execute((void(*)(void*))eraseFlashJSON, NULL, 2000);
 
         watchdog_update();
-        flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
+        //flash_range_program((FLASHJSONADDR - XIP_BASE), in, FILESIZE);
+        flash_safe_execute((void(*)(void*))writeJSON, in, 2000);
 
         for(uint8_t i = 0; i < sizeof(irq); i++)
         {
@@ -258,6 +268,86 @@ void Main::writeFlashJSON(uint8_t* in)
     {
         DPRINTF("JSON matched, not written\n");
     }
+}
+
+bool Main::writeSdJSON(uint8_t* in)
+{
+    FIL file; //config file 
+    FRESULT fr; //file system return results
+    FATFS fs; //FAT file system interface
+    DIR dir; //Directory of the file
+    FILINFO fInfo; //Information on the file
+    sd_card_t *pSD; //SD card driver pointer
+    bool sdMounted = true;
+    bool fileFound = true;
+    uint32_t fileSize = 0;
+
+    while(in[fileSize] != 0 && fileSize < FILESIZE)
+    {
+        fileSize++;
+    }
+
+    //Get the SD card and start its driver
+    pSD = sd_get_by_num(0); 
+
+    if(!sd_card_detect(pSD))
+    {
+        DPRINTF("No SD Card Detected\n");
+    }
+    
+    sd_init_driver();
+
+    watchdog_update();
+
+    //Mount the SD card file system, if it fails set the error light and stop execution
+    fr = f_mount(&fs, "0:", 1);
+    if (fr != FR_OK)
+    {
+        sdMounted = false;
+        LED::setError(SDMOUNT);
+        //panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
+    //Locate the config file in the file system, fault out if it cant be found
+    if(sdMounted)
+    {
+        fr = f_findfirst(&dir, &fInfo, "", "config*.json");
+        if(fr != FR_OK)
+        {
+            fileFound = false;
+            //LED::setError(CONFIGREAD);
+        }
+
+        //Open the config file, if it fails set the error light and stop execution
+        //const char* const filename = "config.json";
+        if(fileFound)
+        {
+            const char* const filename = fInfo.fname;
+            //fr = f_open(&file, filename, FA_READ);
+            fr = f_unlink(filename);
+            if (fr != FR_OK && fr != FR_EXIST)
+            {
+               //LED::setError(CONFIGREAD);
+            }
+        }
+
+        char filename[40];
+        snprintf(filename, sizeof(filename), "config%d.json", (uint8_t)Main::cfg["address"]);
+
+        fr = f_open(&file, filename, FA_CREATE_ALWAYS | FA_WRITE);
+
+        if(fr == FR_OK)
+        {
+            fr = f_write(&file, in, fileSize, NULL);
+
+            if(fr == FR_OK)
+            {
+                fr = f_close(&file);
+            }
+        }
+    }
+
+    return (fr == FR_OK);
 }
 
 void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName )

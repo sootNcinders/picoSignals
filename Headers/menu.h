@@ -16,6 +16,8 @@ class MENU
     private:
         static void menuTask(void *pvParameters);
 
+        static void menuProcessor(char* inBuf);
+        static void adjustmentProcessor(char* inBuf);
         static void printHelp(void);
 
         static uint8_t addr;

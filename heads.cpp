@@ -76,7 +76,7 @@ void HEADS::init(void)
     {
         GARHEAD *gar; //Temporary GAR head object
         RGBHEAD *rgb; //Temporary RGB head object
-        if(!Jhead[i].isNull())
+        if(!Jhead[i].isNull() && strncasecmp(Jhead[i]["mode"], "unused", 6) != 0)
         {
             //If a blue is specified, assume the head is RGB
             if(!Jhead[i]["blue"].as<JsonObject>().isNull())

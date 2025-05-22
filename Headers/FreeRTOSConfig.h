@@ -148,4 +148,6 @@ to exclude the API function. */
 
 /* A header file that defines trace macro can be included here. */
 
+#define PICO_FLASH_ASSUME_CORE1_SAFE 1
+
 #endif /* FREERTOS_CONFIG_H */

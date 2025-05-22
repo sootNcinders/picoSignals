@@ -16,7 +16,7 @@
 #define MAIN_H
 
 #define VERSION 3
-#define REVISION 1
+#define REVISION 2
 
 #define MAXHEADS 4
 #define MAXINPUTS 8
@@ -98,7 +98,9 @@ class Main
     public:
         static void loadConfig(void);
         static void eraseFlashJSON(void);
+        static void writeJSON(uint8_t* in);
         static void writeFlashJSON(uint8_t* in);
+        static bool writeSdJSON(uint8_t* in);
         static void reset(void);
         static void post(void);
 

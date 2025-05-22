@@ -16,6 +16,13 @@
         "ostream": "cpp",
         "sstream": "cpp",
         "cstring": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "regex": "cpp",
+        "__hash_table": "cpp"
     },
 }

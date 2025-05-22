@@ -36,7 +36,8 @@ void LED::init(void)
 
 void LED::ledTask(void *pvParameters)
 {
-    //watchdog_enable(8000, true);
+    //vTaskCoreAffinitySet(NULL, 1);
+
     while(true)
     {
         //DPRINTF("LED Task\n");
