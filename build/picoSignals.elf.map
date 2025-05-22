@@ -3157,9 +3157,9 @@ Discarded input sections
                 0x0000000000000000        0x4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
  .rodata.__func__.0
                 0x0000000000000000        0x9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
- .text          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
- .data          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
- .bss           0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
+ .text          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
+ .data          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
+ .bss           0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
  .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-atof.o)
@@ -3670,7 +3670,7 @@ LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-
 .boot2          0x0000000010000000      0x100
                 0x0000000010000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x0000000010000000      0x100 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
+ .boot2         0x0000000010000000      0x100 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
                 0x0000000010000100                __boot2_end__ = .
                 0x0000000000000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -8616,7 +8616,7 @@ LOAD CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
 LOAD CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
 LOAD CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 LOAD CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
-LOAD /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
+LOAD /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
 LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -8827,7 +8827,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000fbc       0x2c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
  .ARM.attributes
-                0x0000000000000fe8       0x22 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccfVlrBw.o
+                0x0000000000000fe8       0x22 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccO8Tq4n.o
  .ARM.attributes
                 0x000000000000100a       0x1e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
@@ -9001,99 +9001,99 @@ LOAD linker stubs
  .comment       0x0000000000000049       0x4a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .comment       0x0000000000000049       0x4a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
 
-.debug_info     0x0000000000000000   0x14434a
+.debug_info     0x0000000000000000   0x144344
  .debug_info    0x0000000000000000    0x1a1ea CMakeFiles/picoSignals.dir/main.cpp.obj
  .debug_info    0x000000000001a1ea     0x40ee CMakeFiles/picoSignals.dir/LED.cpp.obj
  .debug_info    0x000000000001e2d8     0xcf52 CMakeFiles/picoSignals.dir/battery.cpp.obj
- .debug_info    0x000000000002b22a    0x123e5 CMakeFiles/picoSignals.dir/radio.cpp.obj
- .debug_info    0x000000000003d60f    0x14469 CMakeFiles/picoSignals.dir/io.cpp.obj
- .debug_info    0x0000000000051a78     0xf269 CMakeFiles/picoSignals.dir/ctc.cpp.obj
- .debug_info    0x0000000000060ce1    0x23e50 CMakeFiles/picoSignals.dir/heads.cpp.obj
- .debug_info    0x0000000000084b31    0x4cd7e CMakeFiles/picoSignals.dir/menu.cpp.obj
- .debug_info    0x00000000000d18af     0xf98b CMakeFiles/picoSignals.dir/overlay.cpp.obj
- .debug_info    0x00000000000e123a      0xd5e CMakeFiles/picoSignals.dir/pca9674.cpp.obj
- .debug_info    0x00000000000e1f98     0x3146 CMakeFiles/picoSignals.dir/pca9955.cpp.obj
- .debug_info    0x00000000000e50de     0x4cd1 CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj
- .debug_info    0x00000000000e9daf     0x16af CMakeFiles/picoSignals.dir/GARhead.cpp.obj
- .debug_info    0x00000000000eb45e     0x145a CMakeFiles/picoSignals.dir/RGBhead.cpp.obj
- .debug_info    0x00000000000ec8b8      0x83f CMakeFiles/picoSignals.dir/hw_config.c.obj
- .debug_info    0x00000000000ed0f7      0x4b0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
- .debug_info    0x00000000000ed5a7     0x187e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
- .debug_info    0x00000000000eee25      0x1e3 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
- .debug_info    0x00000000000ef008      0x6be CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
- .debug_info    0x00000000000ef6c6      0x58e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
- .debug_info    0x00000000000efc54     0x1c9e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
- .debug_info    0x00000000000f18f2     0x11b1 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/sem.c.obj
- .debug_info    0x00000000000f2aa3      0x1a4 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/lock_core.c.obj
- .debug_info    0x00000000000f2c47     0x1cc8 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/mutex.c.obj
- .debug_info    0x00000000000f490f      0x2d1 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/critical_section.c.obj
- .debug_info    0x00000000000f4be0     0x3f23 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/time.c.obj
- .debug_info    0x00000000000f8b03      0x813 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/timeout_helper.c.obj
- .debug_info    0x00000000000f9316     0x13f0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .debug_info    0x00000000000fa706     0x123b CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_util/pheap.c.obj
- .debug_info    0x00000000000fb941      0xdd2 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
- .debug_info    0x00000000000fc713      0xfcf CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
- .debug_info    0x00000000000fd6e2      0x51b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
- .debug_info    0x00000000000fdbfd      0x4ee CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
- .debug_info    0x00000000000fe0eb      0x1d8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
- .debug_info    0x00000000000fe2c3     0x103b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
- .debug_info    0x00000000000ff2fe     0x1a5f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .debug_info    0x0000000000100d5d       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
- .debug_info    0x0000000000100d7f      0x27c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
- .debug_info    0x0000000000100ffb       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
- .debug_info    0x000000000010101d       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
- .debug_info    0x000000000010103f      0x2d1 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
- .debug_info    0x0000000000101310     0x5586 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
- .debug_info    0x0000000000106896       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
- .debug_info    0x00000000001068b8       0x26 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
- .debug_info    0x00000000001068de       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
- .debug_info    0x0000000000106900      0x2eb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
- .debug_info    0x0000000000106beb     0x5031 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
- .debug_info    0x000000000010bc1c       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
- .debug_info    0x000000000010bc3e      0x48e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
- .debug_info    0x000000000010c0cc       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
- .debug_info    0x000000000010c0ee       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
- .debug_info    0x000000000010c110      0x7a0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
- .debug_info    0x000000000010c8b0      0x2fb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
- .debug_info    0x000000000010cbab     0x1824 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .debug_info    0x000000000010e3cf     0x104f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .debug_info    0x000000000010f41e      0x79f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
- .debug_info    0x000000000010fbbd     0x1b51 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
- .debug_info    0x000000000011170e      0x5fc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
- .debug_info    0x0000000000111d0a      0x257 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
- .debug_info    0x0000000000111f61      0xf3a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
- .debug_info    0x0000000000112e9b     0x2080 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
- .debug_info    0x0000000000114f1b      0xfe4 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- .debug_info    0x0000000000115eff     0x3c0b CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
- .debug_info    0x0000000000119b0a      0x8be CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
- .debug_info    0x000000000011a3c8     0x19a5 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
- .debug_info    0x000000000011bd6d     0x14c3 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/tusb.c.obj
- .debug_info    0x000000000011d230     0x2839 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
- .debug_info    0x000000000011fa69      0x54c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
- .debug_info    0x000000000011ffb5     0x1606 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
- .debug_info    0x00000000001215bb     0x11c5 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
- .debug_info    0x0000000000122780      0x2d9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
- .debug_info    0x0000000000122a59      0x54a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
- .debug_info    0x0000000000122fa3     0x1ca1 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/port.c.obj
- .debug_info    0x0000000000124c44      0xf21 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/event_groups.c.obj
- .debug_info    0x0000000000125b65      0x2db CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/list.c.obj
- .debug_info    0x0000000000125e40     0x2ea3 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/queue.c.obj
- .debug_info    0x0000000000128ce3     0x4fea CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/tasks.c.obj
- .debug_info    0x000000000012dccd     0x18ca CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/timers.c.obj
- .debug_info    0x000000000012f597     0x1d00 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
- .debug_info    0x0000000000131297      0x883 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/MemMang/heap_4.c.obj
- .debug_info    0x0000000000131b1a      0x128 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
- .debug_info    0x0000000000131c42      0x2b4 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
- .debug_info    0x0000000000131ef6     0x80e7 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
- .debug_info    0x0000000000139fdd     0x1518 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj
- .debug_info    0x000000000013b4f5     0x2677 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj
- .debug_info    0x000000000013db6c     0x37d7 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj
- .debug_info    0x0000000000141343      0x1eb CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj
- .debug_info    0x000000000014152e      0xa4b CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj
- .debug_info    0x0000000000141f79      0xacb CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
- .debug_info    0x0000000000142a44      0x5bc CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
- .debug_info    0x0000000000143000      0xa44 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
- .debug_info    0x0000000000143a44      0x906 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
+ .debug_info    0x000000000002b22a    0x123e3 CMakeFiles/picoSignals.dir/radio.cpp.obj
+ .debug_info    0x000000000003d60d    0x14466 CMakeFiles/picoSignals.dir/io.cpp.obj
+ .debug_info    0x0000000000051a73     0xf269 CMakeFiles/picoSignals.dir/ctc.cpp.obj
+ .debug_info    0x0000000000060cdc    0x23e50 CMakeFiles/picoSignals.dir/heads.cpp.obj
+ .debug_info    0x0000000000084b2c    0x4cd7d CMakeFiles/picoSignals.dir/menu.cpp.obj
+ .debug_info    0x00000000000d18a9     0xf98b CMakeFiles/picoSignals.dir/overlay.cpp.obj
+ .debug_info    0x00000000000e1234      0xd5e CMakeFiles/picoSignals.dir/pca9674.cpp.obj
+ .debug_info    0x00000000000e1f92     0x3146 CMakeFiles/picoSignals.dir/pca9955.cpp.obj
+ .debug_info    0x00000000000e50d8     0x4cd1 CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj
+ .debug_info    0x00000000000e9da9     0x16af CMakeFiles/picoSignals.dir/GARhead.cpp.obj
+ .debug_info    0x00000000000eb458     0x145a CMakeFiles/picoSignals.dir/RGBhead.cpp.obj
+ .debug_info    0x00000000000ec8b2      0x83f CMakeFiles/picoSignals.dir/hw_config.c.obj
+ .debug_info    0x00000000000ed0f1      0x4b0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+ .debug_info    0x00000000000ed5a1     0x187e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+ .debug_info    0x00000000000eee1f      0x1e3 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+ .debug_info    0x00000000000ef002      0x6be CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+ .debug_info    0x00000000000ef6c0      0x58e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+ .debug_info    0x00000000000efc4e     0x1c9e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+ .debug_info    0x00000000000f18ec     0x11b1 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/sem.c.obj
+ .debug_info    0x00000000000f2a9d      0x1a4 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/lock_core.c.obj
+ .debug_info    0x00000000000f2c41     0x1cc8 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/mutex.c.obj
+ .debug_info    0x00000000000f4909      0x2d1 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/critical_section.c.obj
+ .debug_info    0x00000000000f4bda     0x3f23 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/time.c.obj
+ .debug_info    0x00000000000f8afd      0x813 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/timeout_helper.c.obj
+ .debug_info    0x00000000000f9310     0x13f0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .debug_info    0x00000000000fa700     0x123b CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_util/pheap.c.obj
+ .debug_info    0x00000000000fb93b      0xdd2 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+ .debug_info    0x00000000000fc70d      0xfcf CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+ .debug_info    0x00000000000fd6dc      0x51b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+ .debug_info    0x00000000000fdbf7      0x4ee CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+ .debug_info    0x00000000000fe0e5      0x1d8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+ .debug_info    0x00000000000fe2bd     0x103b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ .debug_info    0x00000000000ff2f8     0x1a5f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .debug_info    0x0000000000100d57       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+ .debug_info    0x0000000000100d79      0x27c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+ .debug_info    0x0000000000100ff5       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+ .debug_info    0x0000000000101017       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .debug_info    0x0000000000101039      0x2d1 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+ .debug_info    0x000000000010130a     0x5586 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
+ .debug_info    0x0000000000106890       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .debug_info    0x00000000001068b2       0x26 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+ .debug_info    0x00000000001068d8       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+ .debug_info    0x00000000001068fa      0x2eb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+ .debug_info    0x0000000000106be5     0x5031 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
+ .debug_info    0x000000000010bc16       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+ .debug_info    0x000000000010bc38      0x48e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+ .debug_info    0x000000000010c0c6       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+ .debug_info    0x000000000010c0e8       0x22 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+ .debug_info    0x000000000010c10a      0x7a0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+ .debug_info    0x000000000010c8aa      0x2fb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+ .debug_info    0x000000000010cba5     0x1824 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .debug_info    0x000000000010e3c9     0x104f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .debug_info    0x000000000010f418      0x79f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
+ .debug_info    0x000000000010fbb7     0x1b51 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
+ .debug_info    0x0000000000111708      0x5fc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
+ .debug_info    0x0000000000111d04      0x257 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
+ .debug_info    0x0000000000111f5b      0xf3a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
+ .debug_info    0x0000000000112e95     0x2080 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
+ .debug_info    0x0000000000114f15      0xfe4 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ .debug_info    0x0000000000115ef9     0x3c0b CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
+ .debug_info    0x0000000000119b04      0x8be CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
+ .debug_info    0x000000000011a3c2     0x19a5 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
+ .debug_info    0x000000000011bd67     0x14c3 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/tusb.c.obj
+ .debug_info    0x000000000011d22a     0x2839 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+ .debug_info    0x000000000011fa63      0x54c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
+ .debug_info    0x000000000011ffaf     0x1606 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+ .debug_info    0x00000000001215b5     0x11c5 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
+ .debug_info    0x000000000012277a      0x2d9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
+ .debug_info    0x0000000000122a53      0x54a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
+ .debug_info    0x0000000000122f9d     0x1ca1 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/port.c.obj
+ .debug_info    0x0000000000124c3e      0xf21 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/event_groups.c.obj
+ .debug_info    0x0000000000125b5f      0x2db CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/list.c.obj
+ .debug_info    0x0000000000125e3a     0x2ea3 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/queue.c.obj
+ .debug_info    0x0000000000128cdd     0x4fea CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/tasks.c.obj
+ .debug_info    0x000000000012dcc7     0x18ca CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/timers.c.obj
+ .debug_info    0x000000000012f591     0x1d00 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+ .debug_info    0x0000000000131291      0x883 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/MemMang/heap_4.c.obj
+ .debug_info    0x0000000000131b14      0x128 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
+ .debug_info    0x0000000000131c3c      0x2b4 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
+ .debug_info    0x0000000000131ef0     0x80e7 CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
+ .debug_info    0x0000000000139fd7     0x1518 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj
+ .debug_info    0x000000000013b4ef     0x2677 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj
+ .debug_info    0x000000000013db66     0x37d7 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj
+ .debug_info    0x000000000014133d      0x1eb CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj
+ .debug_info    0x0000000000141528      0xa4b CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj
+ .debug_info    0x0000000000141f73      0xacb CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
+ .debug_info    0x0000000000142a3e      0x5bc CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
+ .debug_info    0x0000000000142ffa      0xa44 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+ .debug_info    0x0000000000143a3e      0x906 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
 
 .debug_abbrev   0x0000000000000000    0x15a40
  .debug_abbrev  0x0000000000000000     0x11b8 CMakeFiles/picoSignals.dir/main.cpp.obj
@@ -9551,99 +9551,99 @@ LOAD linker stubs
  .debug_ranges  0x0000000000019600       0xb0 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .debug_ranges  0x00000000000196b0       0x70 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
 
-.debug_line     0x0000000000000000    0x74d58
+.debug_line     0x0000000000000000    0x74d50
  .debug_line    0x0000000000000000     0x69b2 CMakeFiles/picoSignals.dir/main.cpp.obj
- .debug_line    0x00000000000069b2     0x13dd CMakeFiles/picoSignals.dir/LED.cpp.obj
- .debug_line    0x0000000000007d8f     0x29ab CMakeFiles/picoSignals.dir/battery.cpp.obj
- .debug_line    0x000000000000a73a     0x35a7 CMakeFiles/picoSignals.dir/radio.cpp.obj
- .debug_line    0x000000000000dce1     0x48c8 CMakeFiles/picoSignals.dir/io.cpp.obj
- .debug_line    0x00000000000125a9     0x3631 CMakeFiles/picoSignals.dir/ctc.cpp.obj
- .debug_line    0x0000000000015bda     0x85ba CMakeFiles/picoSignals.dir/heads.cpp.obj
- .debug_line    0x000000000001e194    0x13063 CMakeFiles/picoSignals.dir/menu.cpp.obj
- .debug_line    0x00000000000311f7     0x337a CMakeFiles/picoSignals.dir/overlay.cpp.obj
- .debug_line    0x0000000000034571      0x806 CMakeFiles/picoSignals.dir/pca9674.cpp.obj
- .debug_line    0x0000000000034d77     0x1529 CMakeFiles/picoSignals.dir/pca9955.cpp.obj
- .debug_line    0x00000000000362a0     0x24be CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj
- .debug_line    0x000000000003875e      0xbd0 CMakeFiles/picoSignals.dir/GARhead.cpp.obj
- .debug_line    0x000000000003932e      0x964 CMakeFiles/picoSignals.dir/RGBhead.cpp.obj
- .debug_line    0x0000000000039c92      0x62c CMakeFiles/picoSignals.dir/hw_config.c.obj
- .debug_line    0x000000000003a2be      0x5c1 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
- .debug_line    0x000000000003a87f      0xda9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
- .debug_line    0x000000000003b628      0x2f7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
- .debug_line    0x000000000003b91f      0x4ff CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
- .debug_line    0x000000000003be1e      0x4fc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
- .debug_line    0x000000000003c31a     0x113a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
- .debug_line    0x000000000003d454      0xa91 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/sem.c.obj
- .debug_line    0x000000000003dee5      0x29c CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/lock_core.c.obj
- .debug_line    0x000000000003e181      0xf5d CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/mutex.c.obj
- .debug_line    0x000000000003f0de      0x327 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/critical_section.c.obj
- .debug_line    0x000000000003f405     0x1ca6 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/time.c.obj
- .debug_line    0x00000000000410ab      0x60c CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/timeout_helper.c.obj
- .debug_line    0x00000000000416b7      0xd0d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .debug_line    0x00000000000423c4      0x90d CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_util/pheap.c.obj
- .debug_line    0x0000000000042cd1      0x9b4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
- .debug_line    0x0000000000043685      0xae7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
- .debug_line    0x000000000004416c      0x61d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
- .debug_line    0x0000000000044789      0x46d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
- .debug_line    0x0000000000044bf6      0x311 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
- .debug_line    0x0000000000044f07      0xc17 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
- .debug_line    0x0000000000045b1e     0x128c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .debug_line    0x0000000000046daa      0x15f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
- .debug_line    0x0000000000046f09      0x281 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
- .debug_line    0x000000000004718a      0x2e8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
- .debug_line    0x0000000000047472      0x43d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
- .debug_line    0x00000000000478af      0x3d9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
- .debug_line    0x0000000000047c88     0x2cd4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
- .debug_line    0x000000000004a95c      0x6b5 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
- .debug_line    0x000000000004b011       0xaf CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
- .debug_line    0x000000000004b0c0      0x3f3 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
- .debug_line    0x000000000004b4b3      0x3cb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
- .debug_line    0x000000000004b87e     0x282a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
- .debug_line    0x000000000004e0a8      0x1df CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
- .debug_line    0x000000000004e287      0x445 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
- .debug_line    0x000000000004e6cc       0xd9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
- .debug_line    0x000000000004e7a5       0xe7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
- .debug_line    0x000000000004e88c      0x2f8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
- .debug_line    0x000000000004eb84      0x223 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
- .debug_line    0x000000000004eda7     0x103e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .debug_line    0x000000000004fde5      0xbe8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .debug_line    0x00000000000509cd      0x4f7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
- .debug_line    0x0000000000050ec4      0xeff CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
- .debug_line    0x0000000000051dc3      0x359 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
- .debug_line    0x000000000005211c      0x43c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
- .debug_line    0x0000000000052558      0x88e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
- .debug_line    0x0000000000052de6      0xf7a CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
- .debug_line    0x0000000000053d60      0xaf0 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- .debug_line    0x0000000000054850     0x20bc CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
- .debug_line    0x000000000005690c      0x4d5 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
- .debug_line    0x0000000000056de1      0xeac CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
- .debug_line    0x0000000000057c8d      0xc61 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/tusb.c.obj
- .debug_line    0x00000000000588ee     0x15af CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
- .debug_line    0x0000000000059e9d      0x5c9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
- .debug_line    0x000000000005a466      0xd95 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
- .debug_line    0x000000000005b1fb      0xefb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
- .debug_line    0x000000000005c0f6      0x38b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
- .debug_line    0x000000000005c481      0x4bc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
- .debug_line    0x000000000005c93d     0x127f CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/port.c.obj
- .debug_line    0x000000000005dbbc      0x8b9 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/event_groups.c.obj
- .debug_line    0x000000000005e475      0x3c6 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/list.c.obj
- .debug_line    0x000000000005e83b     0x1b89 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/queue.c.obj
- .debug_line    0x00000000000603c4     0x36c3 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/tasks.c.obj
- .debug_line    0x0000000000063a87      0xc85 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/timers.c.obj
- .debug_line    0x000000000006470c     0x110b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
- .debug_line    0x0000000000065817      0x909 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/MemMang/heap_4.c.obj
- .debug_line    0x0000000000066120      0x16f CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
- .debug_line    0x000000000006628f      0x38f CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
- .debug_line    0x000000000006661e     0x8dee CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
- .debug_line    0x000000000006f40c      0xb15 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj
- .debug_line    0x000000000006ff21     0x1222 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj
- .debug_line    0x0000000000071143     0x1a94 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj
- .debug_line    0x0000000000072bd7      0x24d CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj
- .debug_line    0x0000000000072e24      0x63a CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj
- .debug_line    0x000000000007345e      0x219 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
- .debug_line    0x0000000000073677      0x586 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
- .debug_line    0x0000000000073bfd      0x723 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
- .debug_line    0x0000000000074320      0xa38 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
+ .debug_line    0x00000000000069b2     0x13da CMakeFiles/picoSignals.dir/LED.cpp.obj
+ .debug_line    0x0000000000007d8c     0x29ab CMakeFiles/picoSignals.dir/battery.cpp.obj
+ .debug_line    0x000000000000a737     0x35a4 CMakeFiles/picoSignals.dir/radio.cpp.obj
+ .debug_line    0x000000000000dcdb     0x48c8 CMakeFiles/picoSignals.dir/io.cpp.obj
+ .debug_line    0x00000000000125a3     0x3631 CMakeFiles/picoSignals.dir/ctc.cpp.obj
+ .debug_line    0x0000000000015bd4     0x85ba CMakeFiles/picoSignals.dir/heads.cpp.obj
+ .debug_line    0x000000000001e18e    0x13061 CMakeFiles/picoSignals.dir/menu.cpp.obj
+ .debug_line    0x00000000000311ef     0x337a CMakeFiles/picoSignals.dir/overlay.cpp.obj
+ .debug_line    0x0000000000034569      0x806 CMakeFiles/picoSignals.dir/pca9674.cpp.obj
+ .debug_line    0x0000000000034d6f     0x1529 CMakeFiles/picoSignals.dir/pca9955.cpp.obj
+ .debug_line    0x0000000000036298     0x24be CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.obj
+ .debug_line    0x0000000000038756      0xbd0 CMakeFiles/picoSignals.dir/GARhead.cpp.obj
+ .debug_line    0x0000000000039326      0x964 CMakeFiles/picoSignals.dir/RGBhead.cpp.obj
+ .debug_line    0x0000000000039c8a      0x62c CMakeFiles/picoSignals.dir/hw_config.c.obj
+ .debug_line    0x000000000003a2b6      0x5c1 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+ .debug_line    0x000000000003a877      0xda9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+ .debug_line    0x000000000003b620      0x2f7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+ .debug_line    0x000000000003b917      0x4ff CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+ .debug_line    0x000000000003be16      0x4fc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+ .debug_line    0x000000000003c312     0x113a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+ .debug_line    0x000000000003d44c      0xa91 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/sem.c.obj
+ .debug_line    0x000000000003dedd      0x29c CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/lock_core.c.obj
+ .debug_line    0x000000000003e179      0xf5d CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/mutex.c.obj
+ .debug_line    0x000000000003f0d6      0x327 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_sync/critical_section.c.obj
+ .debug_line    0x000000000003f3fd     0x1ca6 CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/time.c.obj
+ .debug_line    0x00000000000410a3      0x60c CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_time/timeout_helper.c.obj
+ .debug_line    0x00000000000416af      0xd0d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .debug_line    0x00000000000423bc      0x90d CMakeFiles/picoSignals.dir/pico-sdk/src/common/pico_util/pheap.c.obj
+ .debug_line    0x0000000000042cc9      0x9b4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+ .debug_line    0x000000000004367d      0xae7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+ .debug_line    0x0000000000044164      0x61d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+ .debug_line    0x0000000000044781      0x46d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+ .debug_line    0x0000000000044bee      0x311 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+ .debug_line    0x0000000000044eff      0xc17 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ .debug_line    0x0000000000045b16     0x128c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .debug_line    0x0000000000046da2      0x15f CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+ .debug_line    0x0000000000046f01      0x281 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+ .debug_line    0x0000000000047182      0x2e8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+ .debug_line    0x000000000004746a      0x43d CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .debug_line    0x00000000000478a7      0x3d9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+ .debug_line    0x0000000000047c80     0x2cd4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
+ .debug_line    0x000000000004a954      0x6b5 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .debug_line    0x000000000004b009       0xaf CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+ .debug_line    0x000000000004b0b8      0x3f3 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+ .debug_line    0x000000000004b4ab      0x3cb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+ .debug_line    0x000000000004b876     0x282a CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
+ .debug_line    0x000000000004e0a0      0x1df CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+ .debug_line    0x000000000004e27f      0x445 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+ .debug_line    0x000000000004e6c4       0xd9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+ .debug_line    0x000000000004e79d       0xe7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+ .debug_line    0x000000000004e884      0x2f8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+ .debug_line    0x000000000004eb7c      0x223 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+ .debug_line    0x000000000004ed9f     0x103e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .debug_line    0x000000000004fddd      0xbe8 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .debug_line    0x00000000000509c5      0x4f7 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
+ .debug_line    0x0000000000050ebc      0xeff CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
+ .debug_line    0x0000000000051dbb      0x359 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
+ .debug_line    0x0000000000052114      0x43c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
+ .debug_line    0x0000000000052550      0x88e CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
+ .debug_line    0x0000000000052dde      0xf7a CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
+ .debug_line    0x0000000000053d58      0xaf0 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ .debug_line    0x0000000000054848     0x20bc CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
+ .debug_line    0x0000000000056904      0x4d5 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
+ .debug_line    0x0000000000056dd9      0xeac CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
+ .debug_line    0x0000000000057c85      0xc61 CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/tusb.c.obj
+ .debug_line    0x00000000000588e6     0x15af CMakeFiles/picoSignals.dir/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+ .debug_line    0x0000000000059e95      0x5c9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_flash/flash.c.obj
+ .debug_line    0x000000000005a45e      0xd95 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+ .debug_line    0x000000000005b1f3      0xefb CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
+ .debug_line    0x000000000005c0ee      0x38b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
+ .debug_line    0x000000000005c479      0x4bc CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj
+ .debug_line    0x000000000005c935     0x127f CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/port.c.obj
+ .debug_line    0x000000000005dbb4      0x8b9 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/event_groups.c.obj
+ .debug_line    0x000000000005e46d      0x3c6 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/list.c.obj
+ .debug_line    0x000000000005e833     0x1b89 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/queue.c.obj
+ .debug_line    0x00000000000603bc     0x36c3 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/tasks.c.obj
+ .debug_line    0x0000000000063a7f      0xc85 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/timers.c.obj
+ .debug_line    0x0000000000064704     0x110b CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+ .debug_line    0x000000000006580f      0x909 CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/portable/MemMang/heap_4.c.obj
+ .debug_line    0x0000000000066118      0x16f CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffsystem.c.obj
+ .debug_line    0x0000000000066287      0x38f CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ffunicode.c.obj
+ .debug_line    0x0000000000066616     0x8dee CMakeFiles/picoSignals.dir/FatFs_SPI/ff15/source/ff.c.obj
+ .debug_line    0x000000000006f404      0xb15 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_spi.c.obj
+ .debug_line    0x000000000006ff19     0x1222 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/spi.c.obj
+ .debug_line    0x000000000007113b     0x1a94 CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/sd_card.c.obj
+ .debug_line    0x0000000000072bcf      0x24d CMakeFiles/picoSignals.dir/FatFs_SPI/sd_driver/crc.c.obj
+ .debug_line    0x0000000000072e1c      0x63a CMakeFiles/picoSignals.dir/FatFs_SPI/src/glue.c.obj
+ .debug_line    0x0000000000073456      0x219 CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
+ .debug_line    0x000000000007366f      0x586 CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
+ .debug_line    0x0000000000073bf5      0x723 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+ .debug_line    0x0000000000074318      0xa38 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
 
 .debug_str      0x0000000000000000    0x3af9f
  .debug_str     0x0000000000000000    0x10f3b CMakeFiles/picoSignals.dir/main.cpp.obj

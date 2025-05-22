@@ -117,8 +117,6 @@ void IO::ioTask(void *pvParameters)
 {
     while(true)
     {
-        //DPRINTF("IO Task\n");
-
         xSemaphoreTake(ioMutex, portMAX_DELAY);
         input.updateInputs();
         xSemaphoreGive(ioMutex);

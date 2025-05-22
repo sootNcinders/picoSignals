@@ -39,8 +39,6 @@ void Battery::batteryTask(void *pvParameters)
 
     while(true)
     {
-        //DPRINTF("Battery Task\n");
-
         rawADC = adc_read();
         batt = (float)rawADC * CONVERSION_FACTOR;
         batt += DIODEDROP;

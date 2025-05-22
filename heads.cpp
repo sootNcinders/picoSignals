@@ -301,8 +301,6 @@ void HEADS::headsTask(void *pvParameters)
 
     while(true)
     {
-        //DPRINTF("Heads Task\n");
-
         if(((absolute_time_diff_us(dimTimeout, get_absolute_time())/60000000) > dimTime) && headsOn && !headsDim)
         {
             for(int i = 0; i < MAXHEADS; i++)
@@ -375,8 +373,6 @@ void HEADS::headCommTask(void *pvParameters)
 
     while(true)
     {
-        //DPRINTF("Head %d Comm Task\n", headNum);
-
         missingResponse = false;
         incompleteSend = false;
         transmitted = false;

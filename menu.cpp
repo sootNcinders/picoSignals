@@ -82,7 +82,6 @@ void MENU::menuTask(void *pvParameters)
 
             if(ctc && bufIdx == 5)
             {
-                //DPRINTF("%c%c%c%c%c\n", inBuf[0], inBuf[1], inBuf[2], inBuf[3], inBuf[4]);
                 fromCTC.dest = 0;
                 fromCTC.dest += ((inBuf[1] >= 'A') ? (inBuf[1] >= 'a') ? (inBuf[1] - 'a' + 10) : (inBuf[1] - 'A' + 10) : (inBuf[1] - '0')) << 4;
                 fromCTC.dest += (inBuf[2] >= 'A') ? (inBuf[2] >= 'a') ? (inBuf[2] - 'a' + 10) : (inBuf[2] - 'A' + 10) : (inBuf[2] - '0');

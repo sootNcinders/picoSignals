@@ -127,14 +127,8 @@ void Radio::radioTask(void *pvParameters)
     TOCTC toCtc;
     FROMCTC fromCtc;
 
-    //gpio_set_irq_enabled_with_callback(RADIOINT, RFM95_INT_MODE, true, gpio_isr);
-
-    //initRadio();
-
     while(true)
     {
-        //DPRINTF("Radio Task\n");
-
         if(!sleeping)
         {
             while(radio.available())

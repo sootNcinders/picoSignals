@@ -36,12 +36,8 @@ void LED::init(void)
 
 void LED::ledTask(void *pvParameters)
 {
-    //vTaskCoreAffinitySet(NULL, 1);
-
     while(true)
     {
-        //DPRINTF("LED Task\n");
-
         if(!firstPass)
         {
             watchdog_enable(5000, true);
@@ -68,8 +64,6 @@ void LED::errorLEDtask(void *pvParameters)
 
     while(true)
     {
-        //DPRINTF("Error LED Task\n");
-
         if(error)
         {
             if(count < error)

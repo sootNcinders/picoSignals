@@ -63,8 +63,6 @@ void CTC::ctcTask(void *pvParameters)
 
     while(true)
     {
-        //DPRINTF("CTC Task\n");
-
         IO::getSwitchInfo((switchInfo*) &info);
 
         caps = 0;
