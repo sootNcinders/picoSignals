@@ -211,6 +211,8 @@ void HEADS::init(void)
             heads[i].releaseTime = Jhead[i]["release"] | 6; //Set the time to auto clear the head, default to 6min if not specified
 
             heads[i].delayClearStarted = false;
+
+            heads[i].redReleaseDelay = Jhead[i]["redReleaseDelay"] | 0; //Set the delay before a release is available on red, default to 0 if not specified
         }
     }
 
@@ -307,7 +309,7 @@ void HEADS::headsTask(void *pvParameters)
             {
                 if(heads[i].head)
                 {
-                    heads[i].head->setHeadBrightness(heads[i].dimBright);
+                    setHeadDim(i);
                 }
             }
             headsDim = true;
@@ -357,6 +359,11 @@ void HEADS::headsTask(void *pvParameters)
             {
                 heads[i].releaseTimer = get_absolute_time();
             }
+
+            if(absolute_time_diff_us(heads[i].redTime, get_absolute_time()) < 0)
+            {
+                heads[i].redTime = get_absolute_time();
+            }
         }
         
         vTaskDelay(1000 / portTICK_PERIOD_MS);  
@@ -370,6 +377,7 @@ void HEADS::headCommTask(void *pvParameters)
     bool missingResponse = false;
     bool incompleteSend = false;
     bool transmitted = false;
+    bool firstPass = true;
 
     while(true)
     {
@@ -453,7 +461,7 @@ void HEADS::headCommTask(void *pvParameters)
                     if(!heads[headNum].destResponded[x])
                     {
                         Radio::transmit(heads[headNum].destAddr[x], 'R', false, false);
-                        heads[headNum].head->setHeadBrightness(0);
+                        setHeadOff(headNum);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
                         heads[headNum].retries++;
                         DPRINTF("Sending Capture %d to %d\n", headNum, heads[headNum].destAddr[x]);
@@ -471,7 +479,9 @@ void HEADS::headCommTask(void *pvParameters)
             }
         }
         
-        if(IO::getRelease(headNum))
+        if(IO::getRelease(headNum) && 
+            ((absolute_time_diff_us(heads[headNum].redTime, get_absolute_time())/1000000) > heads[headNum].redReleaseDelay 
+            || firstPass || heads[headNum].head->getColor() != red))
         {
             wake();
             CTC::pause(true);
@@ -491,7 +501,7 @@ void HEADS::headCommTask(void *pvParameters)
                     if(!heads[headNum].destResponded[x])
                     {
                         Radio::transmit(heads[headNum].destAddr[x], 'G', false, false);
-                        heads[headNum].head->setHeadBrightness(0);
+                        setHeadOff(headNum);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
                         heads[headNum].retries++;
                         DPRINTF("Sending Release %d to %d\n", headNum, heads[headNum].destAddr[x]);
@@ -507,6 +517,15 @@ void HEADS::headCommTask(void *pvParameters)
             {
                 IO::setLastActive(headNum, release);
             }
+        }
+        else if(IO::getRelease(headNum) && heads[headNum].redReleaseDelay > 0)
+        {
+            IO::setLastActive(headNum, release);
+        }
+
+        if(heads[headNum].head->getColor() != red)
+        {
+            firstPass = false;
         }
 
         if(IO::getCapture(headNum) || IO::getRelease(headNum))
@@ -637,6 +656,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     dimTimeout = get_absolute_time();
 
                     heads[headNum].releaseTimer = get_absolute_time();
+                    heads[headNum].redTime = get_absolute_time();
                 }
                 else
                 {
@@ -704,7 +724,7 @@ void HEADS::wake(void)
         {
             if(heads[i].head)
             {
-                heads[i].head->setHeadBrightness(255);
+                setHeadOn(i);
 
                 if(!headsOn)
                 {
@@ -733,7 +753,7 @@ void HEADS::dim(void)
         {
             if(heads[i].head)
             {
-                heads[i].head->setHeadBrightness(heads[i].dimBright);
+                setHeadOn(i);
             }
         }
     }
@@ -893,4 +913,24 @@ bool HEADS::post(void)
     }
 
     return rtn;
+}
+
+void HEADS::setHeadOn(uint8_t headNum)
+{
+    heads[headNum].head->setHeadBrightness(255);
+}
+
+void HEADS::setHeadDim(uint8_t headNum)
+{
+    heads[headNum].head->setHeadBrightness(heads[headNum].dimBright);
+}
+
+void HEADS::setHeadOff(uint8_t headNum)
+{
+    heads[headNum].head->setHeadBrightness(0);
+}
+
+void HEADS::setHead(uint8_t headNum, uint8_t color)
+{
+    heads[headNum].head->setHead(color);
 }

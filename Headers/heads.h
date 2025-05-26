@@ -28,6 +28,8 @@ typedef struct
     uint8_t releaseTime; //Time to wait to release
     absolute_time_t releaseTimer; //Absolute time of capture
     bool delayClearStarted;
+    uint8_t redReleaseDelay; //Delay before release is available on red
+    absolute_time_t redTime;
 }headInfo;
 
 enum
@@ -71,6 +73,14 @@ class HEADS
         static ledInfo* getLedInfo();
 
         static bool post(void);
+
+        static void setHeadOn(uint8_t headNum);
+
+        static void setHeadDim(uint8_t headNum);
+
+        static void setHeadOff(uint8_t headNum);
+
+        static void setHead(uint8_t headNum, uint8_t color);
 
     private:
         static void headsTask(void *pvParameters);

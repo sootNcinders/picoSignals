@@ -331,6 +331,60 @@ void MENU::menuProcessor(char* inBuf)
             printf("> Config write to SD failed\n");
         }
     }
+    else if(strncasecmp(inBuf, "SET", 3) == 0)
+    {
+        uint8_t head = atoi(inBuf+4);
+
+        printf("Set Head %d ", head); 
+
+        if(head > 0 && head < 4)
+        {
+            head--;
+
+            if(strncasecmp(inBuf+6, "ON", 2) == 0)
+            {
+                HEADS::setHeadOn(head);
+
+                printf("ON\n");
+            }
+            else if(strncasecmp(inBuf+6, "DIM", 3) == 0)
+            {
+                HEADS::setHeadDim(head);
+
+                printf("DIM\n");
+            }
+            else if(strncasecmp(inBuf+6, "OFF", 3) == 0)
+            {
+                HEADS::setHeadOff(head);
+
+                printf("OFF\n");
+            }
+            else if(strncasecmp(inBuf+6, "GREEN", 5) == 0)
+            {
+                HEADS::setHead(head, green);
+
+                printf("GREEN\n");
+            }
+            else if(strncasecmp(inBuf+6, "AMBER", 5) == 0)
+            {
+                HEADS::setHead(head, amber);
+
+                printf("AMBER\n");
+            }
+            else if(strncasecmp(inBuf+6, "RED", 3) == 0)
+            {
+                HEADS::setHead(head, red);
+
+                printf("RED\n");
+            }
+            else if(strncasecmp(inBuf+6, "LUNAR", 5) == 0)
+            {
+                HEADS::setHead(head, lunar);
+
+                printf("LUNAR\n");
+            }
+        }
+    }
     else
     {
         printHelp();
@@ -857,6 +911,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                     printf("H%d= Head %d Green Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
                     break;
 
+                case 120:
+                case 220:
+                case 320:
+                case 420:
+                    if(assign && newVal >= 0 && newVal <= 255)
+                    {
+                        Main::cfg[head[headNum]]["redReleaseDelay"] = newVal;
+                    }
+
+                    printf("H%d= Head %d Red Release Delay %dsec\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["redReleaseDelay"]);
+                    break;
+
                 default:
                     printf("Invalid Adjustment\n");
             }
@@ -1036,12 +1102,13 @@ void MENU::printHelp(void)
     printf("> sys - Print Thread Status List\n");
     printf("> LED - Prints LED Status\n");
     printf("> wrt - Write config to flash and SD\n");
+    printf("> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
     printf("> Adjustments\n");
     printf("> G1 - G12 - General Settings\n");
-    printf("> H101 - H119 - Head 1 Settings\n");
-    printf("> H201 - H219 - Head 2 Settings\n");
-    printf("> H301 - H319 - Head 3 Settings\n");
-    printf("> H401 - H419 - Head 4 Settings\n");
+    printf("> H101 - H120 - Head 1 Settings\n");
+    printf("> H201 - H220 - Head 2 Settings\n");
+    printf("> H301 - H320 - Head 3 Settings\n");
+    printf("> H401 - H420 - Head 4 Settings\n");
     printf("> I11 - I14 - Input 1 Settings\n");
     printf("> I21 - I24 - Input 2 Settings\n");
     printf("> I31 - I34 - Input 3 Settings\n");

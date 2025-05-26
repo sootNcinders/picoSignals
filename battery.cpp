@@ -63,7 +63,7 @@ void Battery::batteryTask(void *pvParameters)
 
         battery = batt;
 
-        if(battery < lowBatThreshold && battery > 4.0)
+        if(battery < lowBatThreshold && battery > 5.0)
         {
             batteryLow = true;
         }
@@ -88,7 +88,7 @@ void Battery::batteryTask(void *pvParameters)
         }
         lastLow = batteryLow;
 
-        if(battery < lowBatShutdown && battery > 4.0)
+        if(battery < lowBatShutdown && battery > 5.0)
         {
             batteryShutdown = true;
         }
