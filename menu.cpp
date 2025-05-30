@@ -74,6 +74,8 @@ void MENU::menuTask(void *pvParameters)
                 bufIdx--;
 
                 printf("\b");
+                printf(" ");
+                printf("\b");
             }
             else if(menu)
             {
