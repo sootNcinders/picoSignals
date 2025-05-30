@@ -1018,7 +1018,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                     }
                     else
                     {
-                        printf("Invalid Adjustment\n");
+                        printf("I%d Unavailable\n", adjNum);
                     }
                     break;
 
@@ -1042,7 +1042,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                     }
                     else
                     {
-                        printf("Invalid Adjustment\n");
+                        printf("I%d Unavailable\n", adjNum);
                     }
                     break;
 
@@ -1065,7 +1065,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                     }
                     else
                     {
-                        printf("Invalid Adjustment\n");
+                        printf("I%d Unavailable\n", adjNum);
                     }
                     break;
 
