@@ -15,6 +15,7 @@
 #define HEADS_H
 
 #define MAXDESTINATIONS 6
+#define MAXPARTNERS 4
 
 //signal head info
 typedef struct
@@ -30,6 +31,13 @@ typedef struct
     bool delayClearStarted;
     uint8_t redReleaseDelay; //Delay before release is available on red
     absolute_time_t redTime;
+    uint8_t mode; //Head op mode, 0 unused, 1 standard, 2 advance
+
+    //advance head parameters
+    uint8_t localHeadNum;
+    uint8_t nextNode;
+    uint8_t nextNodePartners[MAXPARTNERS]; //Partners of next node to listen to
+    char partnerState; //State of the next node partners, G, A, R
 }headInfo;
 
 enum
@@ -40,6 +48,13 @@ enum
     liRed,
     liBlue,
     liLunar,
+};
+
+enum
+{
+    unusedHead = 0,
+    standardHead,
+    advanceHead
 };
 
 typedef struct
@@ -86,6 +101,8 @@ class HEADS
         static void headsTask(void *pvParameters);
 
         static void headCommTask(void *pvParameters);
+
+        static void advanceHeadTask(void *pvParameters);
 
         static void setLastActive(uint8_t hN, uint8_t f, uint8_t m);
 

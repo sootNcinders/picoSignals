@@ -76,7 +76,30 @@ void HEADS::init(void)
     {
         GARHEAD *gar; //Temporary GAR head object
         RGBHEAD *rgb; //Temporary RGB head object
-        if(!Jhead[i].isNull() && strncasecmp(Jhead[i]["mode"], "unused", 6) != 0)
+
+        if(strncasecmp(Jhead[i]["mode"], "standard", 8) == 0)
+        {
+            heads[i].mode = standardHead;
+        }
+        else
+        {
+            //If the head is unused, set the pin to 255
+            pin1 = 255;
+            pin2 = 255;
+            pin3 = 255;
+            pin4 = 255;
+
+            cur1 = 0;
+            cur2 = 0;
+            cur3 = 0;
+            cur4 = 0;
+
+            heads[i].mode = unusedHead; //Set the head mode to unused
+
+            heads[i].head = NULL; //No head object
+        }   
+
+        if(!Jhead[i].isNull() && heads[i].mode != unusedHead)
         {
             //If a blue is specified, assume the head is RGB
             if(!Jhead[i]["blue"].as<JsonObject>().isNull())
@@ -200,7 +223,6 @@ void HEADS::init(void)
             //if no valid destinations were supplied, fault out
             if(heads[i].numDest == 0)
             {
-                //panic("No Destination configured\n");
                 DPRINTF("No Destination configured\n");
                 LED::errorLoop(CONFIGBAD);
                 
@@ -288,7 +310,7 @@ void HEADS::init(void)
 
     for(uint32_t i = 0; i < MAXHEADS; i++)
     {
-        if(heads[i].head)
+        if(heads[i].head && heads[i].mode == standardHead)
         {
             xTaskCreate(headCommTask, "headCommTask", 400, (void*)i, (HEADSCOMMPRIORITY + MAXHEADS) - i, &headCommTaskHandle[i]);
 
@@ -331,7 +353,7 @@ void HEADS::headsTask(void *pvParameters)
 
         for(int i = 0; i < MAXHEADS; i++)
         {
-            if(heads[i].head)
+            if(heads[i].head && heads[i].mode == standardHead)
             {
                 if(heads[i].head->getColor() == red || heads[i].head->getColor() == amber || heads[i].head->getColor() == lunar)
                 {
@@ -547,6 +569,37 @@ void HEADS::headCommTask(void *pvParameters)
     }
 }
 
+void HEADS::advanceHeadTask(void *pvParameters)
+{
+    uint8_t headNum = (uint32_t)pvParameters;
+    uint8_t color = off;
+    uint8_t prevColor = off;
+
+    while(true)
+    {
+        color = heads[heads[headNum].localHeadNum - 1].head->getColor();
+
+        if((color == green && prevColor == red) || color == amber)
+        {
+            heads[headNum].head->setHead(red);
+        }
+        else if(color != amber && prevColor == amber)
+        {
+            if(heads[headNum].partnerState == 'G')
+            {
+                heads[headNum].head->setHead(green);
+            }
+            else
+            {
+                heads[headNum].head->setHead(amber);
+            }
+        }
+
+        prevColor = color;
+        vTaskDelay(1000 / portTICK_PERIOD_MS);  
+    }
+}
+
 void HEADS::processRxMsg(RCL msg, uint8_t from)
 {
     bool headFound = false;
@@ -665,8 +718,108 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                 break;
         }
     }
+    else if(msg.destination != addr && from != addr)
+    {
+        for(uint8_t i = 0; i < MAXHEADS; i++)
+        {
+            if(heads[i].mode == advanceHead && heads[i].head)
+            {
+                if(heads[i].nextNode == from)
+                {
+                    for(uint8_t x = 0; x < MAXPARTNERS; x++)
+                    {
+                        if(heads[i].nextNodePartners[x] == msg.destination)
+                        {
+                            switch (msg.aspect)
+                            {
+                                case 'g':
+                                case 'G':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(green);
+                                    }
+                                    heads[i].partnerState = 'G';
+                                    break;
+
+                                case 'a':
+                                case 'A':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(amber);
+                                    }
+                                    heads[i].partnerState = 'R';
+                                    break;
+
+                                case 'r':
+                                case 'R':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(amber);
+                                    }
+                                    heads[i].partnerState = 'A';
+                                    break;
+                                
+                                default:
+                                    break;
+                            }
+                            break;
+                        }
+                    }
+                }
+                else if(heads[i].nextNode == msg.destination)
+                {
+                    for(uint8_t x = 0; x < MAXPARTNERS; x++)
+                    {
+                        if(heads[i].nextNodePartners[x] == from)
+                        {
+                            switch (msg.aspect)
+                            {
+                                case 'g':
+                                case 'G':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(green);
+                                    }
+                                    heads[i].partnerState = 'G';
+                                    break;
+
+                                case 'a':
+                                case 'A':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(amber);
+                                    }
+                                    heads[i].partnerState = 'A';
+                                    break;
+
+                                case 'r':
+                                case 'R':
+                                    if(heads[i].localHeadNum == 0 || heads[i].localHeadNum > MAXHEADS || 
+                                        !heads[heads[i].localHeadNum - 1].head || heads[heads[i].localHeadNum - 1].head->getColor() != amber)
+                                    {
+                                        heads[i].head->setHead(amber);
+                                    }
+                                    heads[i].partnerState = 'R';
+                                    break;
+                                
+                                default:
+                                    break;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     //If the message was for a different node and was Amber or Red, wake this head.
-    else if(msg.destination != addr && from != addr && (msg.aspect == 'A' || msg.aspect == 'a' || msg.aspect == 'R' || msg.aspect == 'r'))
+    if(msg.destination != addr && from != addr && (msg.aspect == 'A' || msg.aspect == 'a' || msg.aspect == 'R' || msg.aspect == 'r'))
     {
         wake();
     }

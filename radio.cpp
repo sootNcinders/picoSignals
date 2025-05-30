@@ -139,7 +139,7 @@ void Radio::radioTask(void *pvParameters)
                 size = sizeof(buf);
                 radio.recv((uint8_t *)&buf, &size, &from, &to);
 
-                if(size == sizeof(RCL) && (to == addr || to == 255))
+                if(size == sizeof(RCL))
                 {
                     memcpy(&msg, buf, sizeof(RCL));
                     HEADS::processRxMsg(msg, from);
