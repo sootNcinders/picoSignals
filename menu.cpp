@@ -73,7 +73,7 @@ void MENU::menuTask(void *pvParameters)
                 inBuf[bufIdx - 1] = 0;
                 bufIdx--;
 
-                printf("\b");
+                printf("\b \b");
             }
             else if(menu)
             {
