@@ -1,42 +1,42 @@
 {
-    "address": 1,
-    "dimTime" : 20,
-    "sleepTime": 30,
-    "lowBattery": 11.5,
-    "batteryReset": 12,
-    "head1": {
-        "destination": [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-        ],
-        "dim": 127,
-        "release": 5,
-        "green": {
-            "pin": 1,
-            "current": 58,
-            "brightness": 255
-        },
-        "amber": {
-            "pin": 2,
-            "current": 58,
-            "brightness": 255
-        },
-        "red": {
-            "pin": 3,
-            "current": 58,
-            "brightness": 255
-        }
-    },
-    "pin1": {
-        "mode": "capture",
-        "head1": 1
-    },
-    "pin2": {
-        "mode": "release",
-        "head": 1
-    }
+  "address": 1,
+  "dimTime" : 20,
+  "sleepTime": 30,
+  "lowBattery": 11.5,
+  "batteryReset": 12,
+  "head1": {
+      "destination": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+      ],
+      "dim": 127,
+      "release": 5,
+      "green": {
+          "pin": 1,
+          "current": 58,
+          "brightness": 255
+      },
+      "amber": {
+          "pin": 2,
+          "current": 58,
+          "brightness": 255
+      },
+      "red": {
+          "pin": 3,
+          "current": 58,
+          "brightness": 255
+      }
+  },
+  "pin1": {
+      "mode": "capture",
+      "head1": 1
+  },
+  "pin2": {
+      "mode": "release",
+      "head": 1
+  }
 }

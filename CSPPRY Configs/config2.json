@@ -4,7 +4,7 @@
   "sleepTime": 30,
   "lowBattery": 11.75,
   "batteryReset": 12.1,
-  "batteryShutdown": 10.0,
+  "batteryShutdown":9.0,
   "retryTime": 100,
   "ctcPresent": true,
   "monitorLEDS": 1,

@@ -77,9 +77,15 @@ void HEADS::init(void)
         GARHEAD *gar; //Temporary GAR head object
         RGBHEAD *rgb; //Temporary RGB head object
 
-        if(strncasecmp(Jhead[i]["mode"], "standard", 8) == 0 || Jhead[i]["head"].isNull())
+        if(strncasecmp(Jhead[i]["mode"], "standard", 8) == 0 || (Jhead[i]["mode"].isNull() && !Jhead[i].isNull()))
         {
             heads[i].mode = standardHead;
+
+            if(Jhead[i]["mode"].isNull())
+            {
+                //If the mode is not specified, default to standard
+                Jhead[i]["mode"] = "STANDARD";
+            }
         }
         else
         {

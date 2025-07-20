@@ -2,7 +2,7 @@
     "address": 2,
     "dimTime" : 20,
     "sleepTime": 30,
-    "lowBattery": 11,
+    "lowBattery": 11.5,
     "batteryReset": 12,
     "head1": {
         "destination": [
@@ -39,4 +39,4 @@
         "mode": "release",
         "head": 1
     }
-}
+  }

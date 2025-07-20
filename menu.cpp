@@ -177,7 +177,7 @@ void MENU::menuProcessor(char* inBuf)
 
         for(uint8_t i = 0; i < MAXINPUTS; i++)
         {
-            printf("> Input %d: %s:%s %s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
+            printf("> Input %d: %s:%s %s\n", i+1, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
         }
     }
     else if(strncasecmp(inBuf, "rssi", 4) == 0)
@@ -673,7 +673,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 207:
                 case 307:
                 case 407:
-                    if(assign && newVal >= 1 && newVal <= 255)
+                    if(assign && newVal >= 0 && newVal <= 255)
                     {
                         Main::cfg[head[headNum]]["destination"][subAdjNum] = newVal;
                     }
@@ -777,7 +777,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 212:
                 case 312:
                 case 412:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         Main::cfg[head[headNum]]["red"]["current"] = newVal;
                     }
@@ -827,7 +827,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 215:
                 case 315:
                 case 415:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         if(!Main::cfg[head[headNum]]["blue"].isNull())
                         {
@@ -891,7 +891,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 218:
                 case 318:
                 case 418:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         Main::cfg[head[headNum]]["green"]["current"] = newVal;
                     }
@@ -1014,7 +1014,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[pin[pinNum]]["head"] = newVal;
                         }
 
-                        printf("I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
+                        printf("I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head"]);
                     }
                     else
                     {
