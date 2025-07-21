@@ -27,9 +27,14 @@ void Battery::init(void)
 
 void Battery::batteryTask(void *pvParameters)
 {
+    uint8_t hour = 0;
+
     uint16_t rawADC;
+    uint16_t loopCount = 0;
+
     float batt;
     float rawBat[NUMBATSAMPLES] = {0.0};
+    float hourlyBat[24] = {0.0};
 
     bool batteryLow = false;
     bool lastLow = false;
@@ -61,7 +66,34 @@ void Battery::batteryTask(void *pvParameters)
         }
         batt /= NUMBATSAMPLES;
 
-        battery = batt;
+        //battery = batt;
+
+        if(loopCount++ >= (HOURMS / BATTERYPERIOD))
+        {
+            loopCount = 0;
+
+            hourlyBat[hour++] = batt;
+            hour = hour % 24;
+
+            for(uint8_t i = 0; i < 24; i++)
+            {
+                if(hourlyBat[i] == 0.0)
+                {
+                    hourlyBat[i] = batt;
+                }
+            }
+
+            batt = 0.0;
+
+            for(uint8_t i = 0; i < 24; i++)
+            {
+                batt += hourlyBat[i];
+            }
+
+            batt /= 24.0;
+
+            battery = batt;
+        }
 
         if(battery < lowBatThreshold && battery > 5.0)
         {
@@ -109,7 +141,7 @@ void Battery::batteryTask(void *pvParameters)
         }
         lastShutdown = batteryShutdown;
 
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(BATTERYPERIOD / portTICK_PERIOD_MS);
     }
 }
 

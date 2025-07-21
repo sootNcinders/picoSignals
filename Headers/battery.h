@@ -11,6 +11,8 @@
 #define CONVERSION_FACTOR (11.2f/1269) //((3.3f / (1 << 12)) * 10) //(12.0/1284)
 #define DIODEDROP 0.8f
 #define NUMBATSAMPLES 10
+#define BATTERYPERIOD 1000 //Battery check period in ms
+#define HOURMS 3600000 //1 hour in ms
 
 class Battery
 {

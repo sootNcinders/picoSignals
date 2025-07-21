@@ -1291,7 +1291,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "7.0.4"
+			"value" : "7.4.1"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION_MAJOR",
@@ -1315,7 +1315,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "0"
+			"value" : "4"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION_PATCH",
@@ -1327,7 +1327,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "4"
+			"value" : "1"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION_TWEAK",
@@ -1891,7 +1891,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : " /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs"
+			"value" : " /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/cmsis /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2040/hardware_regs"
 		},
 		{
 			"name" : "PICO_DOXYGEN_PATHS",

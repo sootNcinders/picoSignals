@@ -179,7 +179,7 @@ void MENU::menuProcessor(char* inBuf)
 
         for(uint8_t i = 0; i < MAXINPUTS; i++)
         {
-            printf("> Input %d: %s:%s %s\n", i, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
+            printf("> Input %d: %s:%s %s\n", i+1, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
         }
     }
     else if(strncasecmp(inBuf, "rssi", 4) == 0)
@@ -729,12 +729,13 @@ void MENU::adjustmentProcessor(char* inBuf)
                             {
                                 Main::cfg[head[headNum]]["blue"] = Main::cfg[head[headNum]]["amber"];
                                 Main::cfg[head[headNum]].remove("amber");
+                                Main::cfg[head[headNum]]["green"].remove("brightness");
+                                Main::cfg[head[headNum]]["red"].remove("brightness");
                             }
                             else
                             {
                                 Main::cfg[head[headNum]]["blue"]["pin"] = 0;
                                 Main::cfg[head[headNum]]["blue"]["current"] = 0;
-                                Main::cfg[head[headNum]]["blue"]["brightness"] = 0;
                             }
                         }
                         else
@@ -743,6 +744,9 @@ void MENU::adjustmentProcessor(char* inBuf)
                             {
                                 Main::cfg[head[headNum]]["amber"] = Main::cfg[head[headNum]]["blue"];
                                 Main::cfg[head[headNum]].remove("blue");
+                                Main::cfg[head[headNum]]["green"].remove("rgb");
+                                Main::cfg[head[headNum]]["amber"].remove("rgb");
+                                Main::cfg[head[headNum]]["red"].remove("rgb");
                             }
                             else
                             {
@@ -779,7 +783,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 212:
                 case 312:
                 case 412:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         Main::cfg[head[headNum]]["red"]["current"] = newVal;
                     }
@@ -791,12 +795,19 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 213:
                 case 313:
                 case 413:
-                    if(assign && newVal >= 0 && newVal <= 255)
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        Main::cfg[head[headNum]]["red"]["brightness"] = newVal;
+                        printf("H%d Unavailable\n", adjNum);
                     }
-
-                    printf("H%d= Head %d Red Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["brightness"]);
+                    else
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["red"]["brightness"] = newVal;
+                        }
+                        
+                        printf("H%d= Head %d Red Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["brightness"]);
+                    }
                     break;
 
                 case 114:
@@ -829,7 +840,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 215:
                 case 315:
                 case 415:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         if(!Main::cfg[head[headNum]]["blue"].isNull())
                         {
@@ -855,24 +866,17 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 216:
                 case 316:
                 case 416:
-                    if(assign && newVal >= 0 && newVal <= 255)
-                    {
-                        if(!Main::cfg[head[headNum]]["blue"].isNull())
-                        {
-                            Main::cfg[head[headNum]]["blue"]["brightness"] = newVal;
-                        }
-                        else
-                        {
-                            Main::cfg[head[headNum]]["amber"]["brightness"] = newVal;
-                        }
-                    }
-
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d= Head %d Blue Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["blue"]["brightness"]);
+                        printf("H%d Unavailable\n", adjNum);
                     }
                     else
                     {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["amber"]["brightness"] = newVal;
+                        }
+                        
                         printf("H%d= Head %d Amber Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["brightness"]);
                     }
                     break;
@@ -893,7 +897,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 218:
                 case 318:
                 case 418:
-                    if(assign && newVal >= 0 && newVal >= 58)
+                    if(assign && newVal >= 0 && newVal <= 58)
                     {
                         Main::cfg[head[headNum]]["green"]["current"] = newVal;
                     }
@@ -905,12 +909,19 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 219:
                 case 319:
                 case 419:
-                    if(assign && newVal >= 0 && newVal <= 255)
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        Main::cfg[head[headNum]]["green"]["brightness"] = newVal;
+                        printf("H%d Unavailable\n", adjNum);
                     }
-
-                    printf("H%d= Head %d Green Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
+                    else
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["green"]["brightness"] = newVal;
+                        }
+                        
+                        printf("H%d= Head %d Green Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
+                    }
                     break;
 
                 case 120:
@@ -923,6 +934,234 @@ void MENU::adjustmentProcessor(char* inBuf)
                     }
 
                     printf("H%d= Head %d Red Release Delay %dsec\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["redReleaseDelay"]);
+                    break;
+
+                case 121:
+                case 221:
+                case 321:
+                case 421:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["red"]["rgb"][0] = newVal;
+                        }
+
+                        printf("H%d= Head %d Red R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][0]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 122:
+                case 222:
+                case 322:
+                case 422:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["red"]["rgb"][1] = newVal;
+                        }
+
+                        printf("H%d= Head %d Red G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][1]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 123:
+                case 223:
+                case 323:
+                case 423:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["red"]["rgb"][2] = newVal;
+                        }
+
+                        printf("H%d= Head %d Red B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][2]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 124:
+                case 224:
+                case 324:
+                case 424:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["amber"]["rgb"][0] = newVal;
+                        }
+
+                        printf("H%d= Head %d Amber R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][0]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 125:
+                case 225:
+                case 325:
+                case 425:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["amber"]["rgb"][1] = newVal;
+                        }
+
+                        printf("H%d= Head %d Amber G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][1]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 126:
+                case 226:
+                case 326:
+                case 426:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["amber"]["rgb"][2] = newVal;
+                        }
+
+                        printf("H%d= Head %d Amber B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][2]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 127:
+                case 227:
+                case 327:
+                case 427:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["green"]["rgb"][0] = newVal;
+                        }
+
+                        printf("H%d= Head %d Green R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][0]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 128:
+                case 228:
+                case 328:
+                case 428:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["green"]["rgb"][1] = newVal;
+                        }
+
+                        printf("H%d= Head %d Green G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][1]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 129:
+                case 229:
+                case 329:
+                case 429:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["green"]["rgb"][2] = newVal;
+                        }
+
+                        printf("H%d= Head %d Green B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][2]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 130:
+                case 230:
+                case 330:
+                case 430:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["lunar"]["rgb"][0] = newVal;
+                        }
+
+                        printf("H%d= Head %d Lunar R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][0]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 131:
+                case 231:
+                case 331:
+                case 431:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["lunar"]["rgb"][1] = newVal;
+                        }
+
+                        printf("H%d= Head %d Lunar G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][1]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
+                    break;
+
+                case 132:
+                case 232:
+                case 332:
+                case 432:
+                    if(!Main::cfg[head[headNum]]["blue"].isNull())
+                    {
+                        if(assign && newVal >= 0 && newVal <= 255)
+                        {
+                            Main::cfg[head[headNum]]["lunar"]["rgb"][2] = newVal;
+                        }
+
+                        printf("H%d= Head %d Lunar B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][2]);
+                    }
+                    else
+                    {
+                        printf("H%d Unavailable\n", adjNum);
+                    }
                     break;
 
                 default:
@@ -1089,7 +1328,6 @@ void MENU::printHelp(void)
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
     printf("> Pico Signals V%dR%d: Help\n", VERSION, REVISION);
-    //printf("> > Command Start Character\n");
     printf("> bat - Print Battery Voltage\n");
     printf("> err - Print Error Code\n");
     printf("> err clr - Clear Error Code\n");
@@ -1107,10 +1345,10 @@ void MENU::printHelp(void)
     printf("> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
     printf("> Adjustments\n");
     printf("> G1 - G12 - General Settings\n");
-    printf("> H101 - H120 - Head 1 Settings\n");
-    printf("> H201 - H220 - Head 2 Settings\n");
-    printf("> H301 - H320 - Head 3 Settings\n");
-    printf("> H401 - H420 - Head 4 Settings\n");
+    printf("> H101 - H132 - Head 1 Settings\n");
+    printf("> H201 - H232 - Head 2 Settings\n");
+    printf("> H301 - H332 - Head 3 Settings\n");
+    printf("> H401 - H432 - Head 4 Settings\n");
     printf("> I11 - I14 - Input 1 Settings\n");
     printf("> I21 - I24 - Input 2 Settings\n");
     printf("> I31 - I34 - Input 3 Settings\n");

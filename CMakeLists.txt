@@ -12,7 +12,6 @@ add_subdirectory(./FatFs_SPI build)
 add_subdirectory(./ArduinoJson)
 
 add_executable(picoSignals
-                #picoSignals.cpp
                 main.cpp
                 LED.cpp
                 battery.cpp
