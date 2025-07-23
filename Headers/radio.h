@@ -62,6 +62,12 @@ struct FROMCTC
     uint8_t cmd;
 };
 
+struct REMOTECLI
+{
+    uint8_t dest;
+    uint8_t data[251]; //max that can be sent is 256 bytes, 4 bytes used for header
+};
+
 class Radio
 {
     public:
