@@ -464,10 +464,11 @@ void RFM95::recv(uint8_t *buf, uint8_t *len, uint8_t *from, uint8_t *to)
             }
 
             memcpy(buf, (const void*) (_payloadBuf[_tail] + RFM95_HEADER_LEN), *len);
-            _payloadLen[_tail] = 0;
 
-            *from = _rxFrom;
-            *to = _rxTo;
+            *from = _payloadBuf[_tail][1];
+            *to = _payloadBuf[_tail][0];
+
+            memset((void *)&_payloadBuf[_tail], 0, sizeof(_payloadBuf[_tail]));
 
             _tail = ((_tail + 1) >= RFM95_BUF_SIZE) ? 0:_tail+1;
         }
