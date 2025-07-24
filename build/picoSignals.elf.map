@@ -3167,9 +3167,9 @@ Discarded input sections
                 0x0000000000000000        0x4 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
  .rodata.__func__.0
                 0x0000000000000000        0x9 CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
- .text          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
- .data          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
- .bss           0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
+ .text          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
+ .data          0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
+ .bss           0x0000000000000000        0x0 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
  .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-atof.o)
@@ -3680,7 +3680,7 @@ LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-
 .boot2          0x0000000010000000      0x100
                 0x0000000010000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x0000000010000000      0x100 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
+ .boot2         0x0000000010000000      0x100 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
                 0x0000000010000100                __boot2_end__ = .
                 0x0000000000000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -8655,7 +8655,7 @@ LOAD CMakeFiles/picoSignals.dir/FatFs_SPI/src/my_debug.c.obj
 LOAD CMakeFiles/picoSignals.dir/FatFs_SPI/src/rtc.c.obj
 LOAD CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 LOAD CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
-LOAD /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
+LOAD /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
 LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -8866,7 +8866,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000fbc       0x2c CMakeFiles/picoSignals.dir/pico-sdk/src/rp2_common/hardware_rtc/rtc.c.obj
  .ARM.attributes
-                0x0000000000000fe8       0x22 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//cccJlQ8W.o
+                0x0000000000000fe8       0x22 /var/folders/93/m4nrst_97mb1prbp4w6clz240000gn/T//ccFgsEMV.o
  .ARM.attributes
                 0x000000000000100a       0x1e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
