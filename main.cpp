@@ -52,6 +52,7 @@ int main(void)
     Main::loadConfig();
 
     MENU::init();
+    Radio::init();
 
     if(Main::mode == STD)
     {
@@ -60,7 +61,7 @@ int main(void)
         IO::init();
         HEADS::init();
         CTC::init();
-        Radio::init();
+        //Radio::init();
 
         if(!IO::post())
         {
@@ -76,7 +77,7 @@ int main(void)
     else if(Main::mode == CTC)
     {
         DPRINTF("\nCTC Mode\n");
-        Radio::init();
+        //Radio::init();
     }
     else if(Main::mode == OVL)
     {
@@ -84,7 +85,7 @@ int main(void)
         Battery::init();
         IO::init();
         CTC::init();
-        Radio::init();
+        //Radio::init();
         OVERLAY::init();
 
         if(!IO::post())
