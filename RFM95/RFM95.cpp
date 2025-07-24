@@ -166,6 +166,7 @@ void RFM95::handleInterrupt(void)
 {
     uint8_t buf[2];
     BaseType_t higherPriorityTaskWoken = pdFALSE;
+    uint16_t crc = 0;
 
     if(_mutex != NULL)
     {
@@ -292,7 +293,9 @@ void RFM95::handleInterrupt(void)
             _rxTo = _payloadBuf[_head][0];
             _rxFrom = _payloadBuf[_head][1];
 
-            if(_rxTo == _address || _rxTo == RFM95_BROADCAST_ADDR)
+            crc = calcCRC((uint8_t *)&_payloadBuf[_head][RFM95_HEADER_LEN], _payloadLen[_head] - RFM95_HEADER_LEN);
+
+            if((_rxTo == _address || _rxTo == RFM95_BROADCAST_ADDR) && (crc == (uint16_t)(_payloadBuf[_head][2] + (_payloadBuf[_head][3] << 8))) || crc == 0)
             {
                 _head = ((_head + 1) >= RFM95_BUF_SIZE) ? 0:_head+1;
                 #ifdef RFM95_DEBUG
@@ -464,10 +467,11 @@ void RFM95::recv(uint8_t *buf, uint8_t *len, uint8_t *from, uint8_t *to)
             }
 
             memcpy(buf, (const void*) (_payloadBuf[_tail] + RFM95_HEADER_LEN), *len);
-            _payloadLen[_tail] = 0;
 
-            *from = _rxFrom;
-            *to = _rxTo;
+            *from = _payloadBuf[_tail][1];
+            *to = _payloadBuf[_tail][0];
+
+            memset((void *)&_payloadBuf[_tail], 0, sizeof(_payloadBuf[_tail]));
 
             _tail = ((_tail + 1) >= RFM95_BUF_SIZE) ? 0:_tail+1;
         }
@@ -486,6 +490,8 @@ void RFM95::recv(uint8_t *buf, uint8_t *len, uint8_t *from, uint8_t *to)
 bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
 {
     uint8_t buf[5];
+
+    uint16_t crc = calcCRC((uint8_t *)data, len);
     
     absolute_time_t t = get_absolute_time();
 
@@ -547,8 +553,8 @@ bool RFM95::send(uint8_t to, const uint8_t *data, uint8_t len)
     buf[0] = RFM95_REG_00_FIFO | RFM95_WRITE_BIT;
     buf[1] = to;
     buf[2] = _address;
-    buf[3] = 0x00;
-    buf[4] = 0x00;
+    buf[3] = crc & 0xFF;
+    buf[4] = (crc >> 8) & 0xFF;
 
     #ifdef RFM95_DEBUG
     printf("RFM95 Sending: ");
@@ -1281,4 +1287,19 @@ uint8_t RFM95::getMode()
 void RFM95::setCADTimeout(uint16_t timeout)
 {
     _cadTimeout = timeout;
+}
+
+//Calculate a 16bit ones complement CRC for some data
+uint16_t RFM95::calcCRC(uint8_t *buf, uint8_t len)
+{
+    uint16_t crc = 0;
+
+    for(uint8_t i = 0; i < len; i++)
+    {
+        crc += buf[i];
+    }
+
+    crc = ~crc; //invert the bits for ones complement
+
+    return crc;
 }

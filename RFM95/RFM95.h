@@ -443,13 +443,19 @@ class RFM95
 
         void chipSelectFromISR();
 
-        /// @brief delect this chip
+        /// @brief deselect this chip
         void chipDeselect();
 
         void chipDeselectFromISR();
 
         /// @brief sets the low data rate flag if symbol time exceeds 16ms
         void setLowDatarate();
+
+        /// @brief Calculates the ones complement CRC for some data
+        /// @param buf the data buffer to calculate CRC for
+        /// @param len how much data to calculate CRC for
+        /// @return the 16bit CRC value
+        uint16_t calcCRC(uint8_t *buf, uint8_t len);
 
     //Statics for interrupt handling
     private:
