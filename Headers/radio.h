@@ -65,7 +65,8 @@ struct FROMCTC
 struct REMOTECLI
 {
     uint8_t dest;
-    uint8_t data[251]; //max that can be sent is 256 bytes, 4 bytes used for header
+    bool isAck;
+    uint8_t data[32]; //Average size of print statements
 };
 
 class Radio
@@ -95,6 +96,8 @@ class Radio
          * @throws None
          */
         static void sendFromCTC(FROMCTC data);
+
+        static void sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck);
 
         static int8_t getAvgRSSI(void);
 

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/CMakeFiles/freertos_kernel-populate"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/CMakeFiles/freertos_kernel-populate.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/CMakeFiles/freertos_kernel-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-build.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-download.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-install.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-test.rule"
+		},
+		{
+			"file" : "/Users/tleavitt/pico/projects/picoSignals/build/_deps/freertos_kernel-subbuild/freertos_kernel-populate-prefix/src/freertos_kernel-populate-stamp/freertos_kernel-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"freertos_kernel-populate"
+		],
+		"name" : "freertos_kernel-populate"
+	}
+}

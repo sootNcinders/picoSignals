@@ -13,6 +13,7 @@
 #include "hardware/adc.h"
 #include "hardware/watchdog.h"
 #include "hardware/flash.h"
+#include "hardware/clocks.h"
 
 #include "f_util.h"
 #include "ff.h"

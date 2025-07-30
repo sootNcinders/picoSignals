@@ -14,30 +14,96 @@
 #include "ArduinoJson.h"
 
 uint8_t MENU::addr;
+uint8_t MENU::remoteHead;
+uint8_t MENU::remoteTail;
+REMOTECLI MENU::remoteData[8]; //Remote CLI buffer
+uint8_t MENU::remoteFrom[8]; //Remote CLI from address buffer
 
 void MENU::init(void)
 {
     addr = Main::cfg["address"];
 
     xTaskCreate(menuTask, "Menu Task", FILESIZE+4096, NULL, MENUPRIORITY, NULL);
+
+    remoteHead = 0;
+    remoteTail = 0;
+    memset(remoteData, 0, sizeof(remoteData));
+    memset(remoteFrom, 0, sizeof(remoteFrom));
+}
+
+void MENU::processRemoteCLI(REMOTECLI inBuf, uint8_t from)
+{
+    if(inBuf.isAck)
+    {
+        printf("~%x%x", from>>4, from&0x0F);
+
+        for(uint8_t i = 0; i < sizeof(inBuf.data); i++)
+        {
+            if(inBuf.data[i] == '\n')
+            {
+                printf("%c", 0x1A);
+            }
+            
+            printf("%c", inBuf.data[i]);
+            
+            if(inBuf.data[i] == '\n')
+            {
+                printf("~%x%x", from>>4, from&0x0F);
+            }
+        }
+
+        printf("\n");
+    }
+    else
+    {
+        remoteData[remoteHead] = inBuf;
+        remoteFrom[remoteHead] = from;
+        remoteHead = (remoteHead + 1) % sizeof(remoteFrom);
+    }
 }
 
 void MENU::menuTask(void *pvParameters)
 {
     char cin;
-    char inBuf[255];
+    char inBuf[1024];
 
-    uint8_t bufIdx = 0;
+    uint8_t dest = 0;
+
+    uint16_t bufIdx = 0;
 
     bool ctc = false;
     bool menu = false;
+    bool remoteCli = false;
 
     FROMCTC fromCTC;
 
     UBaseType_t priority;
 
+    bufIdx = 0;
+    memset(inBuf, 0, sizeof(inBuf));
+
     while(true)
     {
+        if(remoteHead != remoteTail)
+        {
+            priority = uxTaskPriorityGet(NULL);
+
+            vTaskPrioritySet(NULL, MAXPRIORITY);
+
+            if(remoteData[remoteTail].data[1] >= '0' && remoteData[remoteTail].data[1] <= '9')
+            {
+                adjustmentProcessor((char*)remoteData[remoteTail].data, true, remoteFrom[remoteTail]);
+            }
+            else
+            {
+                menuProcessor((char*)remoteData[remoteTail].data, true, remoteFrom[remoteTail]);
+            }
+
+            vTaskPrioritySet(NULL, priority);
+
+            remoteTail = (remoteTail + 1) % sizeof(remoteFrom);
+        }
+
         cin = getchar_timeout_us(0);
         while(cin >= 0x08 && cin <= 0x7F && bufIdx < sizeof(inBuf))
         {
@@ -53,16 +119,25 @@ void MENU::menuTask(void *pvParameters)
                 bufIdx = 1;
                 ctc = true;
                 menu = false;
+                remoteCli = false;
+            }
+            else if(cin == '~' && bufIdx == 0)
+            {
+                bufIdx = 1;
+                ctc = false;
+                menu = false;
+                remoteCli = true;
             }
             else if(((cin >= 'A' && cin <= 'Z') || (cin >= 'a' && cin <= 'z')) && bufIdx == 0)
             {
                 bufIdx = 1;
                 ctc = false;
                 menu = true;
+                remoteCli = false;
             }
             else if(bufIdx == 0 && (cin == '\r' || cin == '\n'))
             {
-                printHelp();
+                printHelp(false, 0);
             }
 
             //backspace, but cant backspace over the start character
@@ -112,6 +187,18 @@ void MENU::menuTask(void *pvParameters)
 
                 memset(inBuf, 0, sizeof(inBuf));
             }
+            else if(remoteCli && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
+            {
+                //printf("%s\n", inBuf);
+                dest = 0;
+                dest += ((inBuf[1] >= 'A') ? (inBuf[1] >= 'a') ? (inBuf[1] - 'a' + 10) : (inBuf[1] - 'A' + 10) : (inBuf[1] - '0')) << 4;
+                dest += (inBuf[2] >= 'A') ? (inBuf[2] >= 'a') ? (inBuf[2] - 'a' + 10) : (inBuf[2] - 'A' + 10) : (inBuf[2] - '0');
+
+                Radio::sendRemoteCLI((char*)&inBuf[3], bufIdx-3, dest, false);
+
+                bufIdx = 0;
+                memset(inBuf, 0, sizeof(inBuf));
+            }
             else if(menu && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
             {
                 priority = uxTaskPriorityGet(NULL);
@@ -122,17 +209,16 @@ void MENU::menuTask(void *pvParameters)
 
                 if(inBuf[1] >= '0' && inBuf[1] <= '9')
                 {
-                    adjustmentProcessor(inBuf);
+                    adjustmentProcessor(inBuf, false, 0);
                 }
                 else
                 {
-                    menuProcessor(inBuf);
+                    menuProcessor(inBuf, false, 0);
                 }
 
                 vTaskPrioritySet(NULL, priority);
 
                 bufIdx = 0;
-
                 memset(inBuf, 0, sizeof(inBuf));
             }
 
@@ -143,34 +229,57 @@ void MENU::menuTask(void *pvParameters)
     }
 }
 
-void MENU::menuProcessor(char* inBuf)
+void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
 {
     switchInfo info[8];
-    char buf[40*MAXPRIORITY];
+    char buf[512];
     uint8_t head = 0;
+    uint16_t numChars;
     UBaseType_t priority;
+
+    memset(buf, 0, sizeof(buf));
 
     if(strncasecmp(inBuf, "bat", 3) == 0)
     {
-        printf("> Battery Voltage: %2.2fV\n", Battery::getBatteryVoltage());
+        numChars = snprintf(buf, sizeof(buf), "> Battery Voltage: %2.2fV\n", Battery::getBatteryVoltage());
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
     }
     else if(strncasecmp(inBuf, "err", 3) == 0)
     {
         if(strncasecmp(inBuf+4, "clr", 3) == 0)
         {
-            printf("> Errors Cleared\n");
+            numChars = snprintf(buf, sizeof(buf), "> Errors Cleared\n");
             LED::setError(NOERROR);
         }
         else
         {
-            printf("> Error Code: %d - %s\n", LED::getError(), errorCodes[LED::getError()]);
+            numChars = snprintf(buf, sizeof(buf), "> Error Code: %d - %s\n", LED::getError(), errorCodes[LED::getError()]);
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else if(strncasecmp(inBuf, "head", 4) == 0)
     {
         for(uint8_t i = 0; i < MAXHEADS; i++)
         {
-            printf("> Head %d: %c\n", i+1, HEADS::getHead(i));
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Head %d: %c\n", i+1, HEADS::getHead(i));
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else if(strncasecmp(inBuf, "in", 2) == 0)
@@ -179,17 +288,38 @@ void MENU::menuProcessor(char* inBuf)
 
         for(uint8_t i = 0; i < MAXINPUTS; i++)
         {
-            printf("> Input %d: %s:%s %s\n", i+1, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Input %d: %s:%s %s\n", i+1, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else if(strncasecmp(inBuf, "rssi", 4) == 0)
     {
-        printf("> Radio RSSI: %d\n", Radio::getAvgRSSI());
+        numChars = snprintf(buf, sizeof(buf), "> Radio RSSI: %d\n", Radio::getAvgRSSI());
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
     }
     else if(strncasecmp(inBuf, "sys", 3) == 0)
     {
         vTaskList(buf);
-        printf("%s\n", buf);
+        numChars = snprintf(buf, sizeof(buf), "%s\n", buf);
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
     }
     else if(strncasecmp(inBuf, "cap", 3) == 0)
     {
@@ -219,7 +349,14 @@ void MENU::menuProcessor(char* inBuf)
     {
         if(strncasecmp(inBuf+6, "clr", 3) == 0)
         {
-            DPRINTF("Erase Config\n");
+            numChars = snprintf(buf, sizeof(buf), "Erase Config\n");
+
+            printf("%s", buf);
+
+            if(remote)
+            {
+                Radio::sendRemoteCLI(buf, numChars, from, true);
+            }
 
             priority = uxTaskPriorityGet(NULL);
 
@@ -266,52 +403,59 @@ void MENU::menuProcessor(char* inBuf)
 
             if(i < 9)
             {
-                printf("LED  %d: Head: %d ", i+1, headNum);
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "LED  %d: Head: %d ", i+1, headNum);
             }
             else
             {
-                printf("LED %d: Head: %d ", i+1, headNum);
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "LED %d: Head: %d ", i+1, headNum);
             }
 
             switch(info[i].color)
             {
                 case notUsed:
-                    printf("Not Used - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Not Used - ");
                     break;
                 
                 case liGreen:
-                    printf("Green    - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Green    - ");
                     break;
 
                 case liAmber:
-                    printf("Amber    - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Amber    - ");
                     break;
 
                 case liRed:
-                    printf("Red      - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Red      - ");
                     break;
 
                 case liBlue:
-                    printf("Blue     - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Blue     - ");
                     break;
 
                 case liLunar:
-                    printf("Lunar    - ");
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Lunar    - ");
                     break;
             }
 
             if(((leds >> (i*2)) & 0x3) == LEDshort)
             {
-                printf("Shorted\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Shorted\n");
             }
             else if(((leds >> (i*2)) & 0x3) == LEDopen)
             {
-                printf("Open\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "Open\n");
             }
             else
             {
-                printf("OK\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "OK\n");
             }
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else if(strncasecmp(inBuf, "wrt", 3) == 0)
@@ -322,24 +466,38 @@ void MENU::menuProcessor(char* inBuf)
         serializeJsonPretty(Main::cfg, cfgRaw, FILESIZE);
 
         Main::writeFlashJSON((uint8_t*)cfgRaw);
-        printf("> Config written to flash\n");
+        numChars = snprintf(buf, sizeof(buf), "> Config written to flash\n");
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
 
         if(Main::writeSdJSON((uint8_t*)cfgRaw))
         {
-            printf("> Config written to SD\n");
+            numChars = snprintf(buf, sizeof(buf), "> Config written to SD\n");
         }
         else
         {
-            printf("> Config write to SD failed\n");
+            numChars = snprintf(buf, sizeof(buf), "> Config write to SD failed\n");
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else if(strncasecmp(inBuf, "SET", 3) == 0)
     {
         uint8_t head = atoi(inBuf+4);
 
-        printf("Set Head %d ", head); 
+        numChars = snprintf(buf, sizeof(buf), "Set Head %d ", head); 
 
-        if(head > 0 && head < 4)
+        if(head > 0 && head <= 4)
         {
             head--;
 
@@ -347,56 +505,67 @@ void MENU::menuProcessor(char* inBuf)
             {
                 HEADS::setHeadOn(head);
 
-                printf("ON\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "ON\n");
             }
             else if(strncasecmp(inBuf+6, "DIM", 3) == 0)
             {
                 HEADS::setHeadDim(head);
 
-                printf("DIM\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "DIM\n");
             }
             else if(strncasecmp(inBuf+6, "OFF", 3) == 0)
             {
                 HEADS::setHeadOff(head);
 
-                printf("OFF\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "OFF\n");
             }
             else if(strncasecmp(inBuf+6, "GREEN", 5) == 0)
             {
                 HEADS::setHead(head, green);
 
-                printf("GREEN\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "GREEN\n");
             }
             else if(strncasecmp(inBuf+6, "AMBER", 5) == 0)
             {
                 HEADS::setHead(head, amber);
 
-                printf("AMBER\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "AMBER\n");
             }
             else if(strncasecmp(inBuf+6, "RED", 3) == 0)
             {
                 HEADS::setHead(head, red);
 
-                printf("RED\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "RED\n");
             }
             else if(strncasecmp(inBuf+6, "LUNAR", 5) == 0)
             {
                 HEADS::setHead(head, lunar);
 
-                printf("LUNAR\n");
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "LUNAR\n");
             }
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
     else
     {
-        printHelp();
+        printHelp(remote, from);
     }
 }
 
-void MENU::adjustmentProcessor(char* inBuf)
+void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 {
     char numChar[255];
     char newChar[255];
+
+    char buf[512];
+    memset(buf, 0, sizeof(buf));
+    uint16_t numChars = 0;
 
     uint8_t numIdx = 0;
     uint8_t newIdx = 0;
@@ -407,7 +576,7 @@ void MENU::adjustmentProcessor(char* inBuf)
     float newFloat = 0;
     bool assign = false;
 
-    for(uint8_t i = 1; inBuf[i] != 0; i++)
+    for(uint8_t i = 1; inBuf[i] != 0 && i < 0xFF; i++)
     {
         if(inBuf[i] == '=')
         {
@@ -449,7 +618,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["address"] = newVal;
                     }
                     
-                    printf("G1= Address %d\n", (uint8_t)Main::cfg["address"]);
+                    numChars = snprintf(buf, sizeof(buf), "G1= Address %d\n", (uint8_t)Main::cfg["address"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
                 
                 case 2:
@@ -463,7 +639,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["retries"] = 10;
                     }
 
-                    printf("G2= Retries %d\n", (uint8_t)Main::cfg["retries"]);
+                    numChars = snprintf(buf, sizeof(buf), "G2= Retries %d\n", (uint8_t)Main::cfg["retries"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 3:
@@ -477,7 +660,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["retryTime"] = 100;
                     }
 
-                    printf("G3= Retry Time %dms\n", (uint8_t)Main::cfg["retryTime"]);
+                    numChars = snprintf(buf, sizeof(buf), "G3= Retry Time %dms\n", (uint8_t)Main::cfg["retryTime"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 4:
@@ -491,7 +681,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["dimTime"] = 15;
                     }
 
-                    printf("G4= Dim Time %dmin\n", (uint8_t)Main::cfg["dimTime"]);
+                    numChars = snprintf(buf, sizeof(buf), "G4= Dim Time %dmin\n", (uint8_t)Main::cfg["dimTime"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 5:
@@ -505,7 +702,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["sleepTime"] = 30;
                     }
 
-                    printf("G5= Sleep Time %dmin\n", (uint8_t)Main::cfg["sleepTime"]);
+                    numChars = snprintf(buf, sizeof(buf), "G5= Sleep Time %dmin\n", (uint8_t)Main::cfg["sleepTime"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 6: 
@@ -519,7 +723,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["lowBattery"] = 11.75;
                     }
 
-                    printf("G6= Low Battery %2.1fV\n", (float)Main::cfg["lowBattery"]);
+                    numChars = snprintf(buf, sizeof(buf), "G6= Low Battery %2.1fV\n", (float)Main::cfg["lowBattery"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 7:
@@ -533,7 +744,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["batteryReset"] = 12.1;
                     }
 
-                    printf("G7= Low Battery Reset %2.1fV\n", (float)Main::cfg["batteryReset"]);
+                    numChars = snprintf(buf, sizeof(buf), "G7= Low Battery Reset %2.1fV\n", (float)Main::cfg["batteryReset"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 8:
@@ -547,7 +765,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["batteryShutdown"] = 10.0;
                     }
 
-                    printf("G8= Battery Shutdown %2.1fV\n", (float)Main::cfg["batteryShutdown"]);
+                    numChars = snprintf(buf, sizeof(buf), "G8= Battery Shutdown %2.1fV\n", (float)Main::cfg["batteryShutdown"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 9:
@@ -561,7 +786,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["ctcPresent"] = false;
                     }
 
-                    printf("G9= CTC Present %d\n", (uint8_t)Main::cfg["ctcPresent"]);
+                    numChars = snprintf(buf, sizeof(buf), "G9= CTC Present %d\n", (uint8_t)Main::cfg["ctcPresent"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 10:
@@ -575,7 +807,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["monitorLEDs"] = 0;
                     }
 
-                    printf("G10= LED Monitoring Mode %d\n", (uint8_t)Main::cfg["monitorLEDs"]);
+                    numChars = snprintf(buf, sizeof(buf), "G10= LED Monitoring Mode %d\n", (uint8_t)Main::cfg["monitorLEDs"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 11:
@@ -600,7 +839,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["mode"] = "STANDARD";
                     }
                     
-                    printf("G11= Mode %s\n", (const char*)Main::cfg["mode"]);
+                    numChars = snprintf(buf, sizeof(buf), "G11= Mode %s\n", (const char*)Main::cfg["mode"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 12:
@@ -614,11 +860,25 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg["awakePin"] = 255;
                     }
 
-                    printf("G12= Awake Pin %d\n", (uint8_t)Main::cfg["awakePin"]);
+                    numChars = snprintf(buf, sizeof(buf), "G12= Awake Pin %d\n", (uint8_t)Main::cfg["awakePin"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 default:
-                    printf("Invalid Adjustment\n");
+                    numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
             }
             break;
@@ -648,7 +908,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["mode"] = "UNUSED";
                     }
 
-                    printf("H%d= Head %d %s\n", adjNum, headNum+1, (const char*)Main::cfg[head[headNum]]["mode"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d %s\n", adjNum, headNum+1, (const char*)Main::cfg[head[headNum]]["mode"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 102:
@@ -680,7 +947,15 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["destination"][subAdjNum] = newVal;
                     }
 
-                    printf("H%d= Head %d Destination[%d] %d\n", adjNum, headNum+1, subAdjNum, (uint8_t)Main::cfg[head[headNum]]["destination"][subAdjNum]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Destination[%d] %d\n", adjNum, headNum+1, subAdjNum, 
+                                            (uint8_t)Main::cfg[head[headNum]]["destination"][subAdjNum]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 108:
@@ -697,7 +972,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["dim"] = 255;
                     }
 
-                    printf("H%d= Head %d Dim Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["dim"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Dim Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["dim"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 109:
@@ -714,7 +996,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["release"] = 6;
                     }
 
-                    printf("H%d= Head %d Release Time %dmin\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["release"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Release Time %dmin\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["release"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 110:
@@ -759,11 +1048,18 @@ void MENU::adjustmentProcessor(char* inBuf)
 
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d= Head %d RGB\n", adjNum, headNum+1);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d RGB\n", adjNum, headNum+1);
                     }
                     else
                     {
-                        printf("H%d= Head %d GAR\n", adjNum, headNum+1);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d GAR\n", adjNum, headNum+1);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -776,7 +1072,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["red"]["pin"] = newVal;
                     }
 
-                    printf("H%d= Head %d Red Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["pin"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["pin"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 112:
@@ -788,7 +1091,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["red"]["current"] = newVal;
                     }
 
-                    printf("H%d= Head %d Red Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["current"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["current"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 113:
@@ -797,7 +1107,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 413:
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
                     else
                     {
@@ -806,7 +1116,15 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["red"]["brightness"] = newVal;
                         }
                         
-                        printf("H%d= Head %d Red Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["brightness"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Brightness %d\n", adjNum, headNum+1, 
+                                                (uint8_t)Main::cfg[head[headNum]]["red"]["brightness"]);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -828,11 +1146,18 @@ void MENU::adjustmentProcessor(char* inBuf)
 
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d= Head %d Blue Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["blue"]["pin"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Blue Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["blue"]["pin"]);
                     }
                     else
                     {
-                        printf("H%d= Head %d Amber Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["pin"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["pin"]);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -854,11 +1179,18 @@ void MENU::adjustmentProcessor(char* inBuf)
 
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d= Head %d Blue Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["blue"]["current"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Blue Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["blue"]["current"]);
                     }
                     else
                     {
-                        printf("H%d= Head %d Amber Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["current"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["current"]);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -868,7 +1200,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 416:
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
                     else
                     {
@@ -877,7 +1209,15 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["amber"]["brightness"] = newVal;
                         }
                         
-                        printf("H%d= Head %d Amber Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["brightness"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber Brightness %d\n", adjNum, headNum+1, 
+                                                (uint8_t)Main::cfg[head[headNum]]["amber"]["brightness"]);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -890,7 +1230,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["green"]["pin"] = newVal;
                     }
 
-                    printf("H%d= Head %d Green Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["pin"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["pin"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 118:
@@ -902,7 +1249,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["green"]["current"] = newVal;
                     }
 
-                    printf("H%d= Head %d Green Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["current"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["current"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 119:
@@ -911,7 +1265,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                 case 419:
                     if(!Main::cfg[head[headNum]]["blue"].isNull())
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
                     else
                     {
@@ -920,7 +1274,15 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["green"]["brightness"] = newVal;
                         }
                         
-                        printf("H%d= Head %d Green Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green Brightness %d\n", adjNum, headNum+1, 
+                                            (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -933,7 +1295,15 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[head[headNum]]["redReleaseDelay"] = newVal;
                     }
 
-                    printf("H%d= Head %d Red Release Delay %dsec\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["redReleaseDelay"]);
+                    numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Release Delay %dsec\n", adjNum, headNum+1, 
+                                        (uint8_t)Main::cfg[head[headNum]]["redReleaseDelay"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
 
                 case 121:
@@ -947,11 +1317,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["red"]["rgb"][0] = newVal;
                         }
 
-                        printf("H%d= Head %d Red R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][0]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][0]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -966,11 +1343,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["red"]["rgb"][1] = newVal;
                         }
 
-                        printf("H%d= Head %d Red G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][1]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][1]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -985,11 +1369,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["red"]["rgb"][2] = newVal;
                         }
 
-                        printf("H%d= Head %d Red B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][2]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["rgb"][2]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1004,11 +1395,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["amber"]["rgb"][0] = newVal;
                         }
 
-                        printf("H%d= Head %d Amber R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][0]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][0]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1023,11 +1421,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["amber"]["rgb"][1] = newVal;
                         }
 
-                        printf("H%d= Head %d Amber G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][1]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][1]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1042,11 +1447,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["amber"]["rgb"][2] = newVal;
                         }
 
-                        printf("H%d= Head %d Amber B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][2]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["rgb"][2]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1061,11 +1473,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["green"]["rgb"][0] = newVal;
                         }
 
-                        printf("H%d= Head %d Green R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][0]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][0]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1080,11 +1499,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["green"]["rgb"][1] = newVal;
                         }
 
-                        printf("H%d= Head %d Green G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][1]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][1]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1099,11 +1525,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["green"]["rgb"][2] = newVal;
                         }
 
-                        printf("H%d= Head %d Green B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][2]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["rgb"][2]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1118,11 +1551,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["lunar"]["rgb"][0] = newVal;
                         }
 
-                        printf("H%d= Head %d Lunar R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][0]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Lunar R %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][0]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1137,11 +1577,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["lunar"]["rgb"][1] = newVal;
                         }
 
-                        printf("H%d= Head %d Lunar G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][1]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Lunar G %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][1]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1156,16 +1603,31 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[head[headNum]]["lunar"]["rgb"][2] = newVal;
                         }
 
-                        printf("H%d= Head %d Lunar B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][2]);
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Lunar B %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["lunar"]["rgb"][2]);
                     }
                     else
                     {
-                        printf("H%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
                 default:
-                    printf("Invalid Adjustment\n");
+                    numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
+                    break;
             }
             break;
 
@@ -1222,7 +1684,14 @@ void MENU::adjustmentProcessor(char* inBuf)
                         Main::cfg[pin[pinNum]]["mode"] = "unused";
                     }
 
-                    printf("I%d= Input %d %s\n", adjNum, adjNum/10, (const char*)Main::cfg[pin[pinNum]]["mode"]);
+                    numChars = snprintf(buf, sizeof(buf), "I%d= Input %d %s\n", adjNum, adjNum/10, (const char*)Main::cfg[pin[pinNum]]["mode"]);
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
                     break;
                 
                 case 12:
@@ -1241,7 +1710,7 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[pin[pinNum]]["head1"] = newVal;
                         }
 
-                        printf("I%d= Input %d Head 1= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
+                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Head 1= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
                     }
                     else if(strncasecmp(Main::cfg[pin[pinNum]]["mode"], "release", 7) == 0 ||
                                 strncasecmp(Main::cfg[pin[pinNum]]["mode"], "ovlGreen", 8) == 0 ||
@@ -1255,11 +1724,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[pin[pinNum]]["head"] = newVal;
                         }
 
-                        printf("I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
+                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
                     }
                     else
                     {
-                        printf("I%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1279,11 +1755,18 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[pin[pinNum]]["head2"] = newVal;
                         }
 
-                        printf("I%d= Input %d Head 2= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head2"]);
+                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Head 2= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head2"]);
                     }
                     else
                     {
-                        printf("I%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
@@ -1302,61 +1785,93 @@ void MENU::adjustmentProcessor(char* inBuf)
                             Main::cfg[pin[pinNum]]["turnout"] = newVal;
                         }
 
-                        printf("I%d= Input %d Turnout= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["turnout"]);
+                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Turnout= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["turnout"]);
                     }
                     else
                     {
-                        printf("I%d Unavailable\n", adjNum);
+                        numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
+                    }
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
                     }
                     break;
 
                 default:
-                    printf("Invalid Adjustment\n");
+                    numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
+
+                    printf("%s", buf);
+
+                    if(remote)
+                    {
+                        Radio::sendRemoteCLI(buf, numChars, from, true);
+                    }
+                    break;
             }
             break;
 
         default:
-            printf("Invalid Adjustment\n");
+            numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
+
+            printf("%s", buf);
+
+            if(remote)
+            {
+                Radio::sendRemoteCLI(buf, numChars, from, true);
+            }
             break;
     }
 }
 
-void MENU::printHelp(void)
+void MENU::printHelp(bool remote, uint8_t from)
 {
     UBaseType_t priority = uxTaskPriorityGet(NULL);
 
+    char buf[1024];
+    uint16_t numChars = 0;
+
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    printf("> Pico Signals V%dR%d: Help\n", VERSION, REVISION);
-    printf("> bat - Print Battery Voltage\n");
-    printf("> err - Print Error Code\n");
-    printf("> err clr - Clear Error Code\n");
-    printf("> head - Print Head Status\n");
-    printf("> in - Print Input Status\n");
-    printf("> rssi - Print Radio RSSI\n");
-    printf("> cap x - Capture head x 1-4\n");
-    printf("> rel x - Release head x 1-4\n");
-    printf("> wake - Wake Signal\n");
-    printf("> flash clr - Clear Flash\n");
-    printf("> rst - Reset\n");
-    printf("> sys - Print Thread Status List\n");
-    printf("> LED - Prints LED Status\n");
-    printf("> wrt - Write config to flash and SD\n");
-    printf("> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
-    printf("> Adjustments\n");
-    printf("> G1 - G12 - General Settings\n");
-    printf("> H101 - H132 - Head 1 Settings\n");
-    printf("> H201 - H232 - Head 2 Settings\n");
-    printf("> H301 - H332 - Head 3 Settings\n");
-    printf("> H401 - H432 - Head 4 Settings\n");
-    printf("> I11 - I14 - Input 1 Settings\n");
-    printf("> I21 - I24 - Input 2 Settings\n");
-    printf("> I31 - I34 - Input 3 Settings\n");
-    printf("> I41 - I44 - Input 4 Settings\n");
-    printf("> I51 - I54 - Input 5 Settings\n");
-    printf("> I61 - I64 - Input 6 Settings\n");
-    printf("> I71 - I74 - Input 7 Settings\n");
-    printf("> I81 - I84 - Input 8 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Pico Signals V%dR%d: Help\n", VERSION, REVISION);
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> bat - Print Battery Voltage\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> err - Print Error Code\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> err clr - Clear Error Code\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> head - Print Head Status\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> in - Print Input Status\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> rssi - Print Radio RSSI\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> cap x - Capture head x 1-4\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> rel x - Release head x 1-4\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> wake - Wake Signal\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> flash clr - Clear Flash\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> rst - Reset\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> sys - Print Thread Status List\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> LED - Prints LED Status\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> wrt - Write config to flash and SD\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Adjustments\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> G1 - G12 - General Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H132 - Head 1 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H201 - H232 - Head 2 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H301 - H332 - Head 3 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H401 - H432 - Head 4 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I11 - I14 - Input 1 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I21 - I24 - Input 2 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I31 - I34 - Input 3 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I41 - I44 - Input 4 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I51 - I54 - Input 5 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I61 - I64 - Input 6 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I71 - I74 - Input 7 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I81 - I84 - Input 8 Settings\n");
+
+    printf("%s", buf);
+
+    if(remote)
+    {
+        Radio::sendRemoteCLI(buf, numChars, from, true);
+    }
 
     vTaskPrioritySet(NULL, priority);
 }

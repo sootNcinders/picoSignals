@@ -41,6 +41,7 @@ void Battery::batteryTask(void *pvParameters)
     bool batteryShutdown = false;
     bool lastShutdown = false;
     bool blinkOff = false;
+    bool firstPass = true;
 
     while(true)
     {
@@ -68,8 +69,9 @@ void Battery::batteryTask(void *pvParameters)
 
         //battery = batt;
 
-        if(loopCount++ >= (HOURMS / BATTERYPERIOD))
+        if(loopCount++ >= (HOURMS / BATTERYPERIOD) || firstPass)
         {
+            firstPass = false;
             loopCount = 0;
 
             hourlyBat[hour++] = batt;

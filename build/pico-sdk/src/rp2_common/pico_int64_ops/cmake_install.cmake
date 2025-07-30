@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tleavitt/pico/projects/picoSignals/pico-sdk/src/rp2_common/pico_int64_ops
+# Install script for directory: /Users/tleavitt/.pico-sdk/sdk/2.1.1/src/rp2_common/pico_int64_ops
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,8 +32,14 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/opt/homebrew/bin/arm-none-eabi-objdump")
+  set(CMAKE_OBJDUMP "/Users/tleavitt/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-objdump")
 endif()
 
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "/Users/tleavitt/pico/projects/picoSignals/build/pico-sdk/src/rp2_common/pico_int64_ops/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()

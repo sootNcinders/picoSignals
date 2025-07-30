@@ -8,11 +8,13 @@
 
 #include "pico/stdlib.h"
 #include "hardware/spi.h"
+#include "hardware/watchdog.h"
 #include "RFM95/RFM95.h"
 
 #include "LED.h"
 #include "ctc.h"
 #include "heads.h"
+#include "menu.h"
 
 SemaphoreHandle_t Radio::radioMutex; 
 RFM95 Radio::radio = RFM95(spi0, PICO_DEFAULT_SPI_CSN_PIN, RADIOINT, 0);
@@ -126,6 +128,7 @@ void Radio::radioTask(void *pvParameters)
     RCL msg;
     TOCTC toCtc;
     FROMCTC fromCtc;
+    REMOTECLI remoteCli;
 
     while(true)
     {
@@ -164,6 +167,16 @@ void Radio::radioTask(void *pvParameters)
                     if(fromCtc.dest == addr)
                     {
                         CTC::processFromMsg(fromCtc, from);
+                    }
+                }
+                else if(size == sizeof(REMOTECLI) && (to == addr || to == 255))
+                {
+                    memcpy(&remoteCli, buf, sizeof(REMOTECLI));
+                    if(remoteCli.dest == addr)
+                    {
+                        watchdog_update();
+                        
+                        MENU::processRemoteCLI(remoteCli, from);
                     }
                 }
 
@@ -301,6 +314,50 @@ void Radio::sendFromCTC(FROMCTC data)
         //if the transciever driver recovers, clear the error
         LED::setError(NOERROR);
         sendError = false;
+    }
+
+    vTaskPrioritySet(NULL, priority);
+
+    xSemaphoreGive(radioMutex);
+}
+
+void Radio::sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck)
+{
+    REMOTECLI remoteCli;
+
+    xSemaphoreTake(radioMutex, portMAX_DELAY);
+
+    UBaseType_t priority = uxTaskPriorityGet(NULL);
+
+    vTaskPrioritySet(NULL, MAXPRIORITY);
+
+    //DPRINTF("Sending Remote CLI to %d: %s\n", dest, inBuf);
+
+    for(uint16_t i = 0; i < len; i += sizeof(remoteCli.data))
+    {
+        watchdog_update();
+
+        memset(&remoteCli.data, 0, sizeof(remoteCli.data));
+        remoteCli.dest = dest;
+        remoteCli.isAck = isAck;
+
+        //Copy the data into the remote CLI structure
+        memcpy(remoteCli.data, (char*)&inBuf[i], MIN(len - i, sizeof(remoteCli.data)));
+
+        //printf("%s\n", (char*)remoteCli.data);
+
+        //If the transmission fails for any reason, set the error light
+        if(!radio.send(255, (uint8_t*) &remoteCli, sizeof(remoteCli)))
+        {
+            LED::setError(TRANSMISSIONFAIL);
+            sendError = true;
+        }
+        //If the radio recovers, clear the error light
+        else if(sendError)
+        {
+            LED::setError(NOERROR);
+            sendError = false;
+        }
     }
 
     vTaskPrioritySet(NULL, priority);
