@@ -17,7 +17,7 @@ include(FetchContent)
 
 include(../../pico-sdk/external/pico_sdk_import.cmake)
 
-set(PICO_BOARD pico)
+set(PICO_BOARD pico CACHE STRING "Board type")
 set(PICO_PLATFORM rp2040)
 set(PICOTOOL_FETCH_FROM_GIT_PATH ./picotool)
 # Pull in Pico SDK

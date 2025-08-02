@@ -30,11 +30,11 @@ term = serial.Serial(serial_ports[port_index], 115200, timeout=1)
 
 print(f"Connected to {serial_ports[port_index]}")
 
-dest = 0
+termDest = 0
 printHeader = True
 
 def read_serial():
-    global dest
+    global termDest
     global term
     global printHeader
     lnin = ""
@@ -66,7 +66,7 @@ def read_serial():
                 else:
                     print("\r\n\r\n", end="")
 
-            elif dest == 0:
+            elif termDest == 0:
                 if len(lnin) > 0 and "[" not in lnin and lnin[0] != ":" and lnin[0] != ";":
                     print(lnin, end="")
 
@@ -76,7 +76,7 @@ def read_serial():
         time.sleep(0.05)
 
 def read_term():
-    global dest
+    global termDest
     global term
     global printHeader
     lnin = ""
@@ -87,12 +87,12 @@ def read_term():
             if "exit" in lnin:
                 break
             elif "open" in lnin:
-                dest = int(lnin.split(" ")[1])
-                destStr = f'{dest:0>2X}'
+                termDest = int(lnin.split(" ")[1])
+                destStr = f'{termDest:0>2X}'
             elif len(lnin) > 0:
                 printHeader = True
 
-                if dest == 0:
+                if termDest == 0:
                     lnout = lnin
                     lnout = lnout + "\n"
                     lnout = lnout.encode("ASCII")

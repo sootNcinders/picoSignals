@@ -923,12 +923,6 @@ def get_data():
                 f2.write("Aspect: " + lnIn[5] + "\n")
                 f2.write("RSSI: " + str(-1 * int(lnIn[6] + lnIn[7], 16)) + "\n\n")
 
-            elif lnIn[0] == '~':
-                #remote CLI
-                #~ - start code
-                #00 - sender
-                
-                pass
         except:
             pass
 

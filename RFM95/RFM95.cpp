@@ -295,7 +295,8 @@ void RFM95::handleInterrupt(void)
 
             crc = calcCRC((uint8_t *)&_payloadBuf[_head][RFM95_HEADER_LEN], _payloadLen[_head] - RFM95_HEADER_LEN);
 
-            if((_rxTo == _address || _rxTo == RFM95_BROADCAST_ADDR) && (crc == (uint16_t)(_payloadBuf[_head][2] + (_payloadBuf[_head][3] << 8))) || crc == 0)
+            if((_rxTo == _address || _rxTo == RFM95_BROADCAST_ADDR) && (crc == (uint16_t)(_payloadBuf[_head][2] + (_payloadBuf[_head][3] << 8))) || 
+                        (_payloadBuf[_head][2] + (_payloadBuf[_head][3] << 8)) == 0)
             {
                 _head = ((_head + 1) >= RFM95_BUF_SIZE) ? 0:_head+1;
                 #ifdef RFM95_DEBUG
