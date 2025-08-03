@@ -241,7 +241,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
 
     if(strncasecmp(inBuf, "bat", 3) == 0)
     {
-        numChars = snprintf(buf, sizeof(buf), "> Battery Voltage: %2.2fV\n", Battery::getBatteryVoltage());
+        numChars = snprintf(buf, sizeof(buf), "> Battery Voltage: Current: %2.2fV 24hr AVG:%2.2fV\n", Battery::getCurrentBattery(), Battery::getBatteryVoltage());
         printf("%s", buf);
 
         if(remote)

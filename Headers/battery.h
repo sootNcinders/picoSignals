@@ -19,10 +19,12 @@ class Battery
     public:
         static void init(void);
         static float getBatteryVoltage(void);
+        static float getCurrentBattery(void);
 
     private:
         static void batteryTask(void *pvParameters);
 
+        static float currentBattery;
         static float battery;
         static float lowBatThreshold;
         static float lowBatReset;

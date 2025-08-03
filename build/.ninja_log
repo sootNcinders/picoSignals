@@ -135,3 +135,8 @@
 2637	3036	1754011491589871759	CMakeFiles/picoSignals.dir/FreeRTOS-Kernel/tasks.c.o	7bd2e6036e73bf26
 9	280	1754073664933868129	CMakeFiles/picoSignals.dir/RFM95/RFM95.cpp.o	1ba3aac25ac1733b
 280	565	1754073665204736702	picoSignals.elf	568be2eb590a24a4
+16	747	1754182625218914287	CMakeFiles/picoSignals.dir/battery.cpp.o	83cfeecabab2ba11
+16	819	1754182625219068996	CMakeFiles/picoSignals.dir/ctc.cpp.o	9bfcf393136ded7d
+16	874	1754182625218559328	CMakeFiles/picoSignals.dir/main.cpp.o	e37ddd6ee9d7a283
+16	1438	1754182625219216080	CMakeFiles/picoSignals.dir/menu.cpp.o	6a9e940dfaf8cb5a
+1438	1740	1754182626641209376	picoSignals.elf	568be2eb590a24a4
