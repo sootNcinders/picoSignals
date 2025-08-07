@@ -2,3 +2,8 @@
 ArduinoJson/
 pico-sdk/
 FreeRTOS-Kernel/
+/build/.cmake
+build/.ninja_deps
+build/.ninja_deps
+build/.ninja_log
+*.o
