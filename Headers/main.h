@@ -103,6 +103,7 @@ class Main
         static bool writeSdJSON(uint8_t* in);
         static void reset(void);
         static void post(void);
+        static void sdSafeState(void);
 
         static JsonDocument cfg;
         static uint8_t* flashJson;

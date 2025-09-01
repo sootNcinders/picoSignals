@@ -729,6 +729,8 @@ void HEADS::wake(void)
                 if(!headsOn)
                 {
                     heads[i].head->setHead(green);
+
+                    CTC::update();
                 }
             }
         }
