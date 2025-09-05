@@ -109,6 +109,8 @@ class Radio
 
         static bool post(void);
 
+        static bool* getOnlineNodes(void);
+
         static TaskHandle_t radioTaskHandle;
 
         static RFM95 radio;
@@ -128,6 +130,9 @@ class Radio
         static float avgRSSI;
 
         static SemaphoreHandle_t radioMutex;
+
+        static bool nodeOnline[255];
+        static absolute_time_t lastHeard[255];
 };
 
 #endif

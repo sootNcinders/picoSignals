@@ -552,6 +552,33 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             Radio::sendRemoteCLI(buf, numChars, from, true);
         }
     }
+    else if(strncasecmp(inBuf, "NODES", 5) == 0)
+    {
+        bool* nodes = Radio::getOnlineNodes();
+        uint8_t numNodes = 0;
+
+        numChars = snprintf(buf, sizeof(buf), "> Nodes heard in the last 90 minutes:\n");
+
+        for(uint16_t i = 0; i < 255; i++)
+        {
+            if(nodes[i])
+            {
+                numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "%d, ", i);
+                numNodes++;
+                if(numNodes % 10 == 0)
+                {
+                    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n");
+                }
+            }
+        }
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
+    }
     else
     {
         printHelp(remote, from);
@@ -1851,7 +1878,8 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> LED - Prints LED Status\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> wrt - Write config to flash and SD\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
-    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Adjustments\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> nodes - Print all nodes heard in the last 90min\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n> Adjustments\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> G1 - G12 - General Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H132 - Head 1 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H201 - H232 - Head 2 Settings\n");

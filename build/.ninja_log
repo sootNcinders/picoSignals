@@ -144,3 +144,12 @@
 7	701	1756643849638366229	CMakeFiles/picoSignals.dir/main.cpp.o	e37ddd6ee9d7a283
 8	663	1756643947140346949	CMakeFiles/picoSignals.dir/main.cpp.o	e37ddd6ee9d7a283
 663	986	1756643947795239861	picoSignals.elf	568be2eb590a24a4
+23	1125	1757097804944906227	CMakeFiles/picoSignals.dir/battery.cpp.o	83cfeecabab2ba11
+24	1131	1757097804945717597	CMakeFiles/picoSignals.dir/overlay.cpp.o	f6535e1740dea4a8
+24	1160	1757097804945206891	CMakeFiles/picoSignals.dir/io.cpp.o	a9e66145d68a048d
+24	1201	1757097804945334974	CMakeFiles/picoSignals.dir/ctc.cpp.o	9bfcf393136ded7d
+23	1250	1757097804944383146	CMakeFiles/picoSignals.dir/main.cpp.o	e37ddd6ee9d7a283
+24	1309	1757097804945466348	CMakeFiles/picoSignals.dir/heads.cpp.o	5efed6e45647e2d0
+24	1794	1757097804945592889	CMakeFiles/picoSignals.dir/menu.cpp.o	6a9e940dfaf8cb5a
+8	644	1757097843495822099	CMakeFiles/picoSignals.dir/radio.cpp.o	5037c434ca819c6e
+644	1035	1757097844130905286	picoSignals.elf	568be2eb590a24a4
