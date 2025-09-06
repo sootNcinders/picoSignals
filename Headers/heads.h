@@ -30,6 +30,9 @@ typedef struct
     bool delayClearStarted;
     uint8_t redReleaseDelay; //Delay before release is available on red
     absolute_time_t redTime;
+    uint8_t mode; //Unused, standard, dwarf, etc
+
+    uint8_t localHeadNum; //Local partner head for dwarf
 }headInfo;
 
 enum
@@ -42,12 +45,18 @@ enum
     liLunar,
 };
 
+enum
+{
+    unusedHead = 0,
+    standardHead,
+    dwarfHead
+};
+
 typedef struct
 {
     uint8_t headNum;
     uint8_t color;
 }ledInfo;
-
 
 class HEADS
 {

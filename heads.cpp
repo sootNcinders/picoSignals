@@ -76,7 +76,40 @@ void HEADS::init(void)
     {
         GARHEAD *gar; //Temporary GAR head object
         RGBHEAD *rgb; //Temporary RGB head object
-        if(!Jhead[i].isNull() && strncasecmp(Jhead[i]["mode"], "unused", 6) != 0)
+
+        if(strncasecmp(Jhead[i]["mode"], "standard", 8) == 0 || (Jhead[i]["mode"].isNull() && !Jhead[i].isNull()))
+        {
+            heads[i].mode = standardHead;
+
+            if(Jhead[i]["mode"].isNull())
+            {
+                //If the mode is not specified, default to standard
+                Jhead[i]["mode"] = "STANDARD";
+            }
+        }
+        else if(strncasecmp(Jhead[i]["mode"], "dwarf", 5) == 0)
+        {
+            heads[i].mode = dwarfHead;
+        }
+        else
+        {
+            //If the head is unused, set the pin to 255
+            pin1 = 255;
+            pin2 = 255;
+            pin3 = 255;
+            pin4 = 255;
+
+            cur1 = 0;
+            cur2 = 0;
+            cur3 = 0;
+            cur4 = 0;
+
+            heads[i].mode = unusedHead; //Set the head mode to unused
+
+            heads[i].head = NULL; //No head object
+        }   
+
+        if(!Jhead[i].isNull() && heads[i].mode != unusedHead)
         {
             //If a blue is specified, assume the head is RGB
             if(!Jhead[i]["blue"].as<JsonObject>().isNull())
@@ -213,6 +246,21 @@ void HEADS::init(void)
             heads[i].delayClearStarted = false;
 
             heads[i].redReleaseDelay = Jhead[i]["redReleaseDelay"] | 0; //Set the delay before a release is available on red, default to 0 if not specified
+
+            if(heads[i].mode == dwarfHead)
+            {
+                heads[i].localHeadNum = Jhead[i]["localHeadNum"] | 0; //Set the local head number for dwarf heads
+
+                if(heads[i].localHeadNum == 0)
+                {
+                    DPRINTF("Dwarf head %d missing localHeadNum\n", i+1);
+                    LED::errorLoop(CONFIGBAD);
+                }
+            }
+            else
+            {
+                heads[i].localHeadNum = 0;
+            }
         }
     }
 
@@ -558,7 +606,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
     {
         for(int x = 0; x < heads[i].numDest && !headFound; x++)
         {
-            if(from == heads[i].destAddr[x])
+            if(from == heads[i].destAddr[x] && (IO::getCapture(i) || (msg.aspect != 'A' && msg.aspect != 'a')) && heads[i].head)
             {
                 headNum = i;
                 headFound = true;
@@ -623,6 +671,14 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     heads[headNum].retries = 0;
                     dimTimeout = get_absolute_time();
                     heads[headNum].releaseTimer = get_absolute_time();
+
+                    if(heads[headNum].mode == dwarfHead)
+                    {
+                        heads[heads[headNum].localHeadNum - 1].head->setHead(red);
+                        heads[heads[headNum].localHeadNum - 1].releaseTimer = get_absolute_time();
+                        heads[heads[headNum].localHeadNum - 1].redTime = get_absolute_time();
+                        heads[heads[headNum].localHeadNum - 1].retries = 0;
+                    }
                 }
                 break;
             
@@ -663,6 +719,58 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     Radio::transmit(from, 'R', true, false);
                 }
                 break;
+        }
+
+        for(uint8_t i = 0; i < MAXHEADS; i++)
+        {
+            if(heads[i].head && heads[i].mode == dwarfHead && (heads[i].localHeadNum - 1) == headNum)
+            {
+                switch(msg.aspect)
+                {
+                    case 'G':
+                    case 'g':
+                        if(heads[i].head->getColor() == amber && !IO::getRelease(i))
+                        {
+                            if(!heads[i].delayClearStarted)
+                            {
+                                add_alarm_in_ms((clearDelayTime * 1000), delayedClear, &heads[i], true);
+                                heads[i].delayClearStarted = true;
+                            }
+                        }
+                        else
+                        {
+                            heads[i].head->setHead(green);
+                        }
+                        IO::setLastActive(i, release);
+                        heads[i].retries = 0;
+                        break;
+
+                    case 'A':
+                    case 'a':
+                        heads[i].head->setHead(red);
+                        IO::setLastActive(i, capture);
+                        IO::setLastActive(i, release);
+                        heads[i].retries = 0;
+                        heads[i].releaseTimer = get_absolute_time();
+                        heads[i].redTime = get_absolute_time();
+                        break;
+
+                    case 'R':
+                    case 'r':
+                        if((heads[i].head->getColor() != amber || heads[i].delayClearStarted))
+                        {
+                            heads[i].head->setHead(red);
+                            CTC::update();
+                            IO::setLastActive(i, release);
+                            IO::setLastActive(i, capture);
+                            IO::setLastActive(i, turnoutCapture);
+                            heads[i].retries = 0;
+                            heads[i].releaseTimer = get_absolute_time();
+                            heads[i].redTime = get_absolute_time();
+                        }
+                        break;
+                }
+            }
         }
     }
     //If the message was for a different node and was Amber or Red, wake this head.

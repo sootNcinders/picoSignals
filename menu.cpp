@@ -571,6 +571,8 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
                 }
             }
         }
+        
+        numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n");
 
         printf("%s", buf);
 
@@ -923,6 +925,10 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         if(strncasecmp(newChar, "standard", 7) == 0)
                         {
                             Main::cfg[head[headNum]]["mode"] = "STANDARD";
+                        }
+                        else if(strncasecmp(newChar, "dwarf", 5) == 0)
+                        {
+                            Main::cfg[head[headNum]]["mode"] = "DWARF";
                         }
                         else
                         {
