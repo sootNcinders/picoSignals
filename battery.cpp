@@ -4,6 +4,7 @@
 #include "radio.h"
 #include "led.h"
 
+float Battery::currentBattery = 0.0;
 float Battery::battery = 0.0;
 float Battery::lowBatThreshold = 11.75;
 float Battery::lowBatReset = 12.1;
@@ -67,6 +68,7 @@ void Battery::batteryTask(void *pvParameters)
         }
         batt /= NUMBATSAMPLES;
 
+        currentBattery = batt;
         //battery = batt;
 
         if(loopCount++ >= (HOURMS / BATTERYPERIOD) || firstPass)
@@ -150,4 +152,9 @@ void Battery::batteryTask(void *pvParameters)
 float Battery::getBatteryVoltage()
 {
     return battery;
+}
+
+float Battery::getCurrentBattery()
+{
+    return currentBattery;
 }

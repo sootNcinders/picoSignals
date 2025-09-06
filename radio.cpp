@@ -27,6 +27,9 @@ float Radio::avgRSSI;
 
 TaskHandle_t Radio::radioTaskHandle;
 
+bool Radio::nodeOnline[255];
+absolute_time_t Radio::lastHeard[255];
+
 void gpio_isr(uint gpio, uint32_t event_mask)
 {
     BaseType_t taskInterrupted = pdFALSE;
@@ -51,6 +54,9 @@ void gpio_isr(uint gpio, uint32_t event_mask)
 
 void Radio::init(void)
 {
+    memset(nodeOnline, 0, sizeof(nodeOnline));
+    memset(lastHeard, 0, sizeof(lastHeard));
+
     addr = Main::cfg["address"];
     primaryPartner = Main::cfg["head1"]["destination"][0];
 
@@ -181,6 +187,12 @@ void Radio::radioTask(void *pvParameters)
                 }
 
                 DPRINTF("RSSI: %d\n", radio.lastSNR());
+
+                if(!nodeOnline[from])
+                {
+                    nodeOnline[from] = true;
+                }
+                lastHeard[from] = get_absolute_time();
             }
 
             mode = radio.getMode()&0x7; //Only Bits 0-2 represent mode
@@ -201,6 +213,20 @@ void Radio::radioTask(void *pvParameters)
                 initRadio();
                 DPRINTF("Radio reset\n");
             }
+
+            for(uint16_t i = 0; i < 255; i++)
+            {
+                if(nodeOnline[i] && ((absolute_time_diff_us(lastHeard[i], get_absolute_time())/60000000) > 90)) //not heard from node in 90 minutes
+                {
+                    nodeOnline[i] = false;
+                }
+
+                if(absolute_time_diff_us(lastHeard[i], get_absolute_time()) < 0) //handle timer overflow
+                {
+                    lastHeard[i] = get_absolute_time();
+                }
+            }
+            nodeOnline[addr] = true; //always online
         }
 
         xTaskNotifyWait(0, ULONG_MAX, NULL, 1000/portTICK_PERIOD_MS);
@@ -397,4 +423,9 @@ bool Radio::post()
     }
 
     return rtn;
+}
+
+bool* Radio::getOnlineNodes()
+{
+    return &nodeOnline[0];
 }

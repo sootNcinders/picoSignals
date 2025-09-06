@@ -62,7 +62,6 @@ int main(void)
         IO::init();
         HEADS::init();
         CTC::init();
-        //Radio::init();
 
         if(!IO::post())
         {
@@ -78,7 +77,6 @@ int main(void)
     else if(Main::mode == CTC)
     {
         DPRINTF("\nCTC Mode\n");
-        //Radio::init();
     }
     else if(Main::mode == OVL)
     {
@@ -86,7 +84,6 @@ int main(void)
         Battery::init();
         IO::init();
         CTC::init();
-        //Radio::init();
         OVERLAY::init();
 
         if(!IO::post())
@@ -213,6 +210,8 @@ void Main::loadConfig(void)
     }
 
     f_unmount("0:");
+
+    sdSafeState();
 }
 
 void Main::eraseFlashJSON(void)
@@ -349,6 +348,10 @@ bool Main::writeSdJSON(uint8_t* in)
         }
     }
 
+    f_unmount("0:");
+
+    sdSafeState();
+
     return (fr == FR_OK);
 }
 
@@ -396,4 +399,17 @@ void Main::post()
         DPRINTF("Radio Fault\n");
         LED::postLoop(BADRADIO);
     }
+}
+
+void Main::sdSafeState(void)
+{
+    //pull all pins low for storage and surge protection
+    gpio_set_dir(12, GPIO_OUT); //miso
+    gpio_set_dir(11, GPIO_OUT); //mosi
+    gpio_set_dir(10, GPIO_OUT); //sck
+    gpio_set_dir(13, GPIO_OUT); //ss
+    gpio_put(12, 0);
+    gpio_put(11, 0);
+    gpio_put(10, 0);
+    gpio_put(13, 0);
 }
