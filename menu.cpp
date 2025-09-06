@@ -1651,6 +1651,24 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                     }
                     break;
 
+                case 133:
+                case 233:
+                case 333:
+                case 433:
+                    if(strncasecmp(Main::cfg[head[headNum]]["mode"], "dwarf", 5) == 0)
+                    {
+                        if(assign && newVal >= 1 && newVal <= 4)
+                        {
+                            Main::cfg[head[headNum]]["dwarf"]["localHeadNum"] = newVal;
+                        }
+
+                        numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Dwarf Local Head %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["dwarf"]["localHeadNum"]);
+                    }
+                    else
+                    {
+                        numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
+                    }
+
                 default:
                     numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
 
@@ -1887,10 +1905,10 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> nodes - Print all nodes heard in the last 90min\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n> Adjustments\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> G1 - G12 - General Settings\n");
-    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H132 - Head 1 Settings\n");
-    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H201 - H232 - Head 2 Settings\n");
-    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H301 - H332 - Head 3 Settings\n");
-    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H401 - H432 - Head 4 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H133 - Head 1 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H201 - H233 - Head 2 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H301 - H333 - Head 3 Settings\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H401 - H433 - Head 4 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I11 - I14 - Input 1 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I21 - I24 - Input 2 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I31 - I34 - Input 3 Settings\n");
