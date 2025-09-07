@@ -1,5 +1,5 @@
 {
-  "address": 1,
+  "address": 10,
   "dimTime" : 5,
   "sleepTime": 30,
   "lowBattery": 11.75,
@@ -7,7 +7,7 @@
   "batteryShutdown": 10.0,
   "retryTime": 100,
   "ctcPresent": true,
-  "monitorLEDS": 10,
+  "monitorLEDS": 1,
   "head1": {
       "destination": [
         9,

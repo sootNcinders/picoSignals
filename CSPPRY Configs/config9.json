@@ -9,7 +9,8 @@
   "ctcPresent": true,
   "monitorLEDS": 1,
   "head1": {
-      "destination": [
+    "mode": "standard",
+    "destination": [
         10,
         0,
         0,

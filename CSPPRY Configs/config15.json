@@ -2,12 +2,13 @@
   "address": 15,
   "dimTime" : 5,
   "sleepTime": 30,
-  "lowBattery": 11.75,
-  "batteryReset": 12.1,
-  "batteryShutdown": 10.0,
+  "lowBattery": 1,
+  "batteryReset": 1,
+  "batteryShutdown": 1,
   "retryTime": 100,
   "ctcPresent": true,
   "monitorLEDS": 1,
+  "awakePin": 16,
   "head1": {
     "mode": "standard",
     "destination": [
@@ -60,6 +61,24 @@
       },
       "red": {
         "pin": 6,
+        "current": 30,
+        "brightness" : 255
+      }
+  },
+  "head3": {
+    "mode": "dwarf",
+    "destination": [
+        13,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+      "dim" : 50,
+      "release:": 6,
+      "red": {
+        "pin": 7,
         "current": 30,
         "brightness" : 255
       }
