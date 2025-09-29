@@ -1775,7 +1775,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                             Main::cfg[pin[pinNum]]["head"] = newVal;
                         }
 
-                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head1"]);
+                        numChars = snprintf(buf, sizeof(buf), "I%d= Input %d Head= %d\n", adjNum, adjNum/10, (uint8_t)Main::cfg[pin[pinNum]]["head0"]);
                     }
                     else
                     {

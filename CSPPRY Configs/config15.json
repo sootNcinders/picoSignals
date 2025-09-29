@@ -2,9 +2,9 @@
   "address": 15,
   "dimTime" : 5,
   "sleepTime": 30,
-  "lowBattery": 1,
-  "batteryReset": 1,
-  "batteryShutdown": 1,
+  "lowBattery": 11.8,
+  "batteryReset": 12.1,
+  "batteryShutdown": 8,
   "retryTime": 100,
   "ctcPresent": true,
   "monitorLEDS": 1,
@@ -19,7 +19,7 @@
         0,
         0
     ],
-      "dim" : 50,
+      "dim" : 25,
       "release:": 6,
       "green": {
         "pin": 1,
@@ -39,6 +39,7 @@
   },
   "head2": {
     "mode": "dwarf",
+    "localHeadNum": 1,
     "destination": [
         13,
         0,
@@ -47,26 +48,48 @@
         0,
         0
     ],
-      "dim" : 50,
+      "dim" : 30,
       "release:": 6,
       "green": {
-        "pin": 4,
-        "current": 30,
-        "brightness" : 255
-      },
+          "pin": 4,
+          "current": 50,
+          "rgb": [
+              0,
+              170,
+              0
+          ]
+        },
       "amber": {
-        "pin": 5,
-        "current": 30,
-        "brightness" : 255
-      },
+          "rgb": [
+              155,
+              100,
+              0
+          ]
+        },
       "red": {
-        "pin": 6,
-        "current": 30,
-        "brightness" : 255
+          "pin": 6,
+          "current": 50,
+          "rgb": [
+              170,
+              0,
+              0
+          ]
+      },
+      "blue": {
+          "pin": 5,
+          "current" : 50
+      },
+      "lunar": {
+          "rgb": [
+              67,
+              67,
+              121
+          ]
       }
   },
   "head3": {
     "mode": "dwarf",
+    "localHeadNum": 1,
     "destination": [
         13,
         0,
@@ -75,7 +98,7 @@
         0,
         0
     ],
-      "dim" : 50,
+      "dim" : 25,
       "release:": 6,
       "red": {
         "pin": 7,

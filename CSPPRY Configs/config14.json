@@ -2,9 +2,9 @@
   "address": 14,
   "dimTime" : 5,
   "sleepTime": 30,
-  "lowBattery": 1,
-  "batteryReset": 1,
-  "batteryShutdown": 1,
+  "lowBattery": 11.8,
+  "batteryReset": 12.1,
+  "batteryShutdown": 8.0,
   "retryTime": 100,
   "ctcPresent": true,
   "monitorLEDS": 1,
@@ -18,7 +18,7 @@
         0,
         0
     ],
-      "dim" : 50,
+      "dim" : 25,
       "release:": 6,
       "green": {
         "pin": 1,

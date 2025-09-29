@@ -264,18 +264,20 @@ void HEADS::init(void)
         }
     }
 
-    if(!Main::cfg["AwakePin"].isNull())
+    if(!Main::cfg["awakePin"].isNull())
     {
-        awakeIndicator = Main::cfg["AwakePin"];
+        awakeIndicator = Main::cfg["awakePin"];
+        awakeIndicator = awakeIndicator - 1;
     }
     else
     {
         awakeIndicator = 255;
     }
 
-    if(awakeIndicator < 16)
+    if(awakeIndicator >= 0 && awakeIndicator < 16)
     {
-        output.setLEDcurrent(awakeIndicator, 58);
+        DPRINTF("Awake Pin: %d\n", awakeIndicator);
+        output.setLEDcurrent(awakeIndicator, (float)58.0);
         output.setLEDbrightness(awakeIndicator, 255);
     }
 

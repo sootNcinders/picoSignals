@@ -859,56 +859,13 @@ def get_data():
                         nodes[3].heads[0] = 'A'
                     else:
                         nodes[3].heads[0] = nodes[5].heads[0]
-                elif node == 6: #Reid, Reid-Midland
-                    nodes[7].heads[0] = nodes[6].heads[0]
-                    lastMsg[7] = time.time()
-                    lastMsg[8] = time.time()
 
-                    if nodes[6].heads[0] == 'A':
-                        nodes[8].heads[0] = 'R'
-                    elif nodes[6].heads[0] == 'R':
-                        nodes[8].heads[0] = 'A'
-                    else:
-                        nodes[8].heads[0] = nodes[6].heads[0]
-                elif node == 9: #Midland, Midland-Sargent
-                    lastMsg[10] = time.time()
-
-                    if nodes[9].heads[0] == 'A':
-                        nodes[10].heads[0] = 'R'
-                    elif nodes[9].heads[0] == 'R':
-                        nodes[10].heads[0] = 'A'
-                    else:
-                        nodes[10].heads[0] = nodes[9].heads[0]
-                elif node == 12: #St Paul, Sargent-St Paul
-                    lastMsg[11] = time.time()
-
-                    if nodes[12].heads[0] == 'A':
-                        nodes[11].heads[0] = 'R'
-                    elif nodes[12].heads[0] == 'R':
-                        nodes[11].heads[0] = 'A'
-                    else:
-                        nodes[11].heads[0] = nodes[12].heads[0]
-                elif node == 13: #St Paul, St Paul-Elizabeth
-                    lastMsg[14] = time.time()
-                    lastMsg[15] = time.time()
+                elif node == 15:
+                    nodes[16].heads[0] = nodes[node].heads[1]
+                    nodes[16].captures[0] = nodes[node].captures[1]
+                    nodes[16].releases[0] = nodes[node].releases[1]
                     lastMsg[16] = time.time()
-                    
-                    if nodes[13].heads[0] == 'A':
-                        nodes[14].heads[0] = 'R'
-                    elif nodes[13].heads[0] == 'R':
-                        nodes[14].heads[0] = 'A'
-                    else:
-                        nodes[14].heads[0] = nodes[13].heads[0]
-
-                    if nodes[13].heads[1] == 'A':
-                        nodes[15].heads[0] = 'R'
-                        nodes[16].heads[0] = 'R'
-                    elif nodes[13].heads[1] == 'R':
-                        nodes[15].heads[0] = 'A'
-                        nodes[16].heads[0] = 'A'
-                    else:
-                        nodes[15].heads[0] = nodes[13].heads[1]
-                        nodes[16].heads[0] = nodes[13].heads[1]
+                
 
             elif lnIn[0] == ';':
                 #;  - start code
@@ -1006,7 +963,14 @@ def update_gui():
                                         else:
                                             c.itemconfigure(rels[i][y], fill=GRAY)
 
-                            if i == 17:
+                            if i == 13:
+                                if nodes[i].turnouts[0]:
+                                    c.itemconfigure(uWyeE, fill=GRAY)
+                                    c.itemconfigure(uWyeW, fill="white")
+                                else:
+                                    c.itemconfigure(uWyeW, fill=GRAY)
+                                    c.itemconfigure(uWyeE, fill="white")
+                            elif i == 17:
                                 if nodes[i].turnouts[0]:
                                     c.itemconfigure(wyeW, fill=GRAY)
                                     c.itemconfigure(wyeE, fill="white")
