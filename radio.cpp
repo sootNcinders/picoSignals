@@ -148,6 +148,8 @@ void Radio::radioTask(void *pvParameters)
                 size = sizeof(buf);
                 radio.recv((uint8_t *)&buf, &size, &from, &to);
 
+                watchdog_update();
+
                 if(size == sizeof(RCL) && (to == addr || to == 255))
                 {
                     memcpy(&msg, buf, sizeof(RCL));
@@ -180,8 +182,6 @@ void Radio::radioTask(void *pvParameters)
                     memcpy(&remoteCli, buf, sizeof(REMOTECLI));
                     if(remoteCli.dest == addr)
                     {
-                        watchdog_update();
-                        
                         MENU::processRemoteCLI(remoteCli, from);
                     }
                 }

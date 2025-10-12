@@ -166,6 +166,7 @@ void IO::ioTask(void *pvParameters)
 
                 inputs[i].active = inputs[i].raw;
                 CTC::update();
+                //DPRINTF("CTC Update 9\n")
             }
             else if(inputs[i].mode == unused)
             {

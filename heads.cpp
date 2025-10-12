@@ -377,6 +377,7 @@ void HEADS::headsTask(void *pvParameters)
             headsOn = false;
 
             CTC::update();
+            //DPRINTF("CTC Update 2\n")
         }
 
         for(int i = 0; i < MAXHEADS; i++)
@@ -391,6 +392,7 @@ void HEADS::headsTask(void *pvParameters)
                         heads[i].head->setHead(green);
 
                         CTC::update();
+                        //DPRINTF("CTC Update 3\n")
                     }
                     dimTimeout = get_absolute_time();
                 }
@@ -649,6 +651,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                 {
                     heads[headNum].head->setHead(green);
                     CTC::update();
+                    //DPRINTF("CTC Update 4\n")
                 }
 
                 heads[headNum].retries = 0;
@@ -667,6 +670,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     heads[headNum].head->setHead(amber);
 
                     CTC::update();
+                    //DPRINTF("CTC Update 5\n")
 
                     setLastActive(headNum, from, capture);
 
@@ -705,6 +709,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     heads[headNum].head->setHead(red);
 
                     CTC::update();
+                    //DPRINTF("CTC Update 6\n")
 
                     IO::setLastActive(headNum, release);
                     IO::setLastActive(headNum, capture);
@@ -762,7 +767,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                         if((heads[i].head->getColor() != amber || heads[i].delayClearStarted))
                         {
                             heads[i].head->setHead(red);
-                            CTC::update();
+                            //CTC::update();
                             IO::setLastActive(i, release);
                             IO::setLastActive(i, capture);
                             IO::setLastActive(i, turnoutCapture);
@@ -841,6 +846,7 @@ void HEADS::wake(void)
                     heads[i].head->setHead(green);
 
                     CTC::update();
+                    //DPRINTF("CTC Update 7\n")
                 }
             }
         }
@@ -1003,6 +1009,7 @@ int64_t HEADS::delayedClear(alarm_id_t id, void *user_data)
             DPRINTF("Delayed clear\n");
             ((headInfo*)user_data)->head->setHeadFromISR(green);
             CTC::update();
+            //DPRINTF("CTC Update 8\n")
         }
         ((headInfo*)user_data)->delayClearStarted = false;
     }

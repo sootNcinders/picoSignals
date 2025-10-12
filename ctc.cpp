@@ -164,14 +164,19 @@ void CTC::ctcTask(void *pvParameters)
         }
         else
         {
-            if(memcmp(lastInfo, info, sizeof(info)) != 0)
+            for(uint8_t i = 0; i < 8; i++)
             {
-                updateNeeded = true;
+                if(info[i].active != lastInfo[i].active)
+                {
+                    updateNeeded = true;
+                    //DPRINTF("CTC Update 10\n")
+                }
             }
 
             if(bat - lastBat > 0.25 || lastBat - bat > 0.25)
             {
                 updateNeeded = true;
+                //DPRINTF("CTC Update 11\n")
             }
         }
 
@@ -245,10 +250,13 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                     updateNeeded = false;
                     tries = 0;
                 }
+
+                DPRINTF("CTC ACK addr:%d allResponded:%d\n", from, allResponded);
                 break;
                 
             case 0x01: //Ping
                 update();
+                //DPRINTF("CTC Update 1\n")
                 break;
 
             case 0x02: //Wake
