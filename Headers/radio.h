@@ -99,6 +99,8 @@ class Radio
 
         static void sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck);
 
+        static void sendBootloaderMsg(uint8_t* buf, uint8_t len);
+
         static int8_t getAvgRSSI(void);
 
         static uint8_t getAddr(void);

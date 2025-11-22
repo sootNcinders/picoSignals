@@ -42,7 +42,11 @@ RFM95::RFM95(spi_inst_t *spiBus, uint8_t csPin, uint8_t intPin, uint8_t address)
     txAlarmSet = false;
 }
 
+#ifdef USE_FREERTOS
 bool RFM95::init(SemaphoreHandle_t mutex)
+#else
+bool RFM95::init(void)
+#endif
 {
     uint8_t buf[3];
 
@@ -58,7 +62,9 @@ bool RFM95::init(SemaphoreHandle_t mutex)
 
     _cadTimeout = 500;
 
+    #ifdef USE_FREERTOS
     _mutex = mutex;
+    #endif
 
     _promiscuous = true;
 
@@ -165,13 +171,16 @@ bool RFM95::init(SemaphoreHandle_t mutex)
 void RFM95::handleInterrupt(void)
 {
     uint8_t buf[2];
-    BaseType_t higherPriorityTaskWoken = pdFALSE;
     uint16_t crc = 0;
+
+    #ifdef USE_FREERTOS
+    BaseType_t higherPriorityTaskWoken = pdFALSE;
 
     if(_mutex != NULL)
     {
         xSemaphoreTakeFromISR(_mutex, &higherPriorityTaskWoken);
     }
+    #endif
 
     //readRegister(RFM95_REG_12_IRQ_FLAGS, _buf);
     buf[0] = RFM95_REG_12_IRQ_FLAGS & ~RFM95_WRITE_BIT;
@@ -353,12 +362,14 @@ void RFM95::handleInterrupt(void)
     spi_write_blocking(_bus, buf, 2);
     chipDeselectFromISR();
 
+    #ifdef USE_FREERTOS
     if(_mutex != NULL)
     {
         xSemaphoreGiveFromISR(_mutex, &higherPriorityTaskWoken);
 
         portYIELD_FROM_ISR(higherPriorityTaskWoken);
     }
+    #endif
 }
 
 void RFM95::isr0()
@@ -1126,10 +1137,12 @@ void RFM95::readRegister(uint8_t reg, uint8_t *buf)
 
 void RFM95::chipSelect()
 {
+    #ifdef USE_FREERTOS
     if(_mutex != NULL)
     {
         xSemaphoreTake(_mutex, portMAX_DELAY);
     }
+    #endif
 
     busy_wait_us(1);
     gpio_put(_cs, 0);  // Active low
@@ -1149,10 +1162,12 @@ void RFM95::chipDeselect()
     gpio_put(_cs, 1);  // Active low
     busy_wait_us(1);
 
+    #ifdef USE_FREERTOS
     if(_mutex != NULL)
     {
         xSemaphoreGive(_mutex);
     }
+    #endif
 }
 
 void RFM95::chipDeselectFromISR()

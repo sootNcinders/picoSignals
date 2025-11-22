@@ -29,6 +29,10 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
+set(PICOSIGNALDEBUG FALSE)
+
+add_compile_definitions(USE_FREERTOS)
+
 add_subdirectory(./FatFs_SPI build)
 add_subdirectory(./ArduinoJson)
 
@@ -50,7 +54,14 @@ add_executable(picoSignals
                 hw_config.c
         )
 
-pico_set_linker_script(picoSignals ${CMAKE_SOURCE_DIR}/picoSignals.ld)
+if(PICOSIGNALDEBUG)
+    add_compile_definitions(NOBOOT)
+    #No Bootlaoder linker script for debugging
+    pico_set_linker_script(picoSignals ${CMAKE_SOURCE_DIR}/picoSignals-NoBoot.ld)
+else()
+    #Linker script with Bootloader
+    pico_set_linker_script(picoSignals ${CMAKE_SOURCE_DIR}/picoSignals-Boot.ld)
+endif()
 
 target_include_directories(picoSignals PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 target_include_directories(picoSignals PRIVATE ./Headers)

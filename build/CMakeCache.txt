@@ -319,6 +319,9 @@ DOXYGEN_DOT_EXECUTABLE:FILEPATH=DOXYGEN_DOT_EXECUTABLE-NOTFOUND
 //Doxygen documentation generation tool (https://www.doxygen.nl)
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
 
+//The directory containing a CMake configuration file for ELF2UF2.
+ELF2UF2_DIR:PATH=ELF2UF2_DIR-NOTFOUND
+
 //Directory under which to collect all populated content
 FETCHCONTENT_BASE_DIR:PATH=/Users/tleavitt/pico/projects/picoSignals/build/_deps
 

@@ -3,9 +3,11 @@
 #include "hardware/spi.h"
 #include <string.h>
 
+#ifdef USE_FREERTOS
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
+#endif
 
 #ifndef RFM95_H
 #define RFM95_H
@@ -268,7 +270,11 @@ class RFM95
 
         /// @brief Initializes RFM95 Radio
         /// @return true if initialization successful 
+        #ifdef USE_FREERTOS
         bool init(SemaphoreHandle_t mutex);
+        #else
+        bool init(void);
+        #endif
 
         /// @brief Prints the value of all registers to STDIO
         void printRegisters();
@@ -434,7 +440,9 @@ class RFM95
         volatile uint8_t RXled;
         volatile uint8_t TXled;
 
+        #ifdef USE_FREERTOS
         SemaphoreHandle_t _mutex;
+        #endif
 
         uint16_t _cadTimeout;
 

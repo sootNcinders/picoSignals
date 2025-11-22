@@ -8,6 +8,8 @@
 #ifndef MENU_H
 #define MENU_H
 
+#define BOOTLOADER_ENTRY_MAGIC 0xb105f00d
+
 class MENU
 {
     public:

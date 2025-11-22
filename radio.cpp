@@ -150,6 +150,11 @@ void Radio::radioTask(void *pvParameters)
 
                 watchdog_update();
 
+                if(buf[0] == '*')
+                {
+                    //Ignore bootloader traffic
+                    continue;
+                }
                 if(size == sizeof(RCL) && (to == addr || to == 255))
                 {
                     memcpy(&msg, buf, sizeof(RCL));
@@ -384,6 +389,33 @@ void Radio::sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck)
             LED::setError(NOERROR);
             sendError = false;
         }
+    }
+
+    vTaskPrioritySet(NULL, priority);
+
+    xSemaphoreGive(radioMutex);
+}
+
+void Radio::sendBootloaderMsg(uint8_t* buf, uint8_t len)
+{
+    xSemaphoreTake(radioMutex, portMAX_DELAY);
+
+    UBaseType_t priority = uxTaskPriorityGet(NULL);
+
+    vTaskPrioritySet(NULL, MAXPRIORITY);
+
+    //If the transmission fails for any reason, set the error light
+    if(!radio.send(255, buf, len))
+    {
+        LED::setError(TRANSMISSIONFAIL);
+        sendError = true;
+    }
+    
+    //If the radio recovers, clear the error light
+    else if(sendError)
+    {
+        LED::setError(NOERROR);
+        sendError = false;
     }
 
     vTaskPrioritySet(NULL, priority);

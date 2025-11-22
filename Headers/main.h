@@ -3,6 +3,7 @@
 
 #include "pico/stdlib.h"
 #include "hardware/flash.h"
+#include "hardware/structs/watchdog.h"
 
 #include "FreeRTOS.h"
 #include "task.h"

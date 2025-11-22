@@ -314,7 +314,7 @@ void HEADS::init(void)
         }
     }
 
-    if(!watchdog_caused_reboot())
+    if(!watchdog_caused_reboot() || watchdog_hw->scratch[5] != 0 || watchdog_hw->scratch[6] != 0)
     {
         for(int i = 0; i < MAXHEADS; i++)
         {
@@ -328,6 +328,9 @@ void HEADS::init(void)
     {
         LED::setError(WATCHDOG);
     }
+
+    watchdog_hw->scratch[5] = 0;
+    watchdog_hw->scratch[6] = 0;
 
     headsOn = true;
     headsDim = false;

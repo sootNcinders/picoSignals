@@ -66,6 +66,7 @@ void MENU::menuTask(void *pvParameters)
 {
     char cin;
     char inBuf[1024];
+    char otaBuf[255];
 
     uint8_t dest = 0;
 
@@ -74,6 +75,7 @@ void MENU::menuTask(void *pvParameters)
     bool ctc = false;
     bool menu = false;
     bool remoteCli = false;
+    bool otaUpdate = false;
 
     FROMCTC fromCTC;
 
@@ -120,6 +122,7 @@ void MENU::menuTask(void *pvParameters)
                 ctc = true;
                 menu = false;
                 remoteCli = false;
+                otaUpdate = false;
             }
             else if(cin == '~' && bufIdx == 0)
             {
@@ -127,6 +130,7 @@ void MENU::menuTask(void *pvParameters)
                 ctc = false;
                 menu = false;
                 remoteCli = true;
+                otaUpdate = false;
             }
             else if(((cin >= 'A' && cin <= 'Z') || (cin >= 'a' && cin <= 'z')) && bufIdx == 0)
             {
@@ -134,6 +138,15 @@ void MENU::menuTask(void *pvParameters)
                 ctc = false;
                 menu = true;
                 remoteCli = false;
+                otaUpdate = false;
+            }
+            else if(cin == '*' && bufIdx == 0)
+            {
+                bufIdx = 1;
+                ctc = false;
+                menu = false;
+                remoteCli = false;
+                otaUpdate = true;
             }
             else if(bufIdx == 0 && (cin == '\r' || cin == '\n'))
             {
@@ -217,6 +230,15 @@ void MENU::menuTask(void *pvParameters)
                 }
 
                 vTaskPrioritySet(NULL, priority);
+
+                bufIdx = 0;
+                memset(inBuf, 0, sizeof(inBuf));
+            }
+            else if(otaUpdate && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
+            {
+                memcpy(otaBuf, &inBuf[1], bufIdx);
+                
+                Radio::sendBootloaderMsg((uint8_t*)otaBuf, bufIdx);
 
                 bufIdx = 0;
                 memset(inBuf, 0, sizeof(inBuf));
@@ -385,7 +407,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             xTaskResumeAll();
         }
     }
-    else if(strncasecmp(inBuf, "rst", 3) == 0)
+    else if(strncasecmp(inBuf, "RST", 3) == 0)
     {
         Main::reset();
     }
@@ -580,6 +602,22 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         {
             Radio::sendRemoteCLI(buf, numChars, from, true);
         }
+    }
+    else if(strncasecmp(inBuf, "UPDATE", 6) == 0)
+    {
+        numChars = snprintf(buf, sizeof(buf), "> Starting Firmware Update...\n");
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
+
+        watchdog_hw->scratch[5] = BOOTLOADER_ENTRY_MAGIC;
+        watchdog_hw->scratch[6] = ~BOOTLOADER_ENTRY_MAGIC;
+
+        Main::reset();
     }
     else
     {
