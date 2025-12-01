@@ -2,27 +2,25 @@
 
 INPUT_ELF1="Bootloader/build/bootloader.elf"
 INPUT_ELF2="build/picoSignals.elf"
-INPUT_HEX1="build/picoSignals.hex"
+INPUT_HEX1="Bootloader/build/bootloader.hex"
+INPUT_HEX2="build/picoSignals.hex"
 OUTPUT_UF2="Builds/V4R0/PicoSignalsAndBoot-V4R0.uf2"
 OUTPUT_HEX="Builds/V4R0/PicoSignals-V4R0.hex"
 OUTPUT_HEX_COMBINED="Builds/V4R0/PicoSignalsAndBoot-V4R0.hex"
+OUTPUT_BIN="Builds/V4R0/PicoSignalsAndBoot-V4R0.bin"
 
 # Temporary files for combined ELF
 COMBINED_ELF="PicoSignalsAndBootV4R0.elf"
 
-# Combine the ELF files using the linker
-#arm-none-eabi-objcopy --update-section .boot=$INPUT_ELF1 $INPUT_ELF2 $COMBINED_ELF
-arm-none-eabi-objcopy --update-section .app_bin=$INPUT_ELF2 $INPUT_ELF1 $COMBINED_ELF
-arm-none-eabi-objcopy -O ihex $COMBINED_ELF $OUTPUT_HEX_COMBINED
+#Copy app hex to output location
+srec_cat $INPUT_HEX2 -intel -o $OUTPUT_HEX -intel -line_length=44
 
-# Check if the combination was successful
-if [ $? -ne 0 ]; then
-    echo "Error combining ELF files."
-    exit 1
-fi
+srec_cat $INPUT_HEX1 -intel -generate 0x1000B6B8 0x1000C000 -constant 0 $INPUT_HEX2 -intel -o $OUTPUT_HEX_COMBINED -intel -line_length=44
 
-# Convert the combined ELF to UF2 format
-elf2uf2-rs -v $COMBINED_ELF $OUTPUT_UF2
+#arm-none-eabi-objcopy -O elf32-littlearm -I ihex $OUTPUT_HEX_COMBINED $COMBINED_ELF
+
+python3 ../../uf2/uf2#/utils/uf2conv.py -c -f RP2040 $OUTPUT_HEX_COMBINED -o $OUTPUT_UF2
+python3 ../../uf2/uf2#/utils/uf2conv.py --info $OUTPUT_UF2
 
 # Check if the conversion was successful
 if [ $? -ne 0 ]; then

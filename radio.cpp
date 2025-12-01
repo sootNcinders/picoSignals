@@ -150,11 +150,20 @@ void Radio::radioTask(void *pvParameters)
 
                 watchdog_update();
 
+                //printf("Radio RX From: %d To: %d Size: %d Buf[0]:%c\n", from, to, size, buf[0]);
+
                 if(buf[0] == '*')
                 {
-                    //Ignore bootloader traffic
-                    continue;
+                    printf("%c%c", buf[0], buf[1]);
+
+                    if(buf[1] == 'N')
+                    {
+                        printf("%X%X%X%X", (buf[2] >> 4 ) & 0x0F, buf[2] & 0x0F, (buf[3] >> 4) & 0x0F, buf[3] & 0x0F);
+                    }
+
+                    printf("\r\n");
                 }
+
                 if(size == sizeof(RCL) && (to == addr || to == 255))
                 {
                     memcpy(&msg, buf, sizeof(RCL));

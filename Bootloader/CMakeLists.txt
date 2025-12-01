@@ -42,6 +42,7 @@ target_include_directories(bootloader PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 # pull in common dependencies and additional i2c hardware support
 target_link_libraries(bootloader 
                         cmsis_core
+                        hardware_dma
                         pico_stdlib 
                         pico_sync
                         pico_flash

@@ -16,8 +16,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define VERSION 3
-#define REVISION 5
+#define VERSION 4
+#define REVISION 0
 
 #define MAXHEADS 4
 #define MAXINPUTS 8

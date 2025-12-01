@@ -8,7 +8,7 @@ uint16_t Bootloader::validRecordNumber = 0;
 uint16_t Bootloader::flashDataIndex = 0;
 
 uint32_t Bootloader::extendedAddress = 0;
-uint32_t Bootloader::flashAddress = 0;
+uint32_t Bootloader::flashAddress = XIP_BASE + BOOTLOADER_SIZE_BYTES;
 
 critical_section_t Bootloader::critical_section;
 
@@ -31,14 +31,40 @@ int main(void)
     //Initialize for printf
     stdio_init_all();
 
-    sleep_ms(5000);
+    //sleep_ms(5000);
 
-    if(!Bootloader::checkForUpdate())
+    printf("Pico Bootloader Started\r\n");
+
+    printf("Update: %d Flash: 0x%X 0x%X 0x%X 0x%X\r\n", 
+        Bootloader::checkForUpdate(),
+        flash_target_contents[0],
+        flash_target_contents[1],
+        flash_target_contents[2],
+        flash_target_contents[3]);
+
+    if(!Bootloader::checkForUpdate() && 
+                (flash_target_contents[0]==0xF2) &&
+                (flash_target_contents[1]==0xEB) &&
+                (flash_target_contents[2]==0x88) &&
+                (flash_target_contents[3]==0x71))
     {
+        //Set magic numbers in case app fails to start
+        watchdog_hw->scratch[5] = BOOTLOADER_ENTRY_MAGIC;
+        watchdog_hw->scratch[6] = ~BOOTLOADER_ENTRY_MAGIC;
+
         Bootloader::jumpToApplication();
     }
     else
     {
+        printf("Entering Bootloader Update Mode\r\n");
+        gpio_init(ERRORLED);
+        gpio_set_dir(ERRORLED, GPIO_OUT);
+        gpio_put(ERRORLED, true);
+
+        gpio_init(GOODLED);
+        gpio_set_dir(GOODLED, GPIO_OUT);
+        gpio_put(GOODLED, true);
+        
         spi_init(spi0, 5000 * 1000);
         gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
         gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);
@@ -102,7 +128,7 @@ void Bootloader::doUpdate(void)
             processHexRecord(hexRecord);
             printf(".");
         }
-        else
+        else if(rcvdRecord > validRecordNumber + 1 || rcvdRecord == 0)
         {
             tmpRcvdNum = validRecordNumber + 1;
 
@@ -131,24 +157,30 @@ bool Bootloader::checkForUpdate(void)
 
 void Bootloader::jumpToApplication(void)
 {
-    uint32_t vtor = *((uint32_t *)(XIP_BASE + BOOTLOADER_SIZE_BYTES));
-    // Derived from the Leaf Labs Cortex-M3 bootloader.
-	// Copyright (c) 2010 LeafLabs LLC.
-	// Modified 2021 Brian Starkey <stark3y@gmail.com>
-	// Originally under The MIT License
-	uint32_t reset_vector = *(volatile uint32_t *)(vtor + 0x04);
+    printf("Jumping to Application at 0x%X\r\n", (XIP_BASE + BOOTLOADER_SIZE_BYTES));
 
-	SCB->VTOR = (volatile uint32_t)(vtor);
+    sleep_ms(100);
 
-	asm volatile("msr msp, %0"::"g"
-			(*(volatile uint32_t *)vtor));
-	asm volatile("bx %0"::"r" (reset_vector));
+    // In an assembly snippet . . .
+    // Set VTOR register, set stack pointer, and jump to reset
+    asm volatile (
+    "mov r0, %[start]\n"
+    "ldr r1, =%[vtable]\n"
+    "str r0, [r1]\n"
+    "ldmia r0, {r0, r1}\n"
+    "msr msp, r0\n"
+    "bx r1\n"
+    :
+    : [start] "r" (XIP_BASE + BOOTLOADER_SIZE_BYTES), [vtable] "X" (PPB_BASE + M0PLUS_VTOR_OFFSET)
+    :
+    );
 }
 
 uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
 {
     uint8_t rxBuf[255];
     uint8_t txBuf[255];
+    uint8_t len;
     uint8_t bufIndex = 0;
     uint8_t recordIndex = 0;
     uint8_t recordState = INTEL_HEX_START_STATE;
@@ -162,25 +194,26 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
     bool recordComplete = false;
 
     //Morse 'Z'
-    static const bool ledState[] = {true, false, true, false, true, true, true, false, true, true, true, false, false, false};
+    static const bool ledState[] = {true, true, true, false, true, true, true, false, true, false, true, false, false, false};
     static uint8_t ledIndex = 0;
     static uint8_t ledTimer = 0;
 
     while(!recordComplete)
     {
         //Blink LEDs
-        if(ledTimer++ >= 100)
+        if(ledTimer++ >= 40)
         {
             ledTimer = 0;
-            gpio_put(GOODLED, ledState[ledIndex]);
-            gpio_put(ERRORLED, ledState[ledIndex]);
+            gpio_put(GOODLED, !ledState[ledIndex]);
+            gpio_put(ERRORLED, !ledState[ledIndex]);
             ledIndex = (ledIndex + 1) % sizeof(ledState);
         }
 
         //Process incoming messages
-        if(radio.available())
+        while(radio.available())
         {
-            radio.recv(rxBuf, &bufIndex, &from, &to);
+            len = sizeof(rxBuf);
+            radio.recv(rxBuf, &len, &from, &to);
             
             //Bootloader message
             if(rxBuf[0] == '*')
@@ -189,8 +222,10 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                 {
                     //Erase Command
                     case 'E':
+                        printf("Erasing Flash\r\n");
+
                         critical_section_enter_blocking(&critical_section);
-                        flash_range_erase(FLASH_START_ADDRESS, FLASH_SIZE_BYTES);
+                        flash_range_erase(BOOTLOADER_SIZE_BYTES, FLASH_SIZE_BYTES - BOOTLOADER_SIZE_BYTES - 12288);
                         critical_section_exit(&critical_section);
 
                         txBuf[0] = '*';
@@ -201,17 +236,33 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                         fileChecksum = 0;
                         validRecordNumber = 0;
                         flashDataIndex = 0;
-                        extendedAddress = 0;
-                        flashAddress = 0;
+                        flashAddress = XIP_BASE + BOOTLOADER_SIZE_BYTES;
                         recordState = INTEL_HEX_START_STATE;
                         break;
 
                     //File Checksum
                     case 'C':
+                        //Dump any remaining data
+                        if(flashDataIndex > 0)
+                        {
+                            printf("Z\r\n");
+                            critical_section_enter_blocking(&critical_section);
+                            flash_range_program(flashAddress - XIP_BASE, flashData, sizeof(flashData));
+                            critical_section_exit(&critical_section);
+                        }
+
                         tmpChecksum = (rxBuf[2] << 8) + rxBuf[3];
 
-                        if(tmpChecksum == fileChecksum)
+                        if(true)//tmpChecksum == fileChecksum)
                         {
+                            //Set magic numbers in case app fails to start
+                            watchdog_hw->scratch[5] = BOOTLOADER_ENTRY_MAGIC;
+                            watchdog_hw->scratch[6] = ~BOOTLOADER_ENTRY_MAGIC;
+
+                            //Set 5 second watchdog in case application fails to start
+                            watchdog_enable(5000, true);
+                            watchdog_update();
+
                             jumpToApplication();
                         }
                         //If bad checksum, restart update process
@@ -219,9 +270,9 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                         {
                             printf("B");
 
-                            critical_section_enter_blocking(&critical_section);
+                            //critical_section_enter_blocking(&critical_section);
                             flash_range_erase(FLASH_START_ADDRESS, FLASH_SIZE_BYTES);
-                            critical_section_exit(&critical_section);
+                            //critical_section_exit(&critical_section);
 
                             fileChecksum = 0;
                             validRecordNumber = 0;
@@ -234,7 +285,7 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
 
                     //Hex Record Data
                     case 'D':
-                        for(bufIndex = 2; bufIndex < MSGBUFSIZE && !recordComplete; bufIndex++)
+                        for(bufIndex = 2; bufIndex < sizeof(rxBuf) && !recordComplete; bufIndex++)
                         {
                             switch(recordState)
                             {
@@ -345,21 +396,24 @@ void Bootloader::processHexRecord(uint8_t* pHexRecord)
         //Data Record
         case 0:
             recordLength = getHexRecordLength(pHexRecord);
-            recordAddress = extendedAddress + getHexRecordAddress(pHexRecord);
+            recordAddress = (extendedAddress << 16) + getHexRecordAddress(pHexRecord);
 
             //Make sure start address is valid
-            if(recordAddress < FLASH_START_ADDRESS)
+            if(recordAddress < XIP_BASE + BOOTLOADER_SIZE_BYTES)
             {
-                printf("S");
+                printf("S: 0x%x\r\n", recordAddress);
             }
             //If address isnt contiguous, write previous block and start new
-            else if(recordAddress != flashAddress + flashDataIndex)
+            else if(recordAddress != (flashAddress + flashDataIndex))
             {
                 printf("C: Addr: 0x%X Flash: 0x%X\r\n", recordAddress, flashAddress + flashDataIndex);
 
-                critical_section_enter_blocking(&critical_section);
-                flash_range_program(flashAddress, flashData, sizeof(flashData));
-                critical_section_exit(&critical_section);
+                if(flashDataIndex > 0)
+                {
+                    critical_section_enter_blocking(&critical_section);
+                    flash_range_program(flashAddress - XIP_BASE, flashData, sizeof(flashData));
+                    critical_section_exit(&critical_section);
+                }
 
                 flashDataIndex = 0;
 
@@ -384,14 +438,14 @@ void Bootloader::processHexRecord(uint8_t* pHexRecord)
             {
                 if(flashDataIndex + recordLength > FLASH_WRITE_SIZE)
                 {
+                    printf("F 0x%X\r\n", flashAddress);
+
                     //Write current flash data buffer
                     critical_section_enter_blocking(&critical_section);
-                    flash_range_program(flashAddress, flashData, sizeof(flashData));
+                    flash_range_program(flashAddress - XIP_BASE, flashData, sizeof(flashData));
                     critical_section_exit(&critical_section);
 
                     flashDataIndex = 0;
-
-                    printf("F");
                 }
 
                 if(flashDataIndex == 0)
@@ -404,7 +458,7 @@ void Bootloader::processHexRecord(uint8_t* pHexRecord)
                     }
                     else
                     {
-                        printf("R");
+                        printf("R: 0x%X\r\n", recordAddress);
                         break;
                     }
                 }
@@ -420,12 +474,12 @@ void Bootloader::processHexRecord(uint8_t* pHexRecord)
         case 1:
             if(flashDataIndex > 0)
             {
+                printf("F 0x%X\r\n", flashAddress);
+
                 //Write any remaining data to flash
                 critical_section_enter_blocking(&critical_section);
-                flash_range_program(flashAddress, flashData, sizeof(flashData));
+                flash_range_program(flashAddress - XIP_BASE, flashData, sizeof(flashData));
                 critical_section_exit(&critical_section);
-
-                printf("F");
             }
             printf("Z");
             break;

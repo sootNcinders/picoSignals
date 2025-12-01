@@ -22,11 +22,10 @@
 */
 
 __PERSISTENT_STORAGE_LEN = 12288 ;
-__BOOTLOADER_LEN = 64k;
+__BOOTLOADER_LEN = 48k;
 
 MEMORY
 {
-    FLASH_BOOT(rx) : ORIGIN = 0x10000000, LENGTH = __BOOTLOADER_LEN
     FLASH(rx) : ORIGIN = 0x10000000 + __BOOTLOADER_LEN, LENGTH = 2048k - __PERSISTENT_STORAGE_LEN - __BOOTLOADER_LEN
     FLASH_PERSISTENT(rw) : ORIGIN = 0x10000000 + (2048k - __PERSISTENT_STORAGE_LEN) , LENGTH = __PERSISTENT_STORAGE_LEN
     RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 256k
@@ -42,12 +41,6 @@ SECTIONS
        and checksummed. It is usually built by the boot_stage2 target
        in the Raspberry Pi Pico SDK
     */
-
-    .boot : {
-        . = ALIGN(4k);
-        __boot = .;
-        LONG(0)
-    } > FLASH_BOOT
 
     .flash_begin : {
         __flash_binary_start = .;

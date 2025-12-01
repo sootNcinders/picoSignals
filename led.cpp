@@ -32,6 +32,9 @@ void LED::init(void)
 
     DPRINTF("LED Task Initialized\n");
     DPRINTF("Error LED Task Initialized\n");
+
+    watchdog_hw->scratch[5] = 0;
+    watchdog_hw->scratch[6] = 0;
 }
 
 void LED::ledTask(void *pvParameters)

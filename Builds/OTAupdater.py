@@ -4,7 +4,7 @@ import time
 import sys
 import binascii
 
-UPDATE_NODES = {1}
+UPDATE_NODES = {21}
 UPDATE_FILE = "/Users/tleavitt/pico/projects/picoSignals/Builds/V4R0/picoSignals-V4R0.hex"
 
 f = open(UPDATE_FILE, "r")
@@ -48,14 +48,15 @@ for node in UPDATE_NODES:
     #Wait for device to reboot
     time.sleep(5.1)
 
-    nodeReady = True#False
+    nodeReady = False
     i = 0
     while not nodeReady and i < 10:
         lnOut = "*E\n"
         lnOut = lnOut.encode("ASCII")
+
         term.write(lnOut)
 
-        time.sleep(0.05)
+        time.sleep(15)
 
         lnin = term.readline()
         
@@ -81,24 +82,23 @@ for node in UPDATE_NODES:
         recNum = 1
         numLines = len(lines)
         lastPerc = -1
-        t1 = t0 = time.perf_counter()
-        for idx, line in enumerate(lines):
-            t0 = t1
-            t1 = time.perf_counter()
-            tDiff = t1 - t0
+        i = 0
+        while i < numLines:
+            recNum = i + 1
+
             # line[0] preserved (record start char like ':') and rest is hex pairs
-            if len(line) < 2:
+            if len(lines[i]) < 2:
                 payload = b''
             else:
                 # convert hex payload (from char index 1 to end) to bytes
                 try:
-                    payload = binascii.unhexlify(line[1:])
+                    payload = binascii.unhexlify(lines[i][1:])
                 except (binascii.Error, TypeError):
                     payload = b''
 
             bOut = bytearray()
             bOut.extend(b'*D')
-            bOut.append(ord(line[0]) if line else 0)
+            bOut.append(ord(lines[i][0]) if lines[i] else 0)
             bOut.extend(payload)
             bOut.append((recNum >> 8) & 0xFF)
             bOut.append(recNum & 0xFF)
@@ -107,9 +107,16 @@ for node in UPDATE_NODES:
             # update checksum (same semantics as original: sum of bytes after "*D")
             fileChecksum += sum(bOut[2:-3]) if len(bOut) > 3 else 0
 
-            term.write(bytes(bOut))
+            #term.write(bytes(bOut))
 
-            recNum += 1
+            lnOut = "*D"
+            lnOut += lines[i]
+            lnOut += f'{((recNum >> 8) & 0xFF):0>2X}'
+            lnOut += f'{((recNum) & 0xFF):0>2X}'
+            lnOut += "\n"
+            lnOut = lnOut.encode("ASCII")
+
+            term.write(lnOut)
 
             perc = int((recNum / max(1, numLines)) * 100)
             if perc != lastPerc:
@@ -117,33 +124,48 @@ for node in UPDATE_NODES:
                 print(f"{perc}%", end="\r")
 
             # small pause kept minimal; adjust or remove if device can handle faster
-            time.sleep(0.01)
-
-            # read any pending responses (bytes-based) and act on resend requests
-            lnin = term.readline()
-            while lnin:
-                # expect responses like b'*N' + two-byte record number
-                if lnin[0] == 0x2A:  # b'*'
-                    if len(lnin) >= 4 and lnin[1] == ord('N'):
-                        lastRecNum = (lnin[2] << 8) + lnin[3]
-                        recNum = lastRecNum
-                        # jump to that record in our list
-                        print(f"\nResending from record {recNum}\n")
-                        # set loop index to recNum-1 for next iteration
-                        # (we'll continue the for-loop by converting to while if needed)
-                        # Simplest: slice remaining lines and reset iteration
-                        lines = lines[recNum-1:]
-                        numLines = len(lines)
-                        recNum = 1
-                        lastPerc = -1
-                        break
+            t = time.perf_counter()
+            while time.perf_counter() - t < 0.15:
+                gotRewind = False
+                # read any pending responses (bytes-based) and act on resend requests
                 lnin = term.readline()
+
+                lnin = lnin.decode("ASCII", errors='ignore')
+                # expect responses like b'*N' + two-byte record number
+                if  len(lnin) > 0 and lnin[0] == '*':  # b'*'
+                    if len(lnin) >= 4 and lnin[1] == 'N':
+                        lastRecNum = (int(lnin[2], 16) << 12) + (int(lnin[3], 16) << 8) + (int(lnin[4], 16) << 4) + int(lnin[5], 16)
+
+                        if not gotRewind or lastRecNum < recNum:
+                            recNum = lastRecNum - 1
+                            i = recNum - 1
+
+                            #while (lines[i][5] != '0' or lines[6] != '0') and i != 0:
+                                #i -= 1
+                            
+                            #recNum = i + 1
+
+                            # jump to that record in our list
+                            print(f"\nResending from record {recNum}\n")
+                            #break
+        
+            i += 1
 
         # send final checksum packet: "~C" + two-byte checksum + "\n"
         chk = fileChecksum & 0xFFFF
-        final = bytearray(b'~C')
-        final.append((chk >> 8) & 0xFF)
-        final.append(chk & 0xFF)
-        final.append(0x0A)
+        #final = bytearray(b'*C')
+        #final.append((chk >> 8) & 0xFF)
+        #final.append(chk & 0xFF)
+        #final.append(0x0A)
         #term.write(bytes(final))
+
+        lnOut = "*C"
+        lnOut += f'{((chk >> 8) & 0xFF):0>2X}'
+        lnOut += f'{((recNum) & 0xFF):0>2X}'
+        lnOut += "\n"
+        lnOut = lnOut.encode("ASCII")
+
+        term.write(lnOut)
+        time.sleep(1)
+
         print(f"\nUpdate for node {node} complete")

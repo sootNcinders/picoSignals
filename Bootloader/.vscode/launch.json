@@ -46,5 +46,17 @@
                 "load \"${command:raspberry-pi-pico.launchTargetPath}\""
             ]
         },
+        {
+            "name": "BMP Attach",
+            "type": "cortex-debug",
+            "servertype": "bmp",
+            "request": "attach",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/bootloader.elf", // replace with your executable
+            "interface": "swd",
+            "device": "STM32F103",
+            "BMPGDBSerialPort": "/dev/cu.usbmodem98B6A6B31", // Use whatever serial port makes sense for your OS and BMP setup
+            "runToEntryPoint": "main",
+        },
     ]
 }

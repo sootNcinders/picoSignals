@@ -1310,9 +1310,12 @@ uint16_t RFM95::calcCRC(uint8_t *buf, uint8_t len)
 {
     uint16_t crc = 0;
 
-    for(uint8_t i = 0; i < len; i++)
+    if(len > 0)
     {
-        crc += buf[i];
+        for(uint8_t i = 0; i < len; i++)
+        {
+            crc += buf[i];
+        }
     }
 
     crc = ~crc; //invert the bits for ones complement

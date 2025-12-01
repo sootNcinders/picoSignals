@@ -70,6 +70,8 @@ void MENU::menuTask(void *pvParameters)
 
     uint8_t dest = 0;
 
+    uint8_t cnt = 0;
+
     uint16_t bufIdx = 0;
 
     bool ctc = false;
@@ -236,12 +238,43 @@ void MENU::menuTask(void *pvParameters)
             }
             else if(otaUpdate && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
             {
-                memcpy(otaBuf, &inBuf[1], bufIdx);
+                //memcpy(otaBuf, &inBuf[0], bufIdx);
+
+                otaBuf[cnt++] = inBuf[0];
+                otaBuf[cnt++] = inBuf[1];
                 
-                Radio::sendBootloaderMsg((uint8_t*)otaBuf, bufIdx);
+                if(bufIdx > 3)
+                {
+                    otaBuf[cnt++] = inBuf[2];
+
+                    for(uint8_t i = 3; i < bufIdx; i = i + 2)
+                    {
+                        if(inBuf[i] >= 'A')
+                        {
+                            otaBuf[cnt] = ((inBuf[i] - (uint8_t)'A') + 10) << 4;
+                        }
+                        else
+                        {
+                            otaBuf[cnt] = (inBuf[i] - (uint8_t)'0') << 4;
+                        }
+
+                        if(inBuf[i+1] >= 'A')
+                        {
+                            otaBuf[cnt++] += (inBuf[i+1] - (uint8_t)'A') + 10;
+                        }
+                        else
+                        {
+                            otaBuf[cnt++] += (inBuf[i+1] - (uint8_t)'0');
+                        }
+                    }
+                }
+                
+                Radio::sendBootloaderMsg((uint8_t*)otaBuf, cnt);
 
                 bufIdx = 0;
+                cnt = 0;
                 memset(inBuf, 0, sizeof(inBuf));
+                memset(otaBuf, 0, sizeof(otaBuf));
             }
 
             cin = getchar_timeout_us(100);

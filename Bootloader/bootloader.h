@@ -8,13 +8,15 @@
 #include "hardware/structs/watchdog.h"
 #include "hardware/watchdog.h"
 #include "hardware/clocks.h"
+#include "hardware/dma.h"
+
 #include "../RFM95/RFM95.h"
 
 #ifndef BOOTLOADER_H
 #define BOOTLOADER_H
 
 #define FLASH_WRITE_SIZE 256
-#define FLASH_START_ADDRESS 0
+#define FLASH_START_ADDRESS 0x10000000
 
 #define INTEL_HEX_RECORD_DATA_INDEX 4
 
@@ -22,7 +24,7 @@
 
 #define BOOTLOADER_ENTRY_MAGIC 0xb105f00d
 
-#define BOOTLOADER_SIZE_BYTES (32 * 1024) //32KB
+#define BOOTLOADER_SIZE_BYTES 0xC000 //48KB
 #define FLASH_SIZE_BYTES ((2048 * 1024) - (BOOTLOADER_SIZE_BYTES)) //Reserve 32KB for bootloader
 
 #define GOODLED  6
@@ -45,6 +47,9 @@ enum {
 	INTEL_HEX_REC2_STATE,
 	INTEL_HEX_ERR_STATE
 };
+
+// Address of binary information header
+uint8_t *flash_target_contents = (uint8_t *) (XIP_BASE + BOOTLOADER_SIZE_BYTES + 0xD4);
 
 class Bootloader
 {

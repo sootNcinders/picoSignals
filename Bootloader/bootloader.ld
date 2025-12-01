@@ -22,12 +22,11 @@
 */
 
 __PERSISTENT_STORAGE_LEN = 12288 ;
+__BOOTLOADER_LEN = 48k;
 
 MEMORY
 {
-    FLASH(rx) : ORIGIN = 0x10000000, LENGTH = 48k
-    FLASH_APP(rx) : ORIGIN = 0x10000000 + 48k, LENGTH = 2048k - 48k - __PERSISTENT_STORAGE_LEN
-    FLASH_PERSISTENT(rw) : ORIGIN = 0x10000000 + (2048k - __PERSISTENT_STORAGE_LEN) , LENGTH = __PERSISTENT_STORAGE_LEN
+    FLASH(rx) : ORIGIN = 0x10000000, LENGTH = 2048k
     RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 256k
     SCRATCH_X(rwx) : ORIGIN = 0x20040000, LENGTH = 4k
     SCRATCH_Y(rwx) : ORIGIN = 0x20041000, LENGTH = 4k
@@ -61,12 +60,6 @@ SECTIONS
        This can be used to transfer control back to the bootrom on debugger
        launches only, to perform proper flash setup.
     */
-
-    .app_bin : {
-        . = ALIGN(4k);
-	__app_bin = .;
-	LONG(0)
-    } > FLASH_APP
 
     .text : {
         __logical_binary_start = .;

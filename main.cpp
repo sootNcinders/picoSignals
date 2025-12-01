@@ -42,9 +42,7 @@ int main(void)
     //Initialize for printf
     stdio_init_all();
 
-#ifdef NOBOOT
-    sleep_ms(5000);
-#endif
+    //sleep_ms(5000);
 
     DPRINTF("\n\nPico Signals V%dR%d\n\n", VERSION, REVISION);
 
