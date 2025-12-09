@@ -649,6 +649,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
 
         watchdog_hw->scratch[5] = BOOTLOADER_ENTRY_MAGIC;
         watchdog_hw->scratch[6] = ~BOOTLOADER_ENTRY_MAGIC;
+        watchdog_hw->scratch[7] = Main::cfg["address"];
 
         Main::reset();
     }

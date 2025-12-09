@@ -154,7 +154,7 @@ void Radio::radioTask(void *pvParameters)
 
                 if(buf[0] == '*')
                 {
-                    printf("%c%c", buf[0], buf[1]);
+                    printf("%c%c%X%X", buf[0], buf[1], ((from >> 4) & 0x0F), (from & 0x0F));
 
                     if(buf[1] == 'N')
                     {

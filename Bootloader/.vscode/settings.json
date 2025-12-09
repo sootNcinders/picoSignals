@@ -46,5 +46,5 @@
         "sstream": "cpp",
         "streambuf": "cpp"
     },
-    "cortex-debug.variableUseNaturalFormat": true
+    "cortex-debug.variableUseNaturalFormat": false
 }

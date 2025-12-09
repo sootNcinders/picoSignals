@@ -85,7 +85,7 @@ int main(void)
         //12500bps datarate
         Bootloader::radio.init();
         Bootloader::radio.setLEDS(RXLED, TXLED);
-        Bootloader::radio.setAddress(0);
+        Bootloader::radio.setAddress(watchdog_hw->scratch[7]);
         //Preamble length: 8
         Bootloader::radio.setPreambleLength(8);
         //Center Frequency
@@ -222,22 +222,42 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                 {
                     //Erase Command
                     case 'E':
-                        printf("Erasing Flash\r\n");
+                        if(rxBuf[2] >= 'A')
+                        {
+                            to = ((rxBuf[2] - (uint8_t)'A') + 10) << 4;
+                        }
+                        else
+                        {
+                            to = (rxBuf[2] - (uint8_t)'0') << 4;
+                        }
+                        if(rxBuf[3] >= 'A')
+                        {
+                            to += ((rxBuf[3] - (uint8_t)'A') + 10) << 4;
+                        }
+                        else
+                        {
+                            to += (rxBuf[3] - (uint8_t)'0') << 4;
+                        }
 
-                        critical_section_enter_blocking(&critical_section);
-                        flash_range_erase(BOOTLOADER_SIZE_BYTES, FLASH_SIZE_BYTES - BOOTLOADER_SIZE_BYTES - 12288);
-                        critical_section_exit(&critical_section);
+                        if(to == watchdog_hw->scratch[7] || to == 255)
+                        {
+                            printf("Erasing Flash\r\n");
 
-                        txBuf[0] = '*';
-                        txBuf[1] = 'A'; //Acknowledge
-                        radio.send(255, txBuf, 2);
+                            critical_section_enter_blocking(&critical_section);
+                            flash_range_erase(BOOTLOADER_SIZE_BYTES, FLASH_SIZE_BYTES - BOOTLOADER_SIZE_BYTES - 12288);
+                            critical_section_exit(&critical_section);
 
-                        //If update was interrupted, reset variables
-                        fileChecksum = 0;
-                        validRecordNumber = 0;
-                        flashDataIndex = 0;
-                        flashAddress = XIP_BASE + BOOTLOADER_SIZE_BYTES;
-                        recordState = INTEL_HEX_START_STATE;
+                            txBuf[0] = '*';
+                            txBuf[1] = 'A'; //Acknowledge
+                            radio.send(255, txBuf, 2);
+
+                            //If update was interrupted, reset variables
+                            fileChecksum = 0;
+                            validRecordNumber = 0;
+                            flashDataIndex = 0;
+                            flashAddress = XIP_BASE + BOOTLOADER_SIZE_BYTES;
+                            recordState = INTEL_HEX_START_STATE;
+                        }
                         break;
 
                     //File Checksum
@@ -252,6 +272,8 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                         }
 
                         tmpChecksum = (rxBuf[2] << 8) + rxBuf[3];
+
+                        printf("Rcvd: 0x%X Calc: 0x%X\r\n", tmpChecksum, fileChecksum);
 
                         if(true)//tmpChecksum == fileChecksum)
                         {
@@ -299,7 +321,16 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                                 case INTEL_HEX_BCOUNT_STATE:
                                     recordLength = rxBuf[bufIndex];
                                     pHexRecord[recordIndex++] = recordLength;
-                                    recordLenCntr = recordLength - 1; //0 indexed
+
+                                    if(recordLength >= 1)
+                                    {
+                                        recordLenCntr = recordLength - 1; //0 indexed
+                                    }
+                                    else
+                                    {
+                                        recordLenCntr = 0;
+                                    }
+
                                     recordState = INTEL_HEX_ADDR1_STATE;
                                     break;
 
@@ -307,7 +338,15 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                                 case INTEL_HEX_ADDR0_STATE:
                                 case INTEL_HEX_TYPE_STATE:
                                     pHexRecord[recordIndex++] = rxBuf[bufIndex];
-                                    recordState++;
+
+                                    if(recordLength == 0 && recordState == INTEL_HEX_TYPE_STATE)
+                                    {
+                                        recordState = INTEL_HEX_CSUM_STATE;
+                                    }
+                                    else
+                                    {
+                                        recordState++;
+                                    }
                                     break;
 
                                 case INTEL_HEX_DATA_STATE:
