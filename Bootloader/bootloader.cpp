@@ -52,6 +52,10 @@ int main(void)
         watchdog_hw->scratch[5] = BOOTLOADER_ENTRY_MAGIC;
         watchdog_hw->scratch[6] = ~BOOTLOADER_ENTRY_MAGIC;
 
+        //Set watchdog to catch any failed starts, max delay of 8.388sec 
+        watchdog_enable(8388, true);
+        watchdog_update();
+
         Bootloader::jumpToApplication();
     }
     else
@@ -214,6 +218,8 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
         {
             len = sizeof(rxBuf);
             radio.recv(rxBuf, &len, &from, &to);
+
+            //printf("RCVD: %c%c%c%c\r\n", rxBuf[0], rxBuf[1], rxBuf[2], rxBuf[3]);
             
             //Bootloader message
             if(rxBuf[0] == '*')

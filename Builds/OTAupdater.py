@@ -4,8 +4,12 @@ import time
 import sys
 import binascii
 
-UPDATE_NODES = {0, 222}
+#Always include 0 for unprogrammed nodes
+UPDATE_NODES = {0, 1, 18}
 UPDATE_FILE = "/Users/tleavitt/pico/projects/picoSignals/Builds/V4R0/picoSignals-V4R0.hex"
+UPDATE_VERSION = "V4R0"
+
+start = time.perf_counter()
 
 f = open(UPDATE_FILE, "r")
 lines = [l.rstrip("\r\n") for l in f.readlines()]
@@ -40,44 +44,51 @@ anyNodeReady = False
 for node in UPDATE_NODES:
     print(f"Starting update for node {node}")
 
-    #Send Update Command
-    lnOut = "~"
-    lnOut += f'{node:0>2X}'
-    lnOut += "UPDATE\n"
-    lnOut = lnOut.encode("ASCII")
-    term.write(lnOut)
-
-    #Wait for device to reboot
-    time.sleep(5)
-
     nodeReady = False
     i = 0
     while not nodeReady and i < 10:
-        lnOut = "*E\n"
+        #Send Update Command
+        lnOut = "~"
+        lnOut += f'{node:0>2X}'
+        lnOut += "UPDATE\n"
+        lnOut = lnOut.encode("ASCII")
+        term.write(lnOut)
+
+        #Wait for device to reboot
+        time.sleep(5)
+
+        lnOut = "*E"
+        lnOut += f'{node:0>2X}'
+        lnOut += "\n"
         lnOut = lnOut.encode("ASCII")
 
         term.write(lnOut)
 
-        time.sleep(15)
+        time.sleep(5)
 
         lnin = term.readline()
         
         while len(lnin) > 0 and not nodeReady:
-            addr = (int(lnin[2], 16) << 4) + int(lnin[3], 16)
             lnin = lnin.decode("ASCII")
+
+            try:
+                addr = (int(lnin[2], 16) << 4) + int(lnin[3], 16)
+            except (ValueError, IndexError):
+                addr = 0
             
             #*A means node is ready
             if lnin[0] == '*' and lnin[1] == 'A' and addr == node:
                 anyNodeReady = True
+                nodeReady = True
                 print(f"Node {node} is ready for update")
 
             lnin = term.readline()
         i += 1
 
 if not anyNodeReady:
-    print(f"Node {node} did not respond, skipping update")
+    print(f"Nodes did not respond, skipping update")
 else:
-    print(f"Updating node {node} with file {UPDATE_FILE}")
+    print(f"Updating nodes with file {UPDATE_FILE}")
 
     fileChecksum = 0
     recNum = 1
@@ -126,7 +137,7 @@ else:
 
         # small pause kept minimal; adjust or remove if device can handle faster
         t = time.perf_counter()
-        while time.perf_counter() - t < 0.15:
+        while time.perf_counter() - t < 0.25:
             gotRewind = False
             # read any pending responses (bytes-based) and act on resend requests
             lnin = term.readline()
@@ -135,7 +146,11 @@ else:
             # expect responses like b'*N' + two-byte record number
             if  len(lnin) > 0 and lnin[0] == '*':  # b'*'
                 if len(lnin) >= 4 and lnin[1] == 'N':
-                    lastRecNum = (int(lnin[2], 16) << 12) + (int(lnin[3], 16) << 8) + (int(lnin[4], 16) << 4) + int(lnin[5], 16)
+                    try:
+                        lastRecNum = (int(lnin[4], 16) << 12) + (int(lnin[5], 16) << 8) + (int(lnin[6], 16) << 4) + int(lnin[7], 16)
+
+                    except (ValueError, IndexError):
+                        lastRecNum = 0
 
                     if not gotRewind or lastRecNum < recNum:
                         if lastRecNum != 0:
@@ -144,32 +159,71 @@ else:
                         else:
                             i = 0
 
-                        #while (lines[i][5] != '0' or lines[6] != '0') and i != 0:
-                            #i -= 1
-                        
-                        #recNum = i + 1
-
                         # jump to that record in our list
                         print(f"\nResending from record {recNum}\n")
-                        #break
     
         i += 1
 
     # send final checksum packet: "~C" + two-byte checksum + "\n"
     chk = fileChecksum & 0xFFFF
-    #final = bytearray(b'*C')
-    #final.append((chk >> 8) & 0xFF)
-    #final.append(chk & 0xFF)
-    #final.append(0x0A)
-    #term.write(bytes(final))
 
     lnOut = "*C"
     lnOut += f'{((chk >> 8) & 0xFF):0>2X}'
-    lnOut += f'{((recNum) & 0xFF):0>2X}'
+    lnOut += f'{((chk) & 0xFF):0>2X}'
     lnOut += "\n"
     lnOut = lnOut.encode("ASCII")
 
     term.write(lnOut)
     time.sleep(1)
 
+    versions = []
+
+    for node in UPDATE_NODES:
+        verReceived = False
+        i = 0
+        while not verReceived and i < 10:
+            #Send VER Command
+            lnOut = "~"
+            lnOut += f'{node:0>2X}'
+            lnOut += "VER\n"
+            lnOut = lnOut.encode("ASCII")
+            term.write(lnOut)
+
+            time.sleep(5)
+
+            lnin = term.readline()
+
+            while len(lnin) > 0 and not verReceived:
+                lnin = lnin.decode("ASCII")
+
+                try:
+                    addr = (int(lnin[1], 16) << 4) + int(lnin[2], 16)
+                except (ValueError, IndexError):
+                    addr = 0
+                
+                #*A means node is ready
+                if lnin[3] == '>' and lnin[4] == ' ' and lnin[5] == 'V' and addr == node:
+                    verReceived = True
+                    ver = lnin[4:].strip()
+                    versions.append(ver)
+
+                lnin = term.readline()
+            i += 1
+        
+        if(not verReceived):
+            versions.append("V0R0")
+
+    for node, ver in zip(UPDATE_NODES, versions):
+        print(f"Node {node} version: {ver}")
+
+
     print(f"\nUpdate complete\n")
+
+    end = time.perf_counter()
+
+    #print elapsed time in hours:minutes:seconds
+    elapsed = end - start
+    hours = int(elapsed // 3600)
+    minutes = int((elapsed % 3600) // 60)
+    seconds = int(elapsed % 60)
+    print(f"Elapsed time: {hours:02d}:{minutes:02d}:{seconds:02d}")

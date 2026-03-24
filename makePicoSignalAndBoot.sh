@@ -15,7 +15,7 @@ COMBINED_ELF="PicoSignalsAndBootV4R0.elf"
 #Copy app hex to output location
 srec_cat $INPUT_HEX2 -intel -o $OUTPUT_HEX -intel -line_length=44
 
-srec_cat $INPUT_HEX1 -intel -generate 0x1000B758 0x1000C000 -constant 0 $INPUT_HEX2 -intel -o $OUTPUT_HEX_COMBINED -intel -line_length=44
+srec_cat $INPUT_HEX1 -intel -generate 0x1000B768 0x1000C000 -constant 0 $INPUT_HEX2 -intel -o $OUTPUT_HEX_COMBINED -intel -line_length=44
 
 #arm-none-eabi-objcopy -O elf32-littlearm -I ihex $OUTPUT_HEX_COMBINED $COMBINED_ELF
 

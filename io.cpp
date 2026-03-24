@@ -17,7 +17,7 @@ void IO::init()
 
     ioMutex = xSemaphoreCreateMutex();
 
-    i2c_init(i2c0, 1000 * 1000);
+    i2c_init(i2c0, 400 * 1000);
     gpio_set_function(PICO_DEFAULT_I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);

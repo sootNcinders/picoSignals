@@ -240,10 +240,17 @@ void MENU::menuTask(void *pvParameters)
             {
                 //memcpy(otaBuf, &inBuf[0], bufIdx);
 
+                //printf("%c%c%c%c\r\n", inBuf[0], inBuf[1], inBuf[2], inBuf[3]);
+
                 otaBuf[cnt++] = inBuf[0];
                 otaBuf[cnt++] = inBuf[1];
                 
-                if(bufIdx > 3)
+                if(inBuf[1] == 'E')
+                {
+                    otaBuf[cnt++] = inBuf[2];
+                    otaBuf[cnt++] = inBuf[3];
+                }
+                else if(bufIdx > 3)
                 {
                     otaBuf[cnt++] = inBuf[2];
 
@@ -652,6 +659,17 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         watchdog_hw->scratch[7] = Main::cfg["address"];
 
         Main::reset();
+    }
+    else if(strncasecmp(inBuf, "VER", 3) == 0)
+    {
+        numChars = snprintf(buf, sizeof(buf), "> V%dR%d\n", VERSION, REVISION);
+
+        printf("%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
     }
     else
     {
@@ -1975,6 +1993,8 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> wrt - Write config to flash and SD\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> set x y - set head x to on, dim, off, green, amber, red, or lunar\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> nodes - Print all nodes heard in the last 90min\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> update - Reboots the PicoSignal into update mode\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> ver - prints the software version\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n> Adjustments\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> G1 - G12 - General Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H133 - Head 1 Settings\n");
