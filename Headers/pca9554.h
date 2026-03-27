@@ -4,18 +4,16 @@
 #include "hardware/i2c.h"
 #include "input.h"
 
-#ifndef PCA9674_H
-#define PCA9674_h
+#ifndef PCA9554_H
+#define PCA9554_H
 
-#define PCA9674_INT_MODE GPIO_IRQ_EDGE_FALL
-
-class pca9674: public Input
+class pca9554: public Input
 {
     public:
         /// @brief Constructor for the PCA9674 instance
         /// @param i2cbus Pico i2c bus instance- i2c0, i2c1, or i2c_default
         /// @param addr Address as defined by the address pins on the PCA9674 chip, see datasheet for values
-        pca9674(i2c_inst_t *i2cbus, uint8_t addr);
+        pca9554(i2c_inst_t *i2cbus, uint8_t addr);
 
         /// @brief Set which pins will be used for inputs and which will be ignored
         /// @param mask Single byte, each bit representing a pin

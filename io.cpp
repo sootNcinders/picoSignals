@@ -1,10 +1,11 @@
 #include "io.h"
 #include "ctc.h"
 #include "heads.h"
+#include "input.h"
 
 #include "hardware/i2c.h"
 
-pca9674 IO::input = pca9674(i2c0, 0x20);
+Input* IO::input;
 SemaphoreHandle_t IO::ioMutex;
 switchInfo IO::inputs[MAXINPUTS];
 
@@ -25,8 +26,23 @@ void IO::init()
     // Make the I2C pins available to picotool
     bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
 
+    switch(input->getInputChip(i2c0, 0x20))
+    {
+        case pca9674chip:
+            input = new pca9674(i2c0, 0x20);
+            DPRINTF("PCA9674 Detected\n");
+            break;
+        case pca9554chip:
+            DPRINTF("PCA9554 Detected\n");
+            input = new pca9554(i2c0, 0x20);
+            break;
+        default:
+            DPRINTF("No or Unknown input chip detected\n");
+            break;
+    }
+
     //Set all PCA9674 pins as inputs
-    input.inputMask(0xFF);
+    input->inputMask(0xFF);
 
      //Load the mode for up to 8 inputs
     for(int i = 0; i < MAXINPUTS; i++)
@@ -118,12 +134,12 @@ void IO::ioTask(void *pvParameters)
     while(true)
     {
         xSemaphoreTake(ioMutex, portMAX_DELAY);
-        input.updateInputs();
+        input->updateInputs();
         xSemaphoreGive(ioMutex);
 
         for(int i = 0; i < MAXINPUTS; i++)
         {
-            inputs[i].raw = input.getInput(i, false);
+            inputs[i].raw = input->getInput(i, false);
 
             if(inputs[i].raw != inputs[i].lastRaw)
             {
@@ -179,7 +195,7 @@ void IO::ioTask(void *pvParameters)
             }
         }
 
-        input.inputMask(0xFF);
+        input->inputMask(0xFF);
 
         vTaskDelay(5/portTICK_PERIOD_MS);
     }
@@ -335,7 +351,7 @@ bool IO::post()
 {
     bool rtn = false;
 
-    if(input.inputMask(0xFF))
+    if(input->inputMask(0xFF))
     {
         rtn = true;
     }

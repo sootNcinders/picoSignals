@@ -52,6 +52,8 @@ add_executable(picoSignals
                 GARhead.cpp
                 RGBhead.cpp
                 hw_config.c
+                input.cpp
+                pca9554.cpp
         )
 
 if(PICOSIGNALDEBUG)

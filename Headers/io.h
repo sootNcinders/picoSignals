@@ -4,6 +4,8 @@
 #include "semphr.h"
 #include "main.h"
 #include "pca9674.h"
+#include "pca9554.h"
+#include "input.h"
 
 #ifndef IO_H
 #define IO_H
@@ -66,7 +68,7 @@ class IO
         static void ioTask(void *pvParameters);
 
         static SemaphoreHandle_t ioMutex;
-        static pca9674 input;
+        static Input* input;
         static switchInfo inputs[MAXINPUTS];
 
         static uint8_t ovlHeads;
