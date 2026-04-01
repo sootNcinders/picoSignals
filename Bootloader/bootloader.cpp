@@ -219,7 +219,7 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
             len = sizeof(rxBuf);
             radio.recv(rxBuf, &len, &from, &to);
 
-            //printf("RCVD: %c%c%c%c\r\n", rxBuf[0], rxBuf[1], rxBuf[2], rxBuf[3]);
+            
             
             //Bootloader message
             if(rxBuf[0] == '*')
@@ -228,6 +228,8 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                 {
                     //Erase Command
                     case 'E':
+                        printf("RCVD: %c%c%c%c\r\n", rxBuf[0], rxBuf[1], rxBuf[2], rxBuf[3]);
+
                         if(rxBuf[2] >= 'A')
                         {
                             to = ((rxBuf[2] - (uint8_t)'A') + 10) << 4;
@@ -238,11 +240,11 @@ uint16_t Bootloader::waitForHexRecord(uint8_t* pHexRecord)
                         }
                         if(rxBuf[3] >= 'A')
                         {
-                            to += ((rxBuf[3] - (uint8_t)'A') + 10) << 4;
+                            to += ((rxBuf[3] - (uint8_t)'A') + 10);
                         }
                         else
                         {
-                            to += (rxBuf[3] - (uint8_t)'0') << 4;
+                            to += (rxBuf[3] - (uint8_t)'0');
                         }
 
                         if(to == watchdog_hw->scratch[7] || to == 255)

@@ -1971,7 +1971,7 @@ void MENU::printHelp(bool remote, uint8_t from)
 {
     UBaseType_t priority = uxTaskPriorityGet(NULL);
 
-    char buf[1024];
+    char buf[1500];
     uint16_t numChars = 0;
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
@@ -2010,7 +2010,7 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I71 - I74 - Input 7 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I81 - I84 - Input 8 Settings\n");
 
-    printf("%s", buf);
+    printf("%s\n", buf);
 
     if(remote)
     {

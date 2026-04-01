@@ -4,10 +4,12 @@ import time
 import sys
 import binascii
 
+VERSION = "V4R0"
+
 #Always include 0 for unprogrammed nodes
-UPDATE_NODES = {0, 1, 18}
-UPDATE_FILE = "/Users/tleavitt/pico/projects/picoSignals/Builds/V4R0/picoSignals-V4R0.hex"
-UPDATE_VERSION = "V4R0"
+UPDATE_NODES = {0, 2, 222}
+UPDATE_FILE = f"/Users/tleavitt/pico/projects/picoSignals/Builds/{VERSION}/picoSignals-{VERSION}.hex"
+UPDATE_VERSION = VERSION
 
 start = time.perf_counter()
 
@@ -45,7 +47,11 @@ for node in UPDATE_NODES:
     print(f"Starting update for node {node}")
 
     nodeReady = False
-    i = 0
+    if node == 255:
+        i = 9
+    else:
+        i = 0
+
     while not nodeReady and i < 10:
         #Send Update Command
         lnOut = "~"
@@ -55,7 +61,7 @@ for node in UPDATE_NODES:
         term.write(lnOut)
 
         #Wait for device to reboot
-        time.sleep(5)
+        time.sleep(2)
 
         lnOut = "*E"
         lnOut += f'{node:0>2X}'
@@ -64,23 +70,24 @@ for node in UPDATE_NODES:
 
         term.write(lnOut)
 
-        time.sleep(5)
+        t = time.perf_counter()
 
         lnin = term.readline()
         
-        while len(lnin) > 0 and not nodeReady:
-            lnin = lnin.decode("ASCII")
+        while not nodeReady and time.perf_counter() - t < 10:
+            if len(lnin) > 0:
+                lnin = lnin.decode("ASCII")
 
-            try:
-                addr = (int(lnin[2], 16) << 4) + int(lnin[3], 16)
-            except (ValueError, IndexError):
-                addr = 0
-            
-            #*A means node is ready
-            if lnin[0] == '*' and lnin[1] == 'A' and addr == node:
-                anyNodeReady = True
-                nodeReady = True
-                print(f"Node {node} is ready for update")
+                try:
+                    addr = (int(lnin[2], 16) << 4) + int(lnin[3], 16)
+                except (ValueError, IndexError):
+                    addr = 0
+                
+                #*A means node is ready
+                if lnin[0] == '*' and lnin[1] == 'A' and addr == node:
+                    anyNodeReady = True
+                    nodeReady = True
+                    print(f"Node {node} is ready for update")
 
             lnin = term.readline()
         i += 1
@@ -131,13 +138,18 @@ else:
         term.write(lnOut)
 
         perc = int((recNum / max(1, numLines)) * 100)
+        percTenth = int((recNum / max(1, numLines)) * 1000) - (perc * 10)
         if perc != lastPerc:
             lastPerc = perc
-            print(f"{perc}%", end="\r")
+            print("\r" + f"{perc}.{percTenth}%", end=" ")
 
         # small pause kept minimal; adjust or remove if device can handle faster
         t = time.perf_counter()
-        while time.perf_counter() - t < 0.25:
+        delay = 0.15  # seconds
+        if lines[i][5] == 'F' and lines[i][6] == '0':  #delay at increments of 0x100 to allow device to write to flash
+            delay = 0.25 
+
+        while time.perf_counter() - t < delay:
             gotRewind = False
             # read any pending responses (bytes-based) and act on resend requests
             lnin = term.readline()
@@ -157,6 +169,7 @@ else:
                             recNum = lastRecNum - 1
                             i = recNum - 1
                         else:
+                            recNum = 0 
                             i = 0
 
                         # jump to that record in our list
@@ -167,14 +180,15 @@ else:
     # send final checksum packet: "~C" + two-byte checksum + "\n"
     chk = fileChecksum & 0xFFFF
 
-    lnOut = "*C"
-    lnOut += f'{((chk >> 8) & 0xFF):0>2X}'
-    lnOut += f'{((chk) & 0xFF):0>2X}'
-    lnOut += "\n"
-    lnOut = lnOut.encode("ASCII")
+    for i in range(0, 10):
+        lnOut = "*C"
+        lnOut += f'{((chk >> 8) & 0xFF):0>2X}'
+        lnOut += f'{((chk) & 0xFF):0>2X}'
+        lnOut += "\n"
+        lnOut = lnOut.encode("ASCII")
 
-    term.write(lnOut)
-    time.sleep(1)
+        term.write(lnOut)
+        time.sleep(1)
 
     versions = []
 
@@ -182,6 +196,13 @@ else:
         verReceived = False
         i = 0
         while not verReceived and i < 10:
+            #Send ERR CLR Command
+            lnOut = "~"
+            lnOut += f'{node:0>2X}'
+            lnOut += "ERR CLR\n"
+            lnOut = lnOut.encode("ASCII")
+            term.write(lnOut)
+
             #Send VER Command
             lnOut = "~"
             lnOut += f'{node:0>2X}'
