@@ -20,7 +20,7 @@ inputChip Input::getInputChip(i2c_inst_t *i2cbus, uint8_t addr)
 
         if(bytes == 4)
         {
-            printf("ID: 0x%08X\n", id);
+            //printf("ID: 0x%08X\n", id);
             rtn = true;
             break;
         }

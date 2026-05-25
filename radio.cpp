@@ -80,16 +80,16 @@ void Radio::init(void)
 
     initRadio();
 
-    DPRINTF("\nNODE: %d\n", addr);
+    DPRINTF(PRINT_RADIO, "\nNODE: %d\n", addr);
 
     xTaskCreate(radioTask, "Radio Task", 640, NULL, RADIOPRIORITY, &radioTaskHandle);
 
-    DPRINTF("Radio Task Initialized\n");
+    DPRINTF(PRINT_THREAD, "Radio Task Initialized\n");
 }
 
 void Radio::initRadio(void)
 {
-    DPRINTF("Initializing Radio\n");
+    DPRINTF(PRINT_RADIO, "Initializing Radio\n");
 
     uint16_t timeout = (Main::cfg["retryTime"] | 150)/2;
     
@@ -150,7 +150,7 @@ void Radio::radioTask(void *pvParameters)
 
                 watchdog_update();
 
-                //printf("Radio RX From: %d To: %d Size: %d Buf[0]:%c\n", from, to, size, buf[0]);
+                //DPRINTF(PRINT_RADIO, "Radio RX From: %d To: %d Size: %d Buf[0]:%c\n", from, to, size, buf[0]);
 
                 if(buf[0] == '*')
                 {
@@ -158,19 +158,19 @@ void Radio::radioTask(void *pvParameters)
 
                     if(buf[1] == 'N')
                     {
-                        printf("%c%c%X%X", buf[0], buf[1], ((from >> 4) & 0x0F), (from & 0x0F));
-                        printf("%X%X%X%X", (buf[2] >> 4 ) & 0x0F, buf[2] & 0x0F, (buf[3] >> 4) & 0x0F, buf[3] & 0x0F);
+                        DPRINTF(PRINT_UPDATE, "%c%c%X%X", buf[0], buf[1], ((from >> 4) & 0x0F), (from & 0x0F));
+                        DPRINTF(PRINT_UPDATE, "%X%X%X%X", (buf[2] >> 4 ) & 0x0F, buf[2] & 0x0F, (buf[3] >> 4) & 0x0F, buf[3] & 0x0F);
                     }
                     else if(buf[1] == 'E')
                     {
-                        printf("%c%c%c%c%X%X", buf[0], buf[1], buf[2], buf[3], ((from >> 4) & 0x0F), (from & 0x0F));
+                        DPRINTF(PRINT_UPDATE, "%c%c%c%c%X%X", buf[0], buf[1], buf[2], buf[3], ((from >> 4) & 0x0F), (from & 0x0F));
                     }
                     else if(buf[1] == 'A')
                     {
-                        printf("%c%c%X%X", buf[0], buf[1], ((from >> 4) & 0x0F), (from & 0x0F));
+                        DPRINTF(PRINT_UPDATE, "%c%c%X%X", buf[0], buf[1], ((from >> 4) & 0x0F), (from & 0x0F));
                     }
 
-                    printf("\r\n");
+                    DPRINTF(PRINT_UPDATE, "\r\n");
                 }
 
                 if(size == sizeof(RCL) && (to == addr || to == 255))
@@ -209,7 +209,7 @@ void Radio::radioTask(void *pvParameters)
                     }
                 }
 
-                DPRINTF("RSSI: %d\n", radio.lastSNR());
+                DPRINTF(PRINT_RADIO, "RSSI: %d\n", radio.lastSNR());
 
                 if(!nodeOnline[from])
                 {
@@ -222,7 +222,7 @@ void Radio::radioTask(void *pvParameters)
             if(mode != RFM95_MODE_RXCONTINUOUS && mode != RFM95_MODE_RXSINGLE && mode != RFM95_MODE_TX && mode != RFM95_MODE_CAD)
             {
                 radioFaults++;
-                //DPRINTF("Radio fault %d Mode: %d\n", radioFaults, mode);
+                //DPRINTF(PRINT_RADIO, "Radio fault %d Mode: %d\n", radioFaults, mode);
             }
             else
             {
@@ -231,10 +231,10 @@ void Radio::radioTask(void *pvParameters)
 
             if(radioFaults > 10)
             {
-                DPRINTF("Radio fault Mode: %d\n", mode);
+                DPRINTF(PRINT_RADIO, "Radio fault Mode: %d\n", mode);
                 radio.setModeSleep();
                 initRadio();
-                DPRINTF("Radio reset\n");
+                DPRINTF(PRINT_RADIO, "Radio reset\n");
             }
 
             for(uint16_t i = 0; i < 255; i++)
@@ -267,7 +267,7 @@ void Radio::transmit(uint8_t dest, char asp, bool ack, bool code)
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    DPRINTF("Sending to %d: aspect: %c, ack: %d, code: %d\n", dest, asp, ack, code);
+    DPRINTF(PRINT_RADIO, "Sending to %d: aspect: %c, ack: %d, code: %d\n", dest, asp, ack, code);
 
     //Pack the data packet
     transmission.destination = dest;
@@ -309,7 +309,7 @@ void Radio::sendToCTC(TOCTC data)
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    DPRINTF("Sending To CTC\n");
+    DPRINTF(PRINT_RADIO, "Sending To CTC\n");
 
     //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &data, sizeof(data)))
@@ -347,7 +347,7 @@ void Radio::sendFromCTC(FROMCTC data)
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    DPRINTF("Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
+    DPRINTF(PRINT_RADIO, "Sending from CTC to %d cmd %d\n", data.dest, data.cmd);
 
     //If the transmission fails for any reason, set the error light
     if(!radio.send(255, (uint8_t*) &data, sizeof(data)))
@@ -380,8 +380,6 @@ void Radio::sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck)
 
     vTaskPrioritySet(NULL, MAXPRIORITY);
 
-    //DPRINTF("Sending Remote CLI to %d: %s\n", dest, inBuf);
-
     for(uint16_t i = 0; i < len; i += sizeof(remoteCli.data))
     {
         watchdog_update();
@@ -392,8 +390,6 @@ void Radio::sendRemoteCLI(char* inBuf, uint16_t len, uint8_t dest, bool isAck)
 
         //Copy the data into the remote CLI structure
         memcpy(remoteCli.data, (char*)&inBuf[i], MIN(len - i, sizeof(remoteCli.data)));
-
-        //printf("%s\n", (char*)remoteCli.data);
 
         //If the transmission fails for any reason, set the error light
         if(!radio.send(255, (uint8_t*) &remoteCli, sizeof(remoteCli)))

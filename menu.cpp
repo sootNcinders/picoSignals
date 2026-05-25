@@ -35,24 +35,24 @@ void MENU::processRemoteCLI(REMOTECLI inBuf, uint8_t from)
 {
     if(inBuf.isAck)
     {
-        printf("~%x%x", from>>4, from&0x0F);
+        DPRINTF(PRINT_REMOTECLI, "~%x%x", from>>4, from&0x0F);
 
         for(uint8_t i = 0; i < sizeof(inBuf.data); i++)
         {
             if(inBuf.data[i] == '\n')
             {
-                printf("%c", 0x1A);
+                DPRINTF(PRINT_REMOTECLI, "%c", 0x1A);
             }
             
-            printf("%c", inBuf.data[i]);
+            DPRINTF(PRINT_REMOTECLI, "%c", inBuf.data[i]);
             
             if(inBuf.data[i] == '\n')
             {
-                printf("~%x%x", from>>4, from&0x0F);
+                DPRINTF(PRINT_REMOTECLI, "~%x%x", from>>4, from&0x0F);
             }
         }
 
-        printf("\n");
+        DPRINTF(PRINT_REMOTECLI, "\n");
     }
     else
     {
@@ -163,13 +163,13 @@ void MENU::menuTask(void *pvParameters)
                 inBuf[bufIdx - 1] = 0;
                 bufIdx--;
 
-                printf("\b");
-                printf(" ");
-                printf("\b");
+                DPRINTF(PRINT_MENU, "\b");
+                DPRINTF(PRINT_MENU, " ");
+                DPRINTF(PRINT_MENU, "\b");
             }
             else if(menu)
             {
-                printf("%c", inBuf[bufIdx - 1]);
+                DPRINTF(PRINT_MENU, "%c", inBuf[bufIdx - 1]);
             }
 
             if(ctc && bufIdx == 5)
@@ -182,7 +182,7 @@ void MENU::menuTask(void *pvParameters)
                 fromCTC.cmd += ((inBuf[3] >= 'A') ? (inBuf[3] >= 'a') ? (inBuf[3] - 'a' + 10) : (inBuf[3] - 'A' + 10) : (inBuf[3] - '0')) << 4;
                 fromCTC.cmd += (inBuf[4] >= 'A') ? (inBuf[4] >= 'a') ? (inBuf[4] - 'a' + 10) : (inBuf[4] - 'A' + 10) : (inBuf[4] - '0');
 
-                DPRINTF("Dest: %d CMD: %d\n", fromCTC.dest, fromCTC.cmd);
+                DPRINTF(PRINT_RADIO, "Dest: %d CMD: %d\n", fromCTC.dest, fromCTC.cmd);
 
                 bufIdx = 0;
 
@@ -204,7 +204,7 @@ void MENU::menuTask(void *pvParameters)
             }
             else if(remoteCli && bufIdx >= 2 && (cin == '\r' || cin == '\n'))
             {
-                //printf("%s\n", inBuf);
+                //DPRINTF(PRINT_REMOTECLI, "%s\n", inBuf);
                 dest = 0;
                 dest += ((inBuf[1] >= 'A') ? (inBuf[1] >= 'a') ? (inBuf[1] - 'a' + 10) : (inBuf[1] - 'A' + 10) : (inBuf[1] - '0')) << 4;
                 dest += (inBuf[2] >= 'A') ? (inBuf[2] >= 'a') ? (inBuf[2] - 'a' + 10) : (inBuf[2] - 'A' + 10) : (inBuf[2] - '0');
@@ -220,7 +220,7 @@ void MENU::menuTask(void *pvParameters)
 
                 vTaskPrioritySet(NULL, MAXPRIORITY);
 
-                printf("\n");
+                DPRINTF(PRINT_MENU, "\n");
 
                 if(inBuf[1] >= '0' && inBuf[1] <= '9')
                 {
@@ -240,7 +240,7 @@ void MENU::menuTask(void *pvParameters)
             {
                 //memcpy(otaBuf, &inBuf[0], bufIdx);
 
-                //printf("%c%c%c%c\r\n", inBuf[0], inBuf[1], inBuf[2], inBuf[3]);
+                //DPRINTF(PRINT_REMOTECLI, "%c%c%c%c\r\n", inBuf[0], inBuf[1], inBuf[2], inBuf[3]);
 
                 otaBuf[cnt++] = inBuf[0];
                 otaBuf[cnt++] = inBuf[1];
@@ -304,7 +304,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
     if(strncasecmp(inBuf, "bat", 3) == 0)
     {
         numChars = snprintf(buf, sizeof(buf), "> Battery Voltage: Current: %2.2fV 24hr AVG:%2.2fV\n", Battery::getCurrentBattery(), Battery::getBatteryVoltage());
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -323,7 +323,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             numChars = snprintf(buf, sizeof(buf), "> Error Code: %d - %s\n", LED::getError(), errorCodes[LED::getError()]);
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -337,7 +337,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Head %d: %c\n", i+1, HEADS::getHead(i));
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -353,7 +353,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> Input %d: %s:%s %s\n", i+1, switchModes[info[i].mode], (info[i].active) ? "1" : "0", (info[i].lastActive) ? "1" : "0");
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -364,7 +364,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
     {
         numChars = snprintf(buf, sizeof(buf), "> Radio RSSI: %d\n", Radio::getAvgRSSI());
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -376,7 +376,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         vTaskList(buf);
         numChars = snprintf(buf, sizeof(buf), "%s\n", buf);
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -413,7 +413,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         {
             numChars = snprintf(buf, sizeof(buf), "Erase Config\n");
 
-            printf("%s", buf);
+            DPRINTF(PRINT_MENU, "%s", buf);
 
             if(remote)
             {
@@ -513,7 +513,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             }
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -530,7 +530,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         Main::writeFlashJSON((uint8_t*)cfgRaw);
         numChars = snprintf(buf, sizeof(buf), "> Config written to flash\n");
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -546,7 +546,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             numChars = snprintf(buf, sizeof(buf), "> Config write to SD failed\n");
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -607,7 +607,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
             }
         }
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -636,7 +636,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
         
         numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n");
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -647,7 +647,7 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
     {
         numChars = snprintf(buf, sizeof(buf), "> Starting Firmware Update...\n");
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -664,7 +664,185 @@ void MENU::menuProcessor(char* inBuf, bool remote, uint8_t from)
     {
         numChars = snprintf(buf, sizeof(buf), "> V%dR%d\n", VERSION, REVISION);
 
-        printf("%s", buf);
+        DPRINTF(PRINT_MENU, "%s", buf);
+
+        if(remote)
+        {
+            Radio::sendRemoteCLI(buf, numChars, from, true);
+        }
+    }
+    else if(strncasecmp(inBuf, "LOG", 3) == 0)
+    {
+        if(strncasecmp(inBuf+4, "CLR", 3) == 0)
+        {
+            Main::setDebugFlag(PRINT_ALWAYS);
+        }
+        else
+        {
+            if(strncasecmp(inBuf+4, "10", 2) == 0)
+            {
+                //Print Remote CLI
+                if(Main::getDebugFlags() & PRINT_REMOTECLI)
+                {
+                    Main::clearDebugFlag(PRINT_REMOTECLI);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_REMOTECLI);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "1", 1) == 0)
+            {
+                //Print Error
+                if(Main::getDebugFlags() & PRINT_ERROR)
+                {
+                    Main::clearDebugFlag(PRINT_ERROR);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_ERROR);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "2", 1) == 0)
+            {
+                //Print Thread
+                if(Main::getDebugFlags() & PRINT_THREAD)
+                {
+                    Main::clearDebugFlag(PRINT_THREAD);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_THREAD);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "3", 1) == 0)
+            {
+                //Print Config
+                if(Main::getDebugFlags() & PRINT_CONFIG)
+                {
+                    Main::clearDebugFlag(PRINT_CONFIG);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_CONFIG);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "4", 1) == 0)
+            {
+                //Print Radio
+                if(Main::getDebugFlags() & PRINT_RADIO)
+                {
+                    Main::clearDebugFlag(PRINT_RADIO);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_RADIO);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "5", 1) == 0)
+            {
+                //Print Inputs
+                if(Main::getDebugFlags() & PRINT_INPUTS)
+                {
+                    Main::clearDebugFlag(PRINT_INPUTS);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_INPUTS);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "6", 1) == 0)
+            {
+                //Print Heads
+                if(Main::getDebugFlags() & PRINT_HEADS)
+                {
+                    Main::clearDebugFlag(PRINT_HEADS);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_HEADS);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "7", 1) == 0)
+            {
+                //Print CTC
+                if(Main::getDebugFlags() & PRINT_CTC)
+                {
+                    Main::clearDebugFlag(PRINT_CTC);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_CTC);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "8", 1) == 0)
+            {
+                //Print Menu
+                if(Main::getDebugFlags() & PRINT_MENU)
+                {
+                    Main::clearDebugFlag(PRINT_MENU);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_MENU);
+                }
+            }
+            else if(strncasecmp(inBuf+4, "9", 1) == 0)
+            {
+                //Print Update
+                if(Main::getDebugFlags() & PRINT_UPDATE)
+                {
+                    Main::clearDebugFlag(PRINT_UPDATE);
+                }
+                else
+                {
+                    Main::setDebugFlag(PRINT_UPDATE);
+                }
+            }
+        }
+
+        if(Main::getDebugFlags() & PRINT_ERROR)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_ERROR(1)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_THREAD)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_THREAD(2)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_CONFIG)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_CONFIG(3)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_RADIO)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_RADIO(4)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_INPUTS)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_INPUTS(5)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_HEADS)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_HEADS(6)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_CTC)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_CTC(7)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_MENU)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_MENU(8)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_UPDATE)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_UPDATE(9)\r\n");
+        }
+        if(Main::getDebugFlags() & PRINT_REMOTECLI)
+        {
+            numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "PRINT_REMOTECLI(10)\r\n");
+        }  
+
+        DPRINTF(PRINT_MENU, "%s", buf);
 
         if(remote)
         {
@@ -739,7 +917,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                     
                     numChars = snprintf(buf, sizeof(buf), "G1= Address %d\n", (uint8_t)Main::cfg["address"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -760,7 +938,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G2= Retries %d\n", (uint8_t)Main::cfg["retries"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -781,7 +959,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G3= Retry Time %dms\n", (uint8_t)Main::cfg["retryTime"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -802,7 +980,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G4= Dim Time %dmin\n", (uint8_t)Main::cfg["dimTime"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -823,7 +1001,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G5= Sleep Time %dmin\n", (uint8_t)Main::cfg["sleepTime"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -844,7 +1022,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G6= Low Battery %2.1fV\n", (float)Main::cfg["lowBattery"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -865,7 +1043,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G7= Low Battery Reset %2.1fV\n", (float)Main::cfg["batteryReset"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -886,7 +1064,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G8= Battery Shutdown %2.1fV\n", (float)Main::cfg["batteryShutdown"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -907,7 +1085,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G9= CTC Present %d\n", (uint8_t)Main::cfg["ctcPresent"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -928,7 +1106,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G10= LED Monitoring Mode %d\n", (uint8_t)Main::cfg["monitorLEDs"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -960,7 +1138,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                     
                     numChars = snprintf(buf, sizeof(buf), "G11= Mode %s\n", (const char*)Main::cfg["mode"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -981,7 +1159,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "G12= Awake Pin %d\n", (uint8_t)Main::cfg["awakePin"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -992,7 +1170,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                 default:
                     numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1033,7 +1211,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d %s\n", adjNum, headNum+1, (const char*)Main::cfg[head[headNum]]["mode"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1073,7 +1251,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Destination[%d] %d\n", adjNum, headNum+1, subAdjNum, 
                                             (uint8_t)Main::cfg[head[headNum]]["destination"][subAdjNum]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1097,7 +1275,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Dim Brightness %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["dim"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1121,7 +1299,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Release Time %dmin\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["release"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1178,7 +1356,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d= Head %d GAR\n", adjNum, headNum+1);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1197,7 +1375,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["pin"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1216,7 +1394,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["red"]["current"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1243,7 +1421,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                                                 (uint8_t)Main::cfg[head[headNum]]["red"]["brightness"]);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1276,7 +1454,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["pin"]);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1309,7 +1487,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Amber Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["amber"]["current"]);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1336,7 +1514,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                                                 (uint8_t)Main::cfg[head[headNum]]["amber"]["brightness"]);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1355,7 +1533,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green Pin %d\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["pin"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1374,7 +1552,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Green Current %dmA\n", adjNum, headNum+1, (uint8_t)Main::cfg[head[headNum]]["green"]["current"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1401,7 +1579,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                                             (uint8_t)Main::cfg[head[headNum]]["green"]["brightness"]);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1421,7 +1599,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                     numChars = snprintf(buf, sizeof(buf), "H%d= Head %d Red Release Delay %dsec\n", adjNum, headNum+1, 
                                         (uint8_t)Main::cfg[head[headNum]]["redReleaseDelay"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1447,7 +1625,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1473,7 +1651,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1499,7 +1677,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1525,7 +1703,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1551,7 +1729,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1577,7 +1755,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1603,7 +1781,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1629,7 +1807,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1655,7 +1833,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1681,7 +1859,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1707,7 +1885,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1733,7 +1911,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "H%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1762,7 +1940,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                 default:
                     numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1827,7 +2005,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
 
                     numChars = snprintf(buf, sizeof(buf), "I%d= Input %d %s\n", adjNum, adjNum/10, (const char*)Main::cfg[pin[pinNum]]["mode"]);
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1872,7 +2050,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1903,7 +2081,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1933,7 +2111,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                         numChars = snprintf(buf, sizeof(buf), "I%d Unavailable\n", adjNum);
                     }
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1944,7 +2122,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
                 default:
                     numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
 
-                    printf("%s", buf);
+                    DPRINTF(PRINT_MENU, "%s", buf);
 
                     if(remote)
                     {
@@ -1957,7 +2135,7 @@ void MENU::adjustmentProcessor(char* inBuf, bool remote, uint8_t from)
         default:
             numChars = snprintf(buf, sizeof(buf), "Invalid Adjustment\n");
 
-            printf("%s", buf);
+            DPRINTF(PRINT_MENU, "%s", buf);
 
             if(remote)
             {
@@ -1995,6 +2173,9 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> nodes - Print all nodes heard in the last 90min\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> update - Reboots the PicoSignal into update mode\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> ver - prints the software version\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> log - Print logging flags\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> log x - Toggle logging flag x\n");
+    numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> log rst - Reset logging flags\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "\n> Adjustments\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> G1 - G12 - General Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> H101 - H133 - Head 1 Settings\n");
@@ -2010,7 +2191,7 @@ void MENU::printHelp(bool remote, uint8_t from)
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I71 - I74 - Input 7 Settings\n");
     numChars += snprintf((char*)&buf[numChars], sizeof(buf) - numChars, "> I81 - I84 - Input 8 Settings\n");
 
-    printf("%s\n", buf);
+    DPRINTF(PRINT_MENU, "%s\n", buf);
 
     if(remote)
     {

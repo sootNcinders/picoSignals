@@ -30,14 +30,14 @@ void IO::init()
     {
         case pca9674chip:
             input = new pca9674(i2c0, 0x20);
-            DPRINTF("PCA9674 Detected\n");
+            DPRINTF(PRINT_INPUTS, "PCA9674 Detected\n");
             break;
         case pca9554chip:
-            DPRINTF("PCA9554 Detected\n");
+            DPRINTF(PRINT_INPUTS, "PCA9554 Detected\n");
             input = new pca9554(i2c0, 0x20);
             break;
         default:
-            DPRINTF("No or Unknown input chip detected\n");
+            DPRINTF(PRINT_INPUTS, "No or Unknown input chip detected\n");
             break;
     }
 
@@ -126,7 +126,7 @@ void IO::init()
 
     xTaskCreate(ioTask, "IO Task", 256, NULL, IOPRIORITY, NULL);
 
-    DPRINTF("IO Task Initialized\n");
+    DPRINTF(PRINT_THREAD, "IO Task Initialized\n");
 }
 
 void IO::ioTask(void *pvParameters)
@@ -177,12 +177,11 @@ void IO::ioTask(void *pvParameters)
             {
                 if(inputs[i].mode == turnout)
                 {
-                    DPRINTF("Turnout %d = %d\n", i, inputs[i].raw);
+                    DPRINTF(PRINT_INPUTS, "Turnout %d = %d\n", i, inputs[i].raw);
                 }
 
                 inputs[i].active = inputs[i].raw;
                 CTC::update();
-                //DPRINTF("CTC Update 9\n")
             }
             else if(inputs[i].mode == unused)
             {

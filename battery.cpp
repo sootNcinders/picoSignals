@@ -23,7 +23,7 @@ void Battery::init(void)
 
     xTaskCreate(batteryTask, "Battery Task", 256, NULL, BATTERYPRIORITY, &batteryHandle);
 
-    DPRINTF("Battery Task Initialized\n");
+    DPRINTF(PRINT_THREAD, "Battery Task Initialized\n");
 }
 
 void Battery::batteryTask(void *pvParameters)

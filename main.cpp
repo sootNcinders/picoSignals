@@ -34,6 +34,7 @@ JsonDocument Main::cfg = JsonDocument();
 uint8_t* Main::flashJson = (uint8_t*) FLASHJSONADDR;
 
 uint8_t Main::mode = STD;
+uint32_t Main::debugFlags = PRINT_ALWAYS;
 
 int main(void)
 {
@@ -44,7 +45,7 @@ int main(void)
 
     //sleep_ms(5000);
 
-    DPRINTF("\n\nPico Signals V%dR%d\n\n", VERSION, REVISION);
+    DPRINTF(PRINT_ALWAYS, "\n\nPico Signals V%dR%d\n\n", VERSION, REVISION);
 
     //Initialize LEDs first for error codes
     LED::init();
@@ -57,7 +58,7 @@ int main(void)
 
     if(Main::mode == STD)
     {
-        DPRINTF("\nStandard Signal Mode\n");
+        DPRINTF(PRINT_ALWAYS, "\nStandard Signal Mode\n");
         Battery::init();
         IO::init();
         HEADS::init();
@@ -65,22 +66,22 @@ int main(void)
         
         if(!IO::post())
         {
-            DPRINTF("Input Fault\n");
+            DPRINTF(PRINT_ERROR, "Input Fault\n");
             LED::postLoop(BADINPUT);
         }
         else if(!HEADS::post())
         {
-            DPRINTF("Output Fault\n");
+            DPRINTF(PRINT_ERROR, "Output Fault\n");
             LED::postLoop(BADOUTPUT);
         }
     }
     else if(Main::mode == CTC)
     {
-        DPRINTF("\nCTC Mode\n");
+        DPRINTF(PRINT_ALWAYS, "\nCTC Mode\n");
     }
     else if(Main::mode == OVL)
     {
-        DPRINTF("\nOverlay Mode\n");
+        DPRINTF(PRINT_ALWAYS, "\nOverlay Mode\n");
         Battery::init();
         IO::init();
         CTC::init();
@@ -88,7 +89,7 @@ int main(void)
 
         if(!IO::post())
         {
-            DPRINTF("Input Fault\n");
+            DPRINTF(PRINT_ERROR, "Input Fault\n");
             LED::postLoop(BADINPUT);
         }
     }
@@ -96,11 +97,11 @@ int main(void)
     //Main::post();
     if(!Radio::post())
     {
-        DPRINTF("Radio Fault\n");
+        DPRINTF(PRINT_ERROR, "Radio Fault\n");
         LED::postLoop(BADRADIO);
     }
 
-    DPRINTF("Init complete\n");
+    DPRINTF(PRINT_ALWAYS, "Init complete\n");
 
     vTaskStartScheduler();
 
@@ -125,7 +126,7 @@ void Main::loadConfig(void)
 
     if(!sd_card_detect(pSD))
     {
-        DPRINTF("No SD Card Detected\n");
+        DPRINTF(PRINT_ERROR, "No SD Card Detected\n");
     }
     
     sd_init_driver();
@@ -136,7 +137,7 @@ void Main::loadConfig(void)
     {
         sdMounted = false;
         LED::setError(SDMOUNT);
-        //panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+        DPRINTF(PRINT_ERROR, "Failed to mount SD card file system\n");
     }
 
     //Locate the config file in the file system, fault out if it cant be found
@@ -147,7 +148,7 @@ void Main::loadConfig(void)
         {
             fileFound = false;
             LED::setError(CONFIGREAD);
-            //panic("f_findfirst error: %s (%d)\n", FRESULT_str(fr), fr);
+            DPRINTF(PRINT_CONFIG, "Failed to find config file on SD card\n");
         }
     }
     //Open the config file, if it fails set the error light and stop execution
@@ -158,8 +159,8 @@ void Main::loadConfig(void)
         fr = f_open(&file, filename, FA_READ);
         if (fr != FR_OK && fr != FR_EXIST)
         {
-           LED::setError(CONFIGREAD);
-            //panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            LED::setError(CONFIGREAD);
+            DPRINTF(PRINT_CONFIG, "Failed to open config file %s\n", filename);
         }
     }
 
@@ -178,7 +179,7 @@ void Main::loadConfig(void)
         }
         else
         {
-            DPRINTF("Read %d characters of config file\n", readSize);
+            DPRINTF(PRINT_CONFIG, "Read %d characters of config file\n", readSize);
 
             writeFlashJSON((uint8_t*)cfgRaw);
         }
@@ -192,7 +193,7 @@ void Main::loadConfig(void)
     DeserializationError error = deserializeJson(cfg, cfgRaw);
     if(error)
     {
-        DPRINTF("Config JSON error: %s\n", error.c_str());
+        DPRINTF(PRINT_CONFIG, "Config JSON error: %s\n", error.c_str());
         LED::errorLoop(CONFIGREAD);
     }
 
@@ -263,11 +264,11 @@ void Main::writeFlashJSON(uint8_t* in)
 
         xTaskResumeAll();
 
-        DPRINTF("JSON written to flash\n");
+        DPRINTF(PRINT_CONFIG, "JSON written to flash\n");
     }
     else
     {
-        DPRINTF("JSON matched, not written\n");
+        DPRINTF(PRINT_CONFIG, "JSON matched, not written\n");
     }
 }
 
@@ -293,7 +294,7 @@ bool Main::writeSdJSON(uint8_t* in)
 
     if(!sd_card_detect(pSD))
     {
-        DPRINTF("No SD Card Detected\n");
+        DPRINTF(PRINT_ERROR, "No SD Card Detected\n");
     }
     
     sd_init_driver();
@@ -367,7 +368,7 @@ void vApplicationMallocFailedHook( void )
 
 void Main::reset(void)
 {
-    DPRINTF("Reboot\n");
+    DPRINTF(PRINT_ALWAYS, "Reboot\n");
 
     vTaskSuspendAll();
 
@@ -386,17 +387,17 @@ void Main::post()
     bool ledState = HIGH;
     if(!IO::post())
     {
-        DPRINTF("Input Fault\n");
+        DPRINTF(PRINT_ERROR, "Input Fault\n");
         LED::postLoop(BADINPUT);
     }
     else if(!HEADS::post())
     {
-        DPRINTF("Output Fault\n");
+        DPRINTF(PRINT_ERROR, "Output Fault\n");
         LED::postLoop(BADOUTPUT);
     }
     else if(!Radio::post())
     {
-        DPRINTF("Radio Fault\n");
+        DPRINTF(PRINT_ERROR, "Radio Fault\n");
         LED::postLoop(BADRADIO);
     }
 }
@@ -412,4 +413,42 @@ void Main::sdSafeState(void)
     gpio_put(11, 0);
     gpio_put(10, 0);
     gpio_put(13, 0);
+}
+
+void Main::setDebugFlag(uint32_t flag)
+{
+    debugFlags |= flag;
+}
+
+void Main::clearDebugFlag(uint32_t flag)
+{
+    debugFlags &= ~flag;
+}
+
+uint32_t Main::getDebugFlags(void)
+{
+    return debugFlags;
+}
+
+void Main::debugPrintf(uint32_t flags, const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+
+    if(!(debugFlags & PRINT_MENU))
+    {
+        debugFlags &= PRINT_MENU;
+    }
+    
+    if(debugFlags & flags)
+    {
+        if(!(flags & PRINT_CTC || flags & PRINT_MENU || flags & PRINT_UPDATE || flags & PRINT_REMOTECLI))
+        {
+            printf("[%07.3f] ", ((to_us_since_boot(get_absolute_time())%1000000)/1000.0));
+        }
+
+        vprintf(format, args);
+    }
+
+    va_end(args);
 }

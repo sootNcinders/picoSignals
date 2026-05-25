@@ -43,7 +43,7 @@ void CTC::init(void)
 
     xTaskCreate(ctcTask, "CTC Task", 512, NULL, CTCPRIORITY, &ctcTaskHandle);
 
-    DPRINTF("CTC Task Initialized\n");
+    DPRINTF(PRINT_THREAD, "CTC Task Initialized\n");
 }
 
 void CTC::ctcTask(void *pvParameters)
@@ -128,7 +128,7 @@ void CTC::ctcTask(void *pvParameters)
             toCTC.version = VERSION;
             toCTC.revision = REVISION;
             
-            printf(":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", toCTC.sender>>4, toCTC.sender&0xF, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
+            DPRINTF(PRINT_CTC, ":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", toCTC.sender>>4, toCTC.sender&0xF, toCTC.head1, toCTC.head2, toCTC.head3, toCTC.head4,
                     toCTC.captures, toCTC.releases, toCTC.turnouts, abs(toCTC.avgRSSI)>>4, abs(toCTC.avgRSSI)&0xF, toCTC.voltage>>4, toCTC.voltage&0xF, 
                     (toCTC.ledError>>12)&0xF, (toCTC.ledError>>8)&0xF, (toCTC.ledError>>4)&0xF, toCTC.ledError & 0xF,
                     toCTC.version>>4, toCTC.version&0xF, toCTC.revision>>4, toCTC.revision&0xF);
@@ -169,14 +169,12 @@ void CTC::ctcTask(void *pvParameters)
                 if(info[i].active != lastInfo[i].active)
                 {
                     updateNeeded = true;
-                    //DPRINTF("CTC Update 10\n")
                 }
             }
 
             if(bat - lastBat > 0.25 || lastBat - bat > 0.25)
             {
                 updateNeeded = true;
-                //DPRINTF("CTC Update 11\n")
             }
         }
 
@@ -251,12 +249,11 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                     tries = 0;
                 }
 
-                DPRINTF("CTC ACK addr:%d allResponded:%d\n", from, allResponded);
+                DPRINTF(PRINT_RADIO, "CTC ACK addr:%d allResponded:%d\n", from, allResponded);
                 break;
                 
             case 0x01: //Ping
                 update();
-                //DPRINTF("CTC Update 1\n")
                 break;
 
             case 0x02: //Wake
@@ -280,7 +277,7 @@ void CTC::processFromMsg(FROMCTC msg, uint8_t from)
                 break;
 
             case 0x0B: //Clear Flash Config
-                DPRINTF("Erase Config\n");
+                DPRINTF(PRINT_CONFIG, "Erase Config\n");
 
                 vTaskPrioritySet(NULL, MAXPRIORITY);
 
@@ -319,7 +316,7 @@ void CTC::processToMsg(TOCTC msg)
 {
     if(!paused)
     {
-        printf(":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", msg.sender>>4, msg.sender&0xF, msg.head1, msg.head2, msg.head3, msg.head4,
+        DPRINTF(PRINT_CTC, ":%x%x%c%c%c%c%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\n", msg.sender>>4, msg.sender&0xF, msg.head1, msg.head2, msg.head3, msg.head4,
                 msg.captures, msg.releases, msg.turnouts, abs(msg.avgRSSI)>>4, abs(msg.avgRSSI)&0xF, msg.voltage>>4, msg.voltage&0xF, 
                 (msg.ledError>>12)&0xF, (msg.ledError>>8)&0xF, (msg.ledError>>4)&0xF, msg.ledError & 0xF,
                 msg.version>>4, msg.version&0xF, msg.revision>>4, msg.revision&0xF);

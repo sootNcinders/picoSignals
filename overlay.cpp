@@ -40,7 +40,7 @@ void OVERLAY::init(void)
     {
         xTaskCreate(overlayTask, "overlayTask", 400, (void*)i, (HEADSCOMMPRIORITY + MAXHEADS) - i, NULL);
 
-        DPRINTF("Overlay Head %d Task Initialized\n", i+1);
+        DPRINTF(PRINT_THREAD, "Overlay Head %d Task Initialized\n", i+1);
     }
 }
 

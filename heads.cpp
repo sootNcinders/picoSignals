@@ -234,7 +234,7 @@ void HEADS::init(void)
             if(heads[i].numDest == 0)
             {
                 //panic("No Destination configured\n");
-                DPRINTF("No Destination configured\n");
+                DPRINTF(PRINT_ERROR, "No Destination configured\n");
                 LED::errorLoop(CONFIGBAD);
                 
             }
@@ -253,7 +253,7 @@ void HEADS::init(void)
 
                 if(heads[i].localHeadNum == 0)
                 {
-                    DPRINTF("Dwarf head %d missing localHeadNum\n", i+1);
+                    DPRINTF(PRINT_ERROR, "Dwarf head %d missing localHeadNum\n", i+1);
                     LED::errorLoop(CONFIGBAD);
                 }
             }
@@ -276,7 +276,7 @@ void HEADS::init(void)
 
     if(awakeIndicator >= 0 && awakeIndicator < 16)
     {
-        DPRINTF("Awake Pin: %d\n", awakeIndicator);
+        DPRINTF(PRINT_HEADS, "Awake Pin: %d\n", awakeIndicator);
         output.setLEDcurrent(awakeIndicator, (float)58.0);
         output.setLEDbrightness(awakeIndicator, 255);
     }
@@ -287,7 +287,7 @@ void HEADS::init(void)
         {
             for(int x = 0; x < heads[i].numDest; x++)
             {
-                DPRINTF("Head %d Dest %d: %d\n", i, x, heads[i].destAddr[x]);
+                DPRINTF(PRINT_HEADS, "Head %d Dest %d: %d\n", i, x, heads[i].destAddr[x]);
             }
         }
     }
@@ -337,7 +337,7 @@ void HEADS::init(void)
 
     xTaskCreate(headsTask, "headTask", 512, NULL, HEADSPRIORITY, &headsTaskHandle);
 
-    DPRINTF("Heads Task Initialized\n");
+    DPRINTF(PRINT_THREAD, "Heads Task Initialized\n");
 
     for(uint32_t i = 0; i < MAXHEADS; i++)
     {
@@ -345,7 +345,7 @@ void HEADS::init(void)
         {
             xTaskCreate(headCommTask, "headCommTask", 400, (void*)i, (HEADSCOMMPRIORITY + MAXHEADS) - i, &headCommTaskHandle[i]);
 
-            DPRINTF("Head %d Comm Task Initialized\n", i+1);
+            DPRINTF(PRINT_THREAD, "Head %d Comm Task Initialized\n", i+1);
         }
     }
 }
@@ -380,7 +380,6 @@ void HEADS::headsTask(void *pvParameters)
             headsOn = false;
 
             CTC::update();
-            //DPRINTF("CTC Update 2\n")
         }
 
         for(int i = 0; i < MAXHEADS; i++)
@@ -391,11 +390,9 @@ void HEADS::headsTask(void *pvParameters)
                 {
                     if((absolute_time_diff_us(heads[i].releaseTimer, get_absolute_time())/60000000) > heads[i].releaseTime)
                     {
-                        //IO::setRelease(i);
                         heads[i].head->setHead(green);
 
                         CTC::update();
-                        //DPRINTF("CTC Update 3\n")
                     }
                     dimTimeout = get_absolute_time();
                 }
@@ -519,7 +516,7 @@ void HEADS::headCommTask(void *pvParameters)
                         setHeadOff(headNum);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
                         heads[headNum].retries++;
-                        DPRINTF("Sending Capture %d to %d\n", headNum, heads[headNum].destAddr[x]);
+                        DPRINTF(PRINT_HEADS, "Sending Capture %d to %d\n", headNum, heads[headNum].destAddr[x]);
                         transmitted = true;
                         break;
                     }
@@ -559,7 +556,7 @@ void HEADS::headCommTask(void *pvParameters)
                         setHeadOff(headNum);
                         add_alarm_in_ms(BLINKTIME, blinkOn, &heads[headNum], true);
                         heads[headNum].retries++;
-                        DPRINTF("Sending Release %d to %d\n", headNum, heads[headNum].destAddr[x]);
+                        DPRINTF(PRINT_HEADS, "Sending Release %d to %d\n", headNum, heads[headNum].destAddr[x]);
                         transmitted = true;
                         break;
                     }
@@ -624,7 +621,7 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
     //Process if this node was the destination and the transmitting node is a destination for one of the heads
     if(msg.destination == addr && !msg.isCode && headFound && from != addr)
     {
-        DPRINTF("Head %d received %c from %d\n", headNum, msg.aspect, from);
+        DPRINTF(PRINT_HEADS, "Head %d received %c from %d\n", headNum, msg.aspect, from);
 
         wake();
 
@@ -654,7 +651,6 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                 {
                     heads[headNum].head->setHead(green);
                     CTC::update();
-                    //DPRINTF("CTC Update 4\n")
                 }
 
                 heads[headNum].retries = 0;
@@ -673,7 +669,6 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     heads[headNum].head->setHead(amber);
 
                     CTC::update();
-                    //DPRINTF("CTC Update 5\n")
 
                     setLastActive(headNum, from, capture);
 
@@ -712,7 +707,6 @@ void HEADS::processRxMsg(RCL msg, uint8_t from)
                     heads[headNum].head->setHead(red);
 
                     CTC::update();
-                    //DPRINTF("CTC Update 6\n")
 
                     IO::setLastActive(headNum, release);
                     IO::setLastActive(headNum, capture);
@@ -849,7 +843,6 @@ void HEADS::wake(void)
                     heads[i].head->setHead(green);
 
                     CTC::update();
-                    //DPRINTF("CTC Update 7\n")
                 }
             }
         }
@@ -1009,10 +1002,9 @@ int64_t HEADS::delayedClear(alarm_id_t id, void *user_data)
     {
         if(((headInfo*)user_data)->head->getColor() != red) //stop the head from clearing if the block was captured before the timer finished
         {
-            DPRINTF("Delayed clear\n");
+            DPRINTF(PRINT_HEADS, "Delayed clear\n");
             ((headInfo*)user_data)->head->setHeadFromISR(green);
             CTC::update();
-            //DPRINTF("CTC Update 8\n")
         }
         ((headInfo*)user_data)->delayClearStarted = false;
     }
