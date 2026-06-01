@@ -419,6 +419,9 @@ class ConfigEditor(QMainWindow):
                 if color in colors:
                     group.show()
                     layout = self.color_widgets[color]['layout']
+                    # Disconnect signals from old widgets BEFORE clearing to prevent
+                    # stale signals from firing after deleteLater() is called
+                    self._disconnect_color_signals(color)
                     # Clear existing widgets
                     self.clear_layout(layout)
                     
@@ -518,6 +521,33 @@ class ConfigEditor(QMainWindow):
             else:
                 # No head data yet - reset to defaults
                 self.update_color_values({})
+
+    def _disconnect_color_signals(self, color):
+        """Disconnect all signals from a color's widgets before clearing layout."""
+        if color not in self.color_widgets:
+            return
+        widgets = self.color_widgets[color]
+        if 'pin' in widgets and widgets['pin']:
+            try:
+                widgets['pin'].valueChanged.disconnect()
+            except TypeError:
+                pass
+        if 'current' in widgets and widgets['current']:
+            try:
+                widgets['current'].valueChanged.disconnect()
+            except TypeError:
+                pass
+        if 'brightness' in widgets and widgets['brightness']:
+            try:
+                widgets['brightness'].valueChanged.disconnect()
+            except TypeError:
+                pass
+        if 'rgb' in widgets and isinstance(widgets['rgb'], list):
+            for rgb_spin in widgets['rgb']:
+                try:
+                    rgb_spin.valueChanged.disconnect()
+                except TypeError:
+                    pass
 
     def clear_layout(self, layout):
         """Recursively clear all widgets and sub-layouts from a layout."""
@@ -781,81 +811,91 @@ class ConfigEditor(QMainWindow):
         5. Set pin mode and rebuild widgets
         6. Restore parameter values from config
         """
-        pin_num = int(self.pin_combo.currentText())
-        pin_key = f'pin{pin_num}'
+        # Prevent any saves while we're loading and rebuilding the display
+        was_loading = self._loading
+        self._loading = True
         
-        # Save previous pin if we're switching to a different pin (but not during initial load)
-        if not self._loading and self._last_pin_index and self._last_pin_index != pin_num:
-            self.save_pin_to_config(self._last_pin_index)
-        
-        self._last_pin_index = pin_num  # Track current pin
-        
-        if pin_key in self.config_data:
-            # Make a deep copy of pin_data to preserve original during load
-            pin_data = copy.deepcopy(self.config_data[pin_key])
-            mode = pin_data.get('mode', '')
+        try:
+            pin_num = int(self.pin_combo.currentText())
+            pin_key = f'pin{pin_num}'
             
-            # IMPORTANT: Store the pin data to preserve it during field rebuild
-            # (similar to _head_data_to_load for colors)
-            self._pin_data_to_load = pin_data
+            # Save previous pin if we're switching to a different pin (but not during initial load)
+            if not was_loading and self._last_pin_index and self._last_pin_index != pin_num:
+                self._loading = was_loading  # Restore flag to allow save
+                self.save_pin_to_config(self._last_pin_index)
+                self._loading = True  # Re-set to prevent saves while loading new pin
             
-            index = self.pin_mode_combo.findData(mode)
+            self._last_pin_index = pin_num  # Track current pin
             
-            # Always set the combo, even if index is invalid (will set to blank)
-            # Block signals to prevent double-call to update_pin_fields
-            self.pin_mode_combo.blockSignals(True)
-            if index >= 0:
-                self.pin_mode_combo.setCurrentIndex(index)
-            else:
-                # Mode not found, set to blank/default
-                self.pin_mode_combo.setCurrentIndex(0)
-            self.pin_mode_combo.blockSignals(False)
-            
-            # Always rebuild fields based on current combo value
-            self.update_pin_fields()
-            
-            # Restore parameter values if they were created
-            if hasattr(self, 'pin_params') and self.pin_params:
-                # Get current mode from combo (in case it was set above)
-                current_mode = self.pin_mode_combo.currentData()
-                # Use _pin_data_to_load if available (has original data before any modifications)
-                restore_data = self._pin_data_to_load if hasattr(self, '_pin_data_to_load') and self._pin_data_to_load else {}
-                try:
-                    if current_mode == 'capture':
-                        if 'head1' in self.pin_params and 'head1' in restore_data:
-                            self.pin_params['head1'].blockSignals(True)
-                            self.pin_params['head1'].setValue(restore_data['head1'])
-                            self.pin_params['head1'].blockSignals(False)
-                        if 'head2' in self.pin_params and 'head2' in restore_data:
-                            self.pin_params['head2'].blockSignals(True)
-                            self.pin_params['head2'].setValue(restore_data['head2'])
-                            self.pin_params['head2'].blockSignals(False)
-                        if 'turnout' in self.pin_params and 'turnout' in restore_data:
-                            self.pin_params['turnout'].blockSignals(True)
-                            self.pin_params['turnout'].setValue(restore_data['turnout'])
-                            self.pin_params['turnout'].blockSignals(False)
-                    elif current_mode in ['release', 'ovlGreen', 'ovlAmber', 'ovlRed']:
-                        if 'head' in self.pin_params and 'head' in restore_data:
-                            self.pin_params['head'].blockSignals(True)
-                            self.pin_params['head'].setValue(restore_data['head'])
-                            self.pin_params['head'].blockSignals(False)
-                except (RuntimeError, KeyError) as e:
-                    # Widget might have been deleted or key doesn't exist
-                    print(f"Error setting pin parameter: {e}")
-                # NOTE: Do NOT clear _pin_data_to_load here!
-                # Keep it so save_pin_to_config() can use it as fallback if spinboxes were reset
-        else:
-            # No data for this pin
-            self._pin_data_to_load = None
-            index = self.pin_mode_combo.findData("")
-            if index >= 0:
+            if pin_key in self.config_data:
+                # Make a deep copy of pin_data to preserve original during load
+                pin_data = copy.deepcopy(self.config_data[pin_key])
+                mode = pin_data.get('mode', '')
+                
+                # IMPORTANT: Store the pin data to preserve it during field rebuild
+                # (similar to _head_data_to_load for colors)
+                self._pin_data_to_load = pin_data
+                
+                index = self.pin_mode_combo.findData(mode)
+                
+                # Always set the combo, even if index is invalid (will set to blank)
+                # Block signals to prevent double-call to update_pin_fields
                 self.pin_mode_combo.blockSignals(True)
-                self.pin_mode_combo.setCurrentIndex(index)
+                if index >= 0:
+                    self.pin_mode_combo.setCurrentIndex(index)
+                else:
+                    # Mode not found, set to blank/default
+                    self.pin_mode_combo.setCurrentIndex(0)
                 self.pin_mode_combo.blockSignals(False)
-            self.update_pin_fields()
-        
-        # Connect pin widget signals for real-time preview
-        self.connect_pin_widget_signals()
+                
+                # Always rebuild fields based on current combo value
+                self.update_pin_fields()
+                
+                # Restore parameter values if they were created
+                if hasattr(self, 'pin_params') and self.pin_params:
+                    # Get current mode from combo (in case it was set above)
+                    current_mode = self.pin_mode_combo.currentData()
+                    # Use _pin_data_to_load if available (has original data before any modifications)
+                    restore_data = self._pin_data_to_load if hasattr(self, '_pin_data_to_load') and self._pin_data_to_load else {}
+                    try:
+                        if current_mode == 'capture':
+                            if 'head1' in self.pin_params and 'head1' in restore_data:
+                                self.pin_params['head1'].blockSignals(True)
+                                self.pin_params['head1'].setValue(restore_data['head1'])
+                                self.pin_params['head1'].blockSignals(False)
+                            if 'head2' in self.pin_params and 'head2' in restore_data:
+                                self.pin_params['head2'].blockSignals(True)
+                                self.pin_params['head2'].setValue(restore_data['head2'])
+                                self.pin_params['head2'].blockSignals(False)
+                            if 'turnout' in self.pin_params and 'turnout' in restore_data:
+                                self.pin_params['turnout'].blockSignals(True)
+                                self.pin_params['turnout'].setValue(restore_data['turnout'])
+                                self.pin_params['turnout'].blockSignals(False)
+                        elif current_mode in ['release', 'ovlGreen', 'ovlAmber', 'ovlRed']:
+                            if 'head' in self.pin_params and 'head' in restore_data:
+                                self.pin_params['head'].blockSignals(True)
+                                self.pin_params['head'].setValue(restore_data['head'])
+                                self.pin_params['head'].blockSignals(False)
+                    except (RuntimeError, KeyError) as e:
+                        # Widget might have been deleted or key doesn't exist
+                        print(f"Error setting pin parameter: {e}")
+                    # NOTE: Do NOT clear _pin_data_to_load here!
+                    # Keep it so save_pin_to_config() can use it as fallback if spinboxes were reset
+            else:
+                # No data for this pin
+                self._pin_data_to_load = None
+                index = self.pin_mode_combo.findData("")
+                if index >= 0:
+                    self.pin_mode_combo.blockSignals(True)
+                    self.pin_mode_combo.setCurrentIndex(index)
+                    self.pin_mode_combo.blockSignals(False)
+                self.update_pin_fields()
+            
+            # Connect pin widget signals for real-time preview
+            self.connect_pin_widget_signals()
+        finally:
+            # Restore loading flag
+            self._loading = was_loading
 
     def connect_pin_widget_signals(self):
         """Connect pin widget signals to save_pin_to_config for real-time preview."""
@@ -888,120 +928,130 @@ class ConfigEditor(QMainWindow):
         5. Rebuild color fields for detected mode
         6. Populate values from config
         """
-        head_index = int(self.head_combo.currentText())
+        # Prevent any saves while we're loading and rebuilding the display
+        was_loading = self._loading
+        self._loading = True
         
-        # Save previous head if we're switching to a different head (but not during initial load)
-        if not self._loading and self._last_head_index and self._last_head_index != head_index:
-            self.save_head_to_config(self._last_head_index)
-        
-        head_name = f"head{head_index}"
-        self.head_label.setText(head_name)
-        self._last_head_index = head_index  # Track current head
-        
-        if head_name in self.config_data:
-            # IMPORTANT: Make a deep copy of head_data to preserve original during load
-            head_data = copy.deepcopy(self.config_data[head_name])
+        try:
+            head_index = int(self.head_combo.currentText())
             
-            # Block signals while loading to prevent cascading saves
-            self.dest_spins[0].blockSignals(True) if self.dest_spins else None
+            # Save previous head if we're switching to a different head (but not during initial load)
+            if not was_loading and self._last_head_index and self._last_head_index != head_index:
+                self._loading = was_loading  # Restore flag to allow save
+                self.save_head_to_config(self._last_head_index)
+                self._loading = True  # Re-set to prevent saves while loading new head
             
-            # Load destination values
-            for i, dest in enumerate(head_data.get('destination', [0]*6)):
-                self.dest_spins[i].setValue(dest)
-
-            # Load dim (convert 0-255 to 0-100%)
-            raw_dim = head_data.get('dim', 50)
-            self.head_dim_spin.blockSignals(True)
-            self.head_dim_spin.setValue(min(100, max(0, round(raw_dim * 100 / 255))))
-            self.head_dim_spin.blockSignals(False)
-
-            # Load release time (default 6 minutes)
-            self.release_spin.blockSignals(True)
-            self.release_spin.setValue(head_data.get('release', 6))
-            self.release_spin.blockSignals(False)
-
-            # Load red release delay (default 0 seconds)
-            self.red_release_delay_spin.blockSignals(True)
-            self.red_release_delay_spin.setValue(head_data.get('redReleaseDelay', 0))
-            self.red_release_delay_spin.blockSignals(False)
+            head_name = f"head{head_index}"
+            self.head_label.setText(head_name)
+            self._last_head_index = head_index  # Track current head
             
-            # Unblock destination signals
-            for spin in self.dest_spins:
-                spin.blockSignals(False)
+            if head_name in self.config_data:
+                # IMPORTANT: Make a deep copy of head_data to preserve original during load
+                head_data = copy.deepcopy(self.config_data[head_name])
+                
+                # Block signals while loading to prevent cascading saves
+                self.dest_spins[0].blockSignals(True) if self.dest_spins else None
+                
+                # Load destination values
+                for i, dest in enumerate(head_data.get('destination', [0]*6)):
+                    self.dest_spins[i].setValue(dest)
 
-            # Detect style (RGB vs Discrete): Infer from actual data, use data field as hint only
-            # RGB mode is only true if ANY color has RGB data or blue is present
-            has_rgb_data = any('rgb' in head_data.get(color, {}) for color in ["green", "amber", "red", "blue", "lunar"])
-            has_blue = 'blue' in head_data
-            is_rgb_mode = has_rgb_data or has_blue
-            
-            # Set style combo to match detected style
-            # Block signals while setting programmatically to prevent on_head_style_changed() from firing
-            self.head_style_combo.blockSignals(True)
-            if is_rgb_mode:
-                self.head_style_combo.setCurrentText("RGB")
+                # Load dim (convert 0-255 to 0-100%)
+                raw_dim = head_data.get('dim', 50)
+                self.head_dim_spin.blockSignals(True)
+                self.head_dim_spin.setValue(min(100, max(0, round(raw_dim * 100 / 255))))
+                self.head_dim_spin.blockSignals(False)
+
+                # Load release time (default 6 minutes)
+                self.release_spin.blockSignals(True)
+                self.release_spin.setValue(head_data.get('release', 6))
+                self.release_spin.blockSignals(False)
+
+                # Load red release delay (default 0 seconds)
+                self.red_release_delay_spin.blockSignals(True)
+                self.red_release_delay_spin.setValue(head_data.get('redReleaseDelay', 0))
+                self.red_release_delay_spin.blockSignals(False)
+                
+                # Unblock destination signals
+                for spin in self.dest_spins:
+                    spin.blockSignals(False)
+
+                # Detect style (RGB vs Discrete): Infer from actual data, use data field as hint only
+                # RGB mode is only true if ANY color has RGB data or blue is present
+                has_rgb_data = any('rgb' in head_data.get(color, {}) for color in ["green", "amber", "red", "blue", "lunar"])
+                has_blue = 'blue' in head_data
+                is_rgb_mode = has_rgb_data or has_blue
+                
+                # Set style combo to match detected style
+                # Block signals while setting programmatically to prevent on_head_style_changed() from firing
+                self.head_style_combo.blockSignals(True)
+                if is_rgb_mode:
+                    self.head_style_combo.setCurrentText("RGB")
+                else:
+                    self.head_style_combo.setCurrentText("Discrete (GAR)")
+                self.head_style_combo.blockSignals(False)
+
+                # Load head mode (Standard vs Dwarf)
+                head_mode = head_data.get('mode', 'standard')
+                self.head_mode_combo.blockSignals(True)
+                index = self.head_mode_combo.findData(head_mode)
+                if index >= 0:
+                    self.head_mode_combo.setCurrentIndex(index)
+                else:
+                    self.head_mode_combo.setCurrentIndex(0)  # Default to Standard
+                self.head_mode_combo.blockSignals(False)
+
+                # Load local head number if dwarf mode
+                if head_mode == 'dwarf':
+                    self.local_head_num_label.show()
+                    self.local_head_num_spin.show()
+                    self.local_head_num_spin.blockSignals(True)
+                    self.local_head_num_spin.setValue(head_data.get('localHeadNum', 0))
+                    self.local_head_num_spin.blockSignals(False)
+                else:
+                    self.local_head_num_label.hide()
+                    self.local_head_num_spin.hide()
+
+                # Rebuild and populate colors
+                # Store the original head_data so update_color_fields() can use it
+                self._head_data_to_load = head_data
+                self.update_color_fields()
             else:
+                # Reset to defaults
+                for i in range(6):
+                    self.dest_spins[i].setValue(0)
+                self.head_dim_spin.setValue(50)
+                self.release_spin.setValue(6)
+                self.red_release_delay_spin.setValue(0)
+                # Create new head with standard mode and discrete style as default
+                self.config_data[head_name] = {'mode': 'standard'}
+                
+                # Set style to discrete (default)
+                self.head_style_combo.blockSignals(True)
                 self.head_style_combo.setCurrentText("Discrete (GAR)")
-            self.head_style_combo.blockSignals(False)
-
-            # Load head mode (Standard vs Dwarf)
-            head_mode = head_data.get('mode', 'standard')
-            self.head_mode_combo.blockSignals(True)
-            index = self.head_mode_combo.findData(head_mode)
-            if index >= 0:
-                self.head_mode_combo.setCurrentIndex(index)
-            else:
-                self.head_mode_combo.setCurrentIndex(0)  # Default to Standard
-            self.head_mode_combo.blockSignals(False)
-
-            # Load local head number if dwarf mode
-            if head_mode == 'dwarf':
-                self.local_head_num_label.show()
-                self.local_head_num_spin.show()
-                self.local_head_num_spin.blockSignals(True)
-                self.local_head_num_spin.setValue(head_data.get('localHeadNum', 0))
-                self.local_head_num_spin.blockSignals(False)
-            else:
+                self.head_style_combo.blockSignals(False)
+                
+                # Set mode to standard (default)
+                self.head_mode_combo.blockSignals(True)
+                self.head_mode_combo.setCurrentIndex(0)
+                self.head_mode_combo.blockSignals(False)
+                
+                # Hide local head number by default
                 self.local_head_num_label.hide()
                 self.local_head_num_spin.hide()
-
-            # Rebuild and populate colors
-            # Store the original head_data so update_color_fields() can use it
-            self._head_data_to_load = head_data
-            self.update_color_fields()
-        else:
-            # Reset to defaults
-            for i in range(6):
-                self.dest_spins[i].setValue(0)
-            self.head_dim_spin.setValue(50)
-            self.release_spin.setValue(6)
-            self.red_release_delay_spin.setValue(0)
-            # Create new head with standard mode and discrete style as default
-            self.config_data[head_name] = {'mode': 'standard'}
+                self.local_head_num_spin.setValue(0)
+                
+                # No data to load
+                self._head_data_to_load = {}
+                self.update_color_fields()
+                self.update_color_values({})
             
-            # Set style to discrete (default)
-            self.head_style_combo.blockSignals(True)
-            self.head_style_combo.setCurrentText("Discrete (GAR)")
-            self.head_style_combo.blockSignals(False)
-            
-            # Set mode to standard (default)
-            self.head_mode_combo.blockSignals(True)
-            self.head_mode_combo.setCurrentIndex(0)
-            self.head_mode_combo.blockSignals(False)
-            
-            # Hide local head number by default
-            self.local_head_num_label.hide()
-            self.local_head_num_spin.hide()
-            self.local_head_num_spin.setValue(0)
-            
-            # No data to load
-            self._head_data_to_load = {}
-            self.update_color_fields()
-            self.update_color_values({})
-        
-        # Connect head widget signals for real-time preview
-        self.connect_head_widget_signals()
-
+            # Connect head widget signals for real-time preview
+            self.connect_head_widget_signals()
+        finally:
+            # Restore loading flag
+            self._loading = was_loading
+    
     def connect_head_widget_signals(self):
         """Connect head widget signals to save_head_to_config for real-time preview."""
         # Connect all head widget signals regardless of loading state
@@ -1074,7 +1124,10 @@ class ConfigEditor(QMainWindow):
 
 
     def _save_current_head(self):
-        """Wrapper to save the currently displayed head."""
+        """Wrapper to save the currently displayed head. Skips saving during initial load."""
+        # Don't save during initial load
+        if getattr(self, '_loading', False):
+            return
         if hasattr(self, '_last_head_index') and self._last_head_index:
             self.save_head_to_config(self._last_head_index)
 
@@ -1142,14 +1195,18 @@ class ConfigEditor(QMainWindow):
                 # Only set values if the widget exists (handles mode differences)
                 if 'pin' in widgets and widgets['pin'] is not None:
                     try:
+                        widgets['pin'].blockSignals(True)
                         pin_val = color_data.get('pin', 0)
                         widgets['pin'].setValue(pin_val)
+                        widgets['pin'].blockSignals(False)
                     except RuntimeError:
                         # Widget was deleted, skip it
                         pass
                 if 'current' in widgets and widgets['current'] is not None:
                     try:
+                        widgets['current'].blockSignals(True)
                         widgets['current'].setValue(color_data.get('current', 30))
+                        widgets['current'].blockSignals(False)
                     except RuntimeError:
                         # Widget was deleted, skip it
                         pass
@@ -1157,14 +1214,18 @@ class ConfigEditor(QMainWindow):
                     rgb = color_data.get('rgb', [0, 0, 0])
                     for j, val in enumerate(rgb):
                         try:
+                            widgets['rgb'][j].blockSignals(True)
                             widgets['rgb'][j].setValue(round(val * 100 / 255))
+                            widgets['rgb'][j].blockSignals(False)
                         except RuntimeError:
                             # Widget was deleted, skip it
                             pass
                 if 'brightness' in widgets and widgets['brightness'] is not None:
                     try:
+                        widgets['brightness'].blockSignals(True)
                         raw_brightness = color_data.get('brightness', 255)
                         widgets['brightness'].setValue(round(raw_brightness * 100 / 255))
+                        widgets['brightness'].blockSignals(False)
                     except RuntimeError:
                         # Widget was deleted, skip it
                         pass
@@ -1172,23 +1233,31 @@ class ConfigEditor(QMainWindow):
                 # Reset to defaults
                 if 'pin' in widgets and widgets['pin'] is not None:
                     try:
+                        widgets['pin'].blockSignals(True)
                         widgets['pin'].setValue(0)
+                        widgets['pin'].blockSignals(False)
                     except RuntimeError:
                         pass
                 if 'current' in widgets and widgets['current'] is not None:
                     try:
+                        widgets['current'].blockSignals(True)
                         widgets['current'].setValue(30)
+                        widgets['current'].blockSignals(False)
                     except RuntimeError:
                         pass
                 if 'rgb' in widgets and isinstance(widgets['rgb'], list):
                     for rgb_spin in widgets['rgb']:
                         try:
+                            rgb_spin.blockSignals(True)
                             rgb_spin.setValue(0)
+                            rgb_spin.blockSignals(False)
                         except RuntimeError:
                             pass
                 if 'brightness' in widgets and widgets['brightness'] is not None:
                     try:
+                        widgets['brightness'].blockSignals(True)
                         widgets['brightness'].setValue(100)
+                        widgets['brightness'].blockSignals(False)
                     except RuntimeError:
                         pass
 
