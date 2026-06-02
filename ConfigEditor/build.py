@@ -45,10 +45,10 @@ def run_pyinstaller(spec_file, arch=None, use_wine=False):
         cmd = [wine, "pyinstaller", "-y", "--clean", spec_file]
     else:
         # macOS x86 on Apple Silicon: use `arch -x86_64` if available
-            if arch == "x86_64" and platform.system() == "Darwin":
+        if arch == "x86_64" and platform.system() == "Darwin":
             arch_bin = shutil.which("arch")
             if arch_bin:
-                    cmd = [arch_bin, "-x86_64", "pyinstaller", "-y", "--clean", spec_file]
+                cmd = [arch_bin, "-x86_64", "pyinstaller", "-y", "--clean", spec_file]
             else:
                 # Fallback to plain pyinstaller — will likely build for host arch
                 cmd = ["pyinstaller", "-y", "--clean", spec_file]
