@@ -26,11 +26,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r OTAupdater/requirements.txt
+          pip install pillow
 
       - name: Build app
         working-directory: OTAupdater
         run: |
-          pyinstaller ota_macos.spec
+          # ensure icons exist
+          python generate_icons.py || true
+          # clean previous output to avoid PyInstaller interactive prompt
+          if [ -d "dist/OTAUpdater.app" ]; then rm -rf dist/OTAUpdater.app; fi
+          pyinstaller -y --clean ota_macos.spec
 
       - name: Zip .app preserving metadata
         working-directory: OTAupdater
