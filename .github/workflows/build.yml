@@ -33,12 +33,16 @@ jobs:
         working-directory: ConfigEditor
         run: |
           python build.py --platform macos
+      - name: Zip .app preserving metadata
+        working-directory: ConfigEditor
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent "dist/PicoSignals Config Editor.app" "PicoSignals-ConfigEditor-macos-arm64.zip"
 
       - name: Upload macOS arm64 artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-arm64-app
-          path: "ConfigEditor/dist/PicoSignals Config Editor.app"
+          path: ConfigEditor/PicoSignals-ConfigEditor-macos-arm64.zip
 
   build-macos-x86:
     name: macOS (x86_64 via Rosetta)
@@ -65,11 +69,16 @@ jobs:
         run: |
           python build.py --platform macos --arch x86_64
 
+      - name: Zip .app preserving metadata
+        working-directory: ConfigEditor
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent "dist/PicoSignals Config Editor.app" "PicoSignals-ConfigEditor-macos-x86_64.zip"
+
       - name: Upload macOS x86 artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-x86-app
-          path: "ConfigEditor/dist/PicoSignals Config Editor.app"
+          path: ConfigEditor/PicoSignals-ConfigEditor-macos-x86_64.zip
 
   build-windows:
     name: Windows (x64)
