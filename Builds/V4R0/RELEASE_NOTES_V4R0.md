@@ -1,8 +1,8 @@
 # PicoSignals Release Notes
 ## Version 4.0 (V4R0)
 
-**Current Version:** 39f2686  
-**Commits Since CTC Update Bug Fix:** 49  
+**Current Version:** 0215d21  
+**Commits Since CTC Update Bug Fix:** 53  
 **Release Date:** June 1, 2026
 
 ## New Features
@@ -39,6 +39,10 @@
 
 ## Commit History
 
+- 0215d21 2026-06-01 YML fixes
+- b7605e9 2026-06-01 Update ota_build.yml
+- d7e48ae 2026-06-01 Updater Build
+- f91b3e8 2026-06-01 File move
 - 39f2686 2026-06-01 yml
 - d897bd1 2026-06-01 Zip
 - 3dfdc2c 2026-06-01 Update config_editor_windows.spec
