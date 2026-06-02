@@ -23,7 +23,11 @@ a = Analysis(
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zst, cipher=block_cipher)
+try:
+    # Newer PyInstaller emits 'a.zst'; older versions may not have it.
+    pyz = PYZ(a.pure, a.zst, cipher=block_cipher)
+except Exception:
+    pyz = PYZ(a.pure, cipher=block_cipher)
 
 exe = EXE(
     pyz,
