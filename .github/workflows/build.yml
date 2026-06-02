@@ -1,5 +1,9 @@
 name: Build Config Editor
 
+# Opt into Node.js 24 for JavaScript actions to avoid Node 20 deprecation failures.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 on:
   push:
     branches: [ main, master ]
