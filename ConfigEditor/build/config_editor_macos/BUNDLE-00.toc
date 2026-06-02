@@ -1,0 +1,3 @@
+([('config_editor',
+   '/Users/tleavitt/pico/projects/picoSignals/ConfigEditor/dist/config_editor',
+   'EXECUTABLE')],)

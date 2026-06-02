@@ -14,6 +14,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal, QObject, QTimer
 from PyQt5.QtGui import QFont
 
+VERSION = "V1R0"
+
 
 class UpdateWorker(QObject):
     """Worker thread for OTA update operations"""
@@ -278,7 +280,7 @@ class OTAUpdaterGUI(QMainWindow):
 
     def init_ui(self):
         """Initialize the user interface"""
-        self.setWindowTitle("Pico Signals OTA Updater")
+        self.setWindowTitle(f"Pico Signals OTA Updater {VERSION}")
         self.setGeometry(100, 100, 700, 600)
 
         # Main widget and layout

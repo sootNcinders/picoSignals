@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <!-- capsule housing centered with semicircle top/bottom -->
+  <rect x="174" y="31" rx="82" ry="82" width="164" height="389" fill="#111111" />
+  <!-- lenses centered horizontally; red at top semicenter, green at bottom semicenter -->
+  <circle cx="256" cy="113" r="36" fill="#ff3b30" />
+  <circle cx="256" cy="226" r="36" fill="#ffcc00" />
+  <circle cx="256" cy="338" r="36" fill="#4cd964" />
+  <!-- word -->
+  <text x="50%" y="465" font-family="Arial, Helvetica, sans-serif" font-size="96" fill="#ffffff" stroke="#000000" stroke-width="6" stroke-linejoin="round" text-anchor="middle">CONFIG</text>
+</svg>

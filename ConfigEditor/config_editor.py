@@ -19,6 +19,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QAction
 
+VERSION = "V4R0"
+
 
 class ConfigEditor(QMainWindow):
     """
@@ -42,7 +44,7 @@ class ConfigEditor(QMainWindow):
         self._pin_data_to_load = None  # Store original pin data during load (similar to _head_data_to_load)
         self.init_ui()
         self.load_config_to_ui()  # Ensure UI shows defaults at startup
-        self.setWindowTitle("PicoSignals Configuration Editor")
+        self.setWindowTitle(f"PicoSignals-{VERSION} Configuration Editor")
         self.resize(1200, 800)
 
     def get_default_config(self):
@@ -71,6 +73,27 @@ class ConfigEditor(QMainWindow):
                 "red": {"pin": 0, "current": 30, "brightness": 255}
             }
         }
+
+    def create_spin_with_info(self, spin):
+        """Return a QWidget containing the spinbox and a right-aligned label
+        showing min/max/default values for that spinbox.
+        """
+        container = QWidget()
+        layout = QHBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.addWidget(spin)
+        # Format values nicely for integer and double spinboxes
+        try:
+            if isinstance(spin, QDoubleSpinBox):
+                info_text = f"min: {spin.minimum():.1f}  max: {spin.maximum():.1f}  default: {spin.value():.1f}"
+            else:
+                info_text = f"min: {spin.minimum()}  max: {spin.maximum()}  default: {spin.value()}"
+        except Exception:
+            info_text = ""
+        info_label = QLabel(info_text)
+        info_label.setStyleSheet("color: gray;")
+        layout.addWidget(info_label)
+        return container
 
     def init_ui(self):
         """Initialize the user interface with menu bar and tab widget.
@@ -116,6 +139,7 @@ class ConfigEditor(QMainWindow):
         self.create_heads_tab()
         self.create_pins_tab()
         self.create_json_tab()
+        self.create_help_tab()
         
         # Connect signals for real-time JSON preview
         self.connect_preview_signals()
@@ -166,7 +190,7 @@ class ConfigEditor(QMainWindow):
         address_layout = QFormLayout()
         self.address_spin = QSpinBox()
         self.address_spin.setRange(1, 255)
-        address_layout.addRow("Address:", self.address_spin)
+        address_layout.addRow("Address:", self.create_spin_with_info(self.address_spin))
         layout.addLayout(address_layout)
 
         # General parameters group - contains mode-specific settings
@@ -178,14 +202,16 @@ class ConfigEditor(QMainWindow):
         self.dim_time_spin = QSpinBox()
         self.dim_time_spin.setRange(0, 1000)
         self.dim_time_spin.setValue(15)  # Default value
-        form_layout.addRow(self.dim_time_label, self.dim_time_spin)
+        self.dim_time_widget = self.create_spin_with_info(self.dim_time_spin)
+        form_layout.addRow(self.dim_time_label, self.dim_time_widget)
 
         # Sleep Time: minutes before device powers down
         self.sleep_time_label = QLabel("Sleep Time (minutes):")
         self.sleep_time_spin = QSpinBox()
         self.sleep_time_spin.setRange(0, 1000)
         self.sleep_time_spin.setValue(30)  # Default value
-        form_layout.addRow(self.sleep_time_label, self.sleep_time_spin)
+        self.sleep_time_widget = self.create_spin_with_info(self.sleep_time_spin)
+        form_layout.addRow(self.sleep_time_label, self.sleep_time_widget)
 
         # Low Battery: voltage threshold for low battery warning
         self.low_battery_label = QLabel("Low Battery (V):")
@@ -193,7 +219,8 @@ class ConfigEditor(QMainWindow):
         self.low_battery_spin.setRange(0, 20)
         self.low_battery_spin.setSingleStep(0.1)
         self.low_battery_spin.setValue(11.75)  # Default value
-        form_layout.addRow(self.low_battery_label, self.low_battery_spin)
+        self.low_battery_widget = self.create_spin_with_info(self.low_battery_spin)
+        form_layout.addRow(self.low_battery_label, self.low_battery_widget)
 
         # Battery Reset: voltage at which low battery flag is cleared
         self.battery_reset_label = QLabel("Battery Reset (V):")
@@ -201,7 +228,8 @@ class ConfigEditor(QMainWindow):
         self.battery_reset_spin.setRange(0, 20)
         self.battery_reset_spin.setSingleStep(0.1)
         self.battery_reset_spin.setValue(12.1)  # Default value
-        form_layout.addRow(self.battery_reset_label, self.battery_reset_spin)
+        self.battery_reset_widget = self.create_spin_with_info(self.battery_reset_spin)
+        form_layout.addRow(self.battery_reset_label, self.battery_reset_widget)
 
         # Battery Shutdown: voltage at which device shuts down to protect battery
         self.battery_shutdown_label = QLabel("Battery Shutdown (V):")
@@ -209,19 +237,20 @@ class ConfigEditor(QMainWindow):
         self.battery_shutdown_spin.setRange(0, 20)
         self.battery_shutdown_spin.setSingleStep(0.1)
         self.battery_shutdown_spin.setValue(10.0)  # Default value
-        form_layout.addRow(self.battery_shutdown_label, self.battery_shutdown_spin)
+        self.battery_shutdown_widget = self.create_spin_with_info(self.battery_shutdown_spin)
+        form_layout.addRow(self.battery_shutdown_label, self.battery_shutdown_widget)
 
         # Retry Time: milliseconds to wait before retrying failed operations
         self.retry_time_spin = QSpinBox()
         self.retry_time_spin.setRange(0, 1000)
         self.retry_time_spin.setValue(100)  # Default value
-        form_layout.addRow("Retry Time (ms):", self.retry_time_spin)
+        form_layout.addRow("Retry Time (ms):", self.create_spin_with_info(self.retry_time_spin))
 
         # Max Retries: maximum number of retries for failed operations (available in all modes)
         self.max_retries_spin = QSpinBox()
         self.max_retries_spin.setRange(1, 255)
         self.max_retries_spin.setValue(10)  # Default value
-        form_layout.addRow("Max Retries:", self.max_retries_spin)
+        form_layout.addRow("Max Retries:", self.create_spin_with_info(self.max_retries_spin))
 
         # Partner: device address to load head config from (Overlay mode only)
         # When in Overlay, this device doesn't define its own heads
@@ -229,10 +258,12 @@ class ConfigEditor(QMainWindow):
         self.partner_spin = QSpinBox()
         self.partner_spin.setRange(0, 255)
         self.partner_spin.setValue(99)  # Default value
-        form_layout.addRow(self.partner_label, self.partner_spin)
+        # Keep a reference to the container so we can hide/show it later
+        self.partner_widget = self.create_spin_with_info(self.partner_spin)
+        form_layout.addRow(self.partner_label, self.partner_widget)
         # Hide by default - only shown in Overlay mode
         self.partner_label.hide()
-        self.partner_spin.hide()
+        self.partner_widget.hide()
 
         # CTC Present: whether CTC hardware is installed
         self.ctc_present_check = QCheckBox()
@@ -252,7 +283,9 @@ class ConfigEditor(QMainWindow):
         self.awake_pin_label = QLabel("Awake Pin:")
         self.awake_pin_spin = QSpinBox()
         self.awake_pin_spin.setRange(0, 16)
-        form_layout.addRow(self.awake_pin_label, self.awake_pin_spin)
+        # Keep a reference to the container so on_mode_changed can hide/show it
+        self.awake_pin_widget = self.create_spin_with_info(self.awake_pin_spin)
+        form_layout.addRow(self.awake_pin_label, self.awake_pin_widget)
 
         layout.addWidget(self.general_params_group)
         layout.addStretch()
@@ -308,10 +341,11 @@ class ConfigEditor(QMainWindow):
         self.local_head_num_spin = QSpinBox()
         self.local_head_num_spin.setRange(0, 4)
         self.local_head_num_spin.setValue(0)
-        head_layout.addRow(self.local_head_num_label, self.local_head_num_spin)
+        self.local_head_num_widget = self.create_spin_with_info(self.local_head_num_spin)
+        head_layout.addRow(self.local_head_num_label, self.local_head_num_widget)
         # Initially hidden - will show when Dwarf mode is selected
         self.local_head_num_label.hide()
-        self.local_head_num_spin.hide()
+        self.local_head_num_widget.hide()
 
         # Destination: 6 values representing signal aspects
         dest_layout = QHBoxLayout()
@@ -321,26 +355,26 @@ class ConfigEditor(QMainWindow):
             spin = QSpinBox()
             spin.setRange(0, 255)
             self.dest_spins.append(spin)
-            dest_layout.addWidget(spin)
+            dest_layout.addWidget(self.create_spin_with_info(spin))
         head_layout.addRow(dest_layout)
 
         # Dim percentage (0-100%)
         # Stored as 0-255 in JSON, converted to/from percentage in UI
         self.head_dim_spin = QSpinBox()
         self.head_dim_spin.setRange(0, 100)
-        head_layout.addRow("Dim (%):", self.head_dim_spin)
+        head_layout.addRow("Dim (%):", self.create_spin_with_info(self.head_dim_spin))
 
         # Release Time: minutes before aspect is released after triggered
         self.release_spin = QSpinBox()
         self.release_spin.setRange(1, 255)
         self.release_spin.setValue(6)  # Default value
-        head_layout.addRow("Release Time (min):", self.release_spin)
+        head_layout.addRow("Release Time (min):", self.create_spin_with_info(self.release_spin))
 
         # Red Release Delay: seconds to delay red aspect release
         self.red_release_delay_spin = QSpinBox()
         self.red_release_delay_spin.setRange(0, 255)
         self.red_release_delay_spin.setValue(0)  # Default value
-        head_layout.addRow("Red Release Delay (s):", self.red_release_delay_spin)
+        head_layout.addRow("Red Release Delay (s):", self.create_spin_with_info(self.red_release_delay_spin))
 
         # Color configuration groups - will be populated based on mode
         self.color_widgets = {}
@@ -379,10 +413,10 @@ class ConfigEditor(QMainWindow):
         
         if mode == "dwarf":
             self.local_head_num_label.show()
-            self.local_head_num_spin.show()
+            self.local_head_num_widget.show()
         else:
             self.local_head_num_label.hide()
-            self.local_head_num_spin.hide()
+            self.local_head_num_widget.hide()
         
         # Save the mode choice to the current head's config
         if hasattr(self, '_last_head_index'):
@@ -438,7 +472,7 @@ class ConfigEditor(QMainWindow):
                             pin_spin = QSpinBox()
                             pin_spin.setRange(0, 40)
                             layout.addWidget(pin_label, row, 0)
-                            layout.addWidget(pin_spin, row, 1)
+                            layout.addWidget(self.create_spin_with_info(pin_spin), row, 1)
                             widgets_dict['pin'] = pin_spin
                             row += 1
 
@@ -447,7 +481,7 @@ class ConfigEditor(QMainWindow):
                             current_spin.setRange(0, 100)
                             current_spin.setValue(30)  # Default: 30mA
                             layout.addWidget(current_label, row, 0)
-                            layout.addWidget(current_spin, row, 1)
+                            layout.addWidget(self.create_spin_with_info(current_spin), row, 1)
                             widgets_dict['current'] = current_spin
                             row += 1
 
@@ -462,7 +496,7 @@ class ConfigEditor(QMainWindow):
                                 rgb_spin.setRange(0, 100)
                                 rgb_spin.setValue(0)  # Default: no color
                                 rgb_spins.append(rgb_spin)
-                                rgb_layout.addWidget(rgb_spin)
+                                rgb_layout.addWidget(self.create_spin_with_info(rgb_spin))
                             layout.addWidget(rgb_label, row, 0)
                             layout.addLayout(rgb_layout, row, 1)
                             widgets_dict['rgb'] = rgb_spins
@@ -475,21 +509,21 @@ class ConfigEditor(QMainWindow):
                         pin_spin = QSpinBox()
                         pin_spin.setRange(0, 40)
                         layout.addWidget(pin_label, 0, 0)
-                        layout.addWidget(pin_spin, 0, 1)
+                        layout.addWidget(self.create_spin_with_info(pin_spin), 0, 1)
 
                         current_label = QLabel("Current (mA):")
                         current_spin = QSpinBox()
                         current_spin.setRange(0, 100)
                         current_spin.setValue(30)  # Default: 30mA
                         layout.addWidget(current_label, 1, 0)
-                        layout.addWidget(current_spin, 1, 1)
+                        layout.addWidget(self.create_spin_with_info(current_spin), 1, 1)
 
                         brightness_label = QLabel("Brightness (%):")
                         brightness_spin = QSpinBox()
                         brightness_spin.setRange(0, 100)
                         brightness_spin.setValue(100)  # Default: 100% brightness
                         layout.addWidget(brightness_label, 2, 0)
-                        layout.addWidget(brightness_spin, 2, 1)
+                        layout.addWidget(self.create_spin_with_info(brightness_spin), 2, 1)
 
                         widgets_dict['pin'] = pin_spin
                         widgets_dict['current'] = current_spin
@@ -627,6 +661,32 @@ class ConfigEditor(QMainWindow):
 
         self.tab_widget.addTab(tab, "JSON")
 
+    def create_help_tab(self):
+        """Create a Help tab with usage instructions for the application."""
+        tab = QWidget()
+        layout = QVBoxLayout(tab)
+
+        help_text = QTextEdit()
+        help_text.setReadOnly(True)
+        help_text.setFontFamily("Courier New")
+        help_text.setPlainText(
+            "PicoSignals Configuration Editor - Help\n\n"
+            "Usage:\n"
+            "1. Use the General tab to set device mode, address, timing, and battery parameters.\n"
+            "2. In Standard mode, open the Heads tab to configure up to four signal heads (pins, currents, brightness or RGB).\n"
+            "3. Use the Pins tab to map external pins to head actions (capture/release/turnout or overlay outputs).\n"
+            "4. The JSON tab shows the current configuration; you can edit raw JSON and click 'Update from JSON' to load it.\n"
+            "5. Use File->Save/Save As to write configuration to disk.\n\n"
+            "Notes:\n"
+            "- Overlay mode hides head/pin configuration and uses a partner device for head settings.\n"
+            "- CTC mode is simplified and hides head/pin settings.\n"
+            "- Percentage fields are shown as UI values; the file stores some values differently (e.g., dim/brightness 0-255).\n"
+            "- If you need more help, consult CONFIGEDITOR_STRUCTURE.md in the project root."
+        )
+
+        layout.addWidget(help_text)
+        self.tab_widget.addTab(tab, "Help")
+
     def on_mode_changed(self):
         """Update UI based on selected device mode.
         
@@ -642,20 +702,20 @@ class ConfigEditor(QMainWindow):
         if mode == "ctc":
             # In CTC mode, hide timing/battery parameters but keep retry settings
             self.dim_time_label.hide()
-            self.dim_time_spin.hide()
+            self.dim_time_widget.hide()
             self.sleep_time_label.hide()
-            self.sleep_time_spin.hide()
+            self.sleep_time_widget.hide()
             self.low_battery_label.hide()
-            self.low_battery_spin.hide()
+            self.low_battery_widget.hide()
             self.battery_reset_label.hide()
-            self.battery_reset_spin.hide()
+            self.battery_reset_widget.hide()
             self.battery_shutdown_label.hide()
-            self.battery_shutdown_spin.hide()
+            self.battery_shutdown_widget.hide()
             self.ctc_present_check.setVisible(True)
             self.partner_label.hide()
-            self.partner_spin.hide()
+            self.partner_widget.hide()
             self.awake_pin_label.hide()
-            self.awake_pin_spin.hide()
+            self.awake_pin_widget.hide()
             self.monitor_leds_combo.setVisible(True)
             # Retry settings are visible for all modes
         else:
@@ -664,37 +724,37 @@ class ConfigEditor(QMainWindow):
             if mode == "overlay":
                 # Hide timing/battery (from partner)
                 self.dim_time_label.hide()
-                self.dim_time_spin.hide()
+                self.dim_time_widget.hide()
                 self.sleep_time_label.hide()
-                self.sleep_time_spin.hide()
+                self.sleep_time_widget.hide()
                 self.low_battery_label.hide()
-                self.low_battery_spin.hide()
+                self.low_battery_widget.hide()
                 self.battery_reset_label.hide()
-                self.battery_reset_spin.hide()
+                self.battery_reset_widget.hide()
                 self.battery_shutdown_label.hide()
-                self.battery_shutdown_spin.hide()
+                self.battery_shutdown_widget.hide()
                 # Show partner, hide awakePin
                 self.partner_label.show()
-                self.partner_spin.show()
+                self.partner_widget.show()
                 self.awake_pin_label.hide()
-                self.awake_pin_spin.hide()
+                self.awake_pin_widget.hide()
             else:  # Standard
                 # Show all parameters
                 self.dim_time_label.show()
-                self.dim_time_spin.show()
+                self.dim_time_widget.show()
                 self.sleep_time_label.show()
-                self.sleep_time_spin.show()
+                self.sleep_time_widget.show()
                 self.low_battery_label.show()
-                self.low_battery_spin.show()
+                self.low_battery_widget.show()
                 self.battery_reset_label.show()
-                self.battery_reset_spin.show()
+                self.battery_reset_widget.show()
                 self.battery_shutdown_label.show()
-                self.battery_shutdown_spin.show()
+                self.battery_shutdown_widget.show()
                 # Hide partner, show awakePin
                 self.partner_label.hide()
-                self.partner_spin.hide()
+                self.partner_widget.hide()
                 self.awake_pin_label.show()
-                self.awake_pin_spin.show()
+                self.awake_pin_widget.show()
         
         # Control tab availability
         if hasattr(self, 'heads_tab_index'):
@@ -767,23 +827,23 @@ class ConfigEditor(QMainWindow):
         if mode == "release":
             head_spin = QSpinBox()
             head_spin.setRange(0, 4)
-            self.pin_fields_layout.addRow("Head:", head_spin)
+            self.pin_fields_layout.addRow("Head:", self.create_spin_with_info(head_spin))
             self.pin_params['head'] = head_spin
             
         elif mode == "capture":
             head1_spin = QSpinBox()
             head1_spin.setRange(0, 4)
-            self.pin_fields_layout.addRow("Head1:", head1_spin)
+            self.pin_fields_layout.addRow("Head1:", self.create_spin_with_info(head1_spin))
             self.pin_params['head1'] = head1_spin
             
             head2_spin = QSpinBox()
             head2_spin.setRange(0, 4)
-            self.pin_fields_layout.addRow("Head2 (optional):", head2_spin)
+            self.pin_fields_layout.addRow("Head2 (optional):", self.create_spin_with_info(head2_spin))
             self.pin_params['head2'] = head2_spin
             
             turnout_spin = QSpinBox()
             turnout_spin.setRange(0, 8)
-            self.pin_fields_layout.addRow("Turnout Pin (optional):", turnout_spin)
+            self.pin_fields_layout.addRow("Turnout Pin (optional):", self.create_spin_with_info(turnout_spin))
             self.pin_params['turnout'] = turnout_spin
             
         elif mode == "turnout":
@@ -793,7 +853,7 @@ class ConfigEditor(QMainWindow):
         elif mode in ["ovlGreen", "ovlAmber", "ovlRed"]:
             head_spin = QSpinBox()
             head_spin.setRange(0, 4)
-            self.pin_fields_layout.addRow("Head:", head_spin)
+            self.pin_fields_layout.addRow("Head:", self.create_spin_with_info(head_spin))
             self.pin_params['head'] = head_spin
             
         elif mode == "ovlAuxIn":
@@ -1004,13 +1064,13 @@ class ConfigEditor(QMainWindow):
                 # Load local head number if dwarf mode
                 if head_mode == 'dwarf':
                     self.local_head_num_label.show()
-                    self.local_head_num_spin.show()
+                    self.local_head_num_widget.show()
                     self.local_head_num_spin.blockSignals(True)
                     self.local_head_num_spin.setValue(head_data.get('localHeadNum', 0))
                     self.local_head_num_spin.blockSignals(False)
                 else:
                     self.local_head_num_label.hide()
-                    self.local_head_num_spin.hide()
+                    self.local_head_num_widget.hide()
 
                 # Rebuild and populate colors
                 # Store the original head_data so update_color_fields() can use it
@@ -1038,7 +1098,7 @@ class ConfigEditor(QMainWindow):
                 
                 # Hide local head number by default
                 self.local_head_num_label.hide()
-                self.local_head_num_spin.hide()
+                self.local_head_num_widget.hide()
                 self.local_head_num_spin.setValue(0)
                 
                 # No data to load

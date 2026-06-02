@@ -23,7 +23,8 @@ a = Analysis(
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zst, cipher=block_cipher)
+_zst = getattr(a, 'zst', getattr(a, 'zipped_data', None))
+pyz = PYZ(a.pure, _zst, cipher=block_cipher)
 
 exe = EXE(
     pyz,
@@ -49,7 +50,7 @@ exe = EXE(
 app = BUNDLE(
     exe,
     name='PicoSignals Config Editor.app',
-    icon=None,
+    icon='icons/icon.icns',
     bundle_identifier='com.picoSignals.configEditor',
     info_plist={
         'NSPrincipalClass': 'NSApplication',

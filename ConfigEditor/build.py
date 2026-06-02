@@ -29,7 +29,35 @@ def check_pyinstaller():
     except ImportError:
         return False
 
-def build_macos():
+
+def run_pyinstaller(spec_file, arch=None, use_wine=False):
+    """Run PyInstaller with optional arch wrapper or via Wine (experimental).
+
+    - arch: None or 'x86_64' to force running under Rosetta on macOS (uses `arch -x86_64`).
+    - use_wine: if True, attempt to run PyInstaller under Wine (Windows build on macOS/Linux).
+    """
+    cmd = None
+    if use_wine:
+        wine = shutil.which("wine")
+        if not wine:
+            raise RuntimeError("Wine not found on PATH")
+        cmd = [wine, "pyinstaller", spec_file]
+    else:
+        # macOS x86 on Apple Silicon: use `arch -x86_64` if available
+        if arch == "x86_64" and platform.system() == "Darwin":
+            arch_bin = shutil.which("arch")
+            if arch_bin:
+                cmd = [arch_bin, "-x86_64", "pyinstaller", spec_file]
+            else:
+                # Fallback to plain pyinstaller — will likely build for host arch
+                cmd = ["pyinstaller", spec_file]
+        else:
+            cmd = ["pyinstaller", spec_file]
+
+    print("Running:", " ".join(cmd))
+    subprocess.run(cmd, check=True)
+
+def build_macos(arch=None):
     """Build for macOS"""
     print("\n" + "="*50)
     print("Building for macOS...")
@@ -40,10 +68,8 @@ def build_macos():
         return False
     
     try:
-        result = subprocess.run(
-            ["pyinstaller", "config_editor_macos.spec"],
-            check=True
-        )
+        # Use helper which can run under Rosetta when requested
+        run_pyinstaller("config_editor_macos.spec", arch=arch, use_wine=False)
         
         if os.path.exists("dist/PicoSignals Config Editor.app"):
             print("\n✓ macOS build successful!")
@@ -68,11 +94,30 @@ def build_windows():
         return False
     
     try:
-        result = subprocess.run(
-            ["pyinstaller", "config_editor_windows.spec"],
-            check=True
-        )
-        
+        current = get_platform()
+        if current == "windows":
+            run_pyinstaller("config_editor_windows.spec")
+        else:
+            # Attempt experimental Wine-based build on non-Windows hosts
+            wine = shutil.which("wine")
+            if wine:
+                print("\nWine detected — attempting experimental Windows build under Wine.")
+                response = input("Continue with Wine build? (y/N): ").lower()
+                if response == "y":
+                    run_pyinstaller("config_editor_windows.spec", use_wine=True)
+                else:
+                    print("Build cancelled")
+                    return False
+            else:
+                print("\nWarning: Building Windows executables on non-Windows hosts is not supported by PyInstaller.")
+                print("Install Wine and re-run, or build on a Windows machine or CI.")
+                response = input("Continue anyway (attempt plain pyinstaller)? (y/N): ").lower()
+                if response == "y":
+                    run_pyinstaller("config_editor_windows.spec")
+                else:
+                    print("Build cancelled")
+                    return False
+
         if os.path.exists("dist/config_editor/config_editor.exe"):
             print("\n✓ Windows build successful!")
             print("Output: dist/config_editor/config_editor.exe")
@@ -94,6 +139,26 @@ def cleanup():
         os.remove("*.pyc")
     print("✓ Cleanup complete")
 
+
+def check_icons(platform_choice):
+    """Verify icon files exist for the requested platform(s) and prompt if missing."""
+    missing = []
+    if platform_choice in ("macos", "both"):
+        if not os.path.exists(os.path.join("icons", "icon.icns")):
+            missing.append("macOS: icons/icon.icns")
+    if platform_choice in ("windows", "both"):
+        if not os.path.exists(os.path.join("icons", "icon.ico")):
+            missing.append("Windows: icons/icon.ico")
+
+    if missing:
+        print("\nWarning: The following icon files are missing:")
+        for m in missing:
+            print(" - " + m)
+        response = input("Continue without custom icons? (y/N): ").lower()
+        if response != "y":
+            print("Build cancelled")
+            sys.exit(0)
+
 def main():
     print("="*50)
     print("PicoSignals Configuration Editor - Build Tool")
@@ -107,11 +172,24 @@ def main():
     
     # Parse arguments
     platform_choice = "current"
+    arch_choice = None
+    # Support: --platform <macos|windows|both>  and optional --arch <x86_64|arm64>
     if len(sys.argv) > 1:
-        if sys.argv[1] == "--platform" and len(sys.argv) > 2:
-            platform_choice = sys.argv[2].lower()
-        elif sys.argv[1] in ["macos", "windows", "both"]:
-            platform_choice = sys.argv[1].lower()
+        args = sys.argv[1:]
+        i = 0
+        while i < len(args):
+            a = args[i]
+            if a == "--platform" and i+1 < len(args):
+                platform_choice = args[i+1].lower()
+                i += 2
+            elif a in ["macos", "windows", "both"]:
+                platform_choice = a
+                i += 1
+            elif a == "--arch" and i+1 < len(args):
+                arch_choice = args[i+1]
+                i += 2
+            else:
+                i += 1
     
     # Determine what to build
     current = get_platform()
@@ -122,18 +200,20 @@ def main():
     # Create directories
     os.makedirs("dist", exist_ok=True)
     os.makedirs("build", exist_ok=True)
+    # Check for expected icon files and prompt if missing
+    check_icons(platform_choice)
     
     success = True
     
     if platform_choice == "macos":
         if current == "macos":
-            success = build_macos()
+            success = build_macos(arch=arch_choice)
         else:
             print("\nWarning: Building for macOS on non-macOS system")
             print("The resulting executable may not work properly")
             response = input("Continue anyway? (y/N): ").lower()
             if response == "y":
-                success = build_macos()
+                success = build_macos(arch=arch_choice)
             else:
                 print("Build cancelled")
                 sys.exit(0)
@@ -153,9 +233,9 @@ def main():
     
     elif platform_choice == "both":
         if current == "macos":
-            success = build_macos()
+            success = build_macos(arch=arch_choice)
             if success:
-                print("\n⚠ Note: To build for Windows, run this script on Windows")
+                print("\n⚠ Note: To build for Windows reliably, run this script on Windows or use CI.")
         elif current == "windows":
             success = build_windows()
             if success:
