@@ -57,6 +57,30 @@ def run_pyinstaller(spec_file, arch=None, use_wine=False):
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, check=True)
 
+
+def is_ci_environment():
+    """Detect CI or non-interactive environments."""
+    if os.environ.get("CI"):
+        return True
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        return True
+    return False
+
+
+def ask_yes(prompt, default=False):
+    """Prompt the user for a yes/no answer. In CI, return `default` without prompting.
+
+    Returns True for yes, False for no.
+    """
+    if is_ci_environment():
+        print(f"{prompt} [Auto-answered {'y' if default else 'n'} in CI]")
+        return default
+    try:
+        resp = input(prompt).strip().lower()
+        return resp == "y"
+    except EOFError:
+        return default
+
 def build_macos(arch=None):
     """Build for macOS"""
     print("\n" + "="*50)
@@ -102,8 +126,7 @@ def build_windows():
             wine = shutil.which("wine")
             if wine:
                 print("\nWine detected — attempting experimental Windows build under Wine.")
-                response = input("Continue with Wine build? (y/N): ").lower()
-                if response == "y":
+                if ask_yes("Continue with Wine build? (y/N): ", default=True):
                     run_pyinstaller("config_editor_windows.spec", use_wine=True)
                 else:
                     print("Build cancelled")
@@ -111,8 +134,7 @@ def build_windows():
             else:
                 print("\nWarning: Building Windows executables on non-Windows hosts is not supported by PyInstaller.")
                 print("Install Wine and re-run, or build on a Windows machine or CI.")
-                response = input("Continue anyway (attempt plain pyinstaller)? (y/N): ").lower()
-                if response == "y":
+                if ask_yes("Continue anyway (attempt plain pyinstaller)? (y/N): ", default=True):
                     run_pyinstaller("config_editor_windows.spec")
                 else:
                     print("Build cancelled")
@@ -154,8 +176,7 @@ def check_icons(platform_choice):
         print("\nWarning: The following icon files are missing:")
         for m in missing:
             print(" - " + m)
-        response = input("Continue without custom icons? (y/N): ").lower()
-        if response != "y":
+        if not ask_yes("Continue without custom icons? (y/N): ", default=True):
             print("Build cancelled")
             sys.exit(0)
 
@@ -211,8 +232,7 @@ def main():
         else:
             print("\nWarning: Building for macOS on non-macOS system")
             print("The resulting executable may not work properly")
-            response = input("Continue anyway? (y/N): ").lower()
-            if response == "y":
+            if ask_yes("Continue anyway? (y/N): ", default=True):
                 success = build_macos(arch=arch_choice)
             else:
                 print("Build cancelled")
@@ -224,8 +244,7 @@ def main():
         else:
             print("\nWarning: Building for Windows on non-Windows system")
             print("The resulting executable may not work properly")
-            response = input("Continue anyway? (y/N): ").lower()
-            if response == "y":
+            if ask_yes("Continue anyway? (y/N): ", default=True):
                 success = build_windows()
             else:
                 print("Build cancelled")
