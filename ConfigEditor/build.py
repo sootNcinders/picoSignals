@@ -56,7 +56,21 @@ def run_pyinstaller(spec_file, arch=None, use_wine=False):
             cmd = ["pyinstaller", "-y", "--clean", spec_file]
 
     print("Running:", " ".join(cmd))
-    subprocess.run(cmd, check=True)
+    try:
+        completed = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        if completed.stdout:
+            print(completed.stdout)
+        if completed.stderr:
+            print(completed.stderr)
+    except subprocess.CalledProcessError as e:
+        # Print captured output to help with CI debugging, then re-raise
+        print("PyInstaller stdout:")
+        if e.stdout:
+            print(e.stdout)
+        print("PyInstaller stderr:")
+        if e.stderr:
+            print(e.stderr)
+        raise
 
 
 def is_ci_environment():
@@ -97,15 +111,15 @@ def build_macos(arch=None):
         run_pyinstaller("config_editor_macos.spec", arch=arch, use_wine=False)
         
         if os.path.exists("dist/PicoSignals Config Editor.app"):
-            print("\n✓ macOS build successful!")
+            print("\n[OK] macOS build successful!")
             print("Output: dist/PicoSignals Config Editor.app")
             return True
         else:
-            print("\n✗ Build completed but output not found")
+            print("\n[FAIL] Build completed but output not found")
             return False
             
     except subprocess.CalledProcessError as e:
-        print(f"\n✗ Build failed: {e}")
+        print(f"\n[FAIL] Build failed: {e}")
         return False
 
 def build_windows():
@@ -142,15 +156,15 @@ def build_windows():
                     return False
 
         if os.path.exists("dist/config_editor/config_editor.exe"):
-            print("\n✓ Windows build successful!")
+            print("\n[OK] Windows build successful!")
             print("Output: dist/config_editor/config_editor.exe")
             return True
         else:
-            print("\n✗ Build completed but output not found")
+            print("\n[FAIL] Build completed but output not found")
             return False
             
     except subprocess.CalledProcessError as e:
-        print(f"\n✗ Build failed: {e}")
+        print(f"\n[FAIL] Build failed: {e}")
         return False
 
 def cleanup():
@@ -160,7 +174,7 @@ def cleanup():
         shutil.rmtree("build")
     if os.path.exists("*.pyc"):
         os.remove("*.pyc")
-    print("✓ Cleanup complete")
+    print("[OK] Cleanup complete")
 
 
 def check_icons(platform_choice):
@@ -255,11 +269,11 @@ def main():
         if current == "macos":
             success = build_macos(arch=arch_choice)
             if success:
-                print("\n⚠ Note: To build for Windows reliably, run this script on Windows or use CI.")
+                print("\n[WARN] Note: To build for Windows reliably, run this script on Windows or use CI.")
         elif current == "windows":
             success = build_windows()
             if success:
-                print("\n⚠ Note: To build for macOS, run this script on macOS")
+                print("\n[WARN] Note: To build for macOS, run this script on macOS")
         else:
             print("Error: Cannot build for both on this platform")
             success = False
@@ -275,10 +289,10 @@ def main():
         print("Next Steps:")
         print("="*50)
         if platform_choice == "macos" or (platform_choice == "current" and current == "macos"):
-            print("• Open the app: open 'dist/PicoSignals Config Editor.app'")
-            print("• Code-sign (optional): codesign -s - 'dist/PicoSignals Config Editor.app'")
+            print("- Open the app: open 'dist/PicoSignals Config Editor.app'")
+            print("- Code-sign (optional): codesign -s - 'dist/PicoSignals Config Editor.app'")
         elif platform_choice == "windows" or (platform_choice == "current" and current == "windows"):
-            print("• Run: dist\\config_editor\\config_editor.exe")
+            print("- Run: dist\\config_editor\\config_editor.exe")
         
         print("\nFor more information, see BUILD.md")
         sys.exit(0)
